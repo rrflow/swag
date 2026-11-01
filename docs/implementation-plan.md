@@ -42,14 +42,14 @@ native/container and measured-memory goals remain in scope.
 Current action: PR235 publishes ordinary merge `b856a8fb`, incorporating accepted
 main `daec1f1a` and resolving the 19 OpenAPI/projection conflicts. Local validation
 passes; [candidate 41342695388](https://github.com/rrflow/rrflow-development/actions/runs/41342695388)
-is queued and normal automatic merge is enabled. Candidate and protected
-acceptance remain pending. The linked journal
+completed with all 23 jobs successful. Protected acceptance remains pending.
+The linked journal
 records 165 contract/adapter passes, 499 reported owning-suite passes, four
 ignored cases and one SDK entry lacking its live-daemon manifest, plus build,
 lint, TypeScript and repository checks. PR190/232 and packaging PR212 have landed.
-SWAG itself has local
-commit `3a5b337` and no configured remote; its delivery repository is requested,
-not inferred. The owner is also asked for a real task and acceptance criteria;
+The owner selected [`rrflow/swag`](https://github.com/rrflow/swag), an empty private
+repository, for SWAG delivery. `origin` is configured to that repository;
+Git history starts at `3a5b337`. The owner is also asked for a real task and acceptance criteria;
 that answer grants no training permission. The latest local checkout check
 passed 97 Python tests and six TypeScript viewer tests.
 

@@ -40,9 +40,10 @@ release or a qualified routing model.
 4. Validate native and container installation on clean environments, upgrades,
    rollback, configured credentials, resource limits and failure recovery.
    Produce versioned distribution artifacts with checksums and release evidence.
-5. Connect the local SWAG repository to the owner's intended delivery repository.
-   This checkout now has Git history starting at `3a5b337`, but no configured
-   remote. Local commits are not published or reproducible release artifacts.
+5. Qualify distribution from the owner's selected delivery repository,
+   [`rrflow/swag`](https://github.com/rrflow/swag), configured as `origin`.
+   Publishing source does not establish reproducible release artifacts or
+   change the repository's private visibility.
 
 The RROFLOW engine-correlation receiver merged through
 [PR43](https://github.com/rrflow/rroflow-development/pull/43) as
@@ -99,10 +100,10 @@ packaging PR212 have since landed. The published ordinary integration of accepte
 main `daec1f1a` resolves the 19 OpenAPI digest and generated SDK/reference
 conflicts, regenerates the canonical projections and preserves both parents'
 behavior. Local contract/adapter, owning-suite, binary build, lint, TypeScript
-and repository checks pass. GitHub reports the PR mergeable; new candidate and
-protected acceptance remain pending. New
+and repository checks pass. New
 [candidate 41342695388](https://github.com/rrflow/rrflow-development/actions/runs/41342695388)
-is queued, with normal automatic merge enabled for the exact head. The old
+passes all 23 jobs, including live SDK conformance. PR235 remains open and
+protected acceptance remains pending. The old
 passing run remains evidence for `ebeecabb` only. Follow the
 [developer-build execution plan](implementation-plan.md#developer-build-execution-1-november)
 for the remaining dependency order and evidence requirements.

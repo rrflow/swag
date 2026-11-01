@@ -70,8 +70,8 @@ locally: a 33.9 MB ZIP with the optimized primary executable, provenance, verifi
 and trial instructions. Actual relocation, proposal/reopen/replay and three fault
 cases passed. A configuration-change trial also exposed an invalid model effort
 choice, which the engine rejected; that failure is retained. The model remains
-unqualified. [Draft PR212](https://github.com/rrflow/rrflow-development/pull/212)
-owns packaging; protected landing, signed releases, container deployment and the
+unqualified. [Merged PR212](https://github.com/rrflow/rrflow-development/pull/212)
+provides the packaging tooling; signed releases, container deployment and the
 complete Connectome workflow remain open. See [current context](docs/current-context.md).
 
 ## Legacy policy preview

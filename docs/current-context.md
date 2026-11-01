@@ -10,32 +10,34 @@ serving goal beyond 29 GB is 19 GB through a custom RRFlow shard and KV-cache
 system; neither footprint has been measured. The tree is prepared for
 source-available publication under BSL 1.1. Session logs, generated artifacts
 and `.swag/` evidence stay local, and public documents name the development
-hosts `spark-01` to `spark-03`. Publication itself is a separate owner decision.
+hosts `spark-01` to `spark-03`. The owner selected
+[`rrflow/swag`](https://github.com/rrflow/swag) as the delivery repository on
+1 November. It is private; public visibility and release remain separate decisions.
 
 ## Developer-build work resumed, 1 November
 
 The owner requested a plan and execution after the readiness review. The
 [developer-build execution plan](implementation-plan.md#developer-build-execution-1-november)
 keeps the complete workflow, reviewed learning and native/container delivery in
-scope. SWAG now has local commit `3a5b337`, a clean starting worktree and no
-configured remote. Older statements that this checkout lacks Git metadata are
+scope. SWAG has Git history starting at `3a5b337` and `origin` now points to
+`https://github.com/rrflow/swag.git`. Older statements that this checkout lacks Git metadata are
 historical. Fresh local validation passed 97 Python and six viewer tests; both
 preview executable hashes still match their recorded receipts.
 
 RRFlow main has advanced to `daec1f1a`; PR190, PR232 and packaging PR212 are
 merged. PR235 now publishes ordinary merge `b856a8fb`, resolving all 19
 catalogue/projection conflicts and regenerating SDKs from the combined contract.
-GitHub reports it mergeable; candidate and protected acceptance remain pending.
+Its candidate CI has passed; protected acceptance remains pending.
 Parent-preservation checks, the primary binary build, 165 contract/adapter tests,
 499 reported owning-suite tests, strict lint, TypeScript and repository checks
 pass. Four existing tests remain ignored and one SDK entry returns without its
-live-daemon manifest; fresh hosted conformance remains required. New candidate
+live-daemon manifest; the subsequent hosted conformance check passes. Candidate
 [41342695388](https://github.com/rrflow/rrflow-development/actions/runs/41342695388)
-is queued. Normal automatic merge is enabled for the exact head; this is not a
-successful check or merge receipt.
+completed with all 23 jobs successful for `b856a8fb`. PR235 remains open;
+candidate success is not a protected merge receipt.
 No combined developer bundle, governed project execution or qualified model is
-claimed. The worker publication hold, delivery-repository choice and real-task
-acceptance input remain unresolved.
+claimed. The worker publication hold and real-task acceptance input remain
+unresolved; the delivery-repository choice is now resolved.
 
 ## Latest verified advancement
 
