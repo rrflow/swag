@@ -53,6 +53,13 @@ not inferred. The owner is also asked for a real task and acceptance criteria;
 that answer grants no training permission. The latest local checkout check
 passed 97 Python tests and six TypeScript viewer tests.
 
+Next integration risk: a read-only preview of sender `b856a8fb` with published
+worker `52e2254a` lists 29 conflicted paths, including engine invocation,
+endpoint policy, transport contracts and generated projections. The preview
+warns that its path list may be incomplete. It changes no source or refs and
+does not clear the worker publication hold. Resolve that bounded integration
+under its own brief and tests; do not describe the complete stack as conflict-free.
+
 ## Earlier execution, 31 October
 
 Latest receiver package: RROFLOW PR43 merged as `d552e8ab`, from `b4c04cee`, with typed
