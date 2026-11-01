@@ -1,0 +1,2 @@
+# Keep bytes identical across platforms; evidence files are cited by SHA-256.
+* text=auto eol=lf

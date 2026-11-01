@@ -1,0 +1,255 @@
+schema_version: 1
+name: swag-controller-dataset-spec-v1
+description: >
+  Canonical dataset specification for SWAG System-One controller training and
+  evaluation. This file defines required dataset schemas, source contracts,
+  privacy rules, quality gates, and split policy.
+
+intent_contract:
+  system_intent: >
+    System-One controller and decisions routing layer for large/local LLMs with
+    operator attunement, evaluation, and continuous improvement.
+  anti_goals:
+    - generic_chatbot
+    - hardcoded_one_off_rules_engine
+  must_have_capabilities:
+    - deterministic_decision_matrix
+    - dynamic_model_routing
+    - frontier_and_local_support
+    - operator_profiles_attunement
+    - trace_replay_observability
+    - policy_and_budget_guardrails
+    - training_and_finetune_pipeline
+    - benchmarking_eval_harness
+    - minimal_schema_first
+
+model_tiers:
+  primary:
+    - 14b
+    - 27-28b
+  optional_eval_only:
+    - 7b
+    - 24-35b
+
+source_contracts:
+  required_sources:
+    - key: swag_generated_scenarios
+      required: true
+      formats: [jsonl, json, yaml]
+    - key: project_code_and_history
+      required: true
+      formats: [markdown, yaml, json]
+    - key: operator_notes_playbooks
+      required: true
+      formats: [markdown, yaml, jsonl]
+    - key: eval_judgment_labels
+      required: true
+      formats: [jsonl, csv, parquet]
+  optional_sources:
+    - key: prod_incidents_postmortems
+      required: false
+      formats: [markdown, jsonl]
+    - key: support_conversations
+      required: false
+      formats: [jsonl, csv, parquet]
+    - key: public_best_practice_docs
+      required: false
+      formats: [markdown, yaml, json]
+    - key: project_specific_constraints
+      required: false
+      formats: [markdown, yaml, json]
+
+canonical_record_contract:
+  format: jsonl
+  one_record_per_line: true
+  required_fields:
+    - record_id
+    - scenario_id
+    - source_type
+    - messages
+    - labels
+    - metadata
+  schema:
+    record_id:
+      type: string
+      min_length: 8
+      example: rec-000001
+    scenario_id:
+      type: string
+      min_length: 3
+      example: s1-vanilla-general
+    source_type:
+      type: string
+      enum:
+        - swag_generated_scenarios
+        - project_code_and_history
+        - operator_notes_playbooks
+        - prod_incidents_postmortems
+        - support_conversations
+        - eval_judgment_labels
+        - public_best_practice_docs
+        - project_specific_constraints
+    messages:
+      type: array
+      min_items: 3
+      required_roles_in_order: [system, user, assistant]
+      item_schema:
+        role:
+          type: string
+          enum: [system, user, assistant]
+        content:
+          type: string
+          min_length: 1
+    labels:
+      type: object
+      required_fields:
+        - selected_question_ids
+      fields:
+        selected_question_ids:
+          type: array
+          min_items: 1
+          max_items: 250
+          item_type: string
+        skipped_question_ids:
+          type: array
+          required: false
+          item_type: string
+        route_target_tier:
+          type: string
+          required: false
+          enum: [14b, 27-28b, 7b, 24-35b]
+        confidence:
+          type: number
+          required: false
+          min: 0.0
+          max: 1.0
+    metadata:
+      type: object
+      required_fields:
+        - created_at
+        - maturity
+      fields:
+        created_at:
+          type: string
+          format: datetime
+        maturity:
+          type: string
+          enum: [growing, mature]
+        has_test_harness:
+          type: boolean
+          required: false
+        unbounded_data_path:
+          type: boolean
+          required: false
+        domains:
+          type: array
+          required: false
+          item_type: string
+        stacks:
+          type: array
+          required: false
+          item_type: string
+
+quality_gates:
+  baseline_gates:
+    min_accepted_rows: 500
+    min_train_rows: 400
+    min_val_rows: 50
+    min_test_rows: 50
+    min_unique_scenarios: 40
+    min_unique_selected_question_ids: 120
+    min_distinct_stack_prefixes: 13
+    min_rows_with_question_citations: 500
+    min_rows_with_reference_urls: 60
+    max_synthetic_variant_ratio: 0.50
+    required_source_family_min_rows:
+      controller_expected_battery: 24
+      project_history_reference: 850
+      structured_real_inputs: 60
+      official_best_practice_docs: 120
+      incident_support_transcripts: 90
+    required_stack_min_rows:
+      nextjs: 1
+      rust: 1
+      go: 1
+      typescript: 1
+      react: 1
+      vanilla_js: 1
+      java: 1
+      cpp: 1
+      php: 1
+      c: 1
+      python: 1
+      ruby: 1
+      sql: 1
+    max_rejection_rate: 0.20
+    max_duplicate_rate: 0.05
+  content_gates:
+    min_user_chars: 40
+    min_assistant_chars: 24
+    max_total_chars: 32000
+    require_roles: [system, user, assistant]
+    parse_assistant_json: true
+    max_selected_question_ids: 250
+  policy:
+    fail_on_violation: true
+    severity:
+      hard_fail:
+        - min_train_rows
+        - min_unique_scenarios
+        - min_unique_selected_question_ids
+        - min_distinct_stack_prefixes
+        - min_rows_with_question_citations
+        - max_rejection_rate
+      warn_only:
+        - max_duplicate_rate
+
+split_contract:
+  strategy: stable_hash
+  target_ratios:
+    train: 0.90
+    val: 0.08
+    test: 0.02
+  minimum_rows:
+    val: 50
+    test: 50
+  hash_salt: swag-controller-v1
+  leakage_controls:
+    group_by:
+      - scenario_id
+      - source_type
+    prevent_cross_split_duplicate_messages: true
+
+privacy_and_compliance:
+  redact_before_training: true
+  no_external_sensitive_data_sharing: true
+  pii_patterns:
+    - email
+    - phone
+    - address
+    - ip_public
+    - api_key
+    - access_token
+    - secret
+  replacement_token: "<REDACTED>"
+  retain_private_ips: false
+  required_checks:
+    - secrets_scan_pass
+    - pii_scan_pass
+
+dataset_locations:
+  status: not_finalized
+  notes: >
+    Keep this section updated with final storage paths/repositories/buckets as
+    they are decided.
+  planned:
+    canonical_training_jsonl: files/training/data/controller_sft.jsonl
+    cleaned_training_jsonl: files/training/data/controller_sft.cleaned.jsonl
+    rejected_rows_jsonl: files/training/data/controller_sft.rejected.jsonl
+    quality_report_json: files/training/data/controller_sft.quality_report.json
+    split_dir: files/training/data/splits
+
+acceptance_criteria:
+  - reliable_decision_routing
+  - measurable_eval_gains
+  - reproducible_ring_training_and_evaluation

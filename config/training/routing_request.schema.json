@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SWAG bounded route selection input, revision 1",
+  "type": "object", "additionalProperties": false,
+  "required": ["projectIntent", "taskText", "minimumQuality", "maxCost", "requestedEffort", "localOnly", "candidates"],
+  "properties": {
+    "projectIntent": {"type": "string", "minLength": 1, "maxLength": 16000},
+    "taskText": {"type": "string", "minLength": 1, "maxLength": 16000},
+    "minimumQuality": {"type": "number", "minimum": 0},
+    "maxCost": {"type": "number", "minimum": 0},
+    "requestedEffort": {"type": "string", "minLength": 1},
+    "localOnly": {"type": "boolean"},
+    "candidates": {
+      "type": "array", "maxItems": 64,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["bindingId", "provider", "modelId", "accessMode", "authorized", "healthy", "quotaAvailable", "location", "quality", "cost", "efforts"],
+        "properties": {
+          "bindingId": {"type": "string", "minLength": 1},
+          "provider": {"type": "string", "minLength": 1},
+          "modelId": {"type": "string", "minLength": 1},
+          "accessMode": {"enum": ["subscription", "api", "local"]},
+          "authorized": {"type": "boolean"},
+          "healthy": {"type": "boolean"},
+          "quotaAvailable": {"type": "boolean"},
+          "location": {"enum": ["local", "cloud"]},
+          "quality": {"type": "number", "minimum": 0},
+          "cost": {"type": "number", "minimum": 0},
+          "efforts": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    }
+  }
+}

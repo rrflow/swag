@@ -1,0 +1,118 @@
+schema_version: 1
+policy:
+  description: >
+    Registry of decision research feeds that should be folded into SWAG batteries.
+    Feeds are bound to questions by glob patterns over question ids or
+    "<question_set>.<section>" selectors.
+  freshness_policy:
+    default_review_interval_days: 90
+    require_next_review_due: true
+    fail_on_stale_feeds: true
+  research_feeds:
+    - key: swebok_core
+      name: SWEBOK and curriculum core
+      version: "v4"
+      last_verified: "2026-10-25"
+      next_review_due: "2026-12-24"
+      review_interval_days: 90
+      question_bindings:
+        - "shared_predicates.*"
+      sources:
+        - type: standard
+          reference: "SWEBOK v4"
+          url: "https://www.computer.org/education/bodies-of-knowledge/software-engineering"
+        - type: curriculum
+          reference: "SE2014"
+          url: "https://www.acm.org/binaries/content/assets/education/se2014.pdf"
+        - type: curriculum
+          reference: "CS2023"
+          url: "https://csed.acm.org/wp-content/uploads/2024/04/1.1-ACM-CS2023.pdf"
+
+    - key: ai_decision_proven_practices
+      name: AI decisioning proven practices
+      version: "2026-10"
+      last_verified: "2026-10-25"
+      next_review_due: "2026-12-24"
+      review_interval_days: 90
+      question_bindings:
+        - "domains.llm_application.*"
+        - "shared_predicates.software_security.*"
+      sources:
+        - type: official_docs
+          reference: "OpenAI Reasoning guide"
+          url: "https://developers.openai.com/api/docs/guides/reasoning"
+        - type: official_docs
+          reference: "OpenAI Structured Outputs guide"
+          url: "https://developers.openai.com/api/docs/guides/structured-outputs"
+        - type: official_docs
+          reference: "OpenAI Batch API guide"
+          url: "https://developers.openai.com/api/docs/guides/batch"
+        - type: guidance
+          reference: "NIST AI RMF 1.0"
+          url: "https://www.nist.gov/itl/ai-risk-management-framework"
+        - type: guidance
+          reference: "OWASP LLM Top 10 / GenAI Security"
+          url: "https://genai.owasp.org/"
+
+    - key: cloudflare_decisions
+      name: Cloudflare architecture decisions
+      version: "2026-10"
+      last_verified: "2026-10-25"
+      next_review_due: "2026-12-24"
+      review_interval_days: 90
+      question_bindings:
+        - "domains.realtime_messaging.*"
+        - "domains.files_and_media.*"
+      sources:
+        - type: official_docs
+          reference: "Cloudflare Workers AI overview"
+          url: "https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/content/docs/workers-ai/index.mdx"
+        - type: official_docs
+          reference: "Cloudflare Durable Objects overview"
+          url: "https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/content/docs/durable-objects/index.mdx"
+        - type: official_docs
+          reference: "Cloudflare Queues overview"
+          url: "https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/content/docs/queues/index.mdx"
+        - type: official_docs
+          reference: "Cloudflare Vectorize overview"
+          url: "https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/content/docs/vectorize/index.mdx"
+        - type: official_docs
+          reference: "Cloudflare docs index (llms.txt)"
+          url: "https://developers.cloudflare.com/llms.txt"
+
+    - key: jev_decisions
+      name: JEV decision log
+      version: "experimental"
+      last_verified: "2026-10-25"
+      next_review_due: "2026-11-24"
+      review_interval_days: 30
+      question_bindings:
+        - "shared_predicates.software_architecture.*"
+        - "shared_predicates.software_engineering_process.*"
+      sources:
+        - type: official_docs
+          reference: "TypeSafe AI docs introduction"
+          url: "https://docs.typesafe.ai/introduction"
+        - type: vendor_blog
+          reference: "Introducing System One Models & Jev"
+          url: "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+        - type: vendor_case_study
+          reference: "Jack & Jill Jev case study"
+          url: "https://typesafe.ai/blog/jack-jill-jev-case-study"
+        - type: internal
+          reference: "JEV ADR/decision log (required for production governance)"
+
+    - key: rrflow_contract_alignment
+      name: RRFlow naming and boundary contract alignment
+      version: "repo-local-current"
+      last_verified: "2026-10-25"
+      next_review_due: "2026-12-24"
+      review_interval_days: 90
+      question_bindings:
+        - "shared_predicates.software_design_principles.*"
+        - "shared_predicates.software_configuration_management.*"
+      sources:
+        - type: internal
+          reference: "config/rrflow.naming.yaml"
+        - type: internal
+          reference: "config/boundaries/stack_registry.yaml"

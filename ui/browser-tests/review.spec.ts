@@ -1,0 +1,41 @@
+import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+test('real review, draft download/resume, stale rejection and engine validation', async ({ page }, info) => {
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto('/review.html');
+  await expect(page.locator('#task-position')).toHaveText('Task 1 of 21');
+  await page.locator('#reviewer').fill('synthetic-browser-test');
+  await page.locator('#reviewer-kind').selectOption('assistant');
+  await page.locator('#decision').selectOption('correct');
+  await page.locator('#label').selectOption('documentation');
+  await page.locator('#rationale').fill('Synthetic browser test only; not an independent semantic review.');
+  await expect(page.locator('#review-progress')).toContainText('1/21');
+  const pending = page.waitForEvent('download'); await page.locator('#export-draft').click();
+  const download = await pending, file = info.outputPath('test-draft.json'); await download.saveAs(file);
+  const value = JSON.parse(readFileSync(file, 'utf8'));
+  expect(value.reviewerKind).toBe('assistant'); expect(value.decisions[0].label).toBe('documentation');
+  await page.reload(); await expect(page.locator('#review-progress')).toContainText('0/21');
+  await page.locator('#resume-review').setInputFiles(file);
+  await expect(page.locator('#review-progress')).toContainText('1/21');
+  await expect(page.locator('#rationale')).toHaveValue(/Synthetic browser test/);
+  const stale = { ...value, packetSha256: '0'.repeat(64) };
+  await page.locator('#resume-review').setInputFiles({ name: 'stale.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(stale)) });
+  await expect(page.locator('#review-error')).toBeVisible();
+  await expect(page.locator('#review-progress')).toContainText('1/21');
+  for (const decision of value.decisions) {
+    decision.decision = 'exclude'; decision.label = null;
+    decision.rationale = 'Synthetic browser-to-validator test only; no independent semantic review.';
+  }
+  await page.locator('#resume-review').setInputFiles({ name: 'test-review.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(value)) });
+  await expect(page.locator('#export-complete')).toBeEnabled();
+  const completeDownload = page.waitForEvent('download'); await page.locator('#export-complete').click();
+  await (await completeDownload).saveAs(info.outputPath('synthetic-complete-review.json'));
+  await page.reload();
+  await expect(page.locator('#review-progress')).toContainText('0/21');
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: '../.swag/evidence/20261028/review-ui-mobile.png', fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  await page.screenshot({ path: '../.swag/evidence/20261028/review-ui-desktop.png', fullPage: true });
+  expect(errors).toEqual([]);
+});

@@ -1,0 +1,601 @@
+# GENERATED from boundaries/reference/stack_nextjs_v0_1.md (faithful export of Google Doc 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: nextjs
+  kind: stack
+  stack: nextjs
+  stack_field_in_source: nextjs
+source:
+  doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+  title: 'Stack — Next.js (App Router): Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  revision_id: ANLCKQm2OsNQeq1DHMd3hTJLJyQYSnqsAswt7nbXE5FBmYmJxwCZFOjVusAlV9xyDunBTfMLayLeXO4W4GzGi1Mhfl2MiIGFI_LrknnHmQgo
+  owner: hades
+  export_date: '2026-09-30'
+  authored_against: Next.js 16.3.7 (App Router).
+  reference_export: boundaries/reference/stack_nextjs_v0_1.md
+maturity_gating:
+  source_text: 'Greenfield: Project Structure and Installation 1, 2, 4; Server and Client Components 1–3; Mutating Data 1–2; Caching 1. Growing: all sections. Mature: add the Binds to: questions bound to the project''s file tree and style choice, and the Data Access Layer questions become mandatory.'
+  greenfield_refs:
+  - source_ref: Project Structure and Installation 1, 2, 4
+    section: project_structure_and_installation
+    questions:
+    - 1
+    - 2
+    - 4
+    match: title_start
+  - source_ref: Server and Client Components 1–3
+    section: server_and_client_components
+    questions:
+    - 1
+    - 2
+    - 3
+    match: title_start
+  - source_ref: Mutating Data 1–2
+    section: mutating_data
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Caching 1
+    section: caching_and_revalidating
+    questions:
+    - 1
+    match: title_start
+  growing: all sections
+  mature_source_text: 'add the Binds to: questions bound to the project''s file tree and style choice, and the Data Access Layer questions become mandatory.'
+  mandatory_sections_at_mature: []
+  mandatory_question_terms_at_mature:
+  - 'Binds to: questions bound to the project''s file tree and style choice, and the Data Access Layer'
+sections:
+- key: project_structure_and_installation
+  source_heading: Project Structure and Installation
+  title: Project Structure and Installation
+- key: layouts_pages_navigation
+  source_heading: Layouts, Pages, Navigation
+  title: Layouts, Pages, Navigation
+- key: server_and_client_components
+  source_heading: Server and Client Components
+  title: Server and Client Components
+- key: fetching_data
+  source_heading: Fetching Data
+  title: Fetching Data
+- key: mutating_data
+  source_heading: Mutating Data
+  title: Mutating Data
+- key: caching_and_revalidating
+  source_heading: Caching and Revalidating
+  title: Caching and Revalidating
+- key: error_handling
+  source_heading: Error Handling
+  title: Error Handling
+- key: css_images_fonts
+  source_heading: CSS, Images, Fonts
+  title: CSS, Images, Fonts
+- key: metadata
+  source_heading: Metadata
+  title: Metadata
+- key: route_handlers_and_proxy
+  source_heading: Route Handlers and Proxy
+  title: Route Handlers and Proxy
+- key: deploying_and_upgrading
+  source_heading: Deploying and Upgrading
+  title: Deploying and Upgrading
+questions:
+- id: nextjs.project_structure_and_installation.01
+  section: project_structure_and_installation
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Do route files use the App Router file conventions (layout, page, loading, error, not-found, route) rather than ad-hoc names?
+  citation: File conventions (Project Structure)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Project Structure and Installation
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.project_structure_and_installation.02
+  section: project_structure_and_installation
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Is non-route code colocated in private folders or outside app, and are route groups used only for organization and shared layouts?
+  citation: Route groups; private folders; colocation (Project Structure)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Project Structure and Installation
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.project_structure_and_installation.03
+  section: project_structure_and_installation
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Is the placement consistent with this project's existing structure (app, ui or components, lib)?
+  citation: Project organization (Project Structure)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Project Structure and Installation
+  binds_to:
+    key: file_tree
+    label: file tree
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.02
+    topic: placement
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: nextjs.project_structure_and_installation.04
+  section: project_structure_and_installation
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Are secrets only in server-side environment variables, with NEXT_PUBLIC_ reserved for values that are safe to ship to the browser?
+  citation: Environment variables (Installation); Configuration (ASVS V13)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Project Structure and Installation
+  overlaps_shared_question:
+    id: shared_predicates.software_security.02
+    topic: secrets
+    note: listed for review; not removed
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.project_structure_and_installation.05
+  section: project_structure_and_installation
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Are module path aliases used instead of deep relative imports?
+  citation: Module path aliases (Installation)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Project Structure and Installation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.layouts_pages_navigation.01
+  section: layouts_pages_navigation
+  section_ordinal: 1
+  doc_ordinal: 6
+  text: Is shared UI in a layout and page-specific UI in a page, with exactly one root layout?
+  citation: Root layout; nested layouts (Layouts and Pages)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Layouts, Pages, Navigation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.layouts_pages_navigation.02
+  section: layouts_pages_navigation
+  section_ordinal: 2
+  doc_ordinal: 7
+  text: Are internal links rendered with the Link component so prefetching and client-side navigation apply?
+  citation: Link; prefetching (Linking and Navigating)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Layouts, Pages, Navigation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.layouts_pages_navigation.03
+  section: layouts_pages_navigation
+  section_ordinal: 3
+  doc_ordinal: 8
+  text: Are params and searchParams awaited and typed for dynamic segments?
+  citation: Dynamic segments; params (Layouts and Pages)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Layouts, Pages, Navigation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.layouts_pages_navigation.04
+  section: layouts_pages_navigation
+  section_ordinal: 4
+  doc_ordinal: 9
+  text: Are redirects performed with redirect on the server rather than client-side effects where possible?
+  citation: Redirect (Linking and Navigating)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Layouts, Pages, Navigation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.server_and_client_components.01
+  section: server_and_client_components
+  section_ordinal: 1
+  doc_ordinal: 10
+  text: Is 'use client' applied only where interactivity or browser APIs are required, at the leaves of the tree?
+  citation: Server-client boundary (Server and Client Components)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Server and Client Components
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.server_and_client_components.02
+  section: server_and_client_components
+  section_ordinal: 2
+  doc_ordinal: 11
+  text: Are all props crossing the server-to-client boundary serializable?
+  citation: Serializable props (Server and Client Components)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Server and Client Components
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.server_and_client_components.03
+  section: server_and_client_components
+  section_ordinal: 3
+  doc_ordinal: 12
+  text: Are server-only modules (database client, secrets) never imported into Client Components, with server-only marking where it matters?
+  citation: server-only (Server and Client Components)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Server and Client Components
+  overlaps_shared_question:
+    id: shared_predicates.software_security.02
+    topic: secrets
+    note: listed for review; not removed
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.server_and_client_components.04
+  section: server_and_client_components
+  section_ordinal: 4
+  doc_ordinal: 13
+  text: Are Server Components passed into Client Components as children rather than imported by them?
+  citation: Composition (Server and Client Components)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Server and Client Components
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.fetching_data.01
+  section: fetching_data
+  section_ordinal: 1
+  doc_ordinal: 14
+  text: Is data fetched in Server Components (or through Route Handlers for client consumers), not in client effects by default?
+  citation: Server-side data fetching (Fetching Data)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Fetching Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.fetching_data.02
+  section: fetching_data
+  section_ordinal: 2
+  doc_ordinal: 15
+  text: Is slow or non-critical data wrapped in Suspense or loading.js so the shell streams?
+  citation: Streaming; Suspense (Fetching Data)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Fetching Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.fetching_data.03
+  section: fetching_data
+  section_ordinal: 3
+  doc_ordinal: 16
+  text: Are independent requests fetched in parallel rather than as a sequential waterfall?
+  citation: Parallel data fetching (Fetching Data)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Fetching Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.fetching_data.04
+  section: fetching_data
+  section_ordinal: 4
+  doc_ordinal: 17
+  text: Is database access isolated in a data layer (lib/data) rather than inline in components?
+  citation: Data Access Layer (Authentication guide; Foundations course)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Fetching Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.mutating_data.01
+  section: mutating_data
+  section_ordinal: 1
+  doc_ordinal: 18
+  text: Are mutations implemented as Server Functions or Server Actions under 'use server' rather than client-side fetches to hand-rolled endpoints?
+  citation: Server Functions (Mutating Data)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Mutating Data
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.mutating_data.02
+  section: mutating_data
+  section_ordinal: 2
+  doc_ordinal: 19
+  text: Does every Server Function validate its input and check authorization server-side, since it is a public endpoint?
+  citation: Input validation; authorization (Mutating Data; ASVS V4)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Mutating Data
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.mutating_data.03
+  section: mutating_data
+  section_ordinal: 3
+  doc_ordinal: 20
+  text: After a mutation, is the affected cache revalidated with revalidatePath or revalidateTag before redirecting?
+  citation: Revalidation after mutation (Mutating Data; Revalidating)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Mutating Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.mutating_data.04
+  section: mutating_data
+  section_ordinal: 4
+  doc_ordinal: 21
+  text: Are pending and error states surfaced with useActionState or useFormStatus?
+  citation: Form state (Mutating Data)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Mutating Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.caching_and_revalidating.01
+  section: caching_and_revalidating
+  section_ordinal: 1
+  doc_ordinal: 22
+  text: Is the caching strategy for each route and data source explicit (static, dynamic, or Cache Components with 'use cache') rather than assumed from defaults?
+  citation: Caching (Caching)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Caching and Revalidating
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.caching_and_revalidating.02
+  section: caching_and_revalidating
+  section_ordinal: 2
+  doc_ordinal: 23
+  text: Is revalidation chosen deliberately — time-based or on-demand — and are cache tags named canonically?
+  citation: Revalidation strategy (Revalidating)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Caching and Revalidating
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.caching_and_revalidating.03
+  section: caching_and_revalidating
+  section_ordinal: 3
+  doc_ordinal: 24
+  text: Is user-specific or session-specific data excluded from shared caches?
+  citation: Cache scope (Caching)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Caching and Revalidating
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.error_handling.01
+  section: error_handling
+  section_ordinal: 1
+  doc_ordinal: 25
+  text: Are expected errors returned as values to the UI, and only uncaught exceptions left to error.js boundaries?
+  citation: Expected errors; error boundaries (Error Handling)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Error Handling
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.error_handling.02
+  section: error_handling
+  section_ordinal: 2
+  doc_ordinal: 26
+  text: Is not-found handled with notFound and a not-found.js at the right segment?
+  citation: Not found (Error Handling)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Error Handling
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.error_handling.03
+  section: error_handling
+  section_ordinal: 3
+  doc_ordinal: 27
+  text: Is a global-error.js present to catch root layout failures?
+  citation: Global error (Error Handling)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Error Handling
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.css_images_fonts.01
+  section: css_images_fonts
+  section_ordinal: 1
+  doc_ordinal: 28
+  text: Is styling done with this project's chosen method (Tailwind or CSS Modules) rather than mixed ad hoc?
+  citation: Styling method (CSS)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > CSS, Images, Fonts
+  binds_to:
+    key: style_choice
+    label: style choice
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: nextjs.css_images_fonts.02
+  section: css_images_fonts
+  section_ordinal: 2
+  doc_ordinal: 29
+  text: Are images rendered with next/image with dimensions or fill and sizes set?
+  citation: Image optimization (Image Optimization)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > CSS, Images, Fonts
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.css_images_fonts.03
+  section: css_images_fonts
+  section_ordinal: 3
+  doc_ordinal: 30
+  text: Are fonts loaded with next/font rather than external stylesheet links?
+  citation: Font optimization (Font Optimization)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > CSS, Images, Fonts
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.metadata.01
+  section: metadata
+  section_ordinal: 1
+  doc_ordinal: 31
+  text: Is metadata defined through the Metadata API — static or generateMetadata — including Open Graph images for public pages?
+  citation: Metadata API (Metadata and OG images)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Metadata
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.metadata.02
+  section: metadata
+  section_ordinal: 2
+  doc_ordinal: 32
+  text: Are sitemap and robots generated through the file conventions where the site is public?
+  citation: Sitemap; robots (Metadata and OG images)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Metadata
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.route_handlers_and_proxy.01
+  section: route_handlers_and_proxy
+  section_ordinal: 1
+  doc_ordinal: 33
+  text: Is a Route Handler used only where a Server Function does not fit (webhooks, external clients), with correct HTTP method exports and Web Response objects?
+  citation: Route Handlers (Route Handlers)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Route Handlers and Proxy
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.route_handlers_and_proxy.02
+  section: route_handlers_and_proxy
+  section_ordinal: 2
+  doc_ordinal: 34
+  text: Is Proxy limited to rewrites, redirects, headers, and optimistic checks — never the sole authorization gate?
+  citation: Proxy (Proxy; Authentication guide)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Route Handlers and Proxy
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.route_handlers_and_proxy.03
+  section: route_handlers_and_proxy
+  section_ordinal: 3
+  doc_ordinal: 35
+  text: Is authorization enforced in the Data Access Layer next to the data it protects?
+  citation: Data Access Layer (Authentication guide)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Route Handlers and Proxy
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.deploying_and_upgrading.01
+  section: deploying_and_upgrading
+  section_ordinal: 1
+  doc_ordinal: 36
+  text: Is the deployment target (Vercel, self-hosted Node, static export) chosen, and are the features used supported on that target?
+  citation: Deployment targets (Deploying)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Deploying and Upgrading
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.deploying_and_upgrading.02
+  section: deploying_and_upgrading
+  section_ordinal: 2
+  doc_ordinal: 37
+  text: Is the Next.js version current or pinned deliberately, with upgrade codemods applied when moving?
+  citation: Upgrading (Upgrading)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Deploying and Upgrading
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: nextjs.deploying_and_upgrading.03
+  section: deploying_and_upgrading
+  section_ordinal: 3
+  doc_ordinal: 38
+  text: Does the plan honor the React Foundations prerequisite — components, props, state, hooks, Suspense — before introducing Server Component patterns?
+  citation: Prerequisite (React Foundations course)
+  source:
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    section: 5. Boundary questions > Deploying and Upgrading
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false

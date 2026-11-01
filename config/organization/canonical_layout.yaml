@@ -1,0 +1,94 @@
+schema_version: 1
+name: swag_canonical_layout
+summary: >
+  Canonical repository structure for SWAG scale-up. This layout keeps operator
+  runtime secrets, training artifacts, source config, and governance artifacts
+  separated so the project can grow without context rot.
+
+root:
+  .swag:
+    purpose: "Ignored runtime secrets and access instructions for cluster/terminal operations."
+    contents:
+      - cluster_access.md
+      - cluster_access.env.example
+      - local_env_overrides.env
+  config:
+    purpose: "Canonical policy, source manifests, runtime config, training profiles, and operator contracts."
+    subdirs:
+      boundaries:
+        purpose: "Question sets, source bindings, runtime policy, controller boundary logic."
+      frontier:
+        purpose: "Provider and routing config for external model access."
+      local:
+        purpose: "Local/self-hosted adapter config and model profiles."
+      runtime:
+        purpose: "Global defaults, project overrides, and MCP runtime configuration."
+      sources:
+        purpose: "Canonical source registry and vendor evidence manifests."
+      training:
+        purpose: "Training pipeline config, quantization gates, benchmark profiles, and dataset contract templates."
+      organization:
+        purpose: "Repository governance, layout manifest, canonical conventions."
+  tools:
+    purpose: "Operational scripts, training pipelines, controllers, and runtime bootstrap tools."
+    conventions:
+      - use snake_case for Python modules
+      - keep each tool focused on one job: capture, route, benchmark, or train
+      - scripts should emit JSON or YAML artifacts rather than only printing ad hoc logs
+  files:
+    purpose: "Generated artifacts, benchmark outputs, manifests, model metrics, and runtime evidence."
+    subdirs:
+      controller_experiments:
+        purpose: "Scenario generation and per-tier benchmark outputs."
+      training:
+        purpose: "Dataset artifacts, manifests, benchmark results, and model training outputs."
+      alpha_evidence:
+        purpose: "Vendor evidence and optimization comparison reports."
+      swag_control_panel:
+        purpose: "User-facing intake, config, and generated control-panel output."
+  boundaries:
+    purpose: "Project-level decision reference docs, naming guidance, and boundary documentation."
+  tests:
+    purpose: "Fixtures and validation inputs for naming, checks, and dataset quality gates."
+  chat-archive:
+    purpose: "Historical chat and candidate exploration; not active product logic."
+  chat-candidates:
+    purpose: "Candidate prompts, experiment notes, and exploratory drafts."
+  docs:
+    purpose: "External docs or handoff material not required for runtime execution."
+
+naming_rules:
+  - python scripts: snake_case
+  - config keys: snake_case for runtime names and tier labels; kebab-case only when required by external tooling
+  - directories: lower_snake_case
+  - artifacts: transparent and readable, e.g. `swag_supervised.jsonl`, `promotion_scorecard.json`
+  - model profile names: descriptive and explicit, e.g. `fast_28b_controller`, `default_rollout`
+
+data_lifecycle:
+  - inputs: user seed data, repo diffs, issue titles, project configs, source manifests
+  - generated: control panel outputs, dataset rows, scenario packs, benchmark artifacts
+  - reviewed: manifests, proofs, scorecards, and policy validations
+  - promoted: approved tuning configs and runtime defaults
+
+operational_rules:
+  - Keep secrets and host access in `.swag/` or local ignored env files only.
+  - Keep runtime-generated artifacts in `files/`.
+  - Keep canonical source-of-truth config under `config/`.
+  - Keep business logic in `tools/` and policy in `config/`.
+  - Avoid mixing model training artifacts with active project runtime config.
+
+canonical_contract:
+  file_types:
+    - yaml: configuration and policy
+    - jsonl: datasets and event logs
+    - json: manifests and benchmark outputs
+    - py: operational scripts
+  strict_separation:
+    - code logic, runtime config, and generated artifacts must not be co-mingled in the same folder
+    - all active source-of-truth files live under `config/` or `tools/`
+    - generated evidence lives under `files/`
+
+scale_guidance:
+  - as the project grows, add domain-specific subfolders under `config/` and `files/` rather than creating ad hoc top-level directories
+  - preserve a single canonical source of truth for each class of artifact
+  - rotate or archive old candidate material under `chat-archive/` or `chat-candidates/` instead of cluttering active runtime paths

@@ -1,0 +1,90 @@
+schema_version: 1
+name: swag_passive_capture_schema
+summary: >
+  Passive capture schema for SWAG controller training. This is designed to record
+  actual decision moments from real project work: repo diff, issue title, route
+  selection, and user acceptance or override. The goal is to train the controller
+  on decision events instead of raw chat dumps.
+
+required_fields:
+  - record_id
+  - project_id
+  - task_id
+  - source_type
+  - task_type
+  - stack
+  - domain
+  - issue_title
+  - issue_id
+  - repo_context
+  - intent_text
+  - selected_question_ids
+  - route_target_tier
+  - user_override
+  - user_acceptance
+  - confidence
+  - rationale
+  - outcome
+  - source_provenance
+
+allowed_task_types:
+  - routing decisions
+  - architecture review
+  - security review
+  - incident/root cause
+  - migration planning
+  - general project triage
+  - other
+
+allowed_route_tiers:
+  - 7b
+  - 14b
+  - 27-28b
+
+required_behavior:
+  - Collect only decision moments that are actually relevant to a task.
+  - Attach real provenance: changed files, issue ID/title, route selection, and user outcome.
+  - Keep capture narrow and schema-first; do not dump entire repo or chat logs by default.
+  - User acceptance is an observed preference, not proof of technical correctness.
+  - Missing outcomes and confidence remain null; do not invent negative results or confidence.
+  - Captures are unreviewed and training_consent is false until separately admitted.
+  - The current collector is a manual emitter, not a background watcher or diff-content collector.
+
+example_record:
+  record_id: passive-0001
+  project_id: acme-payments
+  task_id: task-2026-10-28-001
+  source_type: passive_capture
+  task_type: security review
+  stack:
+    - python
+    - react
+  domain: auth_and_session_control
+  issue_title: "Add passkey sign-in and session timeout enforcement"
+  issue_id: "PR-1042"
+  repo_context:
+    branch: feature/passkeys
+    repo_root: /workspace/acme-payments
+    changed_files:
+      - app/auth/session.py
+      - app/auth/validators.py
+      - tests/test_auth.py
+  intent_text: "Add passkey sign-in and session timeout enforcement before deployment."
+  selected_question_ids:
+    - shared_predicates.software_security.01
+    - shared_predicates.software_security.03
+    - python.security.01
+  route_target_tier: 14b
+  user_override: false
+  user_acceptance: true
+  confidence: 0.92
+  rationale: "The issue is security-sensitive and bounded to auth/session logic; no broad architecture review is required."
+  outcome:
+    tests_passed: true
+    rollback: false
+    incident: false
+  source_provenance:
+    source_type: git_diff_plus_issue_title
+    source_url: ""
+    reviewer: "user"
+    notes: "Captured from changed files and issue title with user acceptance."

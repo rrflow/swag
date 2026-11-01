@@ -1,0 +1,50 @@
+# Legacy preview policy: tier labels do not establish loaded models or qualification.
+# The enabled experimental profile below is a historical policy setting, not
+# evidence that 6-9GB is attainable. Current BF16 work follows docs/current-context.md.
+schema_version: 1
+policy:
+  controller_tier_strategy:
+    default_tier: 14b
+    fallback_tier: 7b
+    escalation_tier: 27-28b
+    notes: >
+      14B is the default System-One controller tier for balanced controller work.
+      7B is an explicit low-cost opt-in, not a default route. 27-28B is used for
+      deep reasoning and high-risk decision contexts.
+  default_policy_preferences:
+    preferred_default_controller: 14b
+    prefer_tuned_28b_for_hard_cases: true
+    allow_7b_only_when_explicit: true
+  experimental_profiles:
+    fast_28b_controller:
+      enabled: true
+      use_case: >
+        Benchmark a tightly optimized 28B controller under a 6-9GB low-vram profile
+        when the controller must stay fast and reliable on difficult architecture,
+        security, and incident tasks.
+      recommended_condition: >
+        Use only when the task is high-risk and the 14B default has been validated
+        as insufficient or when the team wants to benchmark a faster 28B controller.
+      target_memory_gb: [6, 9]
+      quantization: awq
+  low_cost_signals:
+    budget_modes: [low, constrained]
+    subscription_tiers: [starter, basic]
+    boolean_flags: [force_low_cost, latency_priority]
+  escalation_signals:
+    boolean_flags: [requires_deep_reasoning, high_risk_decision]
+    min_context_chars: 3000
+    intent_keywords:
+      - architecture
+      - migration
+      - incident
+      - root cause
+      - compliance
+      - security
+      - distributed
+      - optimization
+      - escalation
+  fallback_order:
+    "14b": [7b, 27-28b]
+    "7b": [14b, 27-28b]
+    "27-28b": [14b, 7b]

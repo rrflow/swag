@@ -1,0 +1,32 @@
+schema_version: 1
+description: >
+  OpenAI-compatible local model adapter catalog for SWAG. These are the standard
+  local entry points for private or self-hosted model inference servers.
+
+providers:
+  - key: local_openai_compatible
+    label: Local OpenAI-compatible endpoint
+    provider_type: local
+    endpoint_env: LOCAL_OPENAI_BASE_URL
+    api_key_env: LOCAL_OPENAI_API_KEY
+    default_models:
+      - qwen2.5-coder-14b-instruct
+      - qwen2.5-14b-instruct
+      - phi-4
+      - mistral-7b-instruct
+      - llama3.1-8b
+    usage_policy:
+      max_requests_per_minute: 30
+      priority: 30
+  - key: local_ollama_compatible
+    label: Local Ollama-compatible endpoint
+    provider_type: local
+    endpoint_env: OLLAMA_BASE_URL
+    api_key_env: OLLAMA_API_KEY
+    default_models:
+      - qwen2.5-coder:14b
+      - llama3.1:8b
+      - mistral:7b
+    usage_policy:
+      max_requests_per_minute: 20
+      priority: 40

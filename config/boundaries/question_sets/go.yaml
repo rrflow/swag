@@ -1,0 +1,873 @@
+# GENERATED from boundaries/reference/stack_go_v0_1.md (faithful export of Google Doc 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: go
+  kind: stack
+  stack: go
+  stack_field_in_source: go
+source:
+  doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+  title: 'Stack — Go: Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  revision_id: ANLCKQmm7Q2GHnP2pcEgXTV6NX5HMiHy5772DwctvU1mYIDPBPEaxlCww0z-7gAgitAnsJnDhgecCGX6irgP-QxCjiYwQda_d58SBiSYWEMH
+  owner: hades
+  export_date: '2026-09-30'
+  authored_against: Go 1.27 (August 2026).
+  reference_export: boundaries/reference/stack_go_v0_1.md
+maturity_gating:
+  source_text: 'Greenfield: Packages 1–3, 6; Names 1–2, 5; Types 1–2, 4; Errors 1–2, 4, 6; Context 1–2; Concurrency 1–3; Testing 1–2. Growing: all sections. Mature: add the Binds to: questions bound to file tree, canonical name registry, coverage threshold, and lint configuration; Documentation and Tooling sections become mandatory.'
+  greenfield_refs:
+  - source_ref: Packages 1–3, 6
+    section: packages_modules_layout
+    questions:
+    - 1
+    - 2
+    - 3
+    - 6
+    match: title_start
+  - source_ref: Names 1–2, 5
+    section: names_formatting_documentation
+    questions:
+    - 1
+    - 2
+    - 5
+    match: title_start
+  - source_ref: Types 1–2, 4
+    section: types_interfaces_embedding_generics
+    questions:
+    - 1
+    - 2
+    - 4
+    match: title_start
+  - source_ref: Errors 1–2, 4, 6
+    section: errors
+    questions:
+    - 1
+    - 2
+    - 4
+    - 6
+    match: title_start
+  - source_ref: Context 1–2
+    section: context
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Concurrency 1–3
+    section: concurrency
+    questions:
+    - 1
+    - 2
+    - 3
+    match: title_start
+  - source_ref: Testing 1–2
+    section: testing
+    questions:
+    - 1
+    - 2
+    match: title_start
+  growing: all sections
+  mature_source_text: 'add the Binds to: questions bound to file tree, canonical name registry, coverage threshold, and lint configuration; Documentation and Tooling sections become mandatory.'
+  mandatory_sections_at_mature:
+  - names_formatting_documentation
+  - tooling_logging_runtime
+sections:
+- key: packages_modules_layout
+  source_heading: Packages, Modules, Layout
+  title: Packages, Modules, Layout
+- key: names_formatting_documentation
+  source_heading: Names, Formatting, Documentation
+  title: Names, Formatting, Documentation
+- key: types_interfaces_embedding_generics
+  source_heading: Types, Interfaces, Embedding, Generics
+  title: Types, Interfaces, Embedding, Generics
+- key: errors
+  source_heading: Errors
+  title: Errors
+- key: functions_and_control_flow
+  source_heading: Functions and Control Flow
+  title: Functions and Control Flow
+- key: context
+  source_heading: Context
+  title: Context
+- key: concurrency
+  source_heading: Concurrency
+  title: Concurrency
+- key: data
+  source_heading: Data
+  title: Data
+- key: testing
+  source_heading: Testing
+  title: Testing
+- key: tooling_logging_runtime
+  source_heading: Tooling, Logging, Runtime
+  title: Tooling, Logging, Runtime
+questions:
+- id: go.packages_modules_layout.01
+  section: packages_modules_layout
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is the code inside a module with a go.mod naming the module path, and is go.sum committed?
+  citation: Modules (Modules Reference)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.packages_modules_layout.02
+  section: packages_modules_layout
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Is each package one directory with a short, lowercase, singular name that does not stutter with its identifiers and is not util, common, or misc?
+  citation: Package names (Effective Go; Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.packages_modules_layout.03
+  section: packages_modules_layout
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Are binaries under cmd/ and non-public packages under internal/, so privacy is enforced by the toolchain?
+  citation: Organizing a Go module; internal packages
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.packages_modules_layout.04
+  section: packages_modules_layout
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Is the placement consistent with this project's existing module layout?
+  citation: Project organization
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  binds_to:
+    key: file_tree
+    label: file tree
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.02
+    topic: placement
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: go.packages_modules_layout.05
+  section: packages_modules_layout
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Is the go directive set deliberately, with a toolchain directive where reproducibility matters?
+  citation: Go toolchains
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.packages_modules_layout.06
+  section: packages_modules_layout
+  section_ordinal: 6
+  doc_ordinal: 6
+  text: Is the dependency set minimal, go mod tidy clean, and govulncheck run?
+  citation: A little copying is better than a little dependency (Go Proverbs); Vulnerability management
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.packages_modules_layout.07
+  section: packages_modules_layout
+  section_ordinal: 7
+  doc_ordinal: 7
+  text: Are executable tool dependencies tracked with tool directives rather than a tools file workaround?
+  citation: Tool directives (Go 1.24)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Packages, Modules, Layout
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.names_formatting_documentation.01
+  section: names_formatting_documentation
+  section_ordinal: 1
+  doc_ordinal: 8
+  text: Is all code gofmt-formatted, with imports grouped standard library first?
+  citation: gofmt; imports (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: true
+- id: go.names_formatting_documentation.02
+  section: names_formatting_documentation
+  section_ordinal: 2
+  doc_ordinal: 9
+  text: Are identifiers MixedCaps with consistent initialisms (URL, ID, HTTP) and no underscores?
+  citation: Mixed caps; initialisms (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: true
+- id: go.names_formatting_documentation.03
+  section: names_formatting_documentation
+  section_ordinal: 3
+  doc_ordinal: 10
+  text: Do getters omit the Get prefix, and do single-method interfaces end in -er?
+  citation: Getters; interface names (Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: go.names_formatting_documentation.04
+  section: names_formatting_documentation
+  section_ordinal: 4
+  doc_ordinal: 11
+  text: Are receiver names short, consistent across a type's methods, and never this or self?
+  citation: Receiver names (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: go.names_formatting_documentation.05
+  section: names_formatting_documentation
+  section_ordinal: 5
+  doc_ordinal: 12
+  text: Does every exported identifier carry a doc comment beginning with its name, and every package a package comment?
+  citation: Doc comments; package comments (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: true
+- id: go.names_formatting_documentation.06
+  section: names_formatting_documentation
+  section_ordinal: 6
+  doc_ordinal: 13
+  text: Are variable names short in small scopes and descriptive in large ones?
+  citation: Variable names (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: go.names_formatting_documentation.07
+  section: names_formatting_documentation
+  section_ordinal: 7
+  doc_ordinal: 14
+  text: Are names the same canonical names used elsewhere in this project for the same thing?
+  citation: Canonical naming
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Names, Formatting, Documentation
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.01
+    topic: canonical_naming
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+    binding_named_in_mature_clause: true
+- id: go.types_interfaces_embedding_generics.01
+  section: types_interfaces_embedding_generics
+  section_ordinal: 1
+  doc_ordinal: 15
+  text: Are interfaces defined on the consumer side and kept to one or two methods?
+  citation: Interfaces (Code Review Comments); The bigger the interface, the weaker the abstraction (Go Proverbs)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.02
+  section: types_interfaces_embedding_generics
+  section_ordinal: 2
+  doc_ordinal: 16
+  text: Do functions accept interfaces and return concrete types?
+  citation: Accept interfaces, return structs (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.03
+  section: types_interfaces_embedding_generics
+  section_ordinal: 3
+  doc_ordinal: 17
+  text: Is composition via embedding used rather than simulated inheritance?
+  citation: Embedding (Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.04
+  section: types_interfaces_embedding_generics
+  section_ordinal: 4
+  doc_ordinal: 18
+  text: Is the zero value of each type useful, with a constructor only where invariants require one?
+  citation: Make the zero value useful (Go Proverbs; Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.05
+  section: types_interfaces_embedding_generics
+  section_ordinal: 5
+  doc_ordinal: 19
+  text: Is the receiver kind (pointer or value) chosen once per type and applied to all its methods?
+  citation: Receiver type (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.06
+  section: types_interfaces_embedding_generics
+  section_ordinal: 6
+  doc_ordinal: 20
+  text: Where a type is intended to satisfy an interface, is a compile-time interface check present?
+  citation: Interface checks (Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.07
+  section: types_interfaces_embedding_generics
+  section_ordinal: 7
+  doc_ordinal: 21
+  text: Are type parameters used only where they remove real duplication, with named constraints?
+  citation: Generics (Tour; Go 1.18, generic methods 1.27)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.types_interfaces_embedding_generics.08
+  section: types_interfaces_embedding_generics
+  section_ordinal: 8
+  doc_ordinal: 22
+  text: Is any interface{} or any justified, rather than used to avoid a type?
+  citation: interface{} says nothing (Go Proverbs)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Types, Interfaces, Embedding, Generics
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.01
+  section: errors
+  section_ordinal: 1
+  doc_ordinal: 23
+  text: Is every returned error checked, never discarded with the blank identifier?
+  citation: Handle errors (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.02
+  section: errors
+  section_ordinal: 2
+  doc_ordinal: 24
+  text: Are errors returned rather than panicked, with panic reserved for unrecoverable programmer errors?
+  citation: Don't panic (Code Review Comments; Go Proverbs)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.03
+  section: errors
+  section_ordinal: 3
+  doc_ordinal: 25
+  text: Are error strings lowercase without trailing punctuation?
+  citation: Error strings (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.04
+  section: errors
+  section_ordinal: 4
+  doc_ordinal: 26
+  text: Are errors wrapped with %w and inspected with errors.Is or errors.As, never by string matching?
+  citation: Error wrapping (errors package, Go 1.13)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.05
+  section: errors
+  section_ordinal: 5
+  doc_ordinal: 27
+  text: Are sentinel errors and custom error types exported deliberately as part of the API?
+  citation: Errors are values (Go Proverbs)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.06
+  section: errors
+  section_ordinal: 6
+  doc_ordinal: 28
+  text: Is the error path handled and returned early so the happy path stays unindented?
+  citation: Indent error flow (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.errors.07
+  section: errors
+  section_ordinal: 7
+  doc_ordinal: 29
+  text: Are in-band error values (-1, empty string, nil) replaced by a second return value?
+  citation: In-band errors (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Errors
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.functions_and_control_flow.01
+  section: functions_and_control_flow
+  section_ordinal: 1
+  doc_ordinal: 30
+  text: Are named result parameters used only where they document meaning, and naked returns avoided?
+  citation: Named result parameters; naked returns (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Functions and Control Flow
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.functions_and_control_flow.02
+  section: functions_and_control_flow
+  section_ordinal: 2
+  doc_ordinal: 31
+  text: Is cleanup deferred immediately after acquisition?
+  citation: defer (Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Functions and Control Flow
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.functions_and_control_flow.03
+  section: functions_and_control_flow
+  section_ordinal: 3
+  doc_ordinal: 32
+  text: Are functions synchronous by default, leaving concurrency to the caller?
+  citation: Synchronous functions (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Functions and Control Flow
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.functions_and_control_flow.04
+  section: functions_and_control_flow
+  section_ordinal: 4
+  doc_ordinal: 33
+  text: Are small values passed by value rather than by pointer for the sake of it?
+  citation: Pass values (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Functions and Control Flow
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.context.01
+  section: context
+  section_ordinal: 1
+  doc_ordinal: 34
+  text: Is context.Context the first parameter, named ctx, passed explicitly and never stored in a struct?
+  citation: Contexts (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Context
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.context.02
+  section: context
+  section_ordinal: 2
+  doc_ordinal: 35
+  text: Are cancellation and deadlines propagated and honored (select on ctx.Done, or ctx-aware APIs)?
+  citation: Cancellation (context package)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Context
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.context.03
+  section: context
+  section_ordinal: 3
+  doc_ordinal: 36
+  text: Are context values limited to request-scoped data and never used to pass required parameters?
+  citation: Context values (context package)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Context
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.01
+  section: concurrency
+  section_ordinal: 1
+  doc_ordinal: 37
+  text: Does every goroutine have a known lifetime — who stops it, when, and how it exits?
+  citation: Goroutine lifetimes (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.02
+  section: concurrency
+  section_ordinal: 2
+  doc_ordinal: 38
+  text: Is channel ownership clear, with the sender the only party that closes?
+  citation: Channels (Effective Go; Tour)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.03
+  section: concurrency
+  section_ordinal: 3
+  doc_ordinal: 39
+  text: Is shared state either protected by a mutex or avoided by passing data over channels?
+  citation: Share memory by communicating; channels orchestrate, mutexes serialize (Go Proverbs; Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.04
+  section: concurrency
+  section_ordinal: 4
+  doc_ordinal: 40
+  text: Are goroutines coordinated with sync.WaitGroup (WaitGroup.Go) or errgroup, never time.Sleep?
+  citation: WaitGroup (sync package, Go 1.25)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.05
+  section: concurrency
+  section_ordinal: 5
+  doc_ordinal: 41
+  text: Is go test -race part of the test run?
+  citation: Race detector
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.06
+  section: concurrency
+  section_ordinal: 6
+  doc_ordinal: 42
+  text: Is any leftover loop-variable capture workaround removed now that loop variables are per-iteration?
+  citation: Loop variable semantics (Go 1.22)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.concurrency.07
+  section: concurrency
+  section_ordinal: 7
+  doc_ordinal: 43
+  text: Is concurrency introduced for a measured reason, not by default?
+  citation: Concurrency is not parallelism (Go Proverbs)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Concurrency
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.data.01
+  section: data
+  section_ordinal: 1
+  doc_ordinal: 44
+  text: Is slice and map aliasing understood, with copies made deliberately where the caller may mutate?
+  citation: Slices; copying (Tour; Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.data.02
+  section: data
+  section_ordinal: 2
+  doc_ordinal: 45
+  text: Are empty slices declared as var s []T rather than []T{} unless a non-nil value is required (JSON)?
+  citation: Declaring empty slices (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.data.03
+  section: data
+  section_ordinal: 3
+  doc_ordinal: 46
+  text: Is make used to preallocate where the size is known?
+  citation: make; append (Effective Go)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.data.04
+  section: data
+  section_ordinal: 4
+  doc_ordinal: 47
+  text: Are time.Time and time.Duration used for time, never bare integers?
+  citation: time package
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.data.05
+  section: data
+  section_ordinal: 5
+  doc_ordinal: 48
+  text: Are sequences exposed as iterators (iter.Seq) where range-over-func fits?
+  citation: Range over func (Go 1.23)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.testing.01
+  section: testing
+  section_ordinal: 1
+  doc_ordinal: 49
+  text: Are tests table-driven with t.Run subtests, in _test.go files beside the code?
+  citation: Table-driven tests (Go Test Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Testing
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.testing.02
+  section: testing
+  section_ordinal: 2
+  doc_ordinal: 50
+  text: Do failures report got and want with context via t.Errorf, not panics?
+  citation: Useful test failures (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Testing
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: go.testing.03
+  section: testing
+  section_ordinal: 3
+  doc_ordinal: 51
+  text: Are testable Examples provided for exported API?
+  citation: Examples (Code Review Comments)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Testing
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.testing.04
+  section: testing
+  section_ordinal: 4
+  doc_ordinal: 52
+  text: Are benchmarks present for performance-sensitive code and fuzz tests where input is parsed?
+  citation: Benchmarks; fuzzing (testing package, Go 1.18)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Testing
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: go.testing.05
+  section: testing
+  section_ordinal: 5
+  doc_ordinal: 53
+  text: Is coverage measured against this project's threshold?
+  citation: go test -cover
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Testing
+  binds_to:
+    key: coverage_threshold
+    label: coverage threshold
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: go.tooling_logging_runtime.01
+  section: tooling_logging_runtime
+  section_ordinal: 1
+  doc_ordinal: 54
+  text: Do go vet and this project's linter pass, and has go fix been run for modernizers?
+  citation: go vet; go fix (Go 1.26)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Tooling, Logging, Runtime
+  binds_to:
+    key: lint_config
+    label: lint config
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+    binding_named_in_mature_clause: true
+- id: go.tooling_logging_runtime.02
+  section: tooling_logging_runtime
+  section_ordinal: 2
+  doc_ordinal: 55
+  text: Is logging structured with log/slog rather than fmt.Println or the legacy log package?
+  citation: log/slog (Go 1.21)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Tooling, Logging, Runtime
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: go.tooling_logging_runtime.03
+  section: tooling_logging_runtime
+  section_ordinal: 3
+  doc_ordinal: 56
+  text: Is an HTTP server built on net/http with routing patterns and explicit timeouts before a framework is reached for?
+  citation: net/http (Go 1.22 patterns)
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Tooling, Logging, Runtime
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: go.tooling_logging_runtime.04
+  section: tooling_logging_runtime
+  section_ordinal: 4
+  doc_ordinal: 57
+  text: Is the binary static where deployment expects one file (CGO_ENABLED=0 when cgo is not needed)?
+  citation: Static binaries
+  source:
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    section: 5. Boundary questions > Tooling, Logging, Runtime
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true

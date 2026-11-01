@@ -1,0 +1,94 @@
+# GENERATED from boundaries/reference/stack_typescript_v0_1.md (composition set, section 0 / cross-stack contract boundaries).
+# Derived config, export date 2026-10-19, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate.
+schema_version: 1
+question_set:
+  key: schemars
+  kind: stack
+  stack: schemars
+  stack_field_in_source: schemars
+source:
+  doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+  title: 'Stack — TypeScript: Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: '2026-10-19'
+  reference_export: boundaries/reference/stack_typescript_v0_1.md
+  derived_from_section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+sections:
+- key: cross_stack_contract_boundaries
+  source_heading: Cross-Stack Contract Boundaries (composition set)
+  title: Cross-Stack Contract Boundaries
+questions:
+- id: schemars.cross_stack_contract_boundaries.01
+  section: cross_stack_contract_boundaries
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Where types are generated from another stack (Specta, ts-rs, typeshare, openapi-typescript, protobuf, GraphQL codegen), is the source stack the single source of truth, and is the .ts output never hand-edited?
+  citation: Contract boundary; single source of truth
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: true
+    greenfield_condition: when codegen is present
+    growing: true
+    mandatory_at_mature: false
+- id: schemars.cross_stack_contract_boundaries.02
+  section: cross_stack_contract_boundaries
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are generated files marked as generated, excluded from lint and formatting, and regenerated in the build so that drift fails CI?
+  citation: Codegen discipline
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: true
+    greenfield_condition: when codegen is present
+    growing: true
+    mandatory_at_mature: false
+- id: schemars.cross_stack_contract_boundaries.03
+  section: cross_stack_contract_boundaries
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Is the contract versioned so a source-type change surfaces as a visible boundary change on the TypeScript side?
+  citation: Contract versioning
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: schemars.cross_stack_contract_boundaries.04
+  section: cross_stack_contract_boundaries
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Is the IPC or HTTP edge still runtime-validated, since generated types are erased like any other?
+  citation: Type erasure at the contract edge
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: schemars.cross_stack_contract_boundaries.05
+  section: cross_stack_contract_boundaries
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Do generated type names match the source stack's canonical names under the codegen tool's casing rule?
+  citation: Canonical naming across stacks
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true

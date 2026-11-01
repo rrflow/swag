@@ -1,0 +1,5 @@
+# sample api seam keys
+security_scan_start
+testing_run
+thread_start
+plan_view

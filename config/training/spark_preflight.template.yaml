@@ -1,0 +1,37 @@
+schema_version: 1
+description: >
+  Preflight checks for Spark ring readiness before distributed training.
+
+enabled: false
+
+ssh:
+  user: swag
+  connect_timeout_sec: 8
+  strict_host_key_checking: accept-new
+
+python_env:
+  activate_script: /srv/swag/.venv/bin/activate
+
+cluster:
+  control_host: spark-01
+  ring_nodes:
+    - spark-01
+    - spark-02
+    - spark-03
+  shared_storage_path: /srv/swag-shared
+  repo_path: /srv/swag
+
+checks:
+  require_commands:
+    - python3
+    - torchrun
+  require_paths:
+    - /srv/swag-shared
+    - /srv/swag
+  python_imports:
+    - yaml
+    - torch
+    - trl
+    - peft
+    - transformers
+  require_env_vars: []

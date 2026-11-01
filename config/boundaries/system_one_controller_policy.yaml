@@ -1,0 +1,17 @@
+schema_version: 1
+policy:
+  main_question_threshold:
+    min: 50
+    max: 75
+    source: "Operator threshold target for system-one controller main questions"
+
+  mesh_weights:
+    main: 0.5
+    stack: 0.3
+    domain: 0.2
+
+  decision_matrix:
+    include_question_ids_by_bucket: true
+    notes: >
+      Main questions come from shared_predicates after gating/overlap policy.
+      Stack and domain questions are layered context dimensions.

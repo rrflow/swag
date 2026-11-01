@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "issueTitle": "Replace this example with the task being observed",
+  "issueId": "",
+  "intentText": "",
+  "userOverride": null,
+  "route": {
+    "provider": null,
+    "modelId": null,
+    "effort": null,
+    "accessMode": null,
+    "bindingId": null
+  }
+}

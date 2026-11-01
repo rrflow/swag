@@ -1,0 +1,44 @@
+schema_version: 1
+runtime:
+  name: swag
+  deployment_mode: self_hosted
+  mode: configurable
+  hosting:
+    primary: local
+    allow_remote: true
+    allow_hybrid: true
+    default_region: us-east-1
+    local_prefix: .swag
+  rrflow:
+    enabled: true
+    project_mode: isolated
+    parallel_mode: true
+    shared_with_projects: []
+    sync_files:
+      - rrflow.sync.yaml
+      - config/rrflow.sync.yaml
+  mcp:
+    enabled: true
+    transport: stdio
+    servers:
+      - name: rrflow
+        command: python
+        args: ["-m", "rrflow_mcp"]
+        enabled: true
+        project_scope: global
+      - name: filesystem
+        command: npx
+        args: ["-y", "@modelcontextprotocol/server-filesystem", "."]
+        enabled: true
+        project_scope: project
+  global_scope:
+    enabled: true
+    shared_defaults: true
+    per_project_overrides: true
+    project_root_hint: .
+  controller:
+    default_tier: 14b
+    fallback_tier: 7b
+    escalation_tier: 27-28b
+    allow_parallel_routes: true
+    require_quality_gate: true

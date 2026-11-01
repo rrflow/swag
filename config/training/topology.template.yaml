@@ -1,0 +1,51 @@
+schema_version: 1
+description: >
+  Runtime topology template for deciding where SWAG dataset/training/inference
+  workloads should execute: DABO host, Spark ring, or split mode.
+
+sites:
+  - key: dabo
+    label: DABO control/ops host
+    role: control_plane
+    capabilities:
+      data_prep: true
+      dataset_review_ui: true
+      quality_gates: true
+      model_training: false
+      high_throughput_inference: false
+    constraints:
+      notes:
+        - "Best used for orchestration, curation, reports, and control APIs."
+
+  - key: ring
+    label: Spark ring (3x128GB unified)
+    role: compute_plane
+    capabilities:
+      data_prep: true
+      dataset_review_ui: false
+      quality_gates: true
+      model_training: true
+      high_throughput_inference: true
+    constraints:
+      notes:
+        - "Use for LoRA training, adapter merge, evaluation, and local serving."
+
+modes:
+  - key: split_dabo_ring
+    description: "DABO handles control/data curation; ring handles heavy training/inference."
+    workflow:
+      data_ingest_and_redaction: dabo
+      dataset_quality_and_review: dabo
+      train_lora: ring
+      merge_adapter: ring
+      benchmark_eval: ring
+      ops_api_and_reports: dabo
+  - key: ring_only
+    description: "Everything runs on ring nodes."
+    workflow:
+      data_ingest_and_redaction: ring
+      dataset_quality_and_review: ring
+      train_lora: ring
+      merge_adapter: ring
+      benchmark_eval: ring
+      ops_api_and_reports: ring

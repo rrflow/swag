@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: php
+  kind: stack
+  stack: php
+  stack_field_in_source: php
+source:
+  doc_id: null
+  title: "Stack — PHP: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-24"
+  authored_against: PHP 8.3+, Composer 2.x, PHP-FIG PSR guidance, and OWASP web-app practices.
+sections:
+- key: runtime_and_dependencies
+  source_heading: Runtime and Dependencies
+  title: Runtime and Dependencies
+- key: api_and_domain_boundaries
+  source_heading: API and Domain Boundaries
+  title: API and Domain Boundaries
+- key: input_validation_and_security
+  source_heading: Input Validation and Security
+  title: Input Validation and Security
+- key: persistence_and_transactions
+  source_heading: Persistence and Transactions
+  title: Persistence and Transactions
+- key: testing_and_operations
+  source_heading: Testing and Operations
+  title: Testing and Operations
+questions:
+- id: php.runtime_and_dependencies.01
+  section: runtime_and_dependencies
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are PHP runtime version and required extensions pinned and validated consistently across local, CI, and production?
+  citation: PHP runtime compatibility and extensions
+  source: { reference: https://www.php.net/supported-versions.php, section: supported versions }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.runtime_and_dependencies.02
+  section: runtime_and_dependencies
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are Composer dependencies locked and regularly audited for known vulnerabilities?
+  citation: Composer dependency hygiene
+  source: { reference: https://getcomposer.org/doc/03-cli.md#audit, section: composer audit }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.api_and_domain_boundaries.01
+  section: api_and_domain_boundaries
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are domain logic, transport concerns, and persistence adapters separated so request handlers stay thin?
+  citation: Separation of concerns for web applications
+  source: { reference: https://www.php-fig.org/psr/, section: framework interoperability standards }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.api_and_domain_boundaries.02
+  section: api_and_domain_boundaries
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are public API contracts versioned or backward-compatible when changing request or response shape?
+  citation: API contract evolution
+  source: { reference: https://www.php.net/manual/en/language.types.declarations.php, section: type declarations and compatibility }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: php.input_validation_and_security.01
+  section: input_validation_and_security
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Is all untrusted input validated at boundaries and context-aware output escaping applied for HTML, SQL, and command surfaces?
+  citation: OWASP input validation and output encoding
+  source: { reference: https://cheatsheetseries.owasp.org/, section: input validation and output encoding cheat sheets }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.input_validation_and_security.02
+  section: input_validation_and_security
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are secrets and credentials loaded from environment or secret stores rather than committed or hardcoded in source?
+  citation: Secret management baseline
+  source: { reference: https://www.php.net/manual/en/function.getenv.php, section: environment variables }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.persistence_and_transactions.01
+  section: persistence_and_transactions
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are SQL queries parameterized and transaction boundaries explicit for multi-step writes?
+  citation: PDO prepared statements and transactions
+  source: { reference: https://www.php.net/manual/en/book.pdo.php, section: prepared statements and transactions }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.persistence_and_transactions.02
+  section: persistence_and_transactions
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are idempotency, retries, and rollback behavior defined for failure-prone external calls inside write flows?
+  citation: Transactional consistency and failure handling
+  source: { reference: https://www.php.net/manual/en/language.exceptions.php, section: exceptions and control flow }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: php.testing_and_operations.01
+  section: testing_and_operations
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are unit and integration tests separated, deterministic, and mapped to boundary contracts and invariants?
+  citation: PHPUnit testing guidance
+  source: { reference: https://docs.phpunit.de/, section: writing tests }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: php.testing_and_operations.02
+  section: testing_and_operations
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are structured logs, trace correlation IDs, and key health metrics emitted to support production incident debugging?
+  citation: Observability and operational diagnostics
+  source: { reference: https://www.php-fig.org/psr/psr-3/, section: logger interface and structured logging patterns }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

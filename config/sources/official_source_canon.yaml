@@ -1,0 +1,151 @@
+schema_version: 1
+policy:
+  description: >
+    Canonical source manifest used by SWAG to keep the research, route policy,
+    and RRFlow decision contracts consistent over time without context rot.
+  review_cadence_days: 90
+  require_next_review_due: true
+  require_owner: true
+  default_status: active
+
+sources:
+  - key: swebok_core
+    family: standards
+    owner: swag-core
+    version: "v4"
+    official_name: "SWEBOK v4"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://www.computer.org/education/bodies-of-knowledge/software-engineering"
+    summary: >
+      Canonical software engineering body of knowledge used as the shared baseline
+      for system-one decision batteries.
+    question_bindings:
+      - "shared_predicates.*"
+
+  - key: openai_reasoning
+    family: vendor_docs
+    owner: openai
+    version: "reasoning-guide-2026-10"
+    official_name: "OpenAI reasoning guide"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://developers.openai.com/api/docs/guides/reasoning"
+    summary: >
+      Official guidance for reasoning effort, routing, evaluation, and model
+      performance tradeoffs.
+    question_bindings:
+      - "domains.llm_application.*"
+      - "shared_predicates.software_security.*"
+
+  - key: openai_structured_outputs
+    family: vendor_docs
+    owner: openai
+    version: "structured-outputs-2026-10"
+    official_name: "OpenAI structured outputs guide"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://developers.openai.com/api/docs/guides/structured-outputs"
+    summary: >
+      Official contract for schema-enforced outputs and runtime-evaluable decisions.
+    question_bindings:
+      - "shared_predicates.software_design_principles.*"
+      - "shared_predicates.software_architecture.*"
+
+  - key: cloudflare_workers_ai
+    family: vendor_docs
+    owner: cloudflare
+    version: "workers-ai-2026-10"
+    official_name: "Cloudflare Workers AI overview"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://developers.cloudflare.com/workers-ai/"
+    summary: >
+      Official AI edge runtime guidance for local inference, low-latency routing,
+      and stateful edge app patterns.
+    question_bindings:
+      - "domains.realtime_messaging.*"
+      - "domains.files_and_media.*"
+
+  - key: cloudflare_durable_objects
+    family: vendor_docs
+    owner: cloudflare
+    version: "durable-objects-2026-10"
+    official_name: "Cloudflare Durable Objects overview"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://developers.cloudflare.com/durable-objects/"
+    summary: >
+      Official guidance for strongly consistent stateful runtime orchestration.
+    question_bindings:
+      - "shared_predicates.software_architecture.*"
+      - "shared_predicates.software_engineering_process.*"
+
+  - key: cloudflare_queues
+    family: vendor_docs
+    owner: cloudflare
+    version: "queues-2026-10"
+    official_name: "Cloudflare Queues overview"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://developers.cloudflare.com/queues/"
+    summary: >
+      Official queueing guidance for background tasks and durable decoupling.
+    question_bindings:
+      - "shared_predicates.software_engineering_process.*"
+      - "domains.notifications.*"
+
+  - key: cloudflare_vectorize
+    family: vendor_docs
+    owner: cloudflare
+    version: "vectorize-2026-10"
+    official_name: "Cloudflare Vectorize overview"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://developers.cloudflare.com/vectorize/"
+    summary: >
+      Official vector database and retrieval guidance used in AI + data retrieval
+      design patterns.
+    question_bindings:
+      - "domains.search.*"
+      - "domains.analytics_and_reporting.*"
+
+  - key: typesafe_jev
+    family: vendor_docs
+    owner: typesafe
+    version: "experimental-2026-10"
+    official_name: "TypeSafe Jev"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-11-24"
+    status: experimental
+    url: "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+    summary: >
+      Vendor-led decision framework with strong typed-system semantics. It is
+      considered useful but must remain explicitly experimental until independent
+      validation is completed.
+    question_bindings:
+      - "shared_predicates.software_architecture.*"
+      - "shared_predicates.software_engineering_process.*"
+
+  - key: rrflow_core
+    family: internal
+    owner: swag-core
+    version: "repo-local-current"
+    official_name: "RRFlow controller contract"
+    last_verified: "2026-10-25"
+    next_review_due: "2026-12-24"
+    status: active
+    url: "https://example.invalid/rrflow-contract"
+    summary: >
+      Local RRFlow alignment contract that defines naming, route metadata, and
+      shared project decision boundaries.
+    question_bindings:
+      - "shared_predicates.software_design_principles.*"
+      - "shared_predicates.software_configuration_management.*"

@@ -1,0 +1,58 @@
+schema_version: 1
+compatibility:
+  statement: >
+    SWAG is designed to be vendor-agnostic and easy to deploy for production,
+    local experimentation, and model-provider orchestration. The runtime is meant
+    to work cleanly with Codex, Claude, Grok, and other provider-based coding
+    agents without bespoke custom logic per assistant.
+  supported_agents:
+    - codex
+    - claude
+    - grok
+    - generic_openai_compatible
+    - local_ollama
+  default_usage:
+    codex:
+      environment:
+        - OPENAI_BASE_URL
+        - OPENAI_API_KEY
+      recommended_mode: openai_compatible
+      notes: Use the local OpenAI-compatible adapter or frontier provider route.
+    claude:
+      environment:
+        - ANTHROPIC_BASE_URL
+        - ANTHROPIC_API_KEY
+      recommended_mode: anthropic_compatible
+      notes: Works with the frontier provider route and the SWAG controller policy.
+    grok:
+      environment:
+        - XAI_BASE_URL
+        - XAI_API_KEY
+      recommended_mode: xai_compatible
+      notes: Good fit for the 14B default / 27-28B escalation routes.
+    generic_openai_compatible:
+      environment:
+        - OPENAI_BASE_URL
+        - OPENAI_API_KEY
+      recommended_mode: openai_compatible
+      notes: Works for local OpenAI-compatible endpoints and self-hosted models.
+  installation_requirements:
+    python_version: ">=3.10"
+    dependencies:
+      - pyyaml
+      - requests
+    install_command: "python -m pip install pyyaml requests"
+  runtime_contract:
+    model_tier_default: 14b
+    model_tier_fallback: 7b
+    model_tier_escalation: 27-28b
+    controller_policy: system_one
+    rrflow_parallel: true
+    self_hosted: true
+    mcp_capable: true
+  zero_issues_policy:
+    require_env_examples: true
+    require_default_paths: true
+    require_mcp_bridge: true
+    require_global_and_project_config: true
+    require_provider_status_check: true

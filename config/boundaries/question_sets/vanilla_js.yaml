@@ -1,0 +1,833 @@
+# GENERATED from boundaries/reference/stack_vanilla_js_v0_1.md (faithful export of Google Doc 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: vanilla_js
+  kind: stack
+  stack: vanilla_js
+  stack_field_in_source: vanilla-js
+  key_change_applied: vanilla-js -> vanilla_js (snake_case per RRFLOW naming ADR)
+source:
+  doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+  title: 'Stack — JavaScript (vanilla): Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  revision_id: ANLCKQl9djUh0byE74ICoRO1PziTGU_TSl9_PcyA9y1HkRx2SMVtgAHi9FBbVSx5SZEsUEL1hJjrzT2dAOyocrMPNKBu_xErNAozEJJYxjNU
+  owner: hades
+  export_date: '2026-09-30'
+  authored_against: ECMAScript 2026 (ECMA-262, 17th edition, approved June 30, 2026); Node.js 24 Active LTS, Node.js 26 Current (LTS October 2026); Web Platform Baseline as the browser-compatibility reference.
+  reference_export: boundaries/reference/stack_vanilla_js_v0_1.md
+maturity_gating:
+  source_text: 'Greenfield: Language 1–4; Async 1–3; DOM 2–4; Modules 1, 3; Network 1–2; Compatibility 1, 3; Security 1–2; Accessibility 1. Growing: all sections. Mature: add the Binds to: questions bound to file tree, browser support target, runtime, test runner, lint config, and canonical name registry; Performance and Testing sections become mandatory.'
+  greenfield_refs:
+  - source_ref: Language 1–4
+    section: language_fundamentals
+    questions:
+    - 1
+    - 2
+    - 3
+    - 4
+    match: title_start
+  - source_ref: Async 1–3
+    section: asynchronous_javascript
+    questions:
+    - 1
+    - 2
+    - 3
+    match: title_start
+  - source_ref: DOM 2–4
+    section: dom_scripting_and_events
+    questions:
+    - 2
+    - 3
+    - 4
+    match: title_start
+  - source_ref: Modules 1, 3
+    section: modules_and_dependencies
+    questions:
+    - 1
+    - 3
+    match: title_start
+  - source_ref: Network 1–2
+    section: network_and_data
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Compatibility 1, 3
+    section: compatibility_and_runtime_target
+    questions:
+    - 1
+    - 3
+    match: title_start
+  - source_ref: Security 1–2
+    section: security
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Accessibility 1
+    section: accessibility
+    questions:
+    - 1
+    match: title_start
+  growing: all sections
+  mature_source_text: 'add the Binds to: questions bound to file tree, browser support target, runtime, test runner, lint config, and canonical name registry; Performance and Testing sections become mandatory.'
+  mandatory_sections_at_mature:
+  - performance
+  - testing_and_debugging
+sections:
+- key: language_fundamentals
+  source_heading: Language Fundamentals
+  title: Language Fundamentals
+- key: objects_collections_classes
+  source_heading: Objects, Collections, Classes
+  title: Objects, Collections, Classes
+- key: asynchronous_javascript
+  source_heading: Asynchronous JavaScript
+  title: Asynchronous JavaScript
+- key: dom_scripting_and_events
+  source_heading: DOM Scripting and Events
+  title: DOM Scripting and Events
+- key: modules_and_dependencies
+  source_heading: Modules and Dependencies
+  title: Modules and Dependencies
+- key: network_and_data
+  source_heading: Network and Data
+  title: Network and Data
+- key: compatibility_and_runtime_target
+  source_heading: Compatibility and Runtime Target
+  title: Compatibility and Runtime Target
+- key: security
+  source_heading: Security
+  title: Security
+- key: accessibility
+  source_heading: Accessibility
+  title: Accessibility
+- key: performance
+  source_heading: Performance
+  title: Performance
+- key: testing_and_debugging
+  source_heading: Testing and Debugging
+  title: Testing and Debugging
+- key: style_and_naming
+  source_heading: Style and Naming
+  title: Style and Naming
+- key: node_js
+  source_heading: Node.js (fires when the runtime target is Node)
+  title: Node.js
+  heading_note: fires when the runtime target is Node
+questions:
+- id: vanilla_js.language_fundamentals.01
+  section: language_fundamentals
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are variables declared with const by default and let only when reassigned, never var?
+  citation: Grammar and types; Variables (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.language_fundamentals.02
+  section: language_fundamentals
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Is strict equality used, with coercion and sameness semantics understood where loose comparison appears?
+  citation: Equality comparisons and sameness (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.language_fundamentals.03
+  section: language_fundamentals
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: 'Does the code run as a module (type="module", or "type": "module" in Node), so strict mode is on and nothing leaks into global scope?'
+  citation: JavaScript modules (MDN Guide)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.language_fundamentals.04
+  section: language_fundamentals
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Is this binding handled deliberately — arrow functions for lexical this, bound or wrapped methods when passed as callbacks?
+  citation: Functions; this (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.language_fundamentals.05
+  section: language_fundamentals
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Are template literals, destructuring, optional chaining, and nullish coalescing used for clarity rather than concatenation and nested guards?
+  citation: Expressions and operators (MDN Guide)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.language_fundamentals.06
+  section: language_fundamentals
+  section_ordinal: 6
+  doc_ordinal: 6
+  text: Are dates and times handled with Temporal or explicit time-zone-aware formatting via Intl, never Date arithmetic?
+  citation: Representing dates and times (MDN Guide); ECMA-402
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.language_fundamentals.07
+  section: language_fundamentals
+  section_ordinal: 7
+  doc_ordinal: 7
+  text: Is floating-point handled deliberately — Math.sumPrecise for sums, integer arithmetic or BigInt where exactness matters?
+  citation: Numbers and strings (MDN Guide); ES2026
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Language Fundamentals
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.objects_collections_classes.01
+  section: objects_collections_classes
+  section_ordinal: 1
+  doc_ordinal: 8
+  text: Is the collection chosen for the access pattern — Array for ordered lists, Map and Set for keyed or unique data, plain objects for fixed-shape records — with getOrInsert for the upsert pattern?
+  citation: Indexed collections; Keyed collections (MDN Guide); ES2026
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Objects, Collections, Classes
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.objects_collections_classes.02
+  section: objects_collections_classes
+  section_ordinal: 2
+  doc_ordinal: 9
+  text: Is shared data treated immutably — spread, toSorted, toReversed, with, structuredClone — rather than mutated in place?
+  citation: Indexed collections (ES2023 change-by-copy)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Objects, Collections, Classes
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.objects_collections_classes.03
+  section: objects_collections_classes
+  section_ordinal: 3
+  doc_ordinal: 10
+  text: Are classes used only where identity or prototype semantics are needed, with private fields for encapsulation and composition preferred over deep inheritance?
+  citation: Using classes; Classes in JavaScript (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Objects, Collections, Classes
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.objects_collections_classes.04
+  section: objects_collections_classes
+  section_ordinal: 4
+  doc_ordinal: 11
+  text: Are iterators and generators used for lazy sequences, with Iterator helpers instead of intermediate arrays?
+  citation: Iterators and generators (MDN Guide); ES2025
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Objects, Collections, Classes
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.asynchronous_javascript.01
+  section: asynchronous_javascript
+  section_ordinal: 1
+  doc_ordinal: 12
+  text: Is asynchronous work written with async and await, and is every promise awaited, returned, or explicitly handled?
+  citation: 'Asynchronous JavaScript: promises, async and await (MDN)'
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Asynchronous JavaScript
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.asynchronous_javascript.02
+  section: asynchronous_javascript
+  section_ordinal: 2
+  doc_ordinal: 13
+  text: Are errors caught at the boundary, chained with cause, and identified with Error.isError rather than instanceof across realms?
+  citation: Control flow and error handling (MDN Guide); ES2022, ES2026
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Asynchronous JavaScript
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.asynchronous_javascript.03
+  section: asynchronous_javascript
+  section_ordinal: 3
+  doc_ordinal: 14
+  text: Are independent asynchronous operations run in parallel with Promise.all or allSettled rather than awaited in sequence?
+  citation: Sequencing asynchronous operations (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Asynchronous JavaScript
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.asynchronous_javascript.04
+  section: asynchronous_javascript
+  section_ordinal: 4
+  doc_ordinal: 15
+  text: Is CPU-heavy or long-running work moved to a Web Worker or worker_threads so the main thread stays responsive?
+  citation: Introducing workers (MDN); Web Workers
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Asynchronous JavaScript
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.asynchronous_javascript.05
+  section: asynchronous_javascript
+  section_ordinal: 5
+  doc_ordinal: 16
+  text: Is cancellation implemented with AbortController for fetch, listeners, and timers?
+  citation: Fetch; AbortController (WHATWG)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Asynchronous JavaScript
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.asynchronous_javascript.06
+  section: asynchronous_javascript
+  section_ordinal: 6
+  doc_ordinal: 17
+  text: Is deterministic cleanup done with try/finally or using declarations?
+  citation: Resource management (MDN Guide)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Asynchronous JavaScript
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.dom_scripting_and_events.01
+  section: dom_scripting_and_events
+  section_ordinal: 1
+  doc_ordinal: 18
+  text: Are DOM references queried once and cached, and are DOM writes batched or built in a DocumentFragment to avoid layout thrash?
+  citation: DOM scripting (MDN); Performant JavaScript
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > DOM Scripting and Events
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.dom_scripting_and_events.02
+  section: dom_scripting_and_events
+  section_ordinal: 2
+  doc_ordinal: 19
+  text: Are listeners attached with addEventListener, removed when no longer needed, and delegated to a parent for dynamic lists?
+  citation: Events (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > DOM Scripting and Events
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.dom_scripting_and_events.03
+  section: dom_scripting_and_events
+  section_ordinal: 3
+  doc_ordinal: 20
+  text: Is form submission intercepted with preventDefault only where the page must not reload, and does the form still function without JavaScript where feasible?
+  citation: Web forms; Events (MDN); progressive enhancement
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > DOM Scripting and Events
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.dom_scripting_and_events.04
+  section: dom_scripting_and_events
+  section_ordinal: 4
+  doc_ordinal: 21
+  text: Is untrusted content inserted with textContent or createElement, never innerHTML?
+  citation: Security and privacy (MDN Curriculum); ASVS V3
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > DOM Scripting and Events
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.dom_scripting_and_events.05
+  section: dom_scripting_and_events
+  section_ordinal: 5
+  doc_ordinal: 22
+  text: Are reusable UI pieces built as Web Components — custom elements, shadow DOM, template — rather than a framework added for one widget?
+  citation: Web Components (W3C; MDN Client-side web APIs)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > DOM Scripting and Events
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.dom_scripting_and_events.06
+  section: dom_scripting_and_events
+  section_ordinal: 6
+  doc_ordinal: 23
+  text: Are observers (Mutation, Intersection, Resize) used instead of polling, and disconnected when done?
+  citation: Client-side web APIs (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > DOM Scripting and Events
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.modules_and_dependencies.01
+  section: modules_and_dependencies
+  section_ordinal: 1
+  doc_ordinal: 24
+  text: Are ES modules used with explicit imports and exports, bare specifiers resolved by an import map or bundler, and no shared globals between scripts?
+  citation: JavaScript modules (MDN Guide); import maps (WHATWG HTML)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Modules and Dependencies
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.modules_and_dependencies.02
+  section: modules_and_dependencies
+  section_ordinal: 2
+  doc_ordinal: 25
+  text: Is the module graph free of circular dependencies, with one responsibility per module?
+  citation: JavaScript modules
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Modules and Dependencies
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.modules_and_dependencies.03
+  section: modules_and_dependencies
+  section_ordinal: 3
+  doc_ordinal: 26
+  text: Does the standard library cover the need before a dependency is added — Temporal over a date library, Uint8Array base64 methods over a polyfill, Iterator helpers over a utility library?
+  citation: ECMAScript 2025–2026 additions
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Modules and Dependencies
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.modules_and_dependencies.04
+  section: modules_and_dependencies
+  section_ordinal: 4
+  doc_ordinal: 27
+  text: Are dependencies minimal, pinned by lockfile, and audited?
+  citation: Client-side tooling (MDN); npm audit
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Modules and Dependencies
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.modules_and_dependencies.05
+  section: modules_and_dependencies
+  section_ordinal: 5
+  doc_ordinal: 28
+  text: Is the placement consistent with this project's existing structure?
+  citation: Project organization
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Modules and Dependencies
+  binds_to:
+    key: file_tree
+    label: file tree
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.02
+    topic: placement
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: vanilla_js.network_and_data.01
+  section: network_and_data
+  section_ordinal: 1
+  doc_ordinal: 29
+  text: Is fetch used with response.ok checked, a timeout via AbortSignal.timeout, and JSON parsing wrapped in error handling?
+  citation: Network requests; Fetching data (MDN); Fetch standard
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Network and Data
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.network_and_data.02
+  section: network_and_data
+  section_ordinal: 2
+  doc_ordinal: 30
+  text: Is data arriving from JSON, URLs, or storage validated for shape before use?
+  citation: JSON (MDN); Security and privacy
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Network and Data
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.network_and_data.03
+  section: network_and_data
+  section_ordinal: 3
+  doc_ordinal: 31
+  text: Is client-side storage chosen deliberately — localStorage for small synchronous values, IndexedDB for structured or large data, cookies only for what the server needs — with quota and failure handled?
+  citation: Client-side storage (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Network and Data
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.compatibility_and_runtime_target.01
+  section: compatibility_and_runtime_target
+  section_ordinal: 1
+  doc_ordinal: 32
+  text: Is every web feature checked against Web Platform Baseline or this project's browserslist before use, with polyfills only where the target requires them?
+  citation: Baseline (web.dev); Web standards and semantics (MDN Curriculum)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Compatibility and Runtime Target
+  binds_to:
+    key: browser_support_target
+    label: browser support target
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: vanilla_js.compatibility_and_runtime_target.02
+  section: compatibility_and_runtime_target
+  section_ordinal: 2
+  doc_ordinal: 33
+  text: Is feature detection used rather than user-agent sniffing?
+  citation: Cross-browser testing; feature detection (MDN Testing)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Compatibility and Runtime Target
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.compatibility_and_runtime_target.03
+  section: compatibility_and_runtime_target
+  section_ordinal: 3
+  doc_ordinal: 34
+  text: Is the runtime target explicit — browser, Node 24 LTS (26 when it enters LTS), or both — and is the code free of the other runtime's globals?
+  citation: Runtime target
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Compatibility and Runtime Target
+  binds_to:
+    key: runtime
+    label: runtime
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: vanilla_js.security.01
+  section: security
+  section_ordinal: 1
+  doc_ordinal: 35
+  text: Is a Content Security Policy in place, with no inline scripts and no eval or new Function?
+  citation: Content Security Policy (W3C); ASVS V3
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Security
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.security.02
+  section: security
+  section_ordinal: 2
+  doc_ordinal: 36
+  text: 'Are DOM XSS sinks — innerHTML, insertAdjacentHTML, document.write, javascript: URLs — avoided, or guarded by Trusted Types or the Sanitizer API?'
+  citation: DOM sinks; Trusted Types; ASVS V3, V1
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Security
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.security.03
+  section: security
+  section_ordinal: 3
+  doc_ordinal: 37
+  text: Are tokens and secrets kept out of client code and out of localStorage where an HttpOnly cookie serves?
+  citation: Security and privacy (MDN Curriculum); ASVS V3
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Security
+  overlaps_shared_question:
+    id: shared_predicates.software_security.02
+    topic: secrets
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.security.04
+  section: security
+  section_ordinal: 4
+  doc_ordinal: 38
+  text: Are third-party scripts loaded with Subresource Integrity and reviewed for the permissions they take?
+  citation: Subresource Integrity (W3C)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Security
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.accessibility.01
+  section: accessibility
+  section_ordinal: 1
+  doc_ordinal: 39
+  text: Are native semantic elements used before ARIA, with ARIA only where no native element exists?
+  citation: First rule of ARIA use (W3C); Accessibility (MDN core module)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Accessibility
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.accessibility.02
+  section: accessibility
+  section_ordinal: 2
+  doc_ordinal: 40
+  text: Is every interactive element keyboard operable with visible focus, and is dynamic content announced through live regions where needed?
+  citation: Accessibility (MDN); WCAG 2.2; ARIA Authoring Practices Guide
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Accessibility
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.performance.01
+  section: performance
+  section_ordinal: 1
+  doc_ordinal: 41
+  text: Is script loading non-blocking (module or defer), split by route, and is bundle size measured?
+  citation: Performant JavaScript (MDN Web performance)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Performance
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: vanilla_js.performance.02
+  section: performance
+  section_ordinal: 2
+  doc_ordinal: 42
+  text: Are Core Web Vitals measured, with long tasks broken up using scheduler.yield or requestAnimationFrame?
+  citation: Web performance (MDN); web.dev
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Performance
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: vanilla_js.performance.03
+  section: performance
+  section_ordinal: 3
+  doc_ordinal: 43
+  text: Are timers, intervals, listeners, and observers released so nothing leaks across navigations or component lifetimes?
+  citation: Performant JavaScript (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Performance
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: vanilla_js.testing_and_debugging.01
+  section: testing_and_debugging
+  section_ordinal: 1
+  doc_ordinal: 44
+  text: Are unit tests present (node:test or this project's runner) and end-to-end tests for critical flows?
+  citation: Testing (MDN extension module); node:test
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Testing and Debugging
+  binds_to:
+    key: test_runner
+    label: test runner
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+    binding_named_in_mature_clause: true
+- id: vanilla_js.testing_and_debugging.02
+  section: testing_and_debugging
+  section_ordinal: 2
+  doc_ordinal: 45
+  text: Are console.log statements removed, with structured error reporting in their place?
+  citation: Debugging JavaScript (MDN)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Testing and Debugging
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: vanilla_js.style_and_naming.01
+  section: style_and_naming
+  section_ordinal: 1
+  doc_ordinal: 46
+  text: Does the code pass ESLint recommended rules plus this project's rules, and Prettier?
+  citation: ESLint; Google JavaScript Style Guide
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Style and Naming
+  binds_to:
+    key: lint_config
+    label: lint config
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: vanilla_js.style_and_naming.02
+  section: style_and_naming
+  section_ordinal: 2
+  doc_ordinal: 47
+  text: Are exported functions documented with JSDoc types where TypeScript is not in use, so editors can type-check?
+  citation: JSDoc
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Style and Naming
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.style_and_naming.03
+  section: style_and_naming
+  section_ordinal: 3
+  doc_ordinal: 48
+  text: Are names the same canonical names used elsewhere in this project for the same thing?
+  citation: Canonical naming
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Style and Naming
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.01
+    topic: canonical_naming
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: vanilla_js.node_js.01
+  section: node_js
+  section_ordinal: 1
+  doc_ordinal: 49
+  text: 'Are built-in modules imported with the node: prefix, and are promise-based APIs (fs/promises) used over callbacks and sync calls on hot paths?'
+  citation: Node.js documentation
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Node.js (fires when the runtime target is Node)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.node_js.02
+  section: node_js
+  section_ordinal: 2
+  doc_ordinal: 50
+  text: Are unhandled rejections and process signals handled for graceful shutdown?
+  citation: process (Node.js)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Node.js (fires when the runtime target is Node)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.node_js.03
+  section: node_js
+  section_ordinal: 3
+  doc_ordinal: 51
+  text: If .ts files run directly under Node, is only erasable syntax used?
+  citation: Type stripping (Node 24 stable)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Node.js (fires when the runtime target is Node)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: vanilla_js.node_js.04
+  section: node_js
+  section_ordinal: 4
+  doc_ordinal: 52
+  text: Is the Node version pinned to Active LTS in package.json engines and CI?
+  citation: Release schedule (Node.js)
+  source:
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    section: 5. Boundary questions > Node.js (fires when the runtime target is Node)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false

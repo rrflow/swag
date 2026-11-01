@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Explicit local task input for bounded observation polling",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "issueTitle"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "issueTitle": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "issueId": {"type": "string", "maxLength": 200},
+    "intentText": {"type": "string", "maxLength": 8000},
+    "userOverride": {"type": ["boolean", "null"]},
+    "route": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "modelId", "effort", "accessMode", "bindingId"],
+      "properties": {
+        "provider": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+        "modelId": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+        "effort": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+        "accessMode": {"enum": ["subscription", "api", "local", null]},
+        "bindingId": {"type": ["string", "null"], "minLength": 1, "maxLength": 200}
+      }
+    }
+  }
+}

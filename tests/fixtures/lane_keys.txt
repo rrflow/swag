@@ -1,0 +1,8 @@
+orient
+ground
+shape
+stress
+seal
+bound
+advance
+other

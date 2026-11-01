@@ -1,0 +1,697 @@
+# GENERATED from boundaries/reference/stack_typescript_v0_1.md (faithful export of Google Doc 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: typescript
+  kind: stack
+  stack: typescript
+  stack_field_in_source: typescript
+source:
+  doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+  title: 'Stack — TypeScript: Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  revision_id: ANLCKQk4UlqLQDDXRZoERGqiIyp8QZSHWr18e0V2vuk9BWXs1YW_XbQ-KIGfjpBqLp-s_sZZUR2s4KWrt7fHeKBsl9r1oohcquqNxHONrAua
+  owner: hades
+  export_date: '2026-09-30'
+  authored_against: TypeScript 7.0 (GA July 8, 2026; Go-native compiler under the standard typescript package). TypeScript 6.0 remains the last JavaScript-based compiler, published in parallel as @typescript/typescript6 for tools that depend on the old compiler API. 7.1 is scheduled for November 2026.
+  reference_export: boundaries/reference/stack_typescript_v0_1.md
+maturity_gating:
+  source_text: 'Greenfield: Configuration 1–3, 5; Everyday Types 1, 4, 5; Narrowing 1–2; Functions 1, 4; Modules 1; Runtime Boundaries 1; Cross-Stack 1–2 when codegen is present. Growing: all sections. Mature: add the Binds to: questions bound to tsconfig, declaration convention, lint config, file tree, and canonical name registry; Type Manipulation and Declarations sections become mandatory.'
+  greenfield_refs:
+  - source_ref: Configuration 1–3, 5
+    section: configuration_and_toolchain
+    questions:
+    - 1
+    - 2
+    - 3
+    - 5
+    match: title_start
+  - source_ref: Everyday Types 1, 4, 5
+    section: everyday_types
+    questions:
+    - 1
+    - 4
+    - 5
+    match: title_start
+  - source_ref: Narrowing 1–2
+    section: narrowing
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Functions 1, 4
+    section: functions
+    questions:
+    - 1
+    - 4
+    match: title_start
+  - source_ref: Modules 1
+    section: modules_and_declarations
+    questions:
+    - 1
+    match: title_start
+  - source_ref: Runtime Boundaries 1
+    section: runtime_boundaries
+    questions:
+    - 1
+    match: title_start
+  - source_ref: Cross-Stack 1–2 when codegen is present
+    section: cross_stack_contract_boundaries
+    questions:
+    - 1
+    - 2
+    match: title_start
+    condition: when codegen is present
+  growing: all sections
+  mature_source_text: 'add the Binds to: questions bound to tsconfig, declaration convention, lint config, file tree, and canonical name registry; Type Manipulation and Declarations sections become mandatory.'
+  mandatory_sections_at_mature:
+  - object_types_and_type_manipulation
+  - modules_and_declarations
+sections:
+- key: configuration_and_toolchain
+  source_heading: Configuration and Toolchain
+  title: Configuration and Toolchain
+- key: everyday_types
+  source_heading: Everyday Types
+  title: Everyday Types
+- key: narrowing
+  source_heading: Narrowing
+  title: Narrowing
+- key: functions
+  source_heading: Functions
+  title: Functions
+- key: object_types_and_type_manipulation
+  source_heading: Object Types and Type Manipulation
+  title: Object Types and Type Manipulation
+- key: classes_and_compatibility
+  source_heading: Classes and Compatibility
+  title: Classes and Compatibility
+- key: modules_and_declarations
+  source_heading: Modules and Declarations
+  title: Modules and Declarations
+- key: runtime_boundaries
+  source_heading: Runtime Boundaries
+  title: Runtime Boundaries
+- key: cross_stack_contract_boundaries
+  source_heading: Cross-Stack Contract Boundaries (composition set)
+  title: Cross-Stack Contract Boundaries
+  heading_note: composition set
+- key: lint_structure_naming
+  source_heading: Lint, Structure, Naming
+  title: Lint, Structure, Naming
+questions:
+- id: typescript.configuration_and_toolchain.01
+  section: configuration_and_toolchain
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is strict enabled, with this project's additional strictness flags (noUncheckedIndexedAccess, exactOptionalPropertyTypes, noImplicitOverride) applied consistently?
+  citation: strict (tsconfig reference)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Configuration and Toolchain
+  binds_to:
+    key: tsconfig
+    label: tsconfig
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: typescript.configuration_and_toolchain.02
+  section: configuration_and_toolchain
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Do module and moduleResolution match the runtime or bundler (nodenext, bundler), with verbatimModuleSyntax on?
+  citation: Modules reference (5.0)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Configuration and Toolchain
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.configuration_and_toolchain.03
+  section: configuration_and_toolchain
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Is type-checking run as tsc --noEmit in CI, separate from the bundler's transpile, so transpile-only tools cannot hide type errors?
+  citation: Compiler; project configuration
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Configuration and Toolchain
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.configuration_and_toolchain.04
+  section: configuration_and_toolchain
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: In a multi-package repository, are project references used with a single root configuration?
+  citation: Project References
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Configuration and Toolchain
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.configuration_and_toolchain.05
+  section: configuration_and_toolchain
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Is TypeScript on a current 7.x release, with any tool that imports the compiler as a library moved to @typescript/typescript6 or an updated version?
+  citation: TypeScript 7.0 (no legacy compiler API)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Configuration and Toolchain
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.configuration_and_toolchain.06
+  section: configuration_and_toolchain
+  section_ordinal: 6
+  doc_ordinal: 6
+  text: If Node executes .ts files directly, is erasableSyntaxOnly enabled — no enums, namespaces, or parameter properties?
+  citation: erasableSyntaxOnly (5.8); Node type stripping
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Configuration and Toolchain
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.everyday_types.01
+  section: everyday_types
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Is any absent, with unknown plus narrowing at every boundary where the type is not known?
+  citation: any; unknown (Everyday Types; Do's and Don'ts)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Everyday Types
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.everyday_types.02
+  section: everyday_types
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are the wrapper types Number, String, Boolean, Object, and the bare Function type never used?
+  citation: 'Do''s and Don''ts: General Types'
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Everyday Types
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.everyday_types.03
+  section: everyday_types
+  section_ordinal: 3
+  doc_ordinal: 9
+  text: Are unions of string literals preferred over enums; where enums remain, is that a recorded project decision?
+  citation: Literal Types; Enums
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Everyday Types
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.everyday_types.04
+  section: everyday_types
+  section_ordinal: 4
+  doc_ordinal: 10
+  text: Are null and undefined handled explicitly with optional chaining and nullish coalescing, with no non-null assertions outside a commented boundary?
+  citation: strictNullChecks; non-null assertion
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Everyday Types
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.everyday_types.05
+  section: everyday_types
+  section_ordinal: 5
+  doc_ordinal: 11
+  text: Are type assertions confined to boundaries the compiler cannot see, and is satisfies used to check a value without widening it?
+  citation: Type Assertions; satisfies (4.9)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Everyday Types
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.everyday_types.06
+  section: everyday_types
+  section_ordinal: 6
+  doc_ordinal: 12
+  text: Are tuples and as const used where positional or literal structure matters?
+  citation: Tuple Types; as const
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Everyday Types
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.narrowing.01
+  section: narrowing
+  section_ordinal: 1
+  doc_ordinal: 13
+  text: Are unions narrowed with typeof, instanceof, in, and discriminant checks rather than assertions?
+  citation: Narrowing
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Narrowing
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.narrowing.02
+  section: narrowing
+  section_ordinal: 2
+  doc_ordinal: 14
+  text: Do discriminated unions carry a literal discriminant, with exhaustiveness enforced through never in the default branch?
+  citation: Discriminated unions; exhaustiveness checking
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Narrowing
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.narrowing.03
+  section: narrowing
+  section_ordinal: 3
+  doc_ordinal: 15
+  text: Are custom guards written as type predicates, relying on inferred predicates where 5.5+ allows?
+  citation: Type predicates (5.5)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Narrowing
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.functions.01
+  section: functions
+  section_ordinal: 1
+  doc_ordinal: 16
+  text: Are parameter and return types explicit on exported functions and inferred inside modules?
+  citation: More on Functions; isolatedDeclarations (5.5)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Functions
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.functions.02
+  section: functions
+  section_ordinal: 2
+  doc_ordinal: 17
+  text: Are overloads avoided where a union parameter or optional parameter suffices, and ordered specific-to-general where kept?
+  citation: 'Do''s and Don''ts: Overloads'
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Functions
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.functions.03
+  section: functions
+  section_ordinal: 3
+  doc_ordinal: 18
+  text: Is void the return type of callbacks whose result is ignored?
+  citation: 'Do''s and Don''ts: Callback Types'
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Functions
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.functions.04
+  section: functions
+  section_ordinal: 4
+  doc_ordinal: 19
+  text: Are promises always awaited or returned, with catch variables typed unknown?
+  citation: useUnknownInCatchVariables (4.4); no-floating-promises
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Functions
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.object_types_and_type_manipulation.01
+  section: object_types_and_type_manipulation
+  section_ordinal: 1
+  doc_ordinal: 20
+  text: Is interface versus type alias chosen per this project's convention and applied consistently?
+  citation: Object Types
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Object Types and Type Manipulation
+  binds_to:
+    key: declaration_convention
+    label: declaration convention
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+    binding_named_in_mature_clause: true
+- id: typescript.object_types_and_type_manipulation.02
+  section: object_types_and_type_manipulation
+  section_ordinal: 2
+  doc_ordinal: 21
+  text: Are readonly properties and Readonly applied to data that must not be mutated?
+  citation: readonly
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Object Types and Type Manipulation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.object_types_and_type_manipulation.03
+  section: object_types_and_type_manipulation
+  section_ordinal: 3
+  doc_ordinal: 22
+  text: Is a generic introduced only when a type relationship must be preserved, with a constraint and a meaningful name?
+  citation: Generics; constraints
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Object Types and Type Manipulation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.object_types_and_type_manipulation.04
+  section: object_types_and_type_manipulation
+  section_ordinal: 4
+  doc_ordinal: 23
+  text: Are utility types used instead of hand-duplicated shapes derived from an existing type?
+  citation: Utility Types
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Object Types and Type Manipulation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.object_types_and_type_manipulation.05
+  section: object_types_and_type_manipulation
+  section_ordinal: 5
+  doc_ordinal: 24
+  text: Are mapped, conditional, and template literal types used only where they remove duplication, with a comment stating the derivation?
+  citation: Type Manipulation
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Object Types and Type Manipulation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.object_types_and_type_manipulation.06
+  section: object_types_and_type_manipulation
+  section_ordinal: 6
+  doc_ordinal: 25
+  text: Is a const type parameter used where a literal must be preserved through a generic call?
+  citation: const type parameters (5.0)
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Object Types and Type Manipulation
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.classes_and_compatibility.01
+  section: classes_and_compatibility
+  section_ordinal: 1
+  doc_ordinal: 26
+  text: Are classes used only where identity, encapsulated state, or lifecycle justify them, with plain objects and functions otherwise?
+  citation: Classes
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Classes and Compatibility
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.classes_and_compatibility.02
+  section: classes_and_compatibility
+  section_ordinal: 2
+  doc_ordinal: 27
+  text: Is structural compatibility understood, with branded types where nominal identity is genuinely required?
+  citation: Type Compatibility; branded types
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Classes and Compatibility
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.modules_and_declarations.01
+  section: modules_and_declarations
+  section_ordinal: 1
+  doc_ordinal: 28
+  text: Are ES modules used with import type for type-only imports and no namespaces?
+  citation: Modules; import type
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Modules and Declarations
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.modules_and_declarations.02
+  section: modules_and_declarations
+  section_ordinal: 2
+  doc_ordinal: 29
+  text: Are barrel files used deliberately, with circular imports checked?
+  citation: Modules; community best practice
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Modules and Declarations
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.modules_and_declarations.03
+  section: modules_and_declarations
+  section_ordinal: 3
+  doc_ordinal: 30
+  text: Are tsconfig path aliases mirrored in the bundler and runtime configuration?
+  citation: paths
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Modules and Declarations
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.modules_and_declarations.04
+  section: modules_and_declarations
+  section_ordinal: 4
+  doc_ordinal: 31
+  text: Do third-party types come from @types or bundled declarations, with local gaps filled by a declared .d.ts rather than any?
+  citation: Declaration Files
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Modules and Declarations
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.modules_and_declarations.05
+  section: modules_and_declarations
+  section_ordinal: 5
+  doc_ordinal: 32
+  text: Does a published library emit declarations (declaration, isolatedDeclarations)?
+  citation: Declaration emit
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Modules and Declarations
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: typescript.runtime_boundaries.01
+  section: runtime_boundaries
+  section_ordinal: 1
+  doc_ordinal: 33
+  text: Is every value crossing a runtime edge — JSON.parse, HTTP response, environment variable, IPC message, form data — validated with a schema, with the static type derived from the schema?
+  citation: Type erasure; runtime validation
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Runtime Boundaries
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.runtime_boundaries.02
+  section: runtime_boundaries
+  section_ordinal: 2
+  doc_ordinal: 34
+  text: Are environment variables typed through a validated config module rather than read as any?
+  citation: Runtime validation
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Runtime Boundaries
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.cross_stack_contract_boundaries.01
+  section: cross_stack_contract_boundaries
+  section_ordinal: 1
+  doc_ordinal: 35
+  text: Where types are generated from another stack (Specta, ts-rs, typeshare, openapi-typescript, protobuf, GraphQL codegen), is the source stack the single source of truth, and is the .ts output never hand-edited?
+  citation: Contract boundary; single source of truth
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: true
+    greenfield_condition: when codegen is present
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.cross_stack_contract_boundaries.02
+  section: cross_stack_contract_boundaries
+  section_ordinal: 2
+  doc_ordinal: 36
+  text: Are generated files marked as generated, excluded from lint and formatting, and regenerated in the build so that drift fails CI?
+  citation: Codegen discipline
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: true
+    greenfield_condition: when codegen is present
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.cross_stack_contract_boundaries.03
+  section: cross_stack_contract_boundaries
+  section_ordinal: 3
+  doc_ordinal: 37
+  text: Is the contract versioned so a source-type change surfaces as a visible boundary change on the TypeScript side?
+  citation: Contract versioning
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.cross_stack_contract_boundaries.04
+  section: cross_stack_contract_boundaries
+  section_ordinal: 4
+  doc_ordinal: 38
+  text: Is the IPC or HTTP edge still runtime-validated, since generated types are erased like any other?
+  citation: Type erasure at the contract edge
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.cross_stack_contract_boundaries.05
+  section: cross_stack_contract_boundaries
+  section_ordinal: 5
+  doc_ordinal: 39
+  text: Do generated type names match the source stack's canonical names under the codegen tool's casing rule?
+  citation: Canonical naming across stacks
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Cross-Stack Contract Boundaries (composition set)
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: typescript.lint_structure_naming.01
+  section: lint_structure_naming
+  section_ordinal: 1
+  doc_ordinal: 40
+  text: Is typescript-eslint active with the type-checked rule set — no-explicit-any, no-floating-promises, consistent-type-imports?
+  citation: typescript-eslint
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Lint, Structure, Naming
+  binds_to:
+    key: lint_config
+    label: lint config
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: typescript.lint_structure_naming.02
+  section: lint_structure_naming
+  section_ordinal: 2
+  doc_ordinal: 41
+  text: Are @ts-ignore comments absent, with @ts-expect-error used only with a stated reason?
+  citation: Compiler directives
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Lint, Structure, Naming
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: typescript.lint_structure_naming.03
+  section: lint_structure_naming
+  section_ordinal: 3
+  doc_ordinal: 42
+  text: Is the placement consistent with this project's existing structure?
+  citation: Project organization
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Lint, Structure, Naming
+  binds_to:
+    key: file_tree
+    label: file tree
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.02
+    topic: placement
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: typescript.lint_structure_naming.04
+  section: lint_structure_naming
+  section_ordinal: 4
+  doc_ordinal: 43
+  text: Are names the same canonical names used elsewhere in this project for the same thing?
+  citation: Canonical naming
+  source:
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    section: 5. Boundary questions > Lint, Structure, Naming
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.01
+    topic: canonical_naming
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true

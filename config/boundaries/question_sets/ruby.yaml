@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: ruby
+  kind: stack
+  stack: ruby
+  stack_field_in_source: ruby
+source:
+  doc_id: null
+  title: "Stack — Ruby: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: Ruby 3.x, Bundler, and Rails ecosystem best practices.
+sections:
+- key: runtime_and_dependencies
+  source_heading: Runtime and Dependencies
+  title: Runtime and Dependencies
+- key: architecture_and_boundaries
+  source_heading: Architecture and Boundaries
+  title: Architecture and Boundaries
+- key: input_validation_and_security
+  source_heading: Input Validation and Security
+  title: Input Validation and Security
+- key: jobs_concurrency_and_state
+  source_heading: Jobs, Concurrency, and State
+  title: Jobs, Concurrency, and State
+- key: testing_and_operability
+  source_heading: Testing and Operability
+  title: Testing and Operability
+questions:
+- id: ruby.runtime_and_dependencies.01
+  section: runtime_and_dependencies
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are Ruby version and gem dependencies pinned (Gemfile.lock committed) for reproducible builds?
+  citation: Bundler dependency reproducibility
+  source: { reference: https://bundler.io/, section: Gemfile and lockfile }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: ruby.runtime_and_dependencies.02
+  section: runtime_and_dependencies
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are dependency upgrades batched and validated with security scanning and regression checks?
+  citation: Gem dependency governance
+  source: { reference: https://guides.rubyonrails.org/security.html, section: keeping dependencies updated }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: ruby.architecture_and_boundaries.01
+  section: architecture_and_boundaries
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are controllers thin and business logic encapsulated in models/services/use-cases with clear boundaries?
+  citation: Rails architecture patterns
+  source: { reference: https://guides.rubyonrails.org/, section: MVC separation and service boundaries }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: ruby.architecture_and_boundaries.02
+  section: architecture_and_boundaries
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are persistence concerns isolated from domain logic to keep models focused and testable?
+  citation: Separation of concerns
+  source: { reference: https://martinfowler.com/eaaCatalog/, section: domain and persistence layering }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: ruby.input_validation_and_security.01
+  section: input_validation_and_security
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Are inbound parameters whitelisted and validated at boundary entry points?
+  citation: Strong parameters and input validation
+  source: { reference: https://guides.rubyonrails.org/action_controller_overview.html, section: strong parameters }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: ruby.input_validation_and_security.02
+  section: input_validation_and_security
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are secrets and credentials managed through secure configuration stores rather than source code?
+  citation: Rails credentials and secret management
+  source: { reference: https://guides.rubyonrails.org/security.html, section: credentials and secrets }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: ruby.jobs_concurrency_and_state.01
+  section: jobs_concurrency_and_state
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are background jobs idempotent and retry-safe, with deduplication for externally visible side effects?
+  citation: Active Job reliability practices
+  source: { reference: https://guides.rubyonrails.org/active_job_basics.html, section: retries and idempotency }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: ruby.jobs_concurrency_and_state.02
+  section: jobs_concurrency_and_state
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Is database transaction scope minimized around critical sections to avoid lock contention and deadlocks?
+  citation: Active Record transaction discipline
+  source: { reference: https://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html, section: transactions }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: ruby.testing_and_operability.01
+  section: testing_and_operability
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are unit, request, and system tests separated with deterministic fixtures/factories?
+  citation: Rails testing guide
+  source: { reference: https://guides.rubyonrails.org/testing.html, section: test types and structure }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: ruby.testing_and_operability.02
+  section: testing_and_operability
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are structured logs, error monitoring, and request/job correlation IDs present for production diagnosis?
+  citation: Application observability
+  source: { reference: https://guides.rubyonrails.org/debugging_rails_applications.html, section: logging and diagnostics }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

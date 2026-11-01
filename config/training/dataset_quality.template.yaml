@@ -1,0 +1,84 @@
+schema_version: 1
+description: >
+  Dataset quality policy for SWAG controller fine-tuning corpora.
+
+input:
+  jsonl_file: files/training/data/controller_sft.jsonl
+
+output:
+  cleaned_jsonl: files/training/data/controller_sft.cleaned.jsonl
+  rejected_jsonl: files/training/data/controller_sft.rejected.jsonl
+  report_json: files/training/data/controller_sft.quality_report.json
+  split_dir: files/training/data/splits
+
+policy:
+  require_roles: [system, user, assistant]
+  parse_assistant_json: true
+  min_user_chars: 40
+  min_assistant_chars: 24
+  max_total_chars: 32000
+  max_selected_question_ids: 250
+  banned_patterns:
+    - "\\bTODO\\b"
+    - "\\bTBD\\b"
+    - "lorem ipsum"
+    - "placeholder"
+  dedupe:
+    enabled: true
+    mode: user_plus_assistant
+  solid_dataset_gates:
+    min_accepted_rows: 500
+    min_train_rows: 400
+    min_val_rows: 50
+    min_test_rows: 50
+    min_unique_scenarios: 40
+    min_unique_selected_question_ids: 120
+    max_rejection_rate: 0.20
+    max_duplicate_rate: 0.05
+    min_distinct_stack_prefixes: 13
+    min_rows_with_question_citations: 500
+    min_rows_with_reference_urls: 60
+    max_synthetic_variant_ratio: 0.50
+    required_source_family_min_rows:
+      controller_expected_battery: 24
+      project_history_reference: 850
+      structured_real_inputs: 60
+      official_best_practice_docs: 120
+      incident_support_transcripts: 90
+    required_stack_min_rows:
+      nextjs: 1
+      rust: 1
+      go: 1
+      typescript: 1
+      react: 1
+      vanilla_js: 1
+      java: 1
+      cpp: 1
+      php: 1
+      c: 1
+      python: 1
+      ruby: 1
+      sql: 1
+    required_stack_min_unique_selected_question_ids:
+      nextjs: 5
+      rust: 5
+      go: 5
+      typescript: 3
+      react: 3
+      vanilla_js: 5
+      java: 3
+      cpp: 3
+      php: 3
+      c: 3
+      python: 3
+      ruby: 3
+      sql: 3
+    fail_on_violation: true
+
+split:
+  train_ratio: 0.9
+  val_ratio: 0.08
+  test_ratio: 0.02
+  hash_salt: swag-controller-v1
+  min_val_rows: 50
+  min_test_rows: 50

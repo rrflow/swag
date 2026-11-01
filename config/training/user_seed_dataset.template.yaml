@@ -1,0 +1,79 @@
+schema_version: 1
+name: user_seed_dataset_template
+description: >
+  User-authored seed dataset for SWAG 28B controller training. The user must provide
+  real examples before we train the controller. This is not synthetic data generation.
+
+required_fields:
+  - record_id
+  - scenario_id
+  - task_type
+  - stack
+  - domain
+  - project_name
+  - repo_context
+  - intent_text
+  - selected_question_ids
+  - route_target_tier
+  - confidence
+  - rationale
+  - source_provenance
+
+allowed_task_types:
+  - routing decisions
+  - architecture review
+  - security review
+  - incident/root cause
+  - migration planning
+  - general project triage
+  - other
+
+allowed_route_tiers:
+  - 14b
+  - 27-28b
+  - 7b
+
+allowed_stacks:
+  - vanilla_js
+  - typescript
+  - react
+  - nextjs
+  - python
+  - ruby
+  - go
+  - rust
+  - java
+  - cpp
+  - c
+  - php
+  - sql
+  - other
+
+required_behavior:
+  - The user must provide real examples from their own project, incidents, architecture decisions, or delivery work.
+  - Each example must include a route target, selected question IDs, and a rationale grounded in the real scenario.
+  - No synthetic examples may be used to satisfy dataset count targets.
+  - This template is a seed set for supervised training and should be expanded over time.
+
+sample_record:
+  record_id: seed-0001
+  scenario_id: user_seed_0001
+  task_type: security review
+  stack: python
+  domain: auth_and_session_control
+  project_name: example-app
+  repo_context: "Acme product, payments service, internal auth system, 2-year history, multiple incidents"
+  intent_text: "Add passkey sign-in and session timeout enforcement before deployment."
+  selected_question_ids:
+    - shared_predicates.software_security.01
+    - shared_predicates.software_security.03
+    - shared_predicates.verification_and_validation.02
+    - python.security.01
+  route_target_tier: 14b
+  confidence: 0.89
+  rationale: "This is a security-sensitive but bounded change. The task needs explicit security checks and validation rather than broad architecture escalation."
+  source_provenance:
+    source_type: user_seed
+    source_url: ""
+    reviewer: ""
+    notes: "User-authored ground truth for the first supervised seed set."

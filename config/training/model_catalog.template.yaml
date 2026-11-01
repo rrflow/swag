@@ -1,0 +1,62 @@
+schema_version: 1
+description: >
+  Candidate model catalog for SWAG System-One controller benchmarking and
+  tuning. Primary SWAG controller tiers are 14B and 27-28B, with optional 7B
+  smoke coverage for fast iteration and regression checks.
+
+model_tiers:
+  "7b":
+    - family: qwen
+      model: Qwen/Qwen2.5-7B-Instruct
+      local_runtime: vllm
+    - family: mistral
+      model: mistralai/Mistral-7B-Instruct-v0.3
+      local_runtime: vllm
+    - family: llama
+      model: meta-llama/Llama-3.1-8B-Instruct
+      local_runtime: vllm
+
+  "14b":
+    - family: qwen
+      model: Qwen/Qwen2.5-14B-Instruct
+      local_runtime: vllm
+    - family: phi
+      model: microsoft/Phi-4
+      local_runtime: vllm
+    - family: mistral
+      model: mistralai/Mistral-Nemo-Instruct-2407
+      local_runtime: vllm
+      notes: "12B class baseline close to 14B operating envelope."
+
+  "27-28b":
+    - family: qwen
+      model: Qwen/Qwen2.5-32B-Instruct
+      local_runtime: vllm
+      notes: "Used as near-band proxy for 27-28B tier until an exact 27-28B preferred checkpoint is selected."
+    - family: mistral
+      model: mistralai/Mistral-Small-24B-Instruct-2501
+      local_runtime: vllm
+      notes: "Lower edge of upper-tier band; useful for cost/latency tradeoff checks."
+    - family: deepseek
+      model: deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
+      local_runtime: vllm
+      notes: "Reasoning-heavy proxy model for upper-tier controller behavior."
+    - family: qwen
+      model: Qwen/Qwen2.5-32B-Instruct-AWQ
+      local_runtime: vllm
+      notes: "Experimental low-vram fast-controller profile for 28B-class routing under aggressive memory constraints (6-9GB target)."
+
+  "24-35b":
+    - family: nvidia
+      model: nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16
+      local_runtime: vllm
+      notes: "30B total / 3B active (MoE-style). NVIDIA candidate for Spark-class local deployments."
+    - family: qwen
+      model: Qwen/Qwen2.5-32B-Instruct
+      local_runtime: vllm
+    - family: mistral
+      model: mistralai/Mistral-Small-24B-Instruct-2501
+      local_runtime: vllm
+    - family: deepseek
+      model: deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
+      local_runtime: vllm

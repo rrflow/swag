@@ -1,0 +1,47 @@
+schema_version: 1
+description: >
+  Placement policy for deciding split_dabo_ring vs ring_only using explicit,
+  inspectable rules.
+
+inputs:
+  expected_training_hours: 24
+  expected_dataset_rows: 25000
+  concurrent_reviewers: 2
+  interactive_ui_required: true
+  heavy_training_required: true
+
+policy:
+  defaults:
+    preferred_mode: split_dabo_ring
+  rules:
+    - key: prefer_split_for_heavy_training_and_ui
+      when:
+        all:
+          - field: heavy_training_required
+            op: eq
+            value: true
+          - field: interactive_ui_required
+            op: eq
+            value: true
+      choose_mode: split_dabo_ring
+      rationale: >
+        Keep control-plane/UI on DABO while preserving ring compute capacity for
+        long-running training/eval jobs.
+    - key: prefer_ring_only_for_single_box_ops
+      when:
+        all:
+          - field: concurrent_reviewers
+            op: lte
+            value: 1
+          - field: expected_training_hours
+            op: lte
+            value: 2
+      choose_mode: ring_only
+      rationale: >
+        For short/local runs with minimal interactive load, ring-only can reduce
+        coordination overhead.
+
+best_practice_facts:
+  - "Separate control-plane and compute-plane workloads to reduce contention during long training runs."
+  - "Keep dataset review and curation deterministic and traceable with explicit state files and curated exports."
+  - "Route LoRA training, merge, and benchmark workloads to high-memory ring nodes."

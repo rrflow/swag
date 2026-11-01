@@ -1,0 +1,107 @@
+schema_version: 1
+description: >
+  Template for integrating frontier AI subscriptions and per-key API usage policy.
+  Copy to a private runtime file (for example providers.local.yaml) and replace
+  placeholder env vars with your real key variable names.
+
+providers:
+  - key: openai
+    label: OpenAI
+    subscription_tiers: [pro, scale, enterprise]
+    endpoint_env: OPENAI_BASE_URL
+  - key: anthropic
+    label: Anthropic
+    subscription_tiers: [pro, team, enterprise]
+    endpoint_env: ANTHROPIC_BASE_URL
+  - key: xai
+    label: xAI
+    subscription_tiers: [premium, enterprise]
+    endpoint_env: XAI_BASE_URL
+  - key: google
+    label: Google
+    subscription_tiers: [pro, enterprise]
+    endpoint_env: GOOGLE_GENAI_BASE_URL
+  - key: openrouter
+    label: OpenRouter
+    subscription_tiers: [standard, enterprise]
+    endpoint_env: OPENROUTER_BASE_URL
+  - key: azure_openai
+    label: Azure OpenAI
+    subscription_tiers: [standard, enterprise]
+    endpoint_env: AZURE_OPENAI_BASE_URL
+
+api_keys:
+  - key_id: spark-14b-primary
+    provider: xai
+    subscription_tier: premium
+    env_var: SWAG_XAI_KEY_SPARK_14B_A
+    allowed_model_tiers: [14b]
+    usage_policy:
+      max_requests_per_minute: 40
+      daily_budget_usd: 40
+      monthly_budget_usd: 900
+      priority: 10
+  - key_id: spark-openrouter-fallback
+    provider: openrouter
+    subscription_tier: standard
+    env_var: SWAG_OPENROUTER_KEY_A
+    allowed_model_tiers: [7b, 14b, 27-28b]
+    usage_policy:
+      max_requests_per_minute: 40
+      daily_budget_usd: 30
+      monthly_budget_usd: 700
+      priority: 40
+  - key_id: spark-azure-14b-primary
+    provider: azure_openai
+    subscription_tier: enterprise
+    env_var: SWAG_AZURE_OPENAI_KEY_14B_A
+    allowed_model_tiers: [14b]
+    usage_policy:
+      max_requests_per_minute: 30
+      daily_budget_usd: 35
+      monthly_budget_usd: 800
+      priority: 20
+  - key_id: spark-27-28b-primary
+    provider: xai
+    subscription_tier: premium
+    env_var: SWAG_XAI_KEY_SPARK_27_28B_A
+    allowed_model_tiers: [27-28b]
+    usage_policy:
+      max_requests_per_minute: 24
+      daily_budget_usd: 70
+      monthly_budget_usd: 1600
+      priority: 10
+
+routing_profiles:
+  - key: default_frontier_eval
+    description: >
+      Default multi-provider routing for controller evaluations.
+      Uses tier-based model preference and key pools.
+    model_tier_routes:
+      "7b":
+        model_preferences:
+          - provider: openrouter
+            model: qwen/qwen-2.5-7b-instruct
+          - provider: openai
+            model: gpt-5-mini
+        key_pool: [spark-openrouter-fallback]
+      "14b":
+        model_preferences:
+          - provider: xai
+            model: spark-14b
+          - provider: openai
+            model: gpt-5-mini
+          - provider: azure_openai
+            model: swag-14b-deployment
+          - provider: openrouter
+            model: qwen/qwen-2.5-14b-instruct
+        key_pool: [spark-14b-primary, spark-azure-14b-primary, spark-openrouter-fallback]
+      "27-28b":
+        model_preferences:
+          - provider: xai
+            model: spark-27-28b
+          - provider: openrouter
+            model: qwen/qwen-2.5-32b-instruct
+          - provider: anthropic
+            model: claude-sonnet-4.6
+        key_pool: [spark-27-28b-primary, spark-openrouter-fallback]

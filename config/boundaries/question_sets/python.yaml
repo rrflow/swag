@@ -1,0 +1,131 @@
+schema_version: 1
+question_set:
+  key: python
+  kind: stack
+  stack: python
+  stack_field_in_source: python
+source:
+  doc_id: null
+  title: "Stack — Python: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: Python 3.12+ ecosystem guidance (packaging.python.org, docs.python.org, pytest, mypy/pyright).
+sections:
+- key: packaging_and_environment
+  source_heading: Packaging and Environment
+  title: Packaging and Environment
+- key: typing_and_contracts
+  source_heading: Typing and Contracts
+  title: Typing and Contracts
+- key: runtime_boundaries
+  source_heading: Runtime Boundaries
+  title: Runtime Boundaries
+- key: concurrency_and_resources
+  source_heading: Concurrency and Resources
+  title: Concurrency and Resources
+- key: testing_and_quality
+  source_heading: Testing and Quality
+  title: Testing and Quality
+questions:
+- id: python.packaging_and_environment.01
+  section: packaging_and_environment
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is the project configured through pyproject.toml with an explicit Python version range and reproducible dependency resolution?
+  citation: Python packaging standards (PEP 517/518/621)
+  source:
+    reference: https://packaging.python.org/
+    section: pyproject.toml and metadata
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: python.packaging_and_environment.02
+  section: packaging_and_environment
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are runtime dependencies and development tooling dependencies separated so production images stay minimal?
+  citation: Packaging dependency groups
+  source:
+    reference: https://packaging.python.org/
+    section: dependency management
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: python.typing_and_contracts.01
+  section: typing_and_contracts
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are public functions and module boundaries fully type-annotated, with strict static checks in CI?
+  citation: Typing module and gradual typing practice
+  source:
+    reference: https://docs.python.org/3/library/typing.html
+    section: static typing
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: python.typing_and_contracts.02
+  section: typing_and_contracts
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are Any and broad cast patterns constrained to boundary adapters rather than domain logic?
+  citation: Type safety boundary discipline
+  source:
+    reference: https://typing.readthedocs.io/
+    section: minimizing Any
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: python.runtime_boundaries.01
+  section: runtime_boundaries
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Are inbound external values (HTTP payloads, env vars, files, queue messages) validated before use?
+  citation: Input validation and defensive programming
+  source:
+    reference: https://owasp.org/www-project-cheat-sheets/
+    section: input validation principles
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: python.runtime_boundaries.02
+  section: runtime_boundaries
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are serialization boundaries explicit, with stable schema versions for backward compatibility?
+  citation: API and schema versioning
+  source:
+    reference: https://martinfowler.com/articles/consumerDrivenContracts.html
+    section: contract evolution
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: python.concurrency_and_resources.01
+  section: concurrency_and_resources
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Is the concurrency model explicit (sync, threads, asyncio, workers), with blocking calls isolated from async paths?
+  citation: asyncio and concurrency model clarity
+  source:
+    reference: https://docs.python.org/3/library/asyncio.html
+    section: running and scheduling
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: python.concurrency_and_resources.02
+  section: concurrency_and_resources
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are file handles, sockets, and DB sessions scoped with context managers and closed deterministically?
+  citation: Context manager protocol
+  source:
+    reference: https://docs.python.org/3/reference/datamodel.html#context-managers
+    section: __enter__ / __exit__
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: python.testing_and_quality.01
+  section: testing_and_quality
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are unit, integration, and boundary tests separated with deterministic fixtures and stable assertions?
+  citation: pytest best practices
+  source:
+    reference: https://docs.pytest.org/
+    section: fixture and test organization
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: python.testing_and_quality.02
+  section: testing_and_quality
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are linting, formatting, type checking, and tests enforced together in CI before merge?
+  citation: Continuous integration quality gates
+  source:
+    reference: https://docs.github.com/actions
+    section: required checks
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

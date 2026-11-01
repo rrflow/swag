@@ -1,0 +1,70 @@
+schema_version: 1
+status: research_plan_not_qualified
+description: >
+  BF16-first Qwen3-Coder controller specialization. Legacy filename retained;
+  supersedes Qwen2.5, AWQ-first, 6-9GB and presumed 14B-default plans.
+model:
+  primary_tier: "30b_a3b"
+  preferred_candidates:
+    - family: qwen
+      model: Qwen/Qwen3-Coder-30B-A3B-Instruct
+      revision: b2cff646eb4bb1d68355c01b18ae02e7cf42d120
+      notes: Original BF16 baseline; custom checkpoint pending.
+runtime:
+  precision: bfloat16
+  target_memory_gb: null
+  target_memory_mode: bf16_baseline_and_custom_before_compression
+  future_serving_target_bytes: 29000000000
+  preferred_quantization: null
+  max_context_tokens: 4096
+  max_concurrent_sequences: 1
+  kv_cache_memory_bytes: 1073741824
+  fallback_if_memory_unavailable: abstain_or_engine_authorized_handoff
+training:
+  objective: >
+    Learn intent classification, bounded routing and handoffs from reviewed
+    observations; RRFlow independently enforces eligibility and effects.
+  training_strategy: evaluate_bf16_specialization_before_quantization
+  dataset_mix: {}
+  lora: {}
+  optimizer: {}
+  quality_gate:
+    status: pending_frozen_protocol_and_thresholds
+    require_reviewed_provenance_and_consent: true
+    require_project_time_separated_holdout: true
+    require_fresh_reload_and_artifact_digests: true
+    require_engine_policy_enforcement: true
+    missing_thresholds_block_qualification: true
+benchmark_suite:
+  - id: three_arm_routing
+    description: Original BF16 A versus custom BF16 B versus quantization of exactly B as C.
+  - id: admission_and_handoffs
+    description: Authorization, budget, quota, effort, locality, changed inputs, injection and abstention.
+  - id: serving_resources
+    description: Cold/warm latency, throughput and total serving peak at declared workload; unified memory counted once.
+gpu_requirements:
+  status: verify_training_resources_before_launch
+  notes: One GB10 served baseline BF16; this does not prove training or multinode feasibility.
+research_tactics:
+  - name: bounded_decision_contract
+    summary: Keep intent and handoffs compact; measure quality and resource effects.
+  - name: reviewed_observation_learning
+    summary: Treat overrides as preferences until independently reviewed against outcomes.
+  - name: later_compression
+    summary: Evaluate candidate formats only after custom BF16 quality is measured.
+execution_sequence:
+  - step: 1
+    action: Freeze routing schema, independently labelled evaluation cases and acceptance thresholds.
+  - step: 2
+    action: Admit reviewed data and train one pinned custom candidate with a verified BF16 workflow.
+  - step: 3
+    action: Export and freshly reload custom BF16; compare with original BF16 on the frozen protocol.
+  - step: 4
+    action: Quantize exactly that custom checkpoint and compare all three arms toward 29GB total serving memory.
+  - step: 5
+    action: Promote reversibly only after evidence gates and relevant engine integration PRs pass.
+research_notes:
+  implementation_principle: >
+    SWAG proposes; the engine owns plans and admission. Prioritize Claude model,
+    effort and authorized access-aware handoffs, with Codex support. Investigate
+    a from-scratch 14B specialist later; superiority and feasibility are unproven.

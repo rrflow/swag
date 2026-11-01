@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SWAG bounded route proposal, revision 1",
+  "oneOf": [
+    {"type": "object", "additionalProperties": false,
+     "required": ["bindingId", "effort"],
+     "properties": {"bindingId": {"type": "string", "minLength": 1}, "effort": {"type": "string", "minLength": 1}}},
+    {"type": "object", "additionalProperties": false,
+     "required": ["bindingId", "effort"],
+     "properties": {"bindingId": {"type": "null"}, "effort": {"type": "null"}}}
+  ]
+}

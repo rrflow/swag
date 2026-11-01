@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: drizzle
+  kind: stack
+  stack: drizzle
+  stack_field_in_source: drizzle
+source:
+  doc_id: null
+  title: "Stack — Drizzle ORM (TypeScript): Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: drizzle-orm and drizzle-kit official documentation.
+sections:
+- key: schema_and_migrations
+  source_heading: Schema and Migrations
+  title: Schema and Migrations
+- key: query_composition_and_safety
+  source_heading: Query Composition and Safety
+  title: Query Composition and Safety
+- key: types_and_contracts
+  source_heading: Types and Contracts
+  title: Types and Contracts
+- key: transactions_and_consistency
+  source_heading: Transactions and Consistency
+  title: Transactions and Consistency
+- key: operations_and_testing
+  source_heading: Operations and Testing
+  title: Operations and Testing
+questions:
+- id: drizzle.schema_and_migrations.01
+  section: schema_and_migrations
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is schema defined in Drizzle as the canonical source and migration artifacts generated from that source of truth?
+  citation: Drizzle schema-first workflow
+  source: { reference: https://orm.drizzle.team/docs/overview, section: schema definition }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: drizzle.schema_and_migrations.02
+  section: schema_and_migrations
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are migration diffs reviewed for destructive operations and executed through controlled deployment steps?
+  citation: drizzle-kit migrate workflow
+  source: { reference: https://orm.drizzle.team/docs/migrations, section: migration generation and apply }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: drizzle.query_composition_and_safety.01
+  section: query_composition_and_safety
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are query filters and joins composed through typed APIs, with raw SQL usage minimized and parameterized?
+  citation: Typed query builder and sql tagged template safety
+  source: { reference: https://orm.drizzle.team/docs/select, section: select query builder }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: drizzle.query_composition_and_safety.02
+  section: query_composition_and_safety
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are pagination and ordering explicit for list endpoints to avoid unbounded result sets?
+  citation: Query boundary safety
+  source: { reference: https://orm.drizzle.team/docs/select, section: limit and orderBy }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: drizzle.types_and_contracts.01
+  section: types_and_contracts
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Are inferred row and insert types reused across services so persistence and API contracts stay aligned?
+  citation: End-to-end type inference
+  source: { reference: https://orm.drizzle.team/docs/rqb, section: typed query results }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: drizzle.types_and_contracts.02
+  section: types_and_contracts
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are nullable and optional fields handled explicitly at the service boundary rather than widened with any/casts?
+  citation: Strict TypeScript boundary discipline
+  source: { reference: https://www.typescriptlang.org/docs/, section: nullability and strictness }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: drizzle.transactions_and_consistency.01
+  section: transactions_and_consistency
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are multi-step write workflows wrapped in transactions with well-defined rollback semantics?
+  citation: Transaction support
+  source: { reference: https://orm.drizzle.team/docs/transactions, section: transaction API }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: drizzle.transactions_and_consistency.02
+  section: transactions_and_consistency
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are idempotency and retry behavior defined for transaction conflicts and transient database errors?
+  citation: Transaction retry strategy
+  source: { reference: https://www.postgresql.org/docs/current/mvcc.html, section: concurrency control }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: drizzle.operations_and_testing.01
+  section: operations_and_testing
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are query-heavy paths covered with integration tests against the target SQL dialect?
+  citation: Dialect-aware integration testing
+  source: { reference: https://orm.drizzle.team/docs/get-started, section: supported dialects and setup }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: drizzle.operations_and_testing.02
+  section: operations_and_testing
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are Drizzle and drizzle-kit versions pinned and upgraded deliberately with migration verification?
+  citation: Toolchain version management
+  source: { reference: https://orm.drizzle.team/docs/overview, section: package versions }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

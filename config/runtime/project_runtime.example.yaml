@@ -1,0 +1,32 @@
+schema_version: 1
+runtime:
+  deployment_mode: self_hosted
+  project_scope: project
+  defaults_from: global
+  override_policy:
+    allow_global_defaults: true
+    allow_project_overrides: true
+    allow_shared_rrflow: true
+  controller:
+    default_tier: 14b
+    fallback_tier: 7b
+    escalation_tier: 27-28b
+    require_quality_gate: true
+    allow_parallel_routes: true
+  rrflow:
+    enabled: true
+    project_mode: isolated
+    parallel_mode: true
+    shared_with_projects: []
+    project_id: project-alpha
+    sync_files:
+      - rrflow.sync.yaml
+      - config/rrflow.sync.yaml
+  mcp:
+    enabled: true
+    transport: stdio
+    servers:
+      - name: rrflow
+        scope: global
+      - name: filesystem
+        scope: project

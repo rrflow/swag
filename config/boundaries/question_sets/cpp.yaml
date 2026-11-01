@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: cpp
+  kind: stack
+  stack: cpp
+  stack_field_in_source: cpp
+source:
+  doc_id: null
+  title: "Stack — C++: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: C++ Core Guidelines, ISO C++20/23 practices, and modern toolchain guidance.
+sections:
+- key: build_and_tooling
+  source_heading: Build and Tooling
+  title: Build and Tooling
+- key: ownership_and_lifetime
+  source_heading: Ownership and Lifetime
+  title: Ownership and Lifetime
+- key: api_and_type_design
+  source_heading: API and Type Design
+  title: API and Type Design
+- key: concurrency_and_synchronization
+  source_heading: Concurrency and Synchronization
+  title: Concurrency and Synchronization
+- key: testing_and_reliability
+  source_heading: Testing and Reliability
+  title: Testing and Reliability
+questions:
+- id: cpp.build_and_tooling.01
+  section: build_and_tooling
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are compiler warnings, static analysis, and sanitizers enforced in CI for all target build variants?
+  citation: C++ tooling quality gates
+  source: { reference: https://clang.llvm.org/extra/clang-tidy/, section: static checks }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: cpp.build_and_tooling.02
+  section: build_and_tooling
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Is the C++ standard level and ABI policy pinned and consistent across all build targets?
+  citation: Toolchain and ABI stability
+  source: { reference: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines, section: interface stability }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: cpp.ownership_and_lifetime.01
+  section: ownership_and_lifetime
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are ownership semantics explicit through RAII and smart pointers, avoiding raw owning pointers?
+  citation: C++ Core Guidelines ownership model
+  source: { reference: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines, section: resource management }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: cpp.ownership_and_lifetime.02
+  section: ownership_and_lifetime
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are move/copy constructors and assignment operations defined intentionally to avoid accidental expensive copies or invalid states?
+  citation: Rule of zero/five
+  source: { reference: https://en.cppreference.com/w/cpp/language/rule_of_three, section: rule of zero/five }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: cpp.api_and_type_design.01
+  section: api_and_type_design
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Are interfaces minimal and const-correct, using references/spans/views for non-owning access?
+  citation: API correctness and const discipline
+  source: { reference: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines, section: interfaces and const }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: cpp.api_and_type_design.02
+  section: api_and_type_design
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are template constraints and concepts used to make generic APIs explicit and diagnosable?
+  citation: Concepts and constrained templates
+  source: { reference: https://en.cppreference.com/w/cpp/language/constraints, section: concepts }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: cpp.concurrency_and_synchronization.01
+  section: concurrency_and_synchronization
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Is shared mutable state minimized and lock ownership/order documented to avoid deadlocks and races?
+  citation: Concurrency safety principles
+  source: { reference: https://en.cppreference.com/w/cpp/thread, section: mutexes and atomics }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: cpp.concurrency_and_synchronization.02
+  section: concurrency_and_synchronization
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are atomics used with deliberate memory ordering choices rather than defaulting without rationale?
+  citation: Memory model correctness
+  source: { reference: https://en.cppreference.com/w/cpp/atomic/memory_order, section: memory ordering }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: cpp.testing_and_reliability.01
+  section: testing_and_reliability
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are unit/integration tests and fuzz targets in place for parser, protocol, and boundary-heavy components?
+  citation: Native-code reliability testing
+  source: { reference: https://llvm.org/docs/LibFuzzer.html, section: fuzzing strategy }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: cpp.testing_and_reliability.02
+  section: testing_and_reliability
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are crash diagnostics and symbolized stack traces available for production incidents?
+  citation: Operability for native services
+  source: { reference: https://llvm.org/docs/SanitizerCoverage.html, section: runtime diagnostics }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

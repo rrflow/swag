@@ -1,0 +1,72 @@
+# rrflow.naming.yaml - RRFLOW naming rules (shipped defaults for swag)
+#
+# Layering: this file is the SHIPPED DEFAULT. A user copy at
+#   <user config dir>/rrflow.naming.yaml   (see swag.paths.yaml)
+# is deep-merged on top of it. Mappings merge key by key; lists REPLACE.
+# Format: YAML subset (block mappings, block lists, inline [a, b] lists,
+# quoted/plain scalars, comments) so the stdlib-only checker can read it.
+
+schema_version: 1
+
+source:
+  adr_title: "Clyffy - 09 Glossary ADR (Canonical Naming)"
+  adr_status: "LIVE (Accepted 2026-09-24 ET)"
+
+# Closed set of lane keys (ADR section 5, initial glossary seed).
+# Replacement targets must be members of this set.
+lanes:
+  keys: [orient, ground, shape, stress, seal, bound, advance, other]
+  # Fail closed (ADR section 2, rule 4): a lane_key outside this set is a violation.
+  enforce_closed_set: true
+
+reserved_words:
+  citation: "09 Glossary ADR section 2 rule 3 (Absorb jargon, don't dump it): capability words may appear in Absorbs notes, not as internal keys or primary surface labels."
+  words: [planning, research, implementation, testing, verification, design, security]
+  # Which key kinds the ban applies to (decision 2: lanes AND API seams).
+  applies_to: [lane_key, api_seam_key]
+  match:
+    # A key is split on the separator; a hit is a segment equal to a word.
+    # 'security_scan_start' hits 'security'; 'securityx_scan' does not.
+    mode: whole_segment
+    segment_separator: "_"
+    case_sensitive: false
+    # Optional extra spellings per word that also count as hits, e.g.
+    #   testing: [test, tests]
+    # Aliases (short forms) that count as the same reserved word.
+    extra_forms:
+      planning: [plan]
+      testing: [test]
+      verification: [verify]
+  # Suggested replacement per reserved word -> ADR lane key (section 5 Absorbs notes).
+  # NOTE: design and implementation both map to 'shape' (collision, see README).
+  replacements:
+    planning: orient
+    research: ground
+    implementation: shape
+    design: shape
+    testing: stress
+    verification: seal
+    security: bound
+  # Warn when two reserved words map to the same lane (detects the design/implementation collision).
+  report_replacement_collisions: true
+
+on_violation:
+  # error = exit code 1 (fail closed); warn = print, exit code 0.
+  mode: error
+
+# Key shape rules (ADR sections 1 and 3).
+patterns:
+  lane_key:
+    regex: "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    description: "snake_case, ASCII, no spaces (internal key)"
+  api_seam_key:
+    regex: "^[a-z][a-z0-9]*(_[a-z0-9]+)*$"
+    description: "snake_case seam operation or family (ADR section 9)"
+  payload_field:
+    regex: "^[a-z][a-z0-9]*([A-Z][a-z0-9]*)*$"
+    description: "lowerCamel, payload objects only (e.g. projectId)"
+  # Anti-names (ADR section 3): never mint *_v2, new_*, or parallel friendly keys.
+  anti_names:
+    globs: ["*_v2", "new_*"]
+    applies_to: [lane_key, api_seam_key, payload_field]
+    case_sensitive: false

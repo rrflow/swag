@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Explicit review supplement to an immutable capture",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "recordId", "observationSha256", "projectGroup", "leakageGroup", "reviewerId", "labelAuthorId", "reviewedAt", "consent", "redactionReviewed", "sourceKind", "previouslyUsed", "evidence", "request", "expected"],
+  "$defs": {
+    "nonempty": {"type": "string", "pattern": "\\S"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {"path": {"$ref": "#/$defs/nonempty"}, "sha256": {"$ref": "#/$defs/digest"}}
+    }
+  },
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "recordId": {"type": "string", "pattern": "^passive-[0-9a-f]{12}$"},
+    "observationSha256": {"$ref": "#/$defs/digest"},
+    "projectGroup": {"$ref": "#/$defs/nonempty"},
+    "leakageGroup": {"$ref": "#/$defs/nonempty"},
+    "reviewerId": {"$ref": "#/$defs/nonempty"},
+    "labelAuthorId": {"$ref": "#/$defs/nonempty"},
+    "reviewedAt": {"type": "string", "format": "date-time"},
+    "consent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["training", "evaluation", "grantedBy"],
+      "properties": {"training": {"type": "boolean"}, "evaluation": {"type": "boolean"}, "grantedBy": {"$ref": "#/$defs/nonempty"}}
+    },
+    "redactionReviewed": {"const": true},
+    "sourceKind": {"enum": ["real_observation", "synthetic_development"]},
+    "previouslyUsed": {"type": "boolean"},
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consent", "label", "redaction", "candidateSnapshot"],
+      "properties": {
+        "consent": {"$ref": "#/$defs/artifact"}, "label": {"$ref": "#/$defs/artifact"},
+        "redaction": {"$ref": "#/$defs/artifact"}, "candidateSnapshot": {"$ref": "#/$defs/artifact"}
+      }
+    },
+    "request": {"type": "object"},
+    "expected": {"type": "object"}
+  }
+}

@@ -1,0 +1,721 @@
+# GENERATED from boundaries/reference/stack_react_v0_1.md (faithful export of Google Doc 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: react
+  kind: stack
+  stack: react
+  stack_field_in_source: react
+source:
+  doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+  title: 'Stack — React: Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  revision_id: ANLCKQlH9uW4ywo6S7YNf51CtdiHm2wy__i5lKrkVk2Nl1Lg6jbEgV5kOWwxZb_YZChaR6sZDdNlLazTJv-7aHX4PNLvQHQN9C3d4GPCOFp9
+  owner: hades
+  export_date: '2026-09-30'
+  authored_against: React 19.3.0 (September 9, 2026); React Compiler 1.0 (October 2025).
+  reference_export: boundaries/reference/stack_react_v0_1.md
+maturity_gating:
+  source_text: 'Greenfield: Describing the UI 1, 2, 4; Adding Interactivity 2–4; Managing State 1–2; Escape Hatches 1–3, 7; Rules 1, 3; Data 1–2; Tooling 1–2. Growing: all sections. Mature: add the Binds to: questions bound to export convention, state-management choice, file tree, and the TypeScript stack; Performance and Accessibility sections become mandatory.'
+  greenfield_refs:
+  - source_ref: Describing the UI 1, 2, 4
+    section: describing_the_ui
+    questions:
+    - 1
+    - 2
+    - 4
+    match: title_start
+  - source_ref: Adding Interactivity 2–4
+    section: adding_interactivity
+    questions:
+    - 2
+    - 3
+    - 4
+    match: title_start
+  - source_ref: Managing State 1–2
+    section: managing_state
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Escape Hatches 1–3, 7
+    section: escape_hatches
+    questions:
+    - 1
+    - 2
+    - 3
+    - 7
+    match: title_start
+  - source_ref: Rules 1, 3
+    section: rules_of_react_and_strictness
+    questions:
+    - 1
+    - 3
+    match: title_start
+  - source_ref: Data 1–2
+    section: data_actions_suspense
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Tooling 1–2
+    section: tooling_structure_testing
+    questions:
+    - 1
+    - 2
+    match: title_start
+  growing: all sections
+  mature_source_text: 'add the Binds to: questions bound to export convention, state-management choice, file tree, and the TypeScript stack; Performance and Accessibility sections become mandatory.'
+  mandatory_sections_at_mature:
+  - performance
+  - accessibility_and_errors
+sections:
+- key: describing_the_ui
+  source_heading: Describing the UI
+  title: Describing the UI
+- key: adding_interactivity
+  source_heading: Adding Interactivity
+  title: Adding Interactivity
+- key: managing_state
+  source_heading: Managing State
+  title: Managing State
+- key: escape_hatches
+  source_heading: Escape Hatches
+  title: Escape Hatches
+- key: rules_of_react_and_strictness
+  source_heading: Rules of React and Strictness
+  title: Rules of React and Strictness
+- key: data_actions_suspense
+  source_heading: Data, Actions, Suspense (React 19)
+  title: Data, Actions, Suspense
+  heading_note: React 19
+- key: performance
+  source_heading: Performance
+  title: Performance
+- key: accessibility_and_errors
+  source_heading: Accessibility and Errors
+  title: Accessibility and Errors
+- key: tooling_structure_testing
+  source_heading: Tooling, Structure, Testing
+  title: Tooling, Structure, Testing
+questions:
+- id: react.describing_the_ui.01
+  section: describing_the_ui
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is each component a pure function of its props and state, with no side effects during render?
+  citation: Keeping Components Pure (Learn); Rules of React
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Describing the UI
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.describing_the_ui.02
+  section: describing_the_ui
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Does the component tree map to a UI hierarchy identified before coding, with a static version buildable first?
+  citation: Thinking in React, steps 1–2
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Describing the UI
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.describing_the_ui.03
+  section: describing_the_ui
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Is each component small enough to name by one responsibility, and exported consistently with this project's convention?
+  citation: Importing and Exporting Components
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Describing the UI
+  binds_to:
+    key: export_convention
+    label: export convention
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: react.describing_the_ui.04
+  section: describing_the_ui
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Are list items keyed by stable, unique data identifiers — never the array index when items can reorder or be inserted?
+  citation: Rendering Lists; key
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Describing the UI
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.describing_the_ui.05
+  section: describing_the_ui
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Is conditional rendering expressed in JSX (ternary, &&, or early return of null) rather than imperative branches building markup?
+  citation: Conditional Rendering
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Describing the UI
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.describing_the_ui.06
+  section: describing_the_ui
+  section_ordinal: 6
+  doc_ordinal: 6
+  text: Are props treated as read-only, with children used for composition rather than render-prop workarounds?
+  citation: Passing Props to a Component
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Describing the UI
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.adding_interactivity.01
+  section: adding_interactivity
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are event handlers passed as functions and named handleX on the component, onX on the prop?
+  citation: Responding to Events
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Adding Interactivity
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.adding_interactivity.02
+  section: adding_interactivity
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Is state reserved for values that change over time and drive rendering, with derived values computed during render?
+  citation: 'State: A Component''s Memory; Choosing the State Structure'
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Adding Interactivity
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.adding_interactivity.03
+  section: adding_interactivity
+  section_ordinal: 3
+  doc_ordinal: 9
+  text: Are state updates treated as snapshots, using an updater function whenever the next value depends on the previous?
+  citation: State as a Snapshot; Queueing a Series of State Updates
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Adding Interactivity
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.adding_interactivity.04
+  section: adding_interactivity
+  section_ordinal: 4
+  doc_ordinal: 10
+  text: Are objects and arrays in state replaced immutably, never mutated in place?
+  citation: Updating Objects in State; Updating Arrays in State
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Adding Interactivity
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.managing_state.01
+  section: managing_state
+  section_ordinal: 1
+  doc_ordinal: 11
+  text: Is the state structure minimal — no redundant, duplicated, contradictory, or deeply nested state?
+  citation: Choosing the State Structure; Thinking in React, step 3
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.managing_state.02
+  section: managing_state
+  section_ordinal: 2
+  doc_ordinal: 12
+  text: Is shared state lifted to the closest common parent, and otherwise kept local?
+  citation: Sharing State Between Components; Thinking in React, step 4
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.managing_state.03
+  section: managing_state
+  section_ordinal: 3
+  doc_ordinal: 13
+  text: Where a component must reset, is the reset done with a key change rather than an Effect?
+  citation: Preserving and Resetting State
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.managing_state.04
+  section: managing_state
+  section_ordinal: 4
+  doc_ordinal: 14
+  text: Are many related state transitions consolidated in a reducer rather than scattered across setters?
+  citation: Extracting State Logic into a Reducer
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.managing_state.05
+  section: managing_state
+  section_ordinal: 5
+  doc_ordinal: 15
+  text: Is Context used only for data needed deep in the tree (theme, current user, locale), not to avoid passing a prop one level?
+  citation: Passing Data Deeply with Context
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.managing_state.06
+  section: managing_state
+  section_ordinal: 6
+  doc_ordinal: 16
+  text: Is an external state library introduced only after reducer plus Context is shown insufficient, and is the choice recorded?
+  citation: Scaling Up with Reducer and Context
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  binds_to:
+    key: state_management_choice
+    label: state-management choice
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: react.managing_state.07
+  section: managing_state
+  section_ordinal: 7
+  doc_ordinal: 17
+  text: Does data flow down through props and up through callbacks, with no hidden channels?
+  citation: Thinking in React, step 5 (inverse data flow)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Managing State
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.01
+  section: escape_hatches
+  section_ordinal: 1
+  doc_ordinal: 18
+  text: Is every Effect synchronizing with an external system, and is no Effect transforming data for render or responding to a user event?
+  citation: Synchronizing with Effects; You Might Not Need an Effect
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.02
+  section: escape_hatches
+  section_ordinal: 2
+  doc_ordinal: 19
+  text: Does each Effect declare its reactive dependencies honestly, with the lint rule enforced and no suppression comments?
+  citation: Lifecycle of Reactive Effects; Removing Effect Dependencies
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.03
+  section: escape_hatches
+  section_ordinal: 3
+  doc_ordinal: 20
+  text: Does every Effect that subscribes, connects, or starts something return a cleanup?
+  citation: Lifecycle of Reactive Effects
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.04
+  section: escape_hatches
+  section_ordinal: 4
+  doc_ordinal: 21
+  text: Are non-reactive reads inside Effects separated with useEffectEvent?
+  citation: Separating Events from Effects (19.2)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.05
+  section: escape_hatches
+  section_ordinal: 5
+  doc_ordinal: 22
+  text: Are refs used only for values that do not affect rendering and for DOM access, never read or written during render?
+  citation: Referencing Values with Refs; Manipulating the DOM with Refs
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.06
+  section: escape_hatches
+  section_ordinal: 6
+  doc_ordinal: 23
+  text: Is reusable stateful logic extracted into a custom Hook named useX, with a clear input and return contract?
+  citation: Reusing Logic with Custom Hooks
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.escape_hatches.07
+  section: escape_hatches
+  section_ordinal: 7
+  doc_ordinal: 24
+  text: Are Hooks called only at the top level of a component or custom Hook, never conditionally or in loops?
+  citation: Rules of Hooks
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Escape Hatches
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.rules_of_react_and_strictness.01
+  section: rules_of_react_and_strictness
+  section_ordinal: 1
+  doc_ordinal: 25
+  text: Are components and Hooks idempotent, so double-invocation under StrictMode produces the same result?
+  citation: Components and Hooks must be pure; StrictMode
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Rules of React and Strictness
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.rules_of_react_and_strictness.02
+  section: rules_of_react_and_strictness
+  section_ordinal: 2
+  doc_ordinal: 26
+  text: Are props, state, and Hook return values never mutated?
+  citation: Rules of React
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Rules of React and Strictness
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.rules_of_react_and_strictness.03
+  section: rules_of_react_and_strictness
+  section_ordinal: 3
+  doc_ordinal: 27
+  text: Is StrictMode enabled at the root in development?
+  citation: StrictMode
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Rules of React and Strictness
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.01
+  section: data_actions_suspense
+  section_ordinal: 1
+  doc_ordinal: 28
+  text: Is data fetched through the framework or a Suspense-enabled data library rather than raw useEffect plus fetch?
+  citation: You Might Not Need an Effect; Suspense
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.02
+  section: data_actions_suspense
+  section_ordinal: 2
+  doc_ordinal: 29
+  text: Are form submissions implemented as Actions with useActionState and useFormStatus, surfacing pending and error state?
+  citation: Actions (React 19)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.03
+  section: data_actions_suspense
+  section_ordinal: 3
+  doc_ordinal: 30
+  text: Is optimistic UI implemented with useOptimistic where perceived latency matters?
+  citation: useOptimistic
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.04
+  section: data_actions_suspense
+  section_ordinal: 4
+  doc_ordinal: 31
+  text: Is the use API used to read promises or Context in render where it simplifies the code, and never called conditionally?
+  citation: use (React 19; 19.3 warning)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.05
+  section: data_actions_suspense
+  section_ordinal: 5
+  doc_ordinal: 32
+  text: Are Suspense boundaries placed around slow subtrees with fallbacks at the level the design intends?
+  citation: Suspense
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.06
+  section: data_actions_suspense
+  section_ordinal: 6
+  doc_ordinal: 33
+  text: Are non-urgent updates wrapped in transitions to keep input responsive?
+  citation: useTransition; useDeferredValue (19.3 independent transitions)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.07
+  section: data_actions_suspense
+  section_ordinal: 7
+  doc_ordinal: 34
+  text: Is ref passed as an ordinary prop, with forwardRef removed?
+  citation: ref as a prop (React 19)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.data_actions_suspense.08
+  section: data_actions_suspense
+  section_ordinal: 8
+  doc_ordinal: 35
+  text: Are generated ids for accessibility attributes produced with useId, never Math.random?
+  citation: useId
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Data, Actions, Suspense (React 19)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.performance.01
+  section: performance
+  section_ordinal: 1
+  doc_ordinal: 36
+  text: Is the React Compiler enabled; and if not, is manual memoization (memo, useMemo, useCallback) added only after profiling shows a need?
+  citation: React Compiler 1.0; Profiler; Performance Tracks
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Performance
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: react.performance.02
+  section: performance
+  section_ordinal: 2
+  doc_ordinal: 37
+  text: Is hidden-but-preserved UI implemented with Activity rather than conditional unmounting where state must survive?
+  citation: Activity (19.2)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Performance
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: react.performance.03
+  section: performance
+  section_ordinal: 3
+  doc_ordinal: 38
+  text: Are long lists virtualized, and are large components split so a keystroke does not re-render the page?
+  citation: Render and Commit; community best practice
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Performance
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: react.accessibility_and_errors.01
+  section: accessibility_and_errors
+  section_ordinal: 1
+  doc_ordinal: 39
+  text: Are semantic elements, labels, keyboard operability, and ARIA used per the Authoring Practices Guide rather than div-and-onClick?
+  citation: Accessibility (react.dev; WAI-ARIA APG)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Accessibility and Errors
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: react.accessibility_and_errors.02
+  section: accessibility_and_errors
+  section_ordinal: 2
+  doc_ordinal: 40
+  text: Are error boundaries placed around risky subtrees so one failure does not blank the app?
+  citation: Error boundaries
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Accessibility and Errors
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: react.tooling_structure_testing.01
+  section: tooling_structure_testing
+  section_ordinal: 1
+  doc_ordinal: 41
+  text: Was the project created with a framework or Vite per current guidance, never Create React App?
+  citation: Creating a React App (CRA sunset, February 2025)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Tooling, Structure, Testing
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.tooling_structure_testing.02
+  section: tooling_structure_testing
+  section_ordinal: 2
+  doc_ordinal: 42
+  text: Is eslint-plugin-react-hooks active (rules-of-hooks, exhaustive-deps) together with the compiler's lint rules?
+  citation: Tooling
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Tooling, Structure, Testing
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: react.tooling_structure_testing.03
+  section: tooling_structure_testing
+  section_ordinal: 3
+  doc_ordinal: 43
+  text: Is React pinned at a current 19.x release, with the react-server-dom security advisories accounted for?
+  citation: Versions (patched releases 19.0.4, 19.1.5, 19.2.4)
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Tooling, Structure, Testing
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: react.tooling_structure_testing.04
+  section: tooling_structure_testing
+  section_ordinal: 4
+  doc_ordinal: 44
+  text: Is the placement consistent with this project's existing component and feature structure?
+  citation: Project organization
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Tooling, Structure, Testing
+  binds_to:
+    key: file_tree
+    label: file tree
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.02
+    topic: placement
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: react.tooling_structure_testing.05
+  section: tooling_structure_testing
+  section_ordinal: 5
+  doc_ordinal: 45
+  text: Are component props typed as interfaces where the project uses TypeScript?
+  citation: Typing
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Tooling, Structure, Testing
+  binds_to:
+    key: typescript_stack_value
+    label: typescript stack value
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: false
+- id: react.tooling_structure_testing.06
+  section: tooling_structure_testing
+  section_ordinal: 6
+  doc_ordinal: 46
+  text: Do tests query by role, label, and text rather than implementation details?
+  citation: Testing Library query priorities
+  source:
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    section: 5. Boundary questions > Tooling, Structure, Testing
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false

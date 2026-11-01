@@ -1,0 +1,52 @@
+{
+  "weights": {
+    "quality_score": 0.75,
+    "efficiency_score": 0.25
+  },
+  "rows": [
+    {
+      "tier": "7b",
+      "scenarios_scored": 0,
+      "avg_f1": null,
+      "mean_token_accuracy": 0.719,
+      "train_loss": 1.389,
+      "runtime_seconds": 112.0,
+      "quality_score": 0.5687925910422771,
+      "efficiency_score": 1.0,
+      "composite_score": 0.6765944432817078
+    },
+    {
+      "tier": "14b",
+      "scenarios_scored": 0,
+      "avg_f1": null,
+      "mean_token_accuracy": 0.7375,
+      "train_loss": 1.249,
+      "runtime_seconds": 257.0,
+      "quality_score": 0.5910710315695865,
+      "efficiency_score": 0.4876325088339223,
+      "composite_score": 0.5652114008856705
+    },
+    {
+      "tier": "27-28b",
+      "scenarios_scored": 0,
+      "avg_f1": null,
+      "mean_token_accuracy": 0.7444,
+      "train_loss": 1.182,
+      "runtime_seconds": 395.0,
+      "quality_score": 0.601347571035747,
+      "efficiency_score": 0.0,
+      "composite_score": 0.45101067827681024
+    }
+  ],
+  "ranked_tiers": [
+    "7b",
+    "14b",
+    "27-28b"
+  ],
+  "recommendation": {
+    "policy_candidate_default_tier": "14b",
+    "recommended_default_tier": null,
+    "insufficient_evidence": true,
+    "notes": "recommended_default_tier is withheld until scenario scoring is provided (avg_f1 from --responses-dir)."
+  }
+}

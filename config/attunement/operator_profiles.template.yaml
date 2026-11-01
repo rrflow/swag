@@ -1,0 +1,76 @@
+schema_version: 1
+description: >
+  Operator-defined attunement profiles. Choose one per rollout run to define
+  context scope, boundary scope, and runtime policy for SWAG controller sessions.
+
+profiles:
+  - key: default_rollout
+    operator: primary
+    context_scope:
+      repository_roots:
+        - .
+      include_paths:
+        - config/
+        - boundaries/
+        - tools/
+      exclude_paths:
+        - chat-archive/
+      boundary_scope:
+        stacks: all
+        domains: all
+        maturity_default: growing
+      token_scope:
+        include_artifacts:
+          - boundary_question_sets
+          - stack_registry
+          - runtime_policy
+        exclude_artifacts:
+          - archive_transcripts
+    attunement_inputs:
+      required:
+        - project_brief
+        - objective_definition
+      optional:
+        - compliance_overrides
+        - custom_domain_aliases
+    execution_policy:
+      enforce_audit_gaps_zero: true
+      enforce_reference_citations: true
+      require_model_tier_comparison: true
+      route_profile: default_frontier_eval
+
+  - key: focused_security_rollout
+    operator: primary
+    context_scope:
+      repository_roots: [.]
+      include_paths:
+        - config/boundaries/
+        - tools/
+      exclude_paths:
+        - chat-archive/
+      boundary_scope:
+        stacks: all
+        domains:
+          - iam
+          - privileged_access_management
+          - llm_application
+          - billing_and_payments
+        maturity_default: mature
+      token_scope:
+        include_artifacts:
+          - domain_question_sets
+          - security_sections
+          - runtime_policy
+        exclude_artifacts:
+          - non_security_references
+    attunement_inputs:
+      required:
+        - threat_model
+        - compliance_controls
+      optional:
+        - pen_test_findings
+    execution_policy:
+      enforce_audit_gaps_zero: true
+      enforce_reference_citations: true
+      require_model_tier_comparison: true
+      route_profile: default_frontier_eval

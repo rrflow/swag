@@ -1,0 +1,30 @@
+schema_version: 1
+sync:
+  project_mode: isolated
+  project_id: your_project_id
+  swag_shared_profile: default_rollout
+  shared_with_projects: []
+  parallel_rrflow: true
+  configurable_runtime: true
+  hosting_mode: self_hosted
+  decision_sources:
+    - swebok_core
+    - ai_decision_proven_practices
+    - cloudflare_decisions
+    - jev_decisions
+    - rrflow_contract_alignment
+  project_overrides:
+    global_defaults: true
+    per_project_override: true
+    allow_shared_projection: true
+  mcp:
+    enabled: true
+    transport: stdio
+    servers:
+      - rrflow
+      - filesystem
+  notes: >
+    Copy to rrflow.sync.yaml at repository root (or config/rrflow.sync.yaml) and
+    set project_mode to shared when this repository should consume shared RRFlow
+    decision sources across projects. This stays self-hostable, parallel-aware,
+    and configurable at both global and per-project scopes.

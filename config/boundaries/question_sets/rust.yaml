@@ -1,0 +1,849 @@
+# GENERATED from boundaries/reference/stack_rust_v0_1.md (faithful export of Google Doc 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: rust
+  kind: stack
+  stack: rust
+  stack_field_in_source: rust
+source:
+  doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+  title: 'Stack — Rust: Curriculum and Boundary Questions (Draft v0.1)'
+  version: v0.1
+  status: Draft
+  revision_id: ANLCKQnUgMk1bQ7uNKcXsv7UsLsCoA4FvcoQuxXiEdMhaxpVq_oEB39JzsjTyPSm8b-Xzr0BlTwd0-BFR1D9iRmflZQFWfaegZmEhnm8cBP4
+  owner: hades
+  export_date: '2026-09-30'
+  authored_against: The Rust Programming Language, 2024-edition structure (chapters 1–21); Rust 2024 Edition.
+  reference_export: boundaries/reference/stack_rust_v0_1.md
+maturity_gating:
+  source_text: 'Greenfield: Ownership 1–2; Types 1, 3, 4; Packages 1, 2, 4, 6; Error Handling 1–3; Traits 1–3; Naming 1; Testing 1; Async 1–2; Unsafe 1. Growing: all sections. Mature: add the Binds to: questions bound to workspace layout, canonical name registry, runtime choice, and lint configuration; Performance and Documentation sections become mandatory.'
+  greenfield_refs:
+  - source_ref: Ownership 1–2
+    section: ownership_borrowing_lifetimes
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Types 1, 3, 4
+    section: types_structs_enums_patterns
+    questions:
+    - 1
+    - 3
+    - 4
+    match: title_start
+  - source_ref: Packages 1, 2, 4, 6
+    section: packages_crates_modules_workspace
+    questions:
+    - 1
+    - 2
+    - 4
+    - 6
+    match: title_start
+  - source_ref: Error Handling 1–3
+    section: error_handling
+    questions:
+    - 1
+    - 2
+    - 3
+    match: title_start
+  - source_ref: Traits 1–3
+    section: traits_and_generics
+    questions:
+    - 1
+    - 2
+    - 3
+    match: title_start
+  - source_ref: Naming 1
+    section: naming
+    questions:
+    - 1
+    match: title_start
+  - source_ref: Testing 1
+    section: testing_and_documentation
+    questions:
+    - 1
+    match: title_start
+  - source_ref: Async 1–2
+    section: async
+    questions:
+    - 1
+    - 2
+    match: title_start
+  - source_ref: Unsafe 1
+    section: unsafe_and_ffi
+    questions:
+    - 1
+    match: title_start
+  growing: all sections
+  mature_source_text: 'add the Binds to: questions bound to workspace layout, canonical name registry, runtime choice, and lint configuration; Performance and Documentation sections become mandatory.'
+  mandatory_sections_at_mature:
+  - iterators_closures_performance
+  - testing_and_documentation
+sections:
+- key: ownership_borrowing_lifetimes
+  source_heading: Ownership, Borrowing, Lifetimes (Ch 4, 10)
+  title: Ownership, Borrowing, Lifetimes
+  heading_note: Ch 4, 10
+- key: types_structs_enums_patterns
+  source_heading: Types, Structs, Enums, Patterns (Ch 5, 6, 19; API Guidelines)
+  title: Types, Structs, Enums, Patterns
+  heading_note: Ch 5, 6, 19; API Guidelines
+- key: packages_crates_modules_workspace
+  source_heading: Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  title: Packages, Crates, Modules, Workspace
+  heading_note: Ch 7, 14; Cargo Book
+- key: error_handling
+  source_heading: Error Handling (Ch 9; API Guidelines)
+  title: Error Handling
+  heading_note: Ch 9; API Guidelines
+- key: traits_and_generics
+  source_heading: Traits and Generics (Ch 10, 18; API Guidelines)
+  title: Traits and Generics
+  heading_note: Ch 10, 18; API Guidelines
+- key: naming
+  source_heading: Naming (API Guidelines)
+  title: Naming
+  heading_note: API Guidelines
+- key: testing_and_documentation
+  source_heading: Testing and Documentation (Ch 11, 14; API Guidelines)
+  title: Testing and Documentation
+  heading_note: Ch 11, 14; API Guidelines
+- key: iterators_closures_performance
+  source_heading: Iterators, Closures, Performance (Ch 13; Performance Book)
+  title: Iterators, Closures, Performance
+  heading_note: Ch 13; Performance Book
+- key: smart_pointers_and_concurrency
+  source_heading: Smart Pointers and Concurrency (Ch 15, 16)
+  title: Smart Pointers and Concurrency
+  heading_note: Ch 15, 16
+- key: async
+  source_heading: Async (Ch 17)
+  title: Async
+  heading_note: Ch 17
+- key: unsafe_and_ffi
+  source_heading: Unsafe and FFI (Ch 20; Rustonomicon)
+  title: Unsafe and FFI
+  heading_note: Ch 20; Rustonomicon
+- key: tooling_and_style
+  source_heading: Tooling and Style
+  title: Tooling and Style
+questions:
+- id: rust.ownership_borrowing_lifetimes.01
+  section: ownership_borrowing_lifetimes
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is the owner of every value clear, and is each borrow scoped no longer than the data it references?
+  citation: Ownership; borrowing (Ch 4)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Ownership, Borrowing, Lifetimes (Ch 4, 10)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.ownership_borrowing_lifetimes.02
+  section: ownership_borrowing_lifetimes
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are clone calls deliberate for semantics rather than used to silence the borrow checker?
+  citation: Move vs clone (Ch 4)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Ownership, Borrowing, Lifetimes (Ch 4, 10)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.ownership_borrowing_lifetimes.03
+  section: ownership_borrowing_lifetimes
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Are references preferred over owned copies in function parameters where the callee does not need ownership?
+  citation: Borrowing in signatures (Ch 4)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Ownership, Borrowing, Lifetimes (Ch 4, 10)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.ownership_borrowing_lifetimes.04
+  section: ownership_borrowing_lifetimes
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Are lifetimes elided where the rules allow and named only where the compiler requires them?
+  citation: Lifetime elision (Ch 10)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Ownership, Borrowing, Lifetimes (Ch 4, 10)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.ownership_borrowing_lifetimes.05
+  section: ownership_borrowing_lifetimes
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Is 'static avoided as a workaround for a lifetime the design should express?
+  citation: '''static lifetime (Ch 10)'
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Ownership, Borrowing, Lifetimes (Ch 4, 10)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.types_structs_enums_patterns.01
+  section: types_structs_enums_patterns
+  section_ordinal: 1
+  doc_ordinal: 6
+  text: Are domain states modelled as enums with exhaustive match rather than booleans, strings, or sentinel values?
+  citation: Enums; exhaustiveness (Ch 6, 19)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Types, Structs, Enums, Patterns (Ch 5, 6, 19; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.types_structs_enums_patterns.02
+  section: types_structs_enums_patterns
+  section_ordinal: 2
+  doc_ordinal: 7
+  text: Are domain identifiers and units wrapped in newtypes rather than passed as raw primitives?
+  citation: Newtype (C-NEWTYPE; Ch 20)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Types, Structs, Enums, Patterns (Ch 5, 6, 19; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.types_structs_enums_patterns.03
+  section: types_structs_enums_patterns
+  section_ordinal: 3
+  doc_ordinal: 8
+  text: Are invariants enforced by construction — private fields, constructors that validate — so an invalid value cannot exist?
+  citation: Validation; private fields (C-VALIDATE, C-STRUCT-PRIVATE)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Types, Structs, Enums, Patterns (Ch 5, 6, 19; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.types_structs_enums_patterns.04
+  section: types_structs_enums_patterns
+  section_ordinal: 4
+  doc_ordinal: 9
+  text: Is absence expressed with Option and never with a sentinel or a panic?
+  citation: Option (Ch 6)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Types, Structs, Enums, Patterns (Ch 5, 6, 19; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.types_structs_enums_patterns.05
+  section: types_structs_enums_patterns
+  section_ordinal: 5
+  doc_ordinal: 10
+  text: Is destructuring used at the boundary so field access is explicit and checked?
+  citation: Patterns (Ch 19)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Types, Structs, Enums, Patterns (Ch 5, 6, 19; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.packages_crates_modules_workspace.01
+  section: packages_crates_modules_workspace
+  section_ordinal: 1
+  doc_ordinal: 11
+  text: Is the module tree explicit, with pub(crate) by default and pub only on the intended public surface?
+  citation: Module privacy (Ch 7)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.packages_crates_modules_workspace.02
+  section: packages_crates_modules_workspace
+  section_ordinal: 2
+  doc_ordinal: 12
+  text: Does the crate and workspace split align with the boundary — one crate per boundary, not one crate for everything?
+  citation: Workspaces; crate boundaries (Ch 14)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  binds_to:
+    key: workspace_layout
+    label: workspace layout
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: rust.packages_crates_modules_workspace.03
+  section: packages_crates_modules_workspace
+  section_ordinal: 3
+  doc_ordinal: 13
+  text: Is the public API re-exported from a deliberate root rather than exposing internal paths?
+  citation: Re-exports (Ch 7; C-REEXPORT)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.packages_crates_modules_workspace.04
+  section: packages_crates_modules_workspace
+  section_ordinal: 4
+  doc_ordinal: 14
+  text: Are dependencies pinned by Cargo.lock, minimal in count, and audited (cargo audit or cargo deny)?
+  citation: Dependencies (Cargo Book)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.packages_crates_modules_workspace.05
+  section: packages_crates_modules_workspace
+  section_ordinal: 5
+  doc_ordinal: 15
+  text: Are optional dependencies behind Cargo features rather than runtime flags?
+  citation: Features (Cargo Book; C-FEATURE)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.packages_crates_modules_workspace.06
+  section: packages_crates_modules_workspace
+  section_ordinal: 6
+  doc_ordinal: 16
+  text: Is the edition current (2024) or pinned deliberately, and is rust-version declared for a library?
+  citation: Edition; MSRV (Cargo Book)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.packages_crates_modules_workspace.07
+  section: packages_crates_modules_workspace
+  section_ordinal: 7
+  doc_ordinal: 17
+  text: Is the placement of the new code consistent with the project's existing crate and module layout?
+  citation: Project organization
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Packages, Crates, Modules, Workspace (Ch 7, 14; Cargo Book)
+  binds_to:
+    key: file_tree
+    label: file tree
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.02
+    topic: placement
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: false
+- id: rust.error_handling.01
+  section: error_handling
+  section_ordinal: 1
+  doc_ordinal: 18
+  text: Do fallible functions return Result with a typed error rather than panicking?
+  citation: Recoverable errors (Ch 9)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Error Handling (Ch 9; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.error_handling.02
+  section: error_handling
+  section_ordinal: 2
+  doc_ordinal: 19
+  text: Is unwrap or expect confined to tests, prototypes, and cases proven infallible with a comment?
+  citation: Unwrap discipline (Ch 9)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Error Handling (Ch 9; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.error_handling.03
+  section: error_handling
+  section_ordinal: 3
+  doc_ordinal: 20
+  text: Do error types implement Error, Debug, and Display, with structured variants at library boundaries and a catch-all only at the binary edge?
+  citation: Meaningful error types (C-GOOD-ERR)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Error Handling (Ch 9; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.error_handling.04
+  section: error_handling
+  section_ordinal: 4
+  doc_ordinal: 21
+  text: Is the ? operator used with From conversions rather than manual match-and-return?
+  citation: Error propagation (Ch 9)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Error Handling (Ch 9; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.error_handling.05
+  section: error_handling
+  section_ordinal: 5
+  doc_ordinal: 22
+  text: Are panics and error conditions documented in Panics and Errors sections?
+  citation: Failure documentation (C-FAILURE)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Error Handling (Ch 9; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.traits_and_generics.01
+  section: traits_and_generics
+  section_ordinal: 1
+  doc_ordinal: 23
+  text: Is behavior abstracted through a trait with the smallest useful surface, not a trait per struct?
+  citation: Traits (Ch 10)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Traits and Generics (Ch 10, 18; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.traits_and_generics.02
+  section: traits_and_generics
+  section_ordinal: 2
+  doc_ordinal: 24
+  text: Is static dispatch (generics, impl Trait) versus dynamic dispatch (dyn Trait) chosen deliberately, with the reason recorded?
+  citation: Dispatch (Ch 18)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Traits and Generics (Ch 10, 18; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.traits_and_generics.03
+  section: traits_and_generics
+  section_ordinal: 3
+  doc_ordinal: 25
+  text: Do public types eagerly implement the common traits that apply — Debug, Clone, PartialEq, Eq, Hash, Default, Send, Sync?
+  citation: Common traits (C-COMMON-TRAITS, C-SEND-SYNC, C-DEBUG)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Traits and Generics (Ch 10, 18; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.traits_and_generics.04
+  section: traits_and_generics
+  section_ordinal: 4
+  doc_ordinal: 26
+  text: Are traits meant to be closed sealed against downstream implementation?
+  citation: Sealed traits (C-SEALED)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Traits and Generics (Ch 10, 18; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.traits_and_generics.05
+  section: traits_and_generics
+  section_ordinal: 5
+  doc_ordinal: 27
+  text: Do conversions follow the standard traits (From, Into, TryFrom, AsRef) rather than bespoke methods?
+  citation: Conversion traits (C-CONV-TRAITS)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Traits and Generics (Ch 10, 18; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.naming.01
+  section: naming
+  section_ordinal: 1
+  doc_ordinal: 28
+  text: Do identifiers follow RFC 430 casing — UpperCamelCase types and traits, snake_case functions and modules, SCREAMING_SNAKE_CASE constants?
+  citation: Casing (C-CASE)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Naming (API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.naming.02
+  section: naming
+  section_ordinal: 2
+  doc_ordinal: 29
+  text: Do conversion methods follow as_, to_, into_ semantics by cost and ownership?
+  citation: Conversion naming (C-CONV)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Naming (API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.naming.03
+  section: naming
+  section_ordinal: 3
+  doc_ordinal: 30
+  text: Do getters omit the get_ prefix, and do collections expose iter, iter_mut, into_iter?
+  citation: Getter and iterator naming (C-GETTER, C-ITER)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Naming (API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.naming.04
+  section: naming
+  section_ordinal: 4
+  doc_ordinal: 31
+  text: Are names the same canonical names used elsewhere in this project for the same thing?
+  citation: Canonical naming
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Naming (API Guidelines)
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+  overlaps_shared_question:
+    id: shared_predicates.software_construction_practical_considerations.01
+    topic: canonical_naming
+    note: listed for review; not removed
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: rust.testing_and_documentation.01
+  section: testing_and_documentation
+  section_ordinal: 1
+  doc_ordinal: 32
+  text: 'Are unit tests in #[cfg(test)] modules beside the code and integration tests in tests/?'
+  citation: Test organization (Ch 11)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Testing and Documentation (Ch 11, 14; API Guidelines)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: true
+- id: rust.testing_and_documentation.02
+  section: testing_and_documentation
+  section_ordinal: 2
+  doc_ordinal: 33
+  text: Does the public API carry documentation comments with runnable examples (doc tests)?
+  citation: Crate documentation; examples (C-CRATE-DOC, C-EXAMPLE)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Testing and Documentation (Ch 11, 14; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: rust.testing_and_documentation.03
+  section: testing_and_documentation
+  section_ordinal: 3
+  doc_ordinal: 34
+  text: Is the crate metadata (description, license, repository, keywords) complete for anything published?
+  citation: Metadata (C-METADATA)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Testing and Documentation (Ch 11, 14; API Guidelines)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: rust.iterators_closures_performance.01
+  section: iterators_closures_performance
+  section_ordinal: 1
+  doc_ordinal: 35
+  text: Are iterator adapters used where they are clearer than index loops, with collect only when a collection is actually needed?
+  citation: Iterators (Ch 13)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Iterators, Closures, Performance (Ch 13; Performance Book)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: rust.iterators_closures_performance.02
+  section: iterators_closures_performance
+  section_ordinal: 2
+  doc_ordinal: 36
+  text: Are allocations in hot paths measured before being optimized, with a benchmark for performance-sensitive code?
+  citation: Measurement (Performance Book)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Iterators, Closures, Performance (Ch 13; Performance Book)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: rust.iterators_closures_performance.03
+  section: iterators_closures_performance
+  section_ordinal: 3
+  doc_ordinal: 37
+  text: Is the release profile configured deliberately (opt-level, LTO, debug symbols)?
+  citation: Release profiles (Ch 14)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Iterators, Closures, Performance (Ch 13; Performance Book)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: true
+- id: rust.smart_pointers_and_concurrency.01
+  section: smart_pointers_and_concurrency
+  section_ordinal: 1
+  doc_ordinal: 38
+  text: Is shared ownership (Rc, Arc) justified by the design rather than used by default?
+  citation: Reference counting (Ch 15)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Smart Pointers and Concurrency (Ch 15, 16)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.smart_pointers_and_concurrency.02
+  section: smart_pointers_and_concurrency
+  section_ordinal: 2
+  doc_ordinal: 39
+  text: Is interior mutability (RefCell, Mutex, RwLock) minimal, and is each lock's scope kept short and documented?
+  citation: Interior mutability; shared state (Ch 15, 16)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Smart Pointers and Concurrency (Ch 15, 16)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.smart_pointers_and_concurrency.03
+  section: smart_pointers_and_concurrency
+  section_ordinal: 3
+  doc_ordinal: 40
+  text: Are reference cycles impossible or broken with Weak?
+  citation: Reference cycles (Ch 15)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Smart Pointers and Concurrency (Ch 15, 16)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.smart_pointers_and_concurrency.04
+  section: smart_pointers_and_concurrency
+  section_ordinal: 4
+  doc_ordinal: 41
+  text: Is message passing chosen over shared state where the design allows?
+  citation: Message passing (Ch 16)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Smart Pointers and Concurrency (Ch 15, 16)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.smart_pointers_and_concurrency.05
+  section: smart_pointers_and_concurrency
+  section_ordinal: 5
+  doc_ordinal: 42
+  text: Are types that cross thread boundaries Send and Sync by design, not by unsafe impl?
+  citation: Send and Sync (Ch 16; C-SEND-SYNC)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Smart Pointers and Concurrency (Ch 15, 16)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.async.01
+  section: async
+  section_ordinal: 1
+  doc_ordinal: 43
+  text: Is async used only where I/O-bound concurrency demands it, with compute-bound work on threads?
+  citation: Futures, tasks, and threads (Ch 17)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Async (Ch 17)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.async.02
+  section: async
+  section_ordinal: 2
+  doc_ordinal: 44
+  text: Is the async runtime chosen once for the project and not mixed?
+  citation: Runtime (Ch 17)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Async (Ch 17)
+  binds_to:
+    key: runtime_choice
+    label: runtime choice
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: true
+- id: rust.async.03
+  section: async
+  section_ordinal: 3
+  doc_ordinal: 45
+  text: Are blocking calls kept off the executor (spawn_blocking or a dedicated thread)?
+  citation: Blocking in async (Ch 17)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Async (Ch 17)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.async.04
+  section: async
+  section_ordinal: 4
+  doc_ordinal: 46
+  text: Are futures that hold resources cancellation-safe, and are timeouts explicit?
+  citation: Cancellation (Ch 17)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Async (Ch 17)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.async.05
+  section: async
+  section_ordinal: 5
+  doc_ordinal: 47
+  text: Are Streams used for sequences of async values rather than hand-rolled loops over channels?
+  citation: Streams (Ch 17)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Async (Ch 17)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.unsafe_and_ffi.01
+  section: unsafe_and_ffi
+  section_ordinal: 1
+  doc_ordinal: 48
+  text: Is unsafe absent, or isolated in a minimal module with a SAFETY comment stating the invariant upheld?
+  citation: Unsafe Rust (Ch 20; Rustonomicon)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Unsafe and FFI (Ch 20; Rustonomicon)
+  maturity:
+    greenfield: true
+    growing: true
+    mandatory_at_mature: false
+- id: rust.unsafe_and_ffi.02
+  section: unsafe_and_ffi
+  section_ordinal: 2
+  doc_ordinal: 49
+  text: Is every FFI boundary wrapped in a safe API that owns the invariants?
+  citation: FFI (Ch 20)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Unsafe and FFI (Ch 20; Rustonomicon)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.unsafe_and_ffi.03
+  section: unsafe_and_ffi
+  section_ordinal: 3
+  doc_ordinal: 50
+  text: Is unsafe code checked under Miri?
+  citation: Miri (Book, 3rd edition)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Unsafe and FFI (Ch 20; Rustonomicon)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.unsafe_and_ffi.04
+  section: unsafe_and_ffi
+  section_ordinal: 4
+  doc_ordinal: 51
+  text: Are macros used only where functions and generics cannot express the abstraction?
+  citation: Macros (Ch 20)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Unsafe and FFI (Ch 20; Rustonomicon)
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+- id: rust.tooling_and_style.01
+  section: tooling_and_style
+  section_ordinal: 1
+  doc_ordinal: 52
+  text: Does the change pass cargo fmt and cargo clippy with this project's lint configuration and no new warnings?
+  citation: rustfmt; Clippy
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Tooling and Style
+  binds_to:
+    key: clippy_and_rustfmt_config
+    label: clippy and rustfmt config
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false
+    binding_named_in_mature_clause: false
+- id: rust.tooling_and_style.02
+  section: tooling_and_style
+  section_ordinal: 2
+  doc_ordinal: 53
+  text: Is the toolchain pinned (rust-toolchain.toml) where reproducibility matters?
+  citation: Toolchain (Cargo Book)
+  source:
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    section: 5. Boundary questions > Tooling and Style
+  maturity:
+    greenfield: false
+    growing: true
+    mandatory_at_mature: false

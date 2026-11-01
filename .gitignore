@@ -1,0 +1,28 @@
+# Python and local tooling
+.venv/
+__pycache__/
+*.py[cod]
+.cache/
+.test-tmp/
+.DS_Store
+.cursor/
+Microsoft/
+
+# Credentials and local runtime state
+.env
+.env.local
+.env.*
+!.env.example
+.swag/
+
+# Session logs and generated artifacts stay local.
+chat-archive/
+chat-candidates/
+files/*
+!files/controller_experiments/
+files/controller_experiments/*
+!files/controller_experiments/promotion_scorecard.json
+!files/controller_experiments/tier_metrics.spark_latest.json
+
+# Draft for another suite product, held back from the public tree.
+boundaries/reference/lfg_engine_plan_draft_*.md

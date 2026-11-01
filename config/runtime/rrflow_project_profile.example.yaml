@@ -1,0 +1,42 @@
+schema_version: 1
+runtime:
+  deployment_mode: self_hosted
+  defaults_from: global
+  project_scope: project
+  override_policy:
+    allow_global_defaults: true
+    allow_project_overrides: true
+    allow_shared_rrflow: true
+  rrflow:
+    enabled: true
+    project_mode: shared
+    parallel_mode: true
+    project_id: rrflow-project-alpha
+    shared_with_projects:
+      - swag
+      - rrflow-beta
+    decision_sources:
+      - swebok_core
+      - ai_decision_proven_practices
+      - cloudflare_decisions
+      - jev_decisions
+      - rrflow_contract_alignment
+    sync_files:
+      - rrflow.sync.yaml
+      - config/rrflow.sync.yaml
+  controller:
+    default_tier: 14b
+    fallback_tier: 7b
+    escalation_tier: 27-28b
+    require_quality_gate: true
+    allow_parallel_routes: true
+  mcp:
+    enabled: true
+    transport: stdio
+    servers:
+      - name: rrflow
+        scope: global
+      - name: filesystem
+        scope: project
+      - name: github
+        scope: global

@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: pytorch_lightning
+  kind: stack
+  stack: pytorch_lightning
+  stack_field_in_source: pytorch-lightning
+source:
+  doc_id: null
+  title: "Stack — PyTorch Lightning: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: Lightning 2.x docs and PyTorch guidance.
+sections:
+- key: module_and_data_structure
+  source_heading: Module and Data Structure
+  title: Module and Data Structure
+- key: training_reproducibility
+  source_heading: Training Reproducibility
+  title: Training Reproducibility
+- key: distributed_and_precision
+  source_heading: Distributed and Precision
+  title: Distributed and Precision
+- key: checkpoints_and_serving
+  source_heading: Checkpoints and Serving
+  title: Checkpoints and Serving
+- key: evaluation_and_monitoring
+  source_heading: Evaluation and Monitoring
+  title: Evaluation and Monitoring
+questions:
+- id: pytorch_lightning.module_and_data_structure.01
+  section: module_and_data_structure
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is model logic in LightningModule and data ingestion in LightningDataModule, without leakage across concerns?
+  citation: Lightning module separation
+  source: { reference: https://lightning.ai/docs/pytorch/latest/, section: LightningModule and LightningDataModule }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.module_and_data_structure.02
+  section: module_and_data_structure
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are train, validation, and test splits explicit and immutable across runs?
+  citation: Data split integrity
+  source: { reference: https://lightning.ai/docs/pytorch/latest/data/datamodule.html, section: setup and stage splits }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.training_reproducibility.01
+  section: training_reproducibility
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are all random seeds fixed and deterministic modes documented where reproducibility is required?
+  citation: Reproducibility controls
+  source: { reference: https://pytorch.org/docs/stable/notes/randomness.html, section: controlling randomness }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.training_reproducibility.02
+  section: training_reproducibility
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Is gradient accumulation, clipping, and scheduler behavior configured intentionally and captured in run metadata?
+  citation: Trainer optimization controls
+  source: { reference: https://lightning.ai/docs/pytorch/latest/common/trainer.html, section: optimization settings }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.distributed_and_precision.01
+  section: distributed_and_precision
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Is distributed strategy selection (DDP/FSDP/etc.) matched to model size and hardware topology?
+  citation: Distributed training strategy
+  source: { reference: https://lightning.ai/docs/pytorch/latest/accelerators/gpu.html, section: strategy selection }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.distributed_and_precision.02
+  section: distributed_and_precision
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Is mixed precision policy chosen deliberately with numerical stability checks on representative batches?
+  citation: Precision control and numerical stability
+  source: { reference: https://lightning.ai/docs/pytorch/latest/common/precision_basic.html, section: precision modes }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.checkpoints_and_serving.01
+  section: checkpoints_and_serving
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are checkpoints versioned with explicit model/config metadata and a documented restore path?
+  citation: Checkpoint lifecycle
+  source: { reference: https://lightning.ai/docs/pytorch/latest/common/checkpointing_basic.html, section: save and restore }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.checkpoints_and_serving.02
+  section: checkpoints_and_serving
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Is export/inference codepath validated independently from training loops to avoid hidden trainer assumptions?
+  citation: Serving boundary validation
+  source: { reference: https://pytorch.org/tutorials/, section: inference deployment patterns }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.evaluation_and_monitoring.01
+  section: evaluation_and_monitoring
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are metrics computed with clear definitions and no leakage between training and evaluation state?
+  citation: Metric correctness
+  source: { reference: https://lightning.ai/docs/torchmetrics/stable/, section: metric state management }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: pytorch_lightning.evaluation_and_monitoring.02
+  section: evaluation_and_monitoring
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are experiment logs, artifacts, and lineage retained so results are reproducible and auditable?
+  citation: ML experiment tracking
+  source: { reference: https://lightning.ai/docs/pytorch/latest/extensions/logging.html, section: logger integration }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

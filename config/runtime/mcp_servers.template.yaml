@@ -1,0 +1,26 @@
+schema_version: 1
+mcp:
+  enabled: true
+  transport: stdio
+  servers:
+    - name: rrflow
+      description: RRFlow project coordination and shared state sync
+      command: python
+      args: ["-m", "rrflow_mcp"]
+      env: {}
+      enabled: true
+      scope: global
+    - name: filesystem
+      description: File and repo access for project-local tool execution
+      command: npx
+      args: ["-y", "@modelcontextprotocol/server-filesystem", "."]
+      env: {}
+      enabled: true
+      scope: project
+    - name: github
+      description: Optional GitHub integration for PR / issue / repo context
+      command: npx
+      args: ["-y", "@modelcontextprotocol/server-github"]
+      env: {}
+      enabled: false
+      scope: global

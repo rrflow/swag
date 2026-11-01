@@ -1,0 +1,24 @@
+project_name: swag-control-panel-demo
+repo: .
+maturity: growing
+primary_stack: nextjs
+has_test_harness: true
+unbounded_data_path: false
+domains:
+  - llm_application
+  - security
+  - settings_and_preferences
+intent_text: >
+  secure AI app architecture for a shared RRFlow project with runtime config,
+  project override controls, and provider-aware decision routing.
+project_mode: shared
+parallel_rrflow: true
+shared_decision_space: true
+deployment_mode: self_hosted
+budget_mode: balanced
+subscription_tier: pro
+attunement_profile: default_rollout
+route_profile: default_frontier_eval
+model_tier: 14b
+include_overlaps: true
+mcp_enabled: true

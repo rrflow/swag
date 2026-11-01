@@ -1,0 +1,32 @@
+# swag.paths.yaml - per-user, platform-aligned folders for app 'swag' (shipped defaults)
+#
+# Placeholders: ${VAR} = environment variable; ${VAR:-fallback} = fallback when VAR
+# is unset or empty (fallbacks may nest). No absolute user paths live here.
+# The checker only RESOLVES these; it never creates folders. Folders are created
+# at deployment time.
+
+schema_version: 1
+app_name: swag
+
+# Escape hatch: if this env var is set, it replaces the resolved user config dir.
+config_dir_env_override: SWAG_CONFIG_DIR
+
+# File name of the user override for the naming rules, looked up in the config dir.
+naming_override_file: rrflow.naming.yaml
+
+platforms:
+  windows:
+    config: "${APPDATA:-${USERPROFILE}\\AppData\\Roaming}\\${APP}"
+    data: "${LOCALAPPDATA:-${USERPROFILE}\\AppData\\Local}\\${APP}"
+    state: "${LOCALAPPDATA:-${USERPROFILE}\\AppData\\Local}\\${APP}\\state"
+    cache: "${LOCALAPPDATA:-${USERPROFILE}\\AppData\\Local}\\${APP}\\cache"
+  linux:
+    config: "${XDG_CONFIG_HOME:-${HOME}/.config}/${APP}"
+    data: "${XDG_DATA_HOME:-${HOME}/.local/share}/${APP}"
+    state: "${XDG_STATE_HOME:-${HOME}/.local/state}/${APP}"
+    cache: "${XDG_CACHE_HOME:-${HOME}/.cache}/${APP}"
+  macos:
+    config: "${HOME}/Library/Application Support/${APP}"
+    data: "${HOME}/Library/Application Support/${APP}"
+    state: "${HOME}/Library/Application Support/${APP}/state"
+    cache: "${HOME}/Library/Caches/${APP}"

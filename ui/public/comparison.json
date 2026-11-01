@@ -1,0 +1,626 @@
+[{
+  "schemaVersion": 1,
+  "kind": "swag.offline_evidence",
+  "runId": "93265fd0646ed2179ec9f2660b444a58045ec751a6625cd800c86bd6725b45ae",
+  "completedAt": "2026-10-28T16:50:00.189320+00:00",
+  "scope": "development",
+  "model": {
+    "name": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "precision": "bfloat16",
+    "customCheckpoint": false
+  },
+  "provenance": {
+    "protocolSha256": "fa1177ae56ca3c014b43979a5c2cdb5827d60ef18c974fe6ddbb931521fe795b",
+    "resultsSha256": "3fab94ee1a4845ad8bfe35e0c5a173ae7d871cd9d8b8ebd93896a13d06ef6044",
+    "artifactManifestSha256": "7ee0caa2f455d6c4eeebd69379468fc587e91c5b7a176eb995fc5ee74bbbbeed"
+  },
+  "metrics": {
+    "cases": 13,
+    "matched": 7,
+    "accuracy": 0.5384615384615384,
+    "policyViolations": 5,
+    "invalidOutputs": 0,
+    "falseAbstentions": 1,
+    "unnecessarySelections": 5,
+    "firstRequestSeconds": 1.393644495983608,
+    "warmMedianSeconds": 1.30987279699184,
+    "p95Seconds": 1.9622322050854564,
+    "protocolPassed": false,
+    "deploymentQualified": false
+  },
+  "cases": [
+    {
+      "caseRef": "98866b536a7c70d8",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.393644495983608
+    },
+    {
+      "caseRef": "38c26f1ad2763593",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.3005365460412577
+    },
+    {
+      "caseRef": "0cd5aa14872d188d",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": false,
+      "falseAbstention": true,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.1021103009115905
+    },
+    {
+      "caseRef": "b698499a411f5cbb",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.3444311340572312
+    },
+    {
+      "caseRef": "818dd9ca04ff6263",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.2676004369277507
+    },
+    {
+      "caseRef": "d8c95216ba9d7694",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.2434576229425147
+    },
+    {
+      "caseRef": "e94bfff6e79a141f",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.3192090479424223
+    },
+    {
+      "caseRef": "060def043b4f0c21",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.335019993945025
+    },
+    {
+      "caseRef": "9917597f93bb0cb6",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.422814482008107
+    },
+    {
+      "caseRef": "d02e9198e941fb81",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.1349926020484418
+    },
+    {
+      "caseRef": "82b10f1a67d19974",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.24068867508322
+    },
+    {
+      "caseRef": "0d28fb5488687507",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.9622322050854564
+    },
+    {
+      "caseRef": "e48c6853974ef992",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.3317356180632487
+    }
+  ],
+  "signals": [
+    {
+      "signal": "swag_route_policy_violation",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Route proposals violated supplied eligibility constraints",
+      "score": 5.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "signal": "swag_route_false_abstention",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Route proposals abstained despite an eligible choice",
+      "score": 1.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "signal": "swag_evaluation_mismatch",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Evaluation choices differed from expected labels",
+      "score": 6.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    }
+  ],
+  "learningSuggestions": [
+    {
+      "kind": "unsupervised_triage",
+      "state": "suggested",
+      "reason": "Group repeated failure patterns for review; clustering is not a correctness label."
+    },
+    {
+      "kind": "supervised_review",
+      "state": "suggested",
+      "reason": "Review source evidence, corrections and consent before dataset admission."
+    }
+  ],
+  "authority": {
+    "engineReceipt": null,
+    "trainingAuthorized": false,
+    "promotionAuthorized": false,
+    "connectomeIntegrated": false,
+    "rroflowAccepted": false
+  }
+}
+,{
+  "schemaVersion": 1,
+  "kind": "swag.offline_evidence",
+  "runId": "885b70b59c0472a6707a9b84de781598ede4a0f6f394c52f9b95de0f2fc68fe0",
+  "completedAt": "2026-10-28T19:23:25.460908+00:00",
+  "scope": "development",
+  "model": {
+    "name": "swag-qwen3-coder-intent-20261028",
+    "precision": "bfloat16",
+    "customCheckpoint": true
+  },
+  "provenance": {
+    "protocolSha256": "fa1177ae56ca3c014b43979a5c2cdb5827d60ef18c974fe6ddbb931521fe795b",
+    "resultsSha256": "7c4cebe124f920274b7eb212cdfebd4a8ef895b71e9c0a448d5e4564c653b1b8",
+    "artifactManifestSha256": "ba7bede9963d469f312e06b337cb9241de524bdf77c7fe2ee30e09dd9b126252"
+  },
+  "metrics": {
+    "cases": 13,
+    "matched": 7,
+    "accuracy": 0.5384615384615384,
+    "policyViolations": 5,
+    "invalidOutputs": 0,
+    "falseAbstentions": 1,
+    "unnecessarySelections": 5,
+    "firstRequestSeconds": 1.584427024004981,
+    "warmMedianSeconds": 1.5137356295017526,
+    "p95Seconds": 1.625455102068372,
+    "protocolPassed": false,
+    "deploymentQualified": false
+  },
+  "cases": [
+    {
+      "caseRef": "98866b536a7c70d8",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.584427024004981
+    },
+    {
+      "caseRef": "38c26f1ad2763593",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.4545686249621212
+    },
+    {
+      "caseRef": "0cd5aa14872d188d",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": false,
+      "falseAbstention": true,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.1587608840782195
+    },
+    {
+      "caseRef": "b698499a411f5cbb",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.5282364790327847
+    },
+    {
+      "caseRef": "818dd9ca04ff6263",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.5309727271087468
+    },
+    {
+      "caseRef": "d8c95216ba9d7694",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.4267292339354753
+    },
+    {
+      "caseRef": "e94bfff6e79a141f",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.5026788440300152
+    },
+    {
+      "caseRef": "060def043b4f0c21",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.52479241497349
+    },
+    {
+      "caseRef": "9917597f93bb0cb6",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 1.5992928489577025
+    },
+    {
+      "caseRef": "d02e9198e941fb81",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.1718096899567172
+    },
+    {
+      "caseRef": "82b10f1a67d19974",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.4406808780040592
+    },
+    {
+      "caseRef": "0d28fb5488687507",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.625455102068372
+    },
+    {
+      "caseRef": "e48c6853974ef992",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.5297325280262157
+    }
+  ],
+  "signals": [
+    {
+      "signal": "swag_route_policy_violation",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Route proposals violated supplied eligibility constraints",
+      "score": 5.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "signal": "swag_route_false_abstention",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Route proposals abstained despite an eligible choice",
+      "score": 1.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "signal": "swag_evaluation_mismatch",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Evaluation choices differed from expected labels",
+      "score": 6.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    }
+  ],
+  "learningSuggestions": [
+    {
+      "kind": "unsupervised_triage",
+      "state": "suggested",
+      "reason": "Group repeated failure patterns for review; clustering is not a correctness label."
+    },
+    {
+      "kind": "supervised_review",
+      "state": "suggested",
+      "reason": "Review source evidence, corrections and consent before dataset admission."
+    }
+  ],
+  "authority": {
+    "engineReceipt": null,
+    "trainingAuthorized": false,
+    "promotionAuthorized": false,
+    "connectomeIntegrated": false,
+    "rroflowAccepted": false
+  }
+}
+,{
+  "schemaVersion": 1,
+  "kind": "swag.offline_evidence",
+  "runId": "9ebb8b0132d1a8d1f5fd0d1d85de1adb6be8d916c6bc11c665f03a721aacb8be",
+  "completedAt": "2026-10-28T18:39:20.738158+00:00",
+  "scope": "development",
+  "model": {
+    "name": "LiquidAI/d1-3B",
+    "precision": "bfloat16",
+    "customCheckpoint": false
+  },
+  "provenance": {
+    "protocolSha256": "fa1177ae56ca3c014b43979a5c2cdb5827d60ef18c974fe6ddbb931521fe795b",
+    "resultsSha256": "d3bef77ac405750048cf8190a19cd4dc7f9c7a9e8420bde40285d6527698550d",
+    "artifactManifestSha256": "bbc561f42380480e92ae974c92d105206980eb895fbcc359981dc0019e4bc30c"
+  },
+  "metrics": {
+    "cases": 13,
+    "matched": 9,
+    "accuracy": 0.6923076923076923,
+    "policyViolations": 3,
+    "invalidOutputs": 0,
+    "falseAbstentions": 0,
+    "unnecessarySelections": 3,
+    "firstRequestSeconds": 1.2660332932136953,
+    "warmMedianSeconds": 0.0921809826977551,
+    "p95Seconds": 1.2660332932136953,
+    "protocolPassed": false,
+    "deploymentQualified": false
+  },
+  "cases": [
+    {
+      "caseRef": "98866b536a7c70d8",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 1.2660332932136953
+    },
+    {
+      "caseRef": "38c26f1ad2763593",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09317101910710335
+    },
+    {
+      "caseRef": "0cd5aa14872d188d",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09214758221060038
+    },
+    {
+      "caseRef": "b698499a411f5cbb",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09135409723967314
+    },
+    {
+      "caseRef": "818dd9ca04ff6263",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09306724276393652
+    },
+    {
+      "caseRef": "d8c95216ba9d7694",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 0.09293372416868806
+    },
+    {
+      "caseRef": "e94bfff6e79a141f",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09261193312704563
+    },
+    {
+      "caseRef": "060def043b4f0c21",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 0.08982775220647454
+    },
+    {
+      "caseRef": "9917597f93bb0cb6",
+      "validOutput": true,
+      "matched": false,
+      "policyViolation": true,
+      "falseAbstention": false,
+      "unnecessarySelection": true,
+      "elapsedSeconds": 0.09112112317234278
+    },
+    {
+      "caseRef": "d02e9198e941fb81",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.04246572498232126
+    },
+    {
+      "caseRef": "82b10f1a67d19974",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.06610798696056008
+    },
+    {
+      "caseRef": "0d28fb5488687507",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09221438318490982
+    },
+    {
+      "caseRef": "e48c6853974ef992",
+      "validOutput": true,
+      "matched": true,
+      "policyViolation": false,
+      "falseAbstention": false,
+      "unnecessarySelection": false,
+      "elapsedSeconds": 0.09327289136126637
+    }
+  ],
+  "signals": [
+    {
+      "signal": "swag_route_policy_violation",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Route proposals violated supplied eligibility constraints",
+      "score": 3.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "signal": "swag_evaluation_mismatch",
+      "rule_version": 1,
+      "severity": "warn",
+      "summary": "Evaluation choices differed from expected labels",
+      "score": 4.0,
+      "evidence": [
+        {
+          "kind": "turn",
+          "tool_id": null,
+          "excerpt": null
+        }
+      ]
+    }
+  ],
+  "learningSuggestions": [
+    {
+      "kind": "unsupervised_triage",
+      "state": "suggested",
+      "reason": "Group repeated failure patterns for review; clustering is not a correctness label."
+    },
+    {
+      "kind": "supervised_review",
+      "state": "suggested",
+      "reason": "Review source evidence, corrections and consent before dataset admission."
+    }
+  ],
+  "authority": {
+    "engineReceipt": null,
+    "trainingAuthorized": false,
+    "promotionAuthorized": false,
+    "connectomeIntegrated": false,
+    "rroflowAccepted": false
+  }
+}
+]

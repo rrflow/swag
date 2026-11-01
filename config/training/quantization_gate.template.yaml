@@ -1,0 +1,29 @@
+schema_version: 1
+description: >
+  Quantization benchmark gate policy for SWAG controller deployments.
+  Compares candidate quantized profiles against a bf16 baseline per model run.
+
+input:
+  benchmark_results_file: files/training/benchmarks/quantization_results.json
+
+output:
+  gate_report_file: files/training/benchmarks/quantization_gate_report.json
+
+policy:
+  baseline_profile_key: bf16
+  baseline_profile_key_by_tier:
+    "27-28b": bf16_tp3
+  fail_on_violation: false
+  default_thresholds:
+    max_quality_delta_abs: 0.03
+    min_latency_tokens_per_sec_gain: 0.05
+    min_memory_reduction_ratio: 0.15
+  thresholds_by_tier:
+    "14b":
+      max_quality_delta_abs: 0.025
+      min_latency_tokens_per_sec_gain: 0.08
+      min_memory_reduction_ratio: 0.20
+    "27-28b":
+      max_quality_delta_abs: 0.03
+      min_latency_tokens_per_sec_gain: 0.10
+      min_memory_reduction_ratio: 0.25

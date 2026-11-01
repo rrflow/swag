@@ -1,0 +1,529 @@
+# GENERATED from boundaries/reference/stack_category_routing_v0_2.md (faithful export of Google Doc 1r0KlUR9_ZK-9IJjhAs7uze0ENdxqU8hZ7Ay3-Kop67w).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+# Fields: markers.* are verbatim source text (no marker grammar is defined yet; see open questions).
+# 'composable' appears only where a source doc states it.
+schema_version: 1
+source:
+  doc_id: 1r0KlUR9_ZK-9IJjhAs7uze0ENdxqU8hZ7Ay3-Kop67w
+  title: Stack Category Routing (Draft v0.2)
+  version: v0.2
+  status: Draft
+  revision_id: ANLCKQnV1buw3zwWT16MJsFOzlwArub-49SdVWldfgSsZVoUSysIOlv3qBASqfHew_YyPj9efEMZlBSadmW_Kjy5pjpnN-Q6-N-YOLXa-T0w
+  owner: hades
+  export_date: '2026-09-30'
+  reference_export: boundaries/reference/stack_category_routing_v0_2.md
+key_rules:
+  stack_key_pattern: ^[a-z][a-z0-9]*(_[a-z0-9]+)*$
+  pattern_source: config/rrflow.naming.yaml patterns.api_seam_key (RRFLOW naming ADR, snake_case)
+  applied_changes:
+  - from: vanilla-js
+    to: vanilla_js
+  - from: pytorch-lightning
+    to: pytorch_lightning
+routing:
+  battery: battery = shared_predicates ∪ stack(value) ∪ domain(detected boundaries)
+  detection_source_text: 'Stack detection is deterministic first, model second: file markers in the repository decide the value when they exist; the intent model decides only when markers are absent or ambiguous (a greenfield prompt with no repository yet). A polyglot repository carries more than one stack value. Each boundary binds to one primary stack — the runtime that executes the change — and composable values such as typescript fire alongside it. A contract boundary, where types are generated from another stack (Specta, ts-rs, typeshare, schemars, openapi-typescript), fires both stacks'' interface sections plus the typescript composition set (Stack — TypeScript, section 0).'
+status_values_in_source:
+- contract tool
+- drafted
+- queued
+question_sets:
+  shared_predicates:
+    kind: shared
+    question_set: question_sets/shared_predicates.yaml
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+  nextjs:
+    kind: stack
+    question_set: question_sets/nextjs.yaml
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+  vanilla_js:
+    kind: stack
+    question_set: question_sets/vanilla_js.yaml
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+  typescript:
+    kind: stack
+    question_set: question_sets/typescript.yaml
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+  react:
+    kind: stack
+    question_set: question_sets/react.yaml
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+  go:
+    kind: stack
+    question_set: question_sets/go.yaml
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+  rust:
+    kind: stack
+    question_set: question_sets/rust.yaml
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+  c:
+    kind: stack
+    question_set: question_sets/c.yaml
+    doc_id: null
+  cpp:
+    kind: stack
+    question_set: question_sets/cpp.yaml
+    doc_id: null
+  python:
+    kind: stack
+    question_set: question_sets/python.yaml
+    doc_id: null
+  pytorch_lightning:
+    kind: stack
+    question_set: question_sets/pytorch_lightning.yaml
+    doc_id: null
+  java:
+    kind: stack
+    question_set: question_sets/java.yaml
+    doc_id: null
+  php:
+    kind: stack
+    question_set: question_sets/php.yaml
+    doc_id: null
+  sql:
+    kind: stack
+    question_set: question_sets/sql.yaml
+    doc_id: null
+  drizzle:
+    kind: stack
+    question_set: question_sets/drizzle.yaml
+    doc_id: null
+  prisma:
+    kind: stack
+    question_set: question_sets/prisma.yaml
+    doc_id: null
+  ruby:
+    kind: stack
+    question_set: question_sets/ruby.yaml
+    doc_id: null
+  domains:
+    kind: domain
+    question_set: question_sets/domains.yaml
+    doc_id: null
+    origin: pasted in chat 2026-09-30
+    domain_keys:
+    - iam
+    - privileged_access_management
+    - realtime_messaging
+    - llm_application
+stacks:
+- key: nextjs
+  source_value: nextjs
+  canonical_label: Next.js App Router
+  status: drafted
+  markers:
+    registry_text: next.config.*, app/ directory, next in package.json
+  document:
+    title_in_registry: Stack — Next.js
+    doc_id: 1kfJgAGlGJKuxQPNpQntoG0Lpv__z9Y-X80WCdVn5V68
+    question_set: question_sets/nextjs.yaml
+  lexicon_aliases:
+  - alias: Next
+  - alias: Next.js
+  - alias: Vercel
+  - alias: app router
+  - alias: server components
+  - alias: the website
+    quoted_in_source: true
+    context: in a React context
+  stack_doc_aliases:
+  - the website
+  - the site
+  - the frontend
+  - the web app
+  - pages
+  - a page for X
+  - landing page
+  - the homepage
+  - the backend (see disambiguation)
+  - the API
+  - an endpoint
+  - server stuff
+  - load the data
+  - show the data
+  - form
+  - submit the form
+  - save it
+  - make it fast
+  - loading spinner
+  - SEO
+  - show up on Google
+  - images are slow
+  - the fonts
+  - protect the page
+  - only logged-in people
+  - dark mode
+  - deploy it
+  - put it online
+  - Vercel
+- key: rust
+  source_value: rust
+  canonical_label: Rust
+  status: drafted
+  markers:
+    registry_text: Cargo.toml, Cargo.lock, src/main.rs or src/lib.rs, rust-toolchain.toml
+    stack_doc_text: Cargo.toml, Cargo.lock, src/main.rs or src/lib.rs, rust-toolchain.toml.
+  document:
+    title_in_registry: Stack — Rust
+    doc_id: 1BKu8dBkX0smpvmsFgrK18Xvl49YhGYwaiYh2d9Ykl_A
+    question_set: question_sets/rust.yaml
+  lexicon_aliases:
+  - alias: Rust
+  - alias: cargo
+  - alias: crate
+  - alias: the borrow checker
+  - alias: tokio
+  - alias: the engine
+    quoted_in_source: true
+    review: 'flagged for Jesse: confirm this is user phrasing (it collides with banned/engine vocabulary)'
+  - alias: the core
+    quoted_in_source: true
+    review: 'flagged for Jesse: confirm this is user phrasing (it collides with banned/engine vocabulary)'
+  - alias: memory safe
+    quoted_in_source: true
+  stack_doc_aliases:
+  - Rust
+  - cargo
+  - crate
+  - the engine
+  - the core
+  - the binary
+  - the CLI
+  - the server
+  - memory safe
+  - make it fast
+  - no garbage collector
+  - it won't compile
+  - the borrow checker yelled at me
+  - lifetime error
+  - unwrap everywhere
+  - async
+  - tokio
+  - the trait thing
+- key: go
+  source_value: go
+  canonical_label: Go
+  status: drafted
+  markers:
+    registry_text: go.mod, go.sum
+    stack_doc_text: go.mod, go.sum.
+  document:
+    title_in_registry: Stack — Go
+    doc_id: 14iXVT2t-pO_S9cVPOSt_OTRK1o9kDDeAN7Db_7UNohI
+    question_set: question_sets/go.yaml
+  lexicon_aliases:
+  - alias: Go
+  - alias: Golang
+  - alias: goroutine
+  - alias: go mod
+  - alias: the service
+    quoted_in_source: true
+  stack_doc_aliases:
+  - Go
+  - Golang
+  - gopher
+  - the service
+  - the microservice
+  - the API server
+  - the backend (in a Go context)
+  - the CLI tool
+  - goroutines
+  - make it concurrent
+  - single binary
+  - one file to deploy
+  - fast startup
+  - small container
+  - the worker
+  - the queue consumer
+- key: react
+  source_value: react
+  canonical_label: React (without a meta-framework)
+  status: drafted
+  markers:
+    registry_text: react in package.json without next, vite.config.* or similar
+    stack_doc_text: react in package.json without a meta-framework dependency; vite.config.* or an equivalent build tool.
+  document:
+    title_in_registry: Stack — React
+    doc_id: 1dqcX24VooJY4CcZGhwL3E6WniRQ4fCpI2QHeDKPhWKs
+    question_set: question_sets/react.yaml
+  lexicon_aliases:
+  - alias: React
+  - alias: components
+  - alias: hooks
+  - alias: JSX
+  - alias: Vite
+  - alias: the UI
+    quoted_in_source: true
+  stack_doc_aliases:
+  - the UI
+  - the frontend
+  - the interface
+  - components
+  - make it interactive
+  - when they click
+  - a button that does X
+  - a dropdown
+  - a modal
+  - a popup
+  - a form
+  - the state
+  - it's not updating
+  - it updates twice
+  - it re-renders too much
+  - it's slow when I type
+  - infinite loop
+  - the page flickers
+  - the list is slow
+  - Vite
+  - a dashboard
+  - a widget
+  - dark mode toggle
+- key: typescript
+  source_value: typescript
+  canonical_label: TypeScript
+  status: drafted
+  markers:
+    registry_text: tsconfig.json
+    stack_doc_text: tsconfig.json (also .ts/.tsx sources without a build config).
+  document:
+    title_in_registry: Stack — TypeScript
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    question_set: question_sets/typescript.yaml
+  composable: true
+  lexicon_aliases:
+  - alias: TypeScript
+  - alias: TS
+  - alias: types
+  - alias: tsconfig
+  - alias: add types
+    quoted_in_source: true
+  stack_doc_aliases:
+  - TypeScript
+  - TS
+  - add types
+  - type it
+  - make it type safe
+  - the types
+  - type error
+  - red squiggles
+  - it says undefined
+  - it might be null
+  - any
+  - the interface
+  - the shape of the data
+  - the JSON shape
+  - tsconfig
+  - strict mode
+  - it compiles but crashes
+  - cast it
+  - make it stop complaining
+  - generics
+  - the d.ts file
+- key: vanilla_js
+  source_value: vanilla-js
+  canonical_label: JavaScript (no framework)
+  status: drafted
+  markers:
+    registry_text: package.json or plain .js/.html with no framework dependency
+    stack_doc_text: .js or .mjs sources and .html files with no framework dependency in package.json; package.json alone when no framework is declared.
+  document:
+    title_in_registry: Stack — JavaScript (vanilla)
+    doc_id: 1CQgolRDG7QcwMBd-af5HCua7sPDIhAaVEgxKqzgJjGU
+    question_set: question_sets/vanilla_js.yaml
+  lexicon_aliases:
+  - alias: plain JavaScript
+  - alias: no framework
+  - alias: just JS
+    quoted_in_source: true
+  - alias: script tag
+  stack_doc_aliases:
+  - just JavaScript
+  - plain JS
+  - no framework
+  - a script
+  - a script tag
+  - a little interactive thing
+  - when they click the button
+  - the button doesn't work
+  - nothing happens when I click
+  - the page reloads when I submit
+  - it says undefined is not a function
+  - this is undefined
+  - the console
+  - a Node script
+  - a quick script to do X
+  - a bookmarklet
+  - it works on my computer but not on my phone
+  - make it work in Safari
+  - the date is wrong
+  - the number is off by a little
+- key: c
+  source_value: c
+  canonical_label: C
+  status: drafted
+  markers:
+    registry_text: Makefile or CMakeLists.txt with .c sources
+  document: null
+  lexicon_aliases:
+  - alias: C
+  - alias: gcc
+  - alias: clang
+  - alias: low level
+    quoted_in_source: true
+  - alias: embedded
+- key: cpp
+  source_value: cpp
+  canonical_label: C++
+  status: drafted
+  markers:
+    registry_text: CMakeLists.txt with .cpp/.cc/.hpp sources
+  document: null
+  lexicon_aliases:
+  - alias: C++
+  - alias: CMake
+  - alias: STL
+  - alias: the game engine
+    quoted_in_source: true
+- key: python
+  source_value: python
+  canonical_label: Python
+  status: drafted
+  markers:
+    registry_text: pyproject.toml, requirements.txt, setup.py
+  document: null
+  lexicon_aliases:
+  - alias: Python
+  - alias: pip
+  - alias: script
+  - alias: notebook
+  - alias: Flask
+  - alias: FastAPI
+  - alias: Django
+- key: pytorch_lightning
+  source_value: pytorch-lightning
+  canonical_label: PyTorch Lightning
+  status: drafted
+  markers:
+    registry_text: lightning or pytorch-lightning in dependencies; LightningModule subclasses
+  document: null
+  lexicon_aliases:
+  - alias: Lightning
+  - alias: PyTorch Lightning
+  - alias: LightningModule
+  - alias: Trainer
+  - alias: train the model
+    quoted_in_source: true
+- key: java
+  source_value: java
+  canonical_label: Java
+  status: drafted
+  markers:
+    registry_text: pom.xml, build.gradle, build.gradle.kts
+  document: null
+  lexicon_aliases:
+  - alias: Java
+  - alias: Spring
+  - alias: Maven
+  - alias: Gradle
+  - alias: JVM
+- key: php
+  source_value: php
+  canonical_label: PHP
+  status: drafted
+  markers:
+    registry_text: composer.json, composer.lock, *.php
+  document: null
+  lexicon_aliases:
+  - alias: PHP
+  - alias: Composer
+  - alias: Laravel
+  - alias: Symfony
+  - alias: Blade
+  - alias: WordPress
+- key: sql
+  source_value: sql
+  canonical_label: SQL
+  status: drafted
+  markers:
+    registry_text: '*.sql files, migrations/ directory, a database URL in configuration'
+  document: null
+  lexicon_aliases:
+  - alias: SQL
+  - alias: the database
+  - alias: queries
+  - alias: tables
+  - alias: joins
+  - alias: Postgres
+  - alias: SQLite
+  - alias: MySQL
+- key: drizzle
+  source_value: drizzle
+  canonical_label: Drizzle ORM (TypeScript)
+  status: drafted
+  markers:
+    registry_text: drizzle-orm in package.json, drizzle.config.*
+  document: null
+  lexicon_aliases:
+  - alias: Drizzle
+  - alias: drizzle-orm
+  - alias: schema.ts
+  - alias: the ORM
+    quoted_in_source: true
+    context: in a TypeScript project
+- key: prisma
+  source_value: prisma
+  canonical_label: Prisma ORM (TypeScript)
+  status: drafted
+  markers:
+    registry_text: prisma in package.json, schema.prisma
+  document: null
+  lexicon_aliases:
+  - alias: Prisma
+  - alias: schema.prisma
+  - alias: Prisma Client
+  - alias: migrations
+- key: ruby
+  source_value: ruby
+  canonical_label: Ruby
+  status: drafted
+  markers:
+    registry_text: Gemfile, Gemfile.lock, *.rb, config.ru
+  document: null
+  lexicon_aliases:
+  - alias: Ruby
+  - alias: Rails
+  - alias: gem
+  - alias: bundler
+  - alias: rake
+- key: specta
+  source_value: specta
+  canonical_label: Specta (Rust → TypeScript contract)
+  status: contract tool
+  markers:
+    registry_text: specta or tauri-specta in Cargo.toml; generated bindings file
+  document:
+    title_in_registry: Stack — TypeScript, section 0
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    question_set: question_sets/typescript.yaml
+    section: 0. Composition rule
+  lexicon_aliases:
+  - alias: Specta
+  - alias: tauri-specta
+  - alias: rspc
+  - alias: generated bindings from Rust
+- key: schemars
+  source_value: schemars
+  canonical_label: schemars (Rust → JSON Schema contract)
+  status: contract tool
+  markers:
+    registry_text: schemars in Cargo.toml; JsonSchema derives
+  document:
+    title_in_registry: Stack — TypeScript, section 0
+    doc_id: 1WiHxZ88HnGgmmAsKlU2E267COed5G7Lwk_99JX91JIQ
+    question_set: question_sets/typescript.yaml
+    section: 0. Composition rule
+  lexicon_aliases:
+  - alias: schemars
+  - alias: JsonSchema derive
+  - alias: JSON Schema from Rust types

@@ -1,0 +1,34 @@
+schema_version: 1
+sync:
+  project_mode: isolated
+  project_id: swag
+  swag_shared_profile: default_rollout
+  shared_with_projects: []
+  parallel_rrflow: true
+  configurable_runtime: true
+  hosting_mode: self_hosted
+  decision_sources:
+    - swebok_core
+    - ai_decision_proven_practices
+    - cloudflare_decisions
+    - jev_decisions
+    - rrflow_contract_alignment
+  project_overrides:
+    global_defaults: true
+    per_project_override: true
+    allow_shared_projection: true
+  research_freshness_policy:
+    review_interval_days: 90
+    require_next_review_due: true
+    fail_on_stale_feeds: true
+  mcp:
+    enabled: true
+    transport: stdio
+    servers:
+      - rrflow
+      - filesystem
+  notes: >
+    SWAG is configured for isolated RRFlow mode by default while remaining
+    self-hostable, configurable, and capable of parallel RRFlow coordination.
+    Flip project_mode to shared when this repository should consume a broader
+    shared decision baseline across multiple projects.

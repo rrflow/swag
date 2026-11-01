@@ -1,0 +1,17 @@
+{
+  "7b": {
+    "train_loss": 0.0,
+    "mean_token_accuracy": 0.0,
+    "runtime_seconds": 0.0
+  },
+  "14b": {
+    "train_loss": 0.0,
+    "mean_token_accuracy": 0.0,
+    "runtime_seconds": 0.0
+  },
+  "27-28b": {
+    "train_loss": 0.0,
+    "mean_token_accuracy": 0.0,
+    "runtime_seconds": 0.0
+  }
+}

@@ -1,0 +1,1340 @@
+# GENERATED from boundaries/reference/domain_boundaries_v0_1.md (verbatim export of text pasted in chat 2026-09-30; no Google Doc id).
+# Derived config, owner hades. Domain keys approved 2026-09-30; queued-boundary keys are PROPOSED (see boundaries/naming_review.md).
+schema_version: 1
+question_set:
+  key: domains
+  kind: domain
+  fires_on: 'each domain boundary the lexicon resolves (per Stack Category Routing v0.2: domain(detected boundaries))'
+source:
+  doc_id: null
+  origin: pasted in chat 2026-09-30 (parent transcript [t72u])
+  title: Domain Boundaries — user, admin, chat, AI (Draft v0.1)
+  version: v0.1
+  status: Draft
+  owner: hades
+  date: '2026-09-30'
+  export_date: '2026-09-30'
+  parent_doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+  reference_export: boundaries/reference/domain_boundaries_v0_1.md
+key_rules:
+  domain_keys: approved by Jesse 2026-09-30 (source labels kept as source_label)
+  queued_boundary_keys: authored in v0.2 expansion, 2026-10-19
+maturity_gating:
+  specified_in_source: false
+  source_text: null
+domains:
+- key: iam
+  source_label: user
+  source_number: 1
+  canonical_label: Identity and Access Management (IAM)
+  source_heading: 1. user → Identity and Access Management (IAM)
+  aliases:
+  - users
+  - user accounts
+  - accounts
+  - login
+  - log in
+  - sign in
+  - sign up
+  - register
+  - create an account
+  - profiles
+  - forgot password
+  - reset password
+  - remember me
+  - Google login
+  - log in with X
+  - who's logged in
+  - keep them logged in
+  - verify their email
+  disambiguation: '"users" in an analytics sentence (how many users, active users) is reporting, not IAM. "admin user" routes to boundary 2 for the privilege model and here for the credential. "user settings" splits: credential and session settings here, preferences to the product surface.'
+  sources_text: NIST SP 800-63-4 Digital Identity Guidelines, final July 2025 — 63A Identity Proofing and Enrollment, 63B Authentication and Authenticator Management, 63C Federation and Assertions; assurance levels IAL, AAL, FAL. OWASP ASVS 5.0.0 (May 2025) — V6 Authentication, V7 Session Management, V8 Authorization, V9 Self-contained Tokens, V10 OAuth and OIDC, V14 Data Protection, V16 Security Logging and Error Handling. NIST SP 800-53 Rev 5 — AC-2 Account Management, AC-7 Unsuccessful Logon Attempts, AC-12 Session Termination. CS2023 SEC; SE2014 SEC.
+  concept_map:
+  - subject
+  - identity proofing
+  - enrollment
+  - credential service provider
+  - authenticator
+  - authenticator assurance level
+  - memorized secret
+  - multi-factor
+  - phishing-resistant authenticator
+  - syncable authenticator (passkey)
+  - session
+  - session token
+  - re-authentication
+  - federation
+  - assertion
+  - relying party
+  - authorization
+  - role
+  - permission
+  - account lifecycle
+  disambiguation_boundary_refs:
+  - privileged_access_management
+  questions:
+  - id: domains.iam.01
+    section: iam
+    section_ordinal: 1
+    text: Are identity (who the subject is), authentication (proving it), and authorization (what they may do) separated in the design?
+    citation: Digital identity model (800-63-4); ASVS V6, V8
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.02
+    section: iam
+    section_ordinal: 2
+    text: Is the authenticator type and its assurance level (AAL) chosen deliberately and documented?
+    citation: Authenticator assurance level (800-63B-4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.03
+    section: iam
+    section_ordinal: 3
+    text: Are memorized secrets stored with an approved hashing method and checked against known-compromised lists?
+    citation: Password security (ASVS V6.2; 800-63B-4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.04
+    section: iam
+    section_ordinal: 4
+    text: Is multi-factor or phishing-resistant authentication available where the risk requires it?
+    citation: Multi-factor authentication (800-63B-4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.05
+    section: iam
+    section_ordinal: 5
+    text: Are syncable authenticators (passkeys) supported or explicitly deferred with a reason?
+    citation: Syncable authenticators (800-63B-4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.06
+    section: iam
+    section_ordinal: 6
+    text: Is a new session token generated on authentication, with sufficient entropy?
+    citation: Session token lifecycle (ASVS V7.2)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.07
+    section: iam
+    section_ordinal: 7
+    text: Are sessions invalidated on logout and bounded by idle and absolute timeouts?
+    citation: Session logout and timeout (ASVS V7.3; AC-12)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.08
+    section: iam
+    section_ordinal: 8
+    text: Are cookie-based sessions set Secure, HttpOnly, and SameSite?
+    citation: Cookie-based session management (ASVS V7.4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.09
+    section: iam
+    section_ordinal: 9
+    text: Is re-authentication required before sensitive account changes (email, password, authenticator)?
+    citation: Re-authentication (ASVS V6, V7)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.10
+    section: iam
+    section_ordinal: 10
+    text: Are unsuccessful login attempts limited and monitored?
+    citation: Unsuccessful logon attempts (AC-7; ASVS V6)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.11
+    section: iam
+    section_ordinal: 11
+    text: Is account recovery treated as an authentication event with its own assurance, not a bypass?
+    citation: Account recovery (800-63B-4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.12
+    section: iam
+    section_ordinal: 12
+    text: Is the account lifecycle defined — creation, disable, removal, inactivity?
+    citation: Account management (AC-2)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.13
+    section: iam
+    section_ordinal: 13
+    text: If federated login is used, are assertions validated and the FAL documented?
+    citation: Federation and assertions (800-63C-4; ASVS V10)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.14
+    section: iam
+    section_ordinal: 14
+    text: Are self-contained tokens validated for signature, issuer, audience, and expiry?
+    citation: Self-contained tokens (ASVS V9)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.15
+    section: iam
+    section_ordinal: 15
+    text: Is authorization enforced server-side at function, data, and field level?
+    citation: Authorization (ASVS V8)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.16
+    section: iam
+    section_ordinal: 16
+    text: Are changes to the values authorization decisions depend on applied immediately?
+    citation: Authorization (ASVS V8)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.17
+    section: iam
+    section_ordinal: 17
+    text: Is personal data in identity records minimized and its retention defined?
+    citation: Data protection (ASVS V14; 800-63-4 privacy considerations)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+  - id: domains.iam.18
+    section: iam
+    section_ordinal: 18
+    text: Are authentication and authorization failures logged as security events?
+    citation: Security logging (ASVS V16)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 1. user → Identity and Access Management (IAM)
+- key: privileged_access_management
+  source_label: admin
+  source_number: 2
+  canonical_label: Privileged Access and Administration
+  source_heading: 2. admin → Privileged Access and Administration
+  aliases:
+  - admin
+  - admin panel
+  - admin dashboard
+  - control panel
+  - back office
+  - backend for me
+  - manage users
+  - super user
+  - god mode
+  - owner account
+  - staff view
+  - the place where I change stuff
+  - settings for the whole app
+  - moderation
+  - ban a user
+  - impersonate
+  - log in as
+  disambiguation: '"dashboard" alone is a product surface, not administration, unless it manages other users or system configuration. "backend" alone is ambiguous — server code, API, or admin UI; ask. "settings" for one user is boundary 1 or product; for the whole system it is here.'
+  sources_text: NIST SP 800-53 Rev 5 — AC-2 Account Management (AC-2(7) Privileged User Accounts, AC-2(9) Restrictions on Shared and Group Accounts), AC-3 Access Enforcement (AC-3(2) Dual Authorization, AC-3(7) Role-Based Access Control, AC-3(8) Revocation, AC-3(10) Audited Override, AC-3(13) Attribute-Based Access Control), AC-5 Separation of Duties, AC-6 Least Privilege (AC-6(2), AC-6(7) Review of User Privileges, AC-6(9) Log Use of Privileged Functions), AU Audit and Accountability family, CM Configuration Management family. OWASP ASVS 5.0.0 — V8 Authorization (administrative interfaces, multi-tenant), V13 Configuration, V16 Security Logging and Error Handling, V2 Validation and Business Logic. ANSI INCITS 359 Role Based Access Control.
+  concept_map:
+  - privileged account
+  - role
+  - permission
+  - role-based access control
+  - attribute-based access control
+  - separation of duties
+  - least privilege
+  - dual authorization
+  - break-glass
+  - audited override
+  - audit record
+  - audit trail protection
+  - privilege review
+  - revocation
+  - tenant isolation
+  - configuration item
+  - controlled change
+  - impersonation
+  disambiguation_boundary_refs:
+  - iam
+  questions:
+  - id: domains.privileged_access_management.01
+    section: privileged_access_management
+    section_ordinal: 1
+    text: Is the administrative surface separated from the end-user surface (route, deployment, or process)?
+    citation: Administrative interfaces (ASVS V8)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.02
+    section: privileged_access_management
+    section_ordinal: 2
+    text: Are administrative roles defined explicitly with non-overlapping duties?
+    citation: Role-based access control; separation of duties (AC-3(7), AC-5; INCITS 359)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.03
+    section: privileged_access_management
+    section_ordinal: 3
+    text: Does each administrative role hold only the functions it needs?
+    citation: Least privilege (AC-6)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.04
+    section: privileged_access_management
+    section_ordinal: 4
+    text: Are privileged accounts distinct from the same person's ordinary account?
+    citation: Privileged user accounts (AC-2(7), AC-6(2))
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.05
+    section: privileged_access_management
+    section_ordinal: 5
+    text: Is every privileged action audit-logged with actor, target, time, and outcome?
+    citation: Log use of privileged functions (AC-6(9); AU)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.06
+    section: privileged_access_management
+    section_ordinal: 6
+    text: Are audit records protected from modification by the administrators they record?
+    citation: Audit protection (AU; ASVS V16)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.07
+    section: privileged_access_management
+    section_ordinal: 7
+    text: Do destructive or irreversible administrative actions require confirmation or a second approver?
+    citation: Dual authorization (AC-3(2))
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.08
+    section: privileged_access_management
+    section_ordinal: 8
+    text: Is there an audited break-glass or override path rather than an undocumented one?
+    citation: Audited override (AC-3(10))
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.09
+    section: privileged_access_management
+    section_ordinal: 9
+    text: Are privileges reviewed periodically and is revocation applied immediately?
+    citation: Review of user privileges; revocation (AC-6(7), AC-3(8); ASVS V8)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.10
+    section: privileged_access_management
+    section_ordinal: 10
+    text: Are shared or group administrative accounts prohibited?
+    citation: Shared and group accounts (AC-2(9))
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.11
+    section: privileged_access_management
+    section_ordinal: 11
+    text: In a multi-tenant system, is tenant isolation enforced on every administrative query?
+    citation: Multi-tenant authorization (ASVS V8)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.12
+    section: privileged_access_management
+    section_ordinal: 12
+    text: Is system configuration changed through a controlled, versioned path rather than live edits?
+    citation: Configuration management (CM; ASVS V13)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.13
+    section: privileged_access_management
+    section_ordinal: 13
+    text: Is impersonation ("log in as user") logged, consented where required, and time-bounded?
+    citation: Privileged functions logging (AC-6(9); AU)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.14
+    section: privileged_access_management
+    section_ordinal: 14
+    text: Are administrative sessions shorter-lived and re-authenticated for sensitive functions?
+    citation: Session termination; re-authentication (AC-12; ASVS V7)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.15
+    section: privileged_access_management
+    section_ordinal: 15
+    text: Do bulk operations carry scope and rate limits?
+    citation: Business logic (ASVS V2)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+  - id: domains.privileged_access_management.16
+    section: privileged_access_management
+    section_ordinal: 16
+    text: Is content moderation separated from account administration as a distinct role?
+    citation: Separation of duties (AC-5)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 2. admin → Privileged Access and Administration
+- key: realtime_messaging
+  source_label: chat
+  source_number: 3
+  canonical_label: Real-time Messaging
+  source_heading: 3. chat → Real-time Messaging
+  aliases:
+  - chat
+  - messaging
+  - messages
+  - DMs
+  - inbox
+  - let users talk to each other
+  - live chat
+  - group chat
+  - channels
+  - rooms
+  - threads
+  - replies
+  - comments in real time
+  - typing dots
+  - online status
+  - read receipts
+  - notifications when someone replies
+  disambiguation: '"chat" combined with AI, bot, assistant, or "ask it" routes to boundary 4 with a conversational UI; this boundary is human-to-human messaging. "comments" without real-time expectation is a content feature, not messaging. "notifications" alone is its own boundary (queued for a later document).'
+  sources_text: 'CS2023 Parallel and Distributed Computing (PDC) — message-passing and shared-memory models, atomicity, consensus, conditional waiting, replicated state, fault tolerance; CS2023 Networking and Communication (NC) — reliable delivery protocols; CS2023 Data Management (DM). SWEBOK Software Design key issues — concurrency, distribution of components, data persistence, control and handling of events. OWASP ASVS 5.0.0 — V4 API and Web Service (V4.4 WebSocket), V17 WebRTC, V1 Encoding and Sanitization, V5 File Handling, V11 Cryptography. Reference protocols: WebSocket (RFC 6455), XMPP (RFC 6120, 6121), Matrix specification.'
+  concept_map:
+  - message-passing
+  - delivery guarantee (at-most-once, at-least-once, effectively-once)
+  - idempotency key
+  - ordering (sequence number, logical clock, causal order)
+  - acknowledgement
+  - durability
+  - replicated state
+  - presence
+  - ephemeral state
+  - transport (WebSocket, server-sent events, long polling)
+  - reconnect and resume cursor
+  - backpressure
+  - fan-out
+  - retention
+  - moderation
+  - end-to-end encryption
+  disambiguation_boundary_refs:
+  - llm_application
+  questions:
+  - id: domains.realtime_messaging.01
+    section: realtime_messaging
+    section_ordinal: 1
+    text: Is the delivery guarantee (at-most-once, at-least-once, effectively-once) chosen and documented?
+    citation: Reliable delivery (CS2023 NC, PDC)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.02
+    section: realtime_messaging
+    section_ordinal: 2
+    text: Does every message carry a client-generated idempotency key so retries do not duplicate?
+    citation: Idempotence under at-least-once delivery (PDC)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.03
+    section: realtime_messaging
+    section_ordinal: 3
+    text: Is ordering within a conversation defined (sequence number or logical clock) and enforced on display?
+    citation: Ordering; causal order (PDC)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.04
+    section: realtime_messaging
+    section_ordinal: 4
+    text: Is a message durably persisted before it is acknowledged to the sender?
+    citation: Atomicity; data persistence (PDC; SWEBOK)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.05
+    section: realtime_messaging
+    section_ordinal: 5
+    text: Is the transport chosen deliberately (WebSocket, SSE, polling) with reconnect and resume from a last-seen cursor?
+    citation: Reliable delivery; fault tolerance (NC, PDC)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.06
+    section: realtime_messaging
+    section_ordinal: 6
+    text: Is the WebSocket connection authenticated, with the token re-validated on reconnect?
+    citation: WebSocket authentication (ASVS V4.4)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.07
+    section: realtime_messaging
+    section_ordinal: 7
+    text: Is authorization checked per message and per channel membership, not only at connect?
+    citation: Authorization (ASVS V8)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.08
+    section: realtime_messaging
+    section_ordinal: 8
+    text: Is presence (online, typing) modelled as ephemeral state separate from durable messages?
+    citation: Replicated state (PDC)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.09
+    section: realtime_messaging
+    section_ordinal: 9
+    text: Is backpressure or rate limiting applied per connection and per user?
+    citation: Business logic limits (ASVS V2)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.10
+    section: realtime_messaging
+    section_ordinal: 10
+    text: Is fan-out to group members bounded and asynchronous?
+    citation: Distribution of components (SWEBOK)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.11
+    section: realtime_messaging
+    section_ordinal: 11
+    text: Are retention, deletion, and "delete for everyone" semantics defined?
+    citation: Data persistence (SWEBOK; DM)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.12
+    section: realtime_messaging
+    section_ordinal: 12
+    text: Are attachments handled through the file-handling boundary rather than inline in the message model?
+    citation: File handling (ASVS V5)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.13
+    section: realtime_messaging
+    section_ordinal: 13
+    text: Is message content sanitized before rendering?
+    citation: Encoding and sanitization (ASVS V1)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.14
+    section: realtime_messaging
+    section_ordinal: 14
+    text: Is there a report and moderation path with an audit record?
+    citation: Audit and accountability (AU; boundary 2)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+    cross_boundary_refs:
+    - privileged_access_management
+  - id: domains.realtime_messaging.15
+    section: realtime_messaging
+    section_ordinal: 15
+    text: If end-to-end encryption is claimed, is the key model documented and the server unable to read content?
+    citation: Cryptography (ASVS V11)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.16
+    section: realtime_messaging
+    section_ordinal: 16
+    text: Are offline delivery (queue while disconnected) and read-receipt semantics defined?
+    citation: Fault tolerance (PDC)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+  - id: domains.realtime_messaging.17
+    section: realtime_messaging
+    section_ordinal: 17
+    text: Is the conversation model (one-to-one, group, channel, thread) chosen once and named canonically?
+    citation: Data modelling (CS2023 DM)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 3. chat → Real-time Messaging
+- key: llm_application
+  source_label: AI
+  source_number: 4
+  canonical_label: LLM Integration Layer
+  source_heading: 4. AI → LLM Integration Layer
+  aliases:
+  - AI
+  - the AI
+  - the bot
+  - assistant
+  - add ChatGPT
+  - add Claude
+  - make it smart
+  - AI feature
+  - ask the AI
+  - generate with AI
+  - summarize this
+  - auto-write
+  - autocomplete
+  - agent
+  - let it do things for me
+  - RAG
+  - chat with my docs
+  - train it on my data
+  disambiguation: '"train it on my data" almost always means retrieval over the operator''s documents, not fine-tuning — resolve to retrieval unless fine-tuning is explicitly justified (question 18). "chat" here is a conversational UI over the model, not boundary 3. "agent" means tool-calling with autonomy and pulls in the agency questions.'
+  sources_text: OWASP Top 10 for LLM Applications 2025 — LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM03 Supply Chain, LLM04 Data and Model Poisoning, LLM05 Improper Output Handling, LLM06 Excessive Agency, LLM07 System Prompt Leakage, LLM08 Vector and Embedding Weaknesses, LLM09 Misinformation, LLM10 Unbounded Consumption. NIST AI RMF 1.0 — Govern, Map, Measure, Manage; NIST AI 600-1 Generative AI Profile. ISO/IEC 42001:2023 AI management system. CS2023 Artificial Intelligence (AI) knowledge area. SWEBOK Software Design — separation of interface and implementation (for the provider adapter).
+  concept_map:
+  - model provider
+  - adapter/gateway
+  - system prompt
+  - prompt template and version
+  - context assembly
+  - untrusted content
+  - retrieval (RAG)
+  - embedding
+  - vector store
+  - tool calling
+  - agency
+  - human-in-the-loop
+  - output handling
+  - guardrail
+  - evaluation set
+  - regression
+  - observability trace
+  - token accounting
+  - budget
+  - data provenance
+  - fine-tuning
+  disambiguation_boundary_refs:
+  - realtime_messaging
+  questions:
+  - id: domains.llm_application.01
+    section: llm_application
+    section_ordinal: 1
+    text: Is the model provider behind an adapter so the provider or model can change without touching callers?
+    citation: Separation of interface and implementation (SWEBOK); Supply chain (LLM03)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.02
+    section: llm_application
+    section_ordinal: 2
+    text: Is untrusted content (user input, retrieved documents, tool output) kept distinct from instructions when the prompt is assembled?
+    citation: Prompt injection, direct and indirect (LLM01)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.03
+    section: llm_application
+    section_ordinal: 3
+    text: Is model output treated as untrusted data before it is rendered, executed, or stored?
+    citation: Improper output handling (LLM05)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.04
+    section: llm_application
+    section_ordinal: 4
+    text: Is the system prompt free of secrets and not relied on as a security control?
+    citation: System prompt leakage (LLM07)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.05
+    section: llm_application
+    section_ordinal: 5
+    text: Are the tools the model can call minimal in functionality, permission, and autonomy?
+    citation: Excessive agency (LLM06)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.06
+    section: llm_application
+    section_ordinal: 6
+    text: Do consequential actions require human confirmation before execution?
+    citation: Excessive agency (LLM06); Manage (AI RMF)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.07
+    section: llm_application
+    section_ordinal: 7
+    text: Is sensitive data filtered before it enters the prompt and before output is returned?
+    citation: Sensitive information disclosure (LLM02)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.08
+    section: llm_application
+    section_ordinal: 8
+    text: Are retrieval sources access-controlled so a user cannot retrieve documents they may not read?
+    citation: Vector and embedding weaknesses (LLM08)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.09
+    section: llm_application
+    section_ordinal: 9
+    text: Are token, request, and cost budgets enforced per user and per tenant?
+    citation: Unbounded consumption (LLM10)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.10
+    section: llm_application
+    section_ordinal: 10
+    text: Are prompts versioned and tested against an evaluation set before release?
+    citation: Measure (AI RMF)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.11
+    section: llm_application
+    section_ordinal: 11
+    text: Is there a regression harness with defined quality metrics?
+    citation: Measure (AI RMF)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.12
+    section: llm_application
+    section_ordinal: 12
+    text: Are model, provider, and prompt version recorded per request?
+    citation: Govern; traceability (AI RMF; ISO/IEC 42001)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.13
+    section: llm_application
+    section_ordinal: 13
+    text: Is there a fallback or degraded mode when the provider fails or times out?
+    citation: Fault tolerance (SWEBOK)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.14
+    section: llm_application
+    section_ordinal: 14
+    text: Is training or fine-tuning data provenance recorded and separated from user data?
+    citation: Data and model poisoning (LLM04)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.15
+    section: llm_application
+    section_ordinal: 15
+    text: Is AI-generated output labelled where required, with known limitations disclosed?
+    citation: Misinformation (LLM09); Map (AI RMF)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.16
+    section: llm_application
+    section_ordinal: 16
+    text: Are third-party models, plugins, and embedding models pinned and verified?
+    citation: Supply chain (LLM03)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.17
+    section: llm_application
+    section_ordinal: 17
+    text: Are retention and secondary use of prompts and completions defined and disclosed?
+    citation: Data governance (ISO/IEC 42001)
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+  - id: domains.llm_application.18
+    section: llm_application
+    section_ordinal: 18
+    text: Does "train it on my data" resolve to retrieval unless fine-tuning is explicitly justified?
+    citation: Lexicon disambiguation rule
+    source:
+      reference_export: boundaries/reference/domain_boundaries_v0_1.md
+      section: 4. AI → LLM Integration Layer
+- key: billing_and_payments
+  source_label: billing and payments
+  canonical_label: Billing and Payments
+  source_heading: 5. Billing and Payments
+  aliases:
+  - billing
+  - payments
+  - invoices
+  - subscriptions
+  - plans
+  - checkout
+  - charge
+  - refund
+  - proration
+  disambiguation: '"plan" in onboarding copy is onboarding, not billing. "limit exceeded" may involve billing and IAM entitlements.'
+  sources_text: PCI DSS 4.0; OWASP ASVS 5.0 V2/V14; accounting and auditability practices.
+  concept_map:
+  - customer
+  - account
+  - subscription
+  - entitlement
+  - invoice
+  - ledger
+  - payment intent
+  - settlement
+  - refund
+  - dispute
+  questions:
+  - id: domains.billing_and_payments.01
+    section: billing_and_payments
+    section_ordinal: 1
+    text: Are pricing, billing events, and entitlements separated so invoice state cannot directly grant access without entitlement checks?
+    citation: Separation of financial state and authorization state
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.02
+    section: billing_and_payments
+    section_ordinal: 2
+    text: Is cardholder data handled only by compliant providers, with no raw PAN storage in application systems?
+    citation: PCI DSS scope minimization
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.03
+    section: billing_and_payments
+    section_ordinal: 3
+    text: Are webhook events verified for authenticity, replay-protected, and processed idempotently?
+    citation: Payment webhook integrity
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.04
+    section: billing_and_payments
+    section_ordinal: 4
+    text: Are currency, tax, and rounding rules explicit and tested for all supported regions?
+    citation: Financial correctness controls
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.05
+    section: billing_and_payments
+    section_ordinal: 5
+    text: Are refunds, credits, and charge reversals represented as immutable ledger events rather than destructive updates?
+    citation: Auditability and non-repudiation
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.06
+    section: billing_and_payments
+    section_ordinal: 6
+    text: Is proration logic deterministic and documented for mid-cycle plan changes?
+    citation: Subscription lifecycle consistency
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.07
+    section: billing_and_payments
+    section_ordinal: 7
+    text: Are failed payment retries bounded with escalation paths before service suspension?
+    citation: Fault tolerance and customer safety
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+  - id: domains.billing_and_payments.08
+    section: billing_and_payments
+    section_ordinal: 8
+    text: Are billing and entitlement changes fully traceable with actor, timestamp, and reason codes?
+    citation: Financial audit trail
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 5. Billing and Payments }
+- key: notifications
+  source_label: notifications
+  canonical_label: Notifications
+  source_heading: 6. Notifications
+  aliases:
+  - notifications
+  - email
+  - sms
+  - push
+  - webhook
+  - alert
+  - digest
+  - unsubscribe
+  - opt out
+  disambiguation: '"chat message" is realtime messaging; notifications are delivery of events to recipients over channels.'
+  sources_text: RFC 5322/SMTP operational practice; APNS/FCM provider guidance; privacy and consent controls.
+  concept_map:
+  - recipient
+  - channel
+  - template
+  - preference
+  - consent
+  - delivery attempt
+  - retry policy
+  - suppression list
+  questions:
+  - id: domains.notifications.01
+    section: notifications
+    section_ordinal: 1
+    text: Are notification events decoupled from channel delivery so domain workflows do not block on provider availability?
+    citation: Asynchronous delivery architecture
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.02
+    section: notifications
+    section_ordinal: 2
+    text: Are user preferences and legal consent enforced before every send?
+    citation: Consent and preference enforcement
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.03
+    section: notifications
+    section_ordinal: 3
+    text: Are templates versioned and rendered with strict variable validation to prevent broken or unsafe output?
+    citation: Template integrity
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.04
+    section: notifications
+    section_ordinal: 4
+    text: Are retries bounded with exponential backoff and dead-letter handling for permanent failures?
+    citation: Reliable messaging patterns
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.05
+    section: notifications
+    section_ordinal: 5
+    text: Are idempotency keys used to prevent duplicate sends across retries and replays?
+    citation: Delivery idempotence
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.06
+    section: notifications
+    section_ordinal: 6
+    text: Are unsubscribe and suppression mechanisms enforced consistently across all channels?
+    citation: Anti-abuse and compliance controls
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.07
+    section: notifications
+    section_ordinal: 7
+    text: Are provider credentials and callback endpoints rotated and secured with signature verification?
+    citation: Provider integration security
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+  - id: domains.notifications.08
+    section: notifications
+    section_ordinal: 8
+    text: Are send, delivery, bounce, and complaint metrics observable per channel and template?
+    citation: Notification operability metrics
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 6. Notifications }
+- key: files_and_media
+  source_label: files and media
+  canonical_label: Files and Media
+  source_heading: 7. Files and Media
+  aliases:
+  - upload
+  - file
+  - media
+  - image
+  - video
+  - attachment
+  - object storage
+  - thumbnail
+  - download
+  disambiguation: '"profile photo" touches IAM profile plus media handling; storage and processing routes here.'
+  sources_text: OWASP File Upload guidance; cloud object storage best practices; content security controls.
+  concept_map:
+  - object key
+  - metadata
+  - content type
+  - checksum
+  - scan pipeline
+  - retention
+  - signed URL
+  - transformation
+  questions:
+  - id: domains.files_and_media.01
+    section: files_and_media
+    section_ordinal: 1
+    text: Are uploads validated for type, size, and content signatures before persistence?
+    citation: File upload validation
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.02
+    section: files_and_media
+    section_ordinal: 2
+    text: Are malware scanning and quarantine workflows enforced before files become publicly accessible?
+    citation: Content security pipeline
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.03
+    section: files_and_media
+    section_ordinal: 3
+    text: Are storage keys opaque and authorization-checked so paths cannot be enumerated?
+    citation: Access control for object storage
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.04
+    section: files_and_media
+    section_ordinal: 4
+    text: Are signed URLs short-lived, scoped, and invalidated when access rights change?
+    citation: Signed URL security
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.05
+    section: files_and_media
+    section_ordinal: 5
+    text: Are image/video transformations deterministic, resource-bounded, and protected from decompression bombs?
+    citation: Media processing safety
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.06
+    section: files_and_media
+    section_ordinal: 6
+    text: Are retention and deletion policies enforced, including downstream caches and derived assets?
+    citation: Data lifecycle governance
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.07
+    section: files_and_media
+    section_ordinal: 7
+    text: Are checksum and content-length verified end-to-end during upload and retrieval?
+    citation: Integrity verification
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+  - id: domains.files_and_media.08
+    section: files_and_media
+    section_ordinal: 8
+    text: Are transfer and processing failures observable with retry-safe recovery paths?
+    citation: Media pipeline reliability
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 7. Files and Media }
+- key: search
+  source_label: search
+  canonical_label: Search
+  source_heading: 8. Search
+  aliases:
+  - search
+  - query
+  - indexing
+  - relevance
+  - autocomplete
+  - full text
+  - ranking
+  - filters
+  disambiguation: '"find user by id" in admin tooling is IAM/PAM; generalized retrieval and ranking routes here.'
+  sources_text: Information retrieval and search system best practices.
+  concept_map:
+  - index
+  - document
+  - analyzer
+  - query parser
+  - ranking
+  - facet
+  - synonym
+  - freshness
+  questions:
+  - id: domains.search.01
+    section: search
+    section_ordinal: 1
+    text: Is indexing decoupled from write transactions with explicit eventual-consistency semantics?
+    citation: Search indexing architecture
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.02
+    section: search
+    section_ordinal: 2
+    text: Are query parsing and filters validated to prevent injection-like query abuse and runaway complexity?
+    citation: Query parser safety
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.03
+    section: search
+    section_ordinal: 3
+    text: Are ranking features and boosts versioned so relevance changes are traceable and reversible?
+    citation: Relevance governance
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.04
+    section: search
+    section_ordinal: 4
+    text: Are pagination and result windows bounded to protect latency and cluster stability?
+    citation: Search performance constraints
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.05
+    section: search
+    section_ordinal: 5
+    text: Are authorization filters applied consistently so search never leaks non-readable documents?
+    citation: Security trimming
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.06
+    section: search
+    section_ordinal: 6
+    text: Are synonym, stemming, and language analyzers explicit per locale and tested with representative corpora?
+    citation: Linguistic relevance controls
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.07
+    section: search
+    section_ordinal: 7
+    text: Are zero-result and low-confidence queries handled with fallback or clarification strategies?
+    citation: UX resilience in retrieval systems
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+  - id: domains.search.08
+    section: search
+    section_ordinal: 8
+    text: Are index freshness and ingestion lag monitored with SLOs tied to user-visible behavior?
+    citation: Search operability SLOs
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 8. Search }
+- key: analytics_and_reporting
+  source_label: analytics and reporting
+  canonical_label: Analytics and Reporting
+  source_heading: 9. Analytics and Reporting
+  aliases:
+  - analytics
+  - reporting
+  - dashboard
+  - metrics
+  - kpi
+  - events
+  - telemetry
+  - funnel
+  disambiguation: '"is user logged in" is IAM state; aggregate measurement and reporting routes here.'
+  sources_text: Data governance and observability practices.
+  concept_map:
+  - event schema
+  - metric definition
+  - dimension
+  - fact table
+  - aggregation
+  - freshness
+  - lineage
+  - retention
+  questions:
+  - id: domains.analytics_and_reporting.01
+    section: analytics_and_reporting
+    section_ordinal: 1
+    text: Are event schemas versioned with backward-compatible evolution rules?
+    citation: Telemetry schema governance
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.02
+    section: analytics_and_reporting
+    section_ordinal: 2
+    text: Are metric definitions centralized so dashboard numbers are computed consistently across products?
+    citation: Single source of truth for metrics
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.03
+    section: analytics_and_reporting
+    section_ordinal: 3
+    text: Are PII fields minimized, classified, and protected throughout analytics pipelines?
+    citation: Privacy-preserving analytics
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.04
+    section: analytics_and_reporting
+    section_ordinal: 4
+    text: Are late-arriving and duplicate events handled deterministically in aggregates?
+    citation: Event-time correctness
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.05
+    section: analytics_and_reporting
+    section_ordinal: 5
+    text: Are report queries bounded and optimized to avoid operational impact on serving systems?
+    citation: Analytical workload isolation
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.06
+    section: analytics_and_reporting
+    section_ordinal: 6
+    text: Is lineage from raw events to reported KPI values traceable for audits and incident review?
+    citation: Data lineage and auditability
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.07
+    section: analytics_and_reporting
+    section_ordinal: 7
+    text: Are freshness SLOs and staleness indicators visible to report consumers?
+    citation: Data freshness governance
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+  - id: domains.analytics_and_reporting.08
+    section: analytics_and_reporting
+    section_ordinal: 8
+    text: Are access controls applied at report and row-level scopes where required?
+    citation: Reporting authorization controls
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 9. Analytics and Reporting }
+- key: settings_and_preferences
+  source_label: settings and preferences
+  canonical_label: Settings and Preferences
+  source_heading: 10. Settings and Preferences
+  aliases:
+  - settings
+  - preferences
+  - profile settings
+  - notification settings
+  - toggles
+  - config
+  - personalization
+  disambiguation: '"security settings" may split with IAM; non-credential product preferences route here.'
+  sources_text: Configuration management and product preference consistency practices.
+  concept_map:
+  - preference
+  - default
+  - override
+  - scope
+  - tenancy
+  - migration
+  - validation
+  - audit trail
+  questions:
+  - id: domains.settings_and_preferences.01
+    section: settings_and_preferences
+    section_ordinal: 1
+    text: Are preference scopes explicit (user, team, org, global) with deterministic precedence rules?
+    citation: Configuration precedence design
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.02
+    section: settings_and_preferences
+    section_ordinal: 2
+    text: Are new settings introduced with safe defaults and migration paths for existing users?
+    citation: Backward-compatible configuration rollout
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.03
+    section: settings_and_preferences
+    section_ordinal: 3
+    text: Are settings values schema-validated at write-time and read-time?
+    citation: Configuration validation
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.04
+    section: settings_and_preferences
+    section_ordinal: 4
+    text: Are sensitive settings changes protected by re-authentication or step-up authorization when required?
+    citation: Sensitive action protection
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.05
+    section: settings_and_preferences
+    section_ordinal: 5
+    text: Are preference reads cached with clear invalidation semantics so stale values do not persist unexpectedly?
+    citation: Configuration cache correctness
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.06
+    section: settings_and_preferences
+    section_ordinal: 6
+    text: Are feature-flag and user preference boundaries separated to avoid accidental policy coupling?
+    citation: Boundary separation for control planes
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.07
+    section: settings_and_preferences
+    section_ordinal: 7
+    text: Are settings changes auditable with actor identity, source channel, and change diff?
+    citation: Configuration auditability
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+  - id: domains.settings_and_preferences.08
+    section: settings_and_preferences
+    section_ordinal: 8
+    text: Are settings export/import operations bounded and validated to prevent unsafe bulk changes?
+    citation: Bulk configuration safety
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 10. Settings and Preferences }
+- key: onboarding
+  source_label: onboarding
+  canonical_label: Onboarding
+  source_heading: 11. Onboarding
+  aliases:
+  - onboarding
+  - first run
+  - welcome flow
+  - activation
+  - setup wizard
+  - first-time user
+  - tutorial
+  disambiguation: '"sign up" credential creation is IAM; activation and initial product setup route here.'
+  sources_text: Product activation and UX reliability practices.
+  concept_map:
+  - activation milestone
+  - checklist
+  - default project
+  - tutorial
+  - invitation
+  - drop-off
+  - recovery path
+  - completion state
+  questions:
+  - id: domains.onboarding.01
+    section: onboarding
+    section_ordinal: 1
+    text: Are onboarding steps modeled as explicit state transitions with resumable progress?
+    citation: Workflow state-machine reliability
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.02
+    section: onboarding
+    section_ordinal: 2
+    text: Are mandatory versus optional steps clearly separated so users can progress without hidden blockers?
+    citation: Progressive activation design
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.03
+    section: onboarding
+    section_ordinal: 3
+    text: Are first-run defaults safe, reversible, and documented for support teams?
+    citation: Safe defaults principle
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.04
+    section: onboarding
+    section_ordinal: 4
+    text: Are invitation and team-join flows validated for token integrity, expiry, and role assignment correctness?
+    citation: Invitation security model
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.05
+    section: onboarding
+    section_ordinal: 5
+    text: Are onboarding emails/notifications idempotent and preference-aware?
+    citation: Cross-boundary reliability (onboarding + notifications)
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.06
+    section: onboarding
+    section_ordinal: 6
+    text: Are drop-off points instrumented with clear activation metrics and cohort tracking?
+    citation: Activation analytics
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.07
+    section: onboarding
+    section_ordinal: 7
+    text: Are retries/re-entry paths graceful after partial failures during setup?
+    citation: Fault tolerance in multi-step setup
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+  - id: domains.onboarding.08
+    section: onboarding
+    section_ordinal: 8
+    text: Is onboarding completion defined by objective milestones rather than only UI step completion?
+    citation: Outcome-based onboarding quality
+    source: { reference_export: boundaries/reference/domain_boundaries_v0_1.md, section: 11. Onboarding }
+cross_boundary_dependencies:
+- domain: privileged_access_management
+  depends_on:
+  - iam
+  source_text: 'admin depends on user: every administrative role is an authorization decision over an authenticated subject.'
+- domain: realtime_messaging
+  depends_on:
+  - iam
+  - privileged_access_management
+  source_text: chat depends on user (authenticated connections) and admin (moderation and audit).
+- domain: llm_application
+  depends_on:
+  - iam
+  - privileged_access_management
+  source_text: AI depends on user (per-user budgets, access-controlled retrieval) and admin (prompt and budget configuration is privileged).
+- domain: billing_and_payments
+  depends_on:
+  - iam
+  - privileged_access_management
+  source_text: billing depends on authenticated identity and privileged controls for plan and refund administration.
+- domain: notifications
+  depends_on:
+  - iam
+  - settings_and_preferences
+  source_text: notifications depend on user identity and user/org preference policy.
+- domain: files_and_media
+  depends_on:
+  - iam
+  - privileged_access_management
+  source_text: file access and moderation depend on identity and privileged controls.
+- domain: search
+  depends_on:
+  - iam
+  - privileged_access_management
+  source_text: search visibility and administrative indexing controls depend on IAM and privileged roles.
+- domain: analytics_and_reporting
+  depends_on:
+  - iam
+  - privileged_access_management
+  source_text: report access and governance depend on identity and privileged administration.
+- domain: settings_and_preferences
+  depends_on:
+  - iam
+  source_text: settings are scoped to authenticated subjects and their tenancy context.
+- domain: onboarding
+  depends_on:
+  - iam
+  - notifications
+  source_text: onboarding requires authenticated account state and coordinated notification delivery.
+queued_boundaries: []
+open_items_in_source:
+- Validate seed aliases against the mined session corpus; promote inconclusive-pile phrasings that resolve here.
+- Add requirement identifiers (ASVS 5.0.0 section numbers, 800-63B-4 section numbers) as a citation column once the harness exists.
+- Decide which questions gate others within each boundary.

@@ -1,0 +1,44 @@
+schema_version: 1
+description: >
+  Spark cluster baseline for SWAG/RRFLOW training and serving. This template is
+  pre-filled for a 3-node interconnected 128GB unified-memory Spark topology.
+
+cluster:
+  key: spark-gb10-3node-msi
+  label: 3-node Spark GB10 MSI cluster
+  topology: ring
+  node_count: 3
+  interconnect:
+    mode: roce_or_rdma
+    mtu: 9000
+  unified_memory_gb_total: 384
+  notes:
+    - 3 x 128GB unified-memory nodes
+    - Enhanced MSI thermal profile assumed for sustained workloads
+    - Keep one node reserved headroom if it also hosts interactive desktop load
+
+nodes:
+  - key: spark-01
+    unified_memory_gb: 128
+    roles: [train, infer, eval]
+  - key: spark-02
+    unified_memory_gb: 128
+    roles: [train, infer, eval]
+  - key: spark-03
+    unified_memory_gb: 128
+    roles: [train, infer, eval]
+
+training_defaults:
+  strategy: lora_then_merge
+  precision: bf16
+  gradient_checkpointing: true
+  sequence_length: 8192
+  global_batch_tokens_target: 1048576
+  save_every_steps: 500
+  eval_every_steps: 250
+
+runtime_defaults:
+  local_serving: vllm
+  openai_compatible_api: true
+  health_endpoint: /health
+  chat_endpoint: /v1/chat/completions

@@ -1,0 +1,147 @@
+schema_version: 1
+description: >
+  SWAG Spark training pipeline template for data preparation, redaction,
+  controller SFT dataset build, and LoRA run scaffolding.
+
+cluster_profile: config/training/spark_cluster_profile.template.yaml
+model_catalog: config/training/model_catalog.template.yaml
+provider_config: config/frontier/providers.template.yaml
+dataset_quality_config: config/training/dataset_quality.template.yaml
+dataset_spec_config: config/training/dataset_spec.v1.yaml
+topology_config: config/training/topology.template.yaml
+placement_policy_config: config/training/placement_policy.template.yaml
+quantization_gate_config: config/training/quantization_gate.template.yaml
+spark_preflight_config: config/training/spark_preflight.template.yaml
+
+paths:
+  controller_experiments: files/controller_experiments
+  output_root: files/training
+  redacted_corpus_file: files/training/data/redacted_corpus.jsonl
+  controller_sft_file: files/training/data/controller_sft.jsonl
+  controller_sft_clean_file: files/training/data/controller_sft.cleaned.jsonl
+  manifests_dir: files/training/manifests
+  runbooks_dir: files/training/runbooks
+
+dataset_generation:
+  # Rebalanced toward higher-value real-source families with reduced synthetic fill.
+  target_min_rows: 1400
+  real_source_adapters:
+    project_history_reference:
+      enabled: true
+      source_family: project_history_reference
+      source_type: real_source_adapter
+      include:
+        - boundaries/reference/*.md
+        - config/boundaries/question_sets/*.yaml
+        - boundaries/*.md
+        - README.md
+      max_chunks_per_file: 1200
+      max_chars_per_chunk: 420
+      min_selected_question_ids: 8
+      question_preview_limit: 6
+    structured_real_inputs:
+      enabled: true
+      source_family: structured_real_inputs
+      source_type: real_source_adapter
+      include:
+        - config/training/real_sources/structured_*.jsonl
+      min_selected_question_ids: 8
+      question_preview_limit: 6
+      variants_per_record: 3
+      variant_focuses:
+        - policy_guardrails
+        - reliability_tradeoffs
+        - delivery_speed
+    official_best_practice_docs:
+      enabled: true
+      source_family: official_best_practice_docs
+      source_type: real_source_adapter
+      include:
+        - config/training/real_sources/official_best_practice_*.jsonl
+      min_selected_question_ids: 8
+      question_preview_limit: 6
+      variants_per_record: 4
+      variant_focuses:
+        - official_baseline
+        - migration_risk
+        - production_readiness
+        - operability
+    incident_support_transcripts:
+      enabled: true
+      source_family: incident_support_transcripts
+      source_type: real_source_adapter
+      include:
+        - config/training/real_sources/incident_support_*.jsonl
+      min_selected_question_ids: 10
+      question_preview_limit: 6
+      variants_per_record: 3
+      variant_focuses:
+        - root_cause_containment
+        - rollback_safety
+        - prevention_followup
+
+data_sources:
+  include:
+    - README.md
+    - config/
+    - boundaries/
+    - tools/
+  exclude:
+    - chat-archive/
+    - chat-candidates/
+    - files/
+    - tests/
+
+training:
+  strategy: lora_then_merge
+  sequence_length: 8192
+  distributed:
+    # Override these per environment when needed.
+    master_addr: 127.0.0.1
+    master_port: 29500
+    gloo_socket_ifname: eth0
+    nccl_socket_ifname: eth0
+    nccl_ib_disable: 1
+  quantization_profiles:
+    default:
+      - key: bf16
+        dtype: bfloat16
+        quantization: none
+        vllm_extra_args: []
+    by_tier:
+      "14b":
+        - key: bf16
+          dtype: bfloat16
+          quantization: none
+          vllm_extra_args: []
+        - key: awq4
+          dtype: float16
+          quantization: awq
+          vllm_extra_args: ["--quantization", "awq"]
+      "27-28b":
+        - key: bf16_tp3
+          dtype: bfloat16
+          quantization: none
+          vllm_extra_args: ["--tensor-parallel-size", "3"]
+        - key: awq4_tp3
+          dtype: float16
+          quantization: awq
+          vllm_extra_args: ["--tensor-parallel-size", "3", "--quantization", "awq"]
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  optimizer:
+    learning_rate: 2.0e-4
+    weight_decay: 0.01
+    warmup_ratio: 0.03
+  schedule:
+    epochs: 2
+    gradient_accumulation_steps: 8
+    save_steps: 500
+    eval_steps: 250
+
+redaction:
+  replace_with: "<REDACTED>"
+  keep_private_ips: false

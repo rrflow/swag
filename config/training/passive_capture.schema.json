@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SWAG unreviewed routing observation",
+  "description": "One JSON object per line. Local observations are not engine receipts or verified training labels.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "captured_at", "label_status", "training_consent", "route", "record_id", "project_id", "task_id", "source_type", "task_type", "stack", "domain", "issue_title", "issue_id", "repo_context", "intent_text", "selected_question_ids", "route_target_tier", "user_override", "user_acceptance", "confidence", "rationale", "outcome", "source_provenance"],
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nullableString": {"type": ["string", "null"], "minLength": 1},
+    "unknownBoolean": {"type": ["boolean", "null"]},
+    "strings": {"type": "array", "items": {"type": "string"}}
+  },
+  "properties": {
+    "source_snapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scope", "head", "branch", "branch_sha256", "status_sha256", "staged_diff_sha256", "unstaged_diff_sha256", "context_sha256", "stream_id", "snapshot_sha256", "previous_record_id"],
+      "properties": {
+        "scope": {"const": "tracked_files_only"},
+        "head": {"type": "string", "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$"},
+        "branch": {"type": "string", "maxLength": 4096},
+        "branch_sha256": {"$ref": "#/$defs/digest"},
+        "status_sha256": {"$ref": "#/$defs/digest"},
+        "staged_diff_sha256": {"$ref": "#/$defs/digest"},
+        "unstaged_diff_sha256": {"$ref": "#/$defs/digest"},
+        "context_sha256": {"$ref": "#/$defs/digest"},
+        "stream_id": {"$ref": "#/$defs/digest"},
+        "snapshot_sha256": {"$ref": "#/$defs/digest"},
+        "previous_record_id": {"type": ["string", "null"], "pattern": "^passive-[0-9a-f]{12}$"}
+      }
+    },
+    "schema_version": {"const": 1},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "label_status": {"const": "unreviewed"},
+    "training_consent": {"const": false},
+    "route": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "modelId", "effort", "accessMode", "bindingId"],
+      "properties": {
+        "provider": {"$ref": "#/$defs/nullableString"},
+        "modelId": {"$ref": "#/$defs/nullableString"},
+        "effort": {"$ref": "#/$defs/nullableString"},
+        "accessMode": {"enum": ["subscription", "api", "local", null]},
+        "bindingId": {"$ref": "#/$defs/nullableString"}
+      }
+    },
+    "record_id": {"type": "string", "pattern": "^passive-[0-9a-f]{12}$"},
+    "project_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "pattern": "^task-[0-9a-f]{12}$"},
+    "source_type": {"const": "passive_capture"},
+    "task_type": {"type": "string"},
+    "stack": {"$ref": "#/$defs/strings"},
+    "domain": {"type": "string"},
+    "issue_title": {"type": "string"},
+    "issue_id": {"type": "string"},
+    "repo_context": {
+      "type": "object", "additionalProperties": false,
+      "required": ["branch", "repo_root", "changed_files"],
+      "properties": {"branch": {"type": "string"}, "repo_root": {"type": "string"}, "changed_files": {"anyOf": [{"$ref": "#/$defs/strings"}, {"type": "null"}]}}
+    },
+    "intent_text": {"type": "string"},
+    "selected_question_ids": {"$ref": "#/$defs/strings"},
+    "route_target_tier": {"$ref": "#/$defs/nullableString"},
+    "user_override": {"$ref": "#/$defs/unknownBoolean"},
+    "user_acceptance": {"$ref": "#/$defs/unknownBoolean"},
+    "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "rationale": {"type": "string"},
+    "outcome": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tests_passed", "rollback", "incident"],
+      "properties": {"tests_passed": {"$ref": "#/$defs/unknownBoolean"}, "rollback": {"$ref": "#/$defs/unknownBoolean"}, "incident": {"$ref": "#/$defs/unknownBoolean"}}
+    },
+    "source_provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_type", "source_url", "reviewer", "notes"],
+      "properties": {"source_type": {"enum": ["explicit_input_and_git_status", "bounded_local_git_and_task_watch"]}, "source_url": {"type": "string"}, "reviewer": {"type": "string"}, "notes": {"type": "string"}}
+    }
+  }
+}

@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: sql
+  kind: stack
+  stack: sql
+  stack_field_in_source: sql
+source:
+  doc_id: null
+  title: "Stack — SQL: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: PostgreSQL/MySQL/SQLite vendor docs and OWASP SQL guidance.
+sections:
+- key: schema_and_migrations
+  source_heading: Schema and Migrations
+  title: Schema and Migrations
+- key: query_safety
+  source_heading: Query Safety
+  title: Query Safety
+- key: indexing_and_performance
+  source_heading: Indexing and Performance
+  title: Indexing and Performance
+- key: transactions_and_consistency
+  source_heading: Transactions and Consistency
+  title: Transactions and Consistency
+- key: operations_and_recovery
+  source_heading: Operations and Recovery
+  title: Operations and Recovery
+questions:
+- id: sql.schema_and_migrations.01
+  section: schema_and_migrations
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are schema changes versioned through forward-only migrations with deterministic ordering and rollback strategy?
+  citation: Migration lifecycle
+  source: { reference: https://flywaydb.org/documentation/, section: migration versioning }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: sql.schema_and_migrations.02
+  section: schema_and_migrations
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are constraints (PK, FK, unique, check) used to enforce invariants at the database boundary?
+  citation: Relational integrity constraints
+  source: { reference: https://www.postgresql.org/docs/current/ddl-constraints.html, section: constraints }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: sql.query_safety.01
+  section: query_safety
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are all dynamic queries parameterized to prevent injection and plan instability?
+  citation: SQL injection prevention
+  source: { reference: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html, section: parameterized queries }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: sql.query_safety.02
+  section: query_safety
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Is least-privilege enforced with dedicated database roles per service boundary?
+  citation: Principle of least privilege
+  source: { reference: https://owasp.org/www-community/controls/Least_Privilege_Principle, section: database privileges }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: sql.indexing_and_performance.01
+  section: indexing_and_performance
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Are indexes derived from real query patterns and validated with execution plans?
+  citation: Query planning and indexing
+  source: { reference: https://www.postgresql.org/docs/current/using-explain.html, section: EXPLAIN analysis }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: sql.indexing_and_performance.02
+  section: indexing_and_performance
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are high-cardinality scans, N+1 query patterns, and unbounded result sets prevented at boundary APIs?
+  citation: Database performance anti-patterns
+  source: { reference: https://use-the-index-luke.com/, section: pagination and selectivity }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: sql.transactions_and_consistency.01
+  section: transactions_and_consistency
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Is transaction isolation chosen deliberately for each workflow, with known anomaly tradeoffs documented?
+  citation: Transaction isolation levels
+  source: { reference: https://www.postgresql.org/docs/current/transaction-iso.html, section: isolation levels }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: sql.transactions_and_consistency.02
+  section: transactions_and_consistency
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are lock scope and timeout behavior controlled so contention does not cascade into system-wide outages?
+  citation: Locking and contention controls
+  source: { reference: https://www.postgresql.org/docs/current/explicit-locking.html, section: lock modes and waits }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: sql.operations_and_recovery.01
+  section: operations_and_recovery
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are backup and restore procedures tested regularly with objective recovery-time and recovery-point targets?
+  citation: Backup and disaster recovery
+  source: { reference: https://www.postgresql.org/docs/current/backup.html, section: backup and restore }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }
+- id: sql.operations_and_recovery.02
+  section: operations_and_recovery
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are slow-query logs and error telemetry monitored with ownership and remediation SLAs?
+  citation: Database observability
+  source: { reference: https://www.postgresql.org/docs/current/runtime-config-logging.html, section: query logging }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

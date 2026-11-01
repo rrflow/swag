@@ -1,0 +1,805 @@
+# GENERATED from boundaries/reference/boundary_question_bank_v0_2.md (faithful export of Google Doc 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4).
+# Derived config, export date 2026-09-30, owner hades. Do not hand-edit question text here;
+# edit the source doc, re-export, and regenerate. Naming proposals: boundaries/naming_review.md
+schema_version: 1
+question_set:
+  key: shared_predicates
+  kind: shared
+  fires_on: every boundary, every stack (per Stack Category Routing v0.2)
+source:
+  doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+  title: Boundary Question Bank — Core Predicates (Draft v0.2)
+  version: v0.2
+  status: Draft
+  revision_id: ANLCKQmX6mlTe3GpUYit5XDxU9uzeiW5NOw6bZiGp4kOt71Fj8jevSGVVdaZcbtgZcXJmCbBRnE_TGlfFESTbs10Ua_tu1BM2i1-McPPASEz
+  owner: hades
+  export_date: '2026-09-30'
+  reference_export: boundaries/reference/boundary_question_bank_v0_2.md
+maturity_gating:
+  source_text: 'Sections A, D, E, F fire on every boundary. Sections C, H, I fire once a project is graded past greenfield. Section G fires when a test harness exists. Attunement binds every Binds to: question to the named artifact before it fires. Section M fires when the change touches a data path whose input size is unbounded.'
+  source_heading: Gating by project maturity (to author next)
+  sections_without_gating_in_source:
+  - B
+  - J
+  - K
+  - L
+sections:
+- key: software_design_principles
+  letter: A
+  source_heading: A. Software Design — principles
+  domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+  fires_when: on every boundary
+  gating_specified_in_source: true
+- key: software_design_key_issues
+  letter: B
+  source_heading: B. Software Design — key issues
+  domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+  fires_when: null
+  gating_specified_in_source: false
+- key: software_architecture
+  letter: C
+  source_heading: C. Software Architecture
+  domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+  fires_when: once a project is graded past greenfield
+  gating_specified_in_source: true
+- key: software_construction_fundamentals
+  letter: D
+  source_heading: D. Software Construction — fundamentals
+  domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+  fires_when: on every boundary
+  gating_specified_in_source: true
+- key: software_construction_practical_considerations
+  letter: E
+  source_heading: E. Software Construction — practical considerations
+  domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+  fires_when: on every boundary
+  gating_specified_in_source: true
+- key: software_requirements
+  letter: F
+  source_heading: F. Software Requirements
+  domain: 'SWEBOK Software Requirements / SE2014 REQ / CS2023 SE: Requirements Engineering'
+  fires_when: on every boundary
+  gating_specified_in_source: true
+- key: verification_and_validation
+  letter: G
+  source_heading: G. Verification and Validation
+  domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+  fires_when: when a test harness exists
+  gating_specified_in_source: true
+- key: software_quality_and_maintenance
+  letter: H
+  source_heading: H. Software Quality and Maintenance
+  domain: 'SWEBOK Software Quality, Software Maintenance / SE2014 QUA / CS2023 SE: Refactoring and Code Evolution'
+  fires_when: once a project is graded past greenfield
+  gating_specified_in_source: true
+- key: software_configuration_management
+  letter: I
+  source_heading: I. Software Configuration Management
+  domain: SWEBOK Software Configuration Management / SE2014 PRO, PRF
+  fires_when: once a project is graded past greenfield
+  gating_specified_in_source: true
+- key: software_engineering_process
+  letter: J
+  source_heading: J. Software Engineering Process
+  domain: 'SWEBOK Software Engineering Process / SE2014 PRO / CS2023 SE: Software Project Management'
+  fires_when: null
+  gating_specified_in_source: false
+- key: software_security
+  letter: K
+  source_heading: K. Software Security
+  domain: SWEBOK Software Security / SE2014 SEC / CS2023 SEC
+  fires_when: null
+  gating_specified_in_source: false
+- key: professional_practice
+  letter: L
+  source_heading: L. Professional Practice
+  domain: SWEBOK Software Engineering Professional Practice / SE2014 PRF
+  fires_when: null
+  gating_specified_in_source: false
+- key: algorithmic_foundations
+  letter: M
+  source_heading: M. Algorithmic Foundations
+  domain: CS2023 Algorithmic Foundations (AL) / SE2014 CMP
+  fires_when: when the change touches a data path whose input size is unbounded
+  gating_specified_in_source: true
+questions:
+- id: shared_predicates.software_design_principles.01
+  section: software_design_principles
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Does this module have one cohesive responsibility?
+  canonical_term: Cohesion
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.02
+  section: software_design_principles
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Is coupling to other modules limited to their explicit interfaces (no reaching into internals)?
+  canonical_term: Coupling
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.03
+  section: software_design_principles
+  section_ordinal: 3
+  doc_ordinal: 3
+  text: Is the internal representation hidden behind an interface?
+  canonical_term: Encapsulation and information hiding
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.04
+  section: software_design_principles
+  section_ordinal: 4
+  doc_ordinal: 4
+  text: Can the implementation change without changing callers?
+  canonical_term: Separation of interface and implementation
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.05
+  section: software_design_principles
+  section_ordinal: 5
+  doc_ordinal: 5
+  text: Is each concern (domain logic, persistence, presentation, cross-cutting) handled in exactly one place?
+  canonical_term: Separation of concerns
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.06
+  section: software_design_principles
+  section_ordinal: 6
+  doc_ordinal: 6
+  text: Does every responsibility in this change have a home module, with none left floating?
+  canonical_term: Decomposition and modularization
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.07
+  section: software_design_principles
+  section_ordinal: 7
+  doc_ordinal: 7
+  text: Does the abstraction expose only what callers need, and everything they need?
+  canonical_term: Sufficiency, completeness, primitiveness
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_principles.08
+  section: software_design_principles
+  section_ordinal: 8
+  doc_ordinal: 8
+  text: Does this reinvent something the codebase already provides?
+  canonical_term: Abstraction / reuse
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+  binds_to:
+    key: module_inventory
+    label: module inventory
+- id: shared_predicates.software_design_principles.09
+  section: software_design_principles
+  section_ordinal: 9
+  doc_ordinal: 9
+  text: Is an established design pattern applied where one fits, rather than reinvented?
+  canonical_term: Design patterns
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: A. Software Design — principles
+    domain: 'SWEBOK Software Design / SE2014 DES / CS2023 SE: Software Design'
+- id: shared_predicates.software_design_key_issues.01
+  section: software_design_key_issues
+  section_ordinal: 1
+  doc_ordinal: 10
+  text: Is shared state and its synchronization explicit?
+  canonical_term: Concurrency
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: B. Software Design — key issues
+    domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+- id: shared_predicates.software_design_key_issues.02
+  section: software_design_key_issues
+  section_ordinal: 2
+  doc_ordinal: 11
+  text: For each failure this code can produce, is the handler identified?
+  canonical_term: Error and exception handling and fault tolerance
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: B. Software Design — key issues
+    domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+- id: shared_predicates.software_design_key_issues.03
+  section: software_design_key_issues
+  section_ordinal: 3
+  doc_ordinal: 12
+  text: Is persistence isolated from domain logic?
+  canonical_term: Data persistence
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: B. Software Design — key issues
+    domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+- id: shared_predicates.software_design_key_issues.04
+  section: software_design_key_issues
+  section_ordinal: 4
+  doc_ordinal: 13
+  text: Is control flow explicit rather than hidden in side effects?
+  canonical_term: Control and handling of events
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: B. Software Design — key issues
+    domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+- id: shared_predicates.software_design_key_issues.05
+  section: software_design_key_issues
+  section_ordinal: 5
+  doc_ordinal: 14
+  text: Is there exactly one source of truth for this piece of state?
+  canonical_term: Data persistence / data management
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: B. Software Design — key issues
+    domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+- id: shared_predicates.software_design_key_issues.06
+  section: software_design_key_issues
+  section_ordinal: 6
+  doc_ordinal: 15
+  text: Where components are distributed, is the boundary between them explicit?
+  canonical_term: Distribution of components
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: B. Software Design — key issues
+    domain: SWEBOK Software Design (Key Issues) / SE2014 DES
+- id: shared_predicates.software_architecture.01
+  section: software_architecture
+  section_ordinal: 1
+  doc_ordinal: 16
+  text: Does this change respect the existing layer and boundary rules?
+  canonical_term: Architectural style / structure
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: C. Software Architecture
+    domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+  binds_to:
+    key: boundary_map
+    label: boundary map
+- id: shared_predicates.software_architecture.02
+  section: software_architecture
+  section_ordinal: 2
+  doc_ordinal: 17
+  text: Does this introduce a new dependency direction (a lower layer now depending on a higher one)?
+  canonical_term: Dependency structure
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: C. Software Architecture
+    domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+- id: shared_predicates.software_architecture.03
+  section: software_architecture
+  section_ordinal: 3
+  doc_ordinal: 18
+  text: Is the architectural decision recorded with its rationale?
+  canonical_term: Architecture description / design rationale
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: C. Software Architecture
+    domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+  binds_to:
+    key: adr_store
+    label: ADR store
+- id: shared_predicates.software_architecture.04
+  section: software_architecture
+  section_ordinal: 4
+  doc_ordinal: 19
+  text: Does this make anything harder to delete or replace?
+  canonical_term: Modifiability
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: C. Software Architecture
+    domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+- id: shared_predicates.software_architecture.05
+  section: software_architecture
+  section_ordinal: 5
+  doc_ordinal: 20
+  text: Does this introduce a circular dependency?
+  canonical_term: Dependency structure
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: C. Software Architecture
+    domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+- id: shared_predicates.software_architecture.06
+  section: software_architecture
+  section_ordinal: 6
+  doc_ordinal: 21
+  text: Is this consistent with decisions already ratified in the ADR store, and does it contradict none of them?
+  canonical_term: Design rationale; settled decisions
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: C. Software Architecture
+    domain: 'SWEBOK Software Architecture / SE2014 DES (architectural design) / CS2023 SE: Software Design'
+  binds_to:
+    key: adr_store
+    label: ADR store
+- id: shared_predicates.software_construction_fundamentals.01
+  section: software_construction_fundamentals
+  section_ordinal: 1
+  doc_ordinal: 22
+  text: Is this the simplest construction that satisfies the requirement?
+  canonical_term: Minimizing complexity
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: D. Software Construction — fundamentals
+    domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+- id: shared_predicates.software_construction_fundamentals.02
+  section: software_construction_fundamentals
+  section_ordinal: 2
+  doc_ordinal: 23
+  text: Is the expected change localized to one place?
+  canonical_term: Anticipating change
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: D. Software Construction — fundamentals
+    domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+- id: shared_predicates.software_construction_fundamentals.03
+  section: software_construction_fundamentals
+  section_ordinal: 3
+  doc_ordinal: 24
+  text: Can this be verified without modifying it?
+  canonical_term: Constructing for verification
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: D. Software Construction — fundamentals
+    domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+- id: shared_predicates.software_construction_fundamentals.04
+  section: software_construction_fundamentals
+  section_ordinal: 4
+  doc_ordinal: 25
+  text: Does this reuse existing code or library rather than duplicate it?
+  canonical_term: Reuse
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: D. Software Construction — fundamentals
+    domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+- id: shared_predicates.software_construction_fundamentals.05
+  section: software_construction_fundamentals
+  section_ordinal: 5
+  doc_ordinal: 26
+  text: Does this follow the project coding standard?
+  canonical_term: Standards in construction
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: D. Software Construction — fundamentals
+    domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+  binds_to:
+    key: style_guide_linter_config
+    label: style guide / linter config
+- id: shared_predicates.software_construction_fundamentals.06
+  section: software_construction_fundamentals
+  section_ordinal: 6
+  doc_ordinal: 27
+  text: Is this configurable because a stated need requires it, not speculative generality?
+  canonical_term: Anticipating change
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: D. Software Construction — fundamentals
+    domain: 'SWEBOK Software Construction (Fundamentals) / SE2014 CMP, DES / CS2023 SE: Software Construction'
+- id: shared_predicates.software_construction_practical_considerations.01
+  section: software_construction_practical_considerations
+  section_ordinal: 1
+  doc_ordinal: 28
+  text: Are identifiers the same canonical names used elsewhere for the same thing?
+  canonical_term: Naming conventions
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+- id: shared_predicates.software_construction_practical_considerations.02
+  section: software_construction_practical_considerations
+  section_ordinal: 2
+  doc_ordinal: 29
+  text: Is the folder and file placement consistent with the existing structure?
+  canonical_term: Source code organization
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+  binds_to:
+    key: file_tree
+    label: file tree
+- id: shared_predicates.software_construction_practical_considerations.03
+  section: software_construction_practical_considerations
+  section_ordinal: 3
+  doc_ordinal: 30
+  text: Are inputs at boundaries validated or asserted?
+  canonical_term: Defensive programming
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+- id: shared_predicates.software_construction_practical_considerations.04
+  section: software_construction_practical_considerations
+  section_ordinal: 4
+  doc_ordinal: 31
+  text: Are acquired resources (files, connections, memory, handles) bounded and released?
+  canonical_term: Resource management
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+- id: shared_predicates.software_construction_practical_considerations.05
+  section: software_construction_practical_considerations
+  section_ordinal: 5
+  doc_ordinal: 32
+  text: Are literal values replaced by named constants or configuration?
+  canonical_term: Coding practices
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+- id: shared_predicates.software_construction_practical_considerations.06
+  section: software_construction_practical_considerations
+  section_ordinal: 6
+  doc_ordinal: 33
+  text: Does the code express its intent without needing an external explanation?
+  canonical_term: Code documentation
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+- id: shared_predicates.software_construction_practical_considerations.07
+  section: software_construction_practical_considerations
+  section_ordinal: 7
+  doc_ordinal: 34
+  text: Is dead or unreachable code removed?
+  canonical_term: Code quality
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+- id: shared_predicates.software_construction_practical_considerations.08
+  section: software_construction_practical_considerations
+  section_ordinal: 8
+  doc_ordinal: 35
+  text: Is the operation safe to run twice?
+  canonical_term: Idempotence
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+- id: shared_predicates.software_construction_practical_considerations.09
+  section: software_construction_practical_considerations
+  section_ordinal: 9
+  doc_ordinal: 36
+  text: Does this introduce a dead name — a term retired elsewhere in the system?
+  canonical_term: Naming conventions
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: E. Software Construction — practical considerations
+    domain: SWEBOK Software Construction (Practical Considerations) / SE2014 CMP
+  binds_to:
+    key: canonical_name_registry
+    label: canonical name registry
+- id: shared_predicates.software_requirements.01
+  section: software_requirements
+  section_ordinal: 1
+  doc_ordinal: 37
+  text: Is the requirement stated as what, not how, before construction?
+  canonical_term: Requirements specification
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: F. Software Requirements
+    domain: 'SWEBOK Software Requirements / SE2014 REQ / CS2023 SE: Requirements Engineering'
+- id: shared_predicates.software_requirements.02
+  section: software_requirements
+  section_ordinal: 2
+  doc_ordinal: 38
+  text: Is there an acceptance criterion that can be checked?
+  canonical_term: Verifiable requirements
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: F. Software Requirements
+    domain: 'SWEBOK Software Requirements / SE2014 REQ / CS2023 SE: Requirements Engineering'
+- id: shared_predicates.software_requirements.03
+  section: software_requirements
+  section_ordinal: 3
+  doc_ordinal: 39
+  text: Are non-functional requirements (performance, security, reliability) explicit?
+  canonical_term: Quality attributes / non-functional requirements
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: F. Software Requirements
+    domain: 'SWEBOK Software Requirements / SE2014 REQ / CS2023 SE: Requirements Engineering'
+- id: shared_predicates.software_requirements.04
+  section: software_requirements
+  section_ordinal: 4
+  doc_ordinal: 40
+  text: Is this change traceable to a requirement or decision?
+  canonical_term: Requirements tracing
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: F. Software Requirements
+    domain: 'SWEBOK Software Requirements / SE2014 REQ / CS2023 SE: Requirements Engineering'
+  binds_to:
+    key: task_adr_reference
+    label: task / ADR reference
+- id: shared_predicates.software_requirements.05
+  section: software_requirements
+  section_ordinal: 5
+  doc_ordinal: 41
+  text: Is the scope bounded to the stated requirement and not a speculative future one?
+  canonical_term: Requirements validation / scope
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: F. Software Requirements
+    domain: 'SWEBOK Software Requirements / SE2014 REQ / CS2023 SE: Requirements Engineering'
+- id: shared_predicates.verification_and_validation.01
+  section: verification_and_validation
+  section_ordinal: 1
+  doc_ordinal: 42
+  text: Is there a unit test that exercises this change?
+  canonical_term: Unit testing
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: G. Verification and Validation
+    domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+- id: shared_predicates.verification_and_validation.02
+  section: verification_and_validation
+  section_ordinal: 2
+  doc_ordinal: 43
+  text: Is the touched boundary covered by an integration test?
+  canonical_term: Integration testing
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: G. Verification and Validation
+    domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+- id: shared_predicates.verification_and_validation.03
+  section: verification_and_validation
+  section_ordinal: 3
+  doc_ordinal: 44
+  text: Does the existing suite still pass?
+  canonical_term: Regression testing
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: G. Verification and Validation
+    domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+- id: shared_predicates.verification_and_validation.04
+  section: verification_and_validation
+  section_ordinal: 4
+  doc_ordinal: 45
+  text: Are failure paths and edge cases tested, not only the happy path?
+  canonical_term: Boundary-value analysis, error guessing
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: G. Verification and Validation
+    domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+- id: shared_predicates.verification_and_validation.05
+  section: verification_and_validation
+  section_ordinal: 5
+  doc_ordinal: 46
+  text: Is static analysis / lint clean?
+  canonical_term: Static analysis
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: G. Verification and Validation
+    domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+- id: shared_predicates.verification_and_validation.06
+  section: verification_and_validation
+  section_ordinal: 6
+  doc_ordinal: 47
+  text: Has the change been reviewed or inspected?
+  canonical_term: Reviews and inspections
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: G. Verification and Validation
+    domain: 'SWEBOK Software Testing, Software Quality / SE2014 VAV / CS2023 SE: Software Verification and Validation'
+- id: shared_predicates.software_quality_and_maintenance.01
+  section: software_quality_and_maintenance
+  section_ordinal: 1
+  doc_ordinal: 48
+  text: Does this preserve or improve maintainability (analyzability, modifiability, testability)?
+  canonical_term: Maintainability quality attributes
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: H. Software Quality and Maintenance
+    domain: 'SWEBOK Software Quality, Software Maintenance / SE2014 QUA / CS2023 SE: Refactoring and Code Evolution'
+- id: shared_predicates.software_quality_and_maintenance.02
+  section: software_quality_and_maintenance
+  section_ordinal: 2
+  doc_ordinal: 49
+  text: If technical debt is introduced, is it recorded?
+  canonical_term: Technical debt
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: H. Software Quality and Maintenance
+    domain: 'SWEBOK Software Quality, Software Maintenance / SE2014 QUA / CS2023 SE: Refactoring and Code Evolution'
+  binds_to:
+    key: debt_register
+    label: debt register
+- id: shared_predicates.software_quality_and_maintenance.03
+  section: software_quality_and_maintenance
+  section_ordinal: 3
+  doc_ordinal: 50
+  text: If this is a refactoring, is it behavior-preserving?
+  canonical_term: Refactoring
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: H. Software Quality and Maintenance
+    domain: 'SWEBOK Software Quality, Software Maintenance / SE2014 QUA / CS2023 SE: Refactoring and Code Evolution'
+- id: shared_predicates.software_quality_and_maintenance.04
+  section: software_quality_and_maintenance
+  section_ordinal: 4
+  doc_ordinal: 51
+  text: Is the change's blast radius identified (what else depends on this)?
+  canonical_term: Impact analysis
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: H. Software Quality and Maintenance
+    domain: 'SWEBOK Software Quality, Software Maintenance / SE2014 QUA / CS2023 SE: Refactoring and Code Evolution'
+- id: shared_predicates.software_configuration_management.01
+  section: software_configuration_management
+  section_ordinal: 1
+  doc_ordinal: 52
+  text: Is the change on a version-controlled branch with a descriptive commit?
+  canonical_term: Configuration control
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: I. Software Configuration Management
+    domain: SWEBOK Software Configuration Management / SE2014 PRO, PRF
+- id: shared_predicates.software_configuration_management.02
+  section: software_configuration_management
+  section_ordinal: 2
+  doc_ordinal: 53
+  text: Are dependencies and toolchain versions identified and pinned?
+  canonical_term: Configuration identification
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: I. Software Configuration Management
+    domain: SWEBOK Software Configuration Management / SE2014 PRO, PRF
+- id: shared_predicates.software_configuration_management.03
+  section: software_configuration_management
+  section_ordinal: 3
+  doc_ordinal: 54
+  text: Is the build reproducible from a clean checkout?
+  canonical_term: Build management
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: I. Software Configuration Management
+    domain: SWEBOK Software Configuration Management / SE2014 PRO, PRF
+- id: shared_predicates.software_configuration_management.04
+  section: software_configuration_management
+  section_ordinal: 4
+  doc_ordinal: 55
+  text: Is the version bumped where the public surface changed?
+  canonical_term: Release management
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: I. Software Configuration Management
+    domain: SWEBOK Software Configuration Management / SE2014 PRO, PRF
+- id: shared_predicates.software_engineering_process.01
+  section: software_engineering_process
+  section_ordinal: 1
+  doc_ordinal: 56
+  text: Is the definition of done for this task explicit?
+  canonical_term: Process definition
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: J. Software Engineering Process
+    domain: 'SWEBOK Software Engineering Process / SE2014 PRO / CS2023 SE: Software Project Management'
+- id: shared_predicates.software_engineering_process.02
+  section: software_engineering_process
+  section_ordinal: 2
+  doc_ordinal: 57
+  text: Is the work sized as a small, reviewable increment?
+  canonical_term: Incremental process
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: J. Software Engineering Process
+    domain: 'SWEBOK Software Engineering Process / SE2014 PRO / CS2023 SE: Software Project Management'
+- id: shared_predicates.software_engineering_process.03
+  section: software_engineering_process
+  section_ordinal: 3
+  doc_ordinal: 58
+  text: Is the project mature enough that the existing file tree must be read before anything is written?
+  canonical_term: Maturity gate
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: J. Software Engineering Process
+    domain: 'SWEBOK Software Engineering Process / SE2014 PRO / CS2023 SE: Software Project Management'
+- id: shared_predicates.software_engineering_process.04
+  section: software_engineering_process
+  section_ordinal: 4
+  doc_ordinal: 59
+  text: Is the operator expected to be involved at this decision point?
+  canonical_term: Operator involvement
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: J. Software Engineering Process
+    domain: 'SWEBOK Software Engineering Process / SE2014 PRO / CS2023 SE: Software Project Management'
+- id: shared_predicates.software_security.01
+  section: software_security
+  section_ordinal: 1
+  doc_ordinal: 60
+  text: Is input validated at the trust boundary?
+  canonical_term: Input validation
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: K. Software Security
+    domain: SWEBOK Software Security / SE2014 SEC / CS2023 SEC
+- id: shared_predicates.software_security.02
+  section: software_security
+  section_ordinal: 2
+  doc_ordinal: 61
+  text: Are secrets kept out of source and logs?
+  canonical_term: Secure coding practices
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: K. Software Security
+    domain: SWEBOK Software Security / SE2014 SEC / CS2023 SEC
+- id: shared_predicates.software_security.03
+  section: software_security
+  section_ordinal: 3
+  doc_ordinal: 62
+  text: Is least privilege applied to any new access?
+  canonical_term: Least privilege
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: K. Software Security
+    domain: SWEBOK Software Security / SE2014 SEC / CS2023 SEC
+- id: shared_predicates.software_security.04
+  section: software_security
+  section_ordinal: 4
+  doc_ordinal: 63
+  text: Does this change widen the attack surface — new endpoints, inputs, permissions, or dependencies exposed?
+  canonical_term: Attack surface
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: K. Software Security
+    domain: SWEBOK Software Security / SE2014 SEC / CS2023 SEC
+- id: shared_predicates.professional_practice.01
+  section: professional_practice
+  section_ordinal: 1
+  doc_ordinal: 64
+  text: Is the rationale for this decision recorded where the next person will find it?
+  canonical_term: Documentation and communication
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: L. Professional Practice
+    domain: SWEBOK Software Engineering Professional Practice / SE2014 PRF
+- id: shared_predicates.professional_practice.02
+  section: professional_practice
+  section_ordinal: 2
+  doc_ordinal: 65
+  text: Would a new contributor find this discoverable without being told where to look?
+  canonical_term: Documentation and communication
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: L. Professional Practice
+    domain: SWEBOK Software Engineering Professional Practice / SE2014 PRF
+- id: shared_predicates.algorithmic_foundations.01
+  section: algorithmic_foundations
+  section_ordinal: 1
+  doc_ordinal: 66
+  text: Is the time and space complexity acceptable for the expected input size?
+  canonical_term: Complexity analysis
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: M. Algorithmic Foundations
+    domain: CS2023 Algorithmic Foundations (AL) / SE2014 CMP
+- id: shared_predicates.algorithmic_foundations.02
+  section: algorithmic_foundations
+  section_ordinal: 2
+  doc_ordinal: 67
+  text: Is the chosen data structure right for the dominant access pattern?
+  canonical_term: Data structure selection
+  source:
+    doc_id: 1c-HSBhxLY-z-A6xn_owLsi47HD10_sIa0FPHZqq0IB4
+    section: M. Algorithmic Foundations
+    domain: CS2023 Algorithmic Foundations (AL) / SE2014 CMP

@@ -1,0 +1,7 @@
+{
+  "minimumCases": 13,
+  "minimumAccuracy": 1.0,
+  "maximumPolicyViolations": 0,
+  "maximumInvalidOutputs": 0,
+  "maximumP95Seconds": 20
+}

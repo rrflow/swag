@@ -1,0 +1,22 @@
+schema_version: 1
+policy:
+  shared_section_gating_overrides:
+    software_design_key_issues: on_every_boundary
+    software_engineering_process: on_every_boundary
+    software_security: on_every_boundary
+    professional_practice: on_every_boundary
+
+  shared_section_default_citations:
+    software_design_principles: SWEBOK Software Design; SE2014 DES; CS2023 Software Design
+    software_design_key_issues: SWEBOK Software Design (Key Issues); SE2014 DES
+    software_architecture: SWEBOK Software Architecture; SE2014 DES; CS2023 Software Design
+    software_construction_fundamentals: SWEBOK Software Construction; SE2014 CMP/DES; CS2023 Software Construction
+    software_construction_practical_considerations: SWEBOK Software Construction (Practical Considerations); SE2014 CMP
+    software_requirements: SWEBOK Software Requirements; SE2014 REQ; CS2023 Requirements Engineering
+    verification_and_validation: SWEBOK Software Testing and Quality; SE2014 VAV; CS2023 Verification and Validation
+    software_quality_and_maintenance: SWEBOK Software Quality and Maintenance; SE2014 QUA; CS2023 Refactoring and Evolution
+    software_configuration_management: SWEBOK Software Configuration Management; SE2014 PRO/PRF
+    software_engineering_process: SWEBOK Software Engineering Process; SE2014 PRO; CS2023 Software Project Management
+    software_security: SWEBOK Software Security; SE2014 SEC; CS2023 Security
+    professional_practice: SWEBOK Software Engineering Professional Practice; SE2014 PRF
+    algorithmic_foundations: CS2023 Algorithmic Foundations; SE2014 CMP

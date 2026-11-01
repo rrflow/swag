@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: c
+  kind: stack
+  stack: c
+  stack_field_in_source: c
+source:
+  doc_id: null
+  title: "Stack — C: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: ISO C guidance, CERT C Secure Coding, GCC/Clang diagnostics and sanitizers.
+sections:
+- key: toolchain_and_build
+  source_heading: Toolchain and Build
+  title: Toolchain and Build
+- key: memory_and_lifetime
+  source_heading: Memory and Lifetime
+  title: Memory and Lifetime
+- key: api_and_headers
+  source_heading: API and Headers
+  title: API and Headers
+- key: errors_and_bounds
+  source_heading: Errors and Bounds
+  title: Errors and Bounds
+- key: testing_and_portability
+  source_heading: Testing and Portability
+  title: Testing and Portability
+questions:
+- id: c.toolchain_and_build.01
+  section: toolchain_and_build
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are compiler warnings maximized and treated as errors for production builds?
+  citation: GCC/Clang warning discipline
+  source: { reference: https://gcc.gnu.org/onlinedocs/, section: warning options }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: c.toolchain_and_build.02
+  section: toolchain_and_build
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are sanitizers (address/undefined/thread as applicable) part of CI validation?
+  citation: Sanitizer-based correctness
+  source: { reference: https://clang.llvm.org/docs/UsersManual.html, section: sanitizer flags }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: c.memory_and_lifetime.01
+  section: memory_and_lifetime
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Is ownership of every allocated buffer explicit, with one clear free path per allocation?
+  citation: Memory ownership discipline
+  source: { reference: https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard, section: dynamic memory rules }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: c.memory_and_lifetime.02
+  section: memory_and_lifetime
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are pointer aliasing and lifetime assumptions documented at module boundaries?
+  citation: Pointer safety and UB prevention
+  source: { reference: https://en.cppreference.com/w/c/language/pointer, section: pointer semantics }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: c.api_and_headers.01
+  section: api_and_headers
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Do headers expose only stable interfaces and avoid leaking private struct internals by default?
+  citation: Encapsulation in C APIs
+  source: { reference: https://www.gnu.org/prep/standards/, section: header/interface conventions }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: c.api_and_headers.02
+  section: api_and_headers
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are include guards and translation-unit boundaries consistent to prevent ODR-style conflicts and macro collisions?
+  citation: Header hygiene
+  source: { reference: https://gcc.gnu.org/onlinedocs/cpp/, section: include guards and macros }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: c.errors_and_bounds.01
+  section: errors_and_bounds
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are all external input lengths validated before copy/parse operations, with overflow-safe arithmetic?
+  citation: Buffer overflow prevention
+  source: { reference: https://wiki.sei.cmu.edu/confluence/display/c, section: bounds and integer safety rules }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: c.errors_and_bounds.02
+  section: errors_and_bounds
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Is error propagation consistent (return codes/errno/status objects) and never silently ignored?
+  citation: Error handling consistency
+  source: { reference: https://man7.org/linux/man-pages/man3/errno.3.html, section: errno usage }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: c.testing_and_portability.01
+  section: testing_and_portability
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are portability assumptions (endianness, width, alignment, compiler extensions) tested or guarded explicitly?
+  citation: Portability and undefined behavior controls
+  source: { reference: https://en.cppreference.com/w/c/language/conversion, section: integer and platform behavior }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: c.testing_and_portability.02
+  section: testing_and_portability
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are boundary and fuzz tests in place for parsing and memory-intensive code paths?
+  citation: Fuzzing for native code
+  source: { reference: https://llvm.org/docs/LibFuzzer.html, section: fuzz target design }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

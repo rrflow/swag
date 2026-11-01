@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: java
+  kind: stack
+  stack: java
+  stack_field_in_source: java
+source:
+  doc_id: null
+  title: "Stack — Java: Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: Java 21 LTS+, Maven/Gradle, and Oracle/OpenJDK best practices.
+sections:
+- key: build_and_dependencies
+  source_heading: Build and Dependencies
+  title: Build and Dependencies
+- key: api_and_domain_design
+  source_heading: API and Domain Design
+  title: API and Domain Design
+- key: null_safety_and_errors
+  source_heading: Null Safety and Errors
+  title: Null Safety and Errors
+- key: concurrency_and_transactions
+  source_heading: Concurrency and Transactions
+  title: Concurrency and Transactions
+- key: testing_and_observability
+  source_heading: Testing and Observability
+  title: Testing and Observability
+questions:
+- id: java.build_and_dependencies.01
+  section: build_and_dependencies
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Are Java and toolchain versions pinned and reproducible across local and CI environments?
+  citation: Java toolchain reproducibility
+  source: { reference: https://maven.apache.org/, section: build reproducibility }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: java.build_and_dependencies.02
+  section: build_and_dependencies
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are dependencies managed with explicit versions and vulnerability scanning in the build pipeline?
+  citation: Dependency hygiene
+  source: { reference: https://docs.gradle.org/, section: dependency management }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: java.api_and_domain_design.01
+  section: api_and_domain_design
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are DTOs, domain models, and persistence entities separated to avoid accidental coupling?
+  citation: Layered architecture and separation of concerns
+  source: { reference: https://martinfowler.com/bliki/AnemicDomainModel.html, section: domain model boundaries }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: java.api_and_domain_design.02
+  section: api_and_domain_design
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are public APIs backward-compatible or versioned when behavior/contract changes are introduced?
+  citation: API evolution practices
+  source: { reference: https://openjdk.org/, section: compatibility guidelines }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: java.null_safety_and_errors.01
+  section: null_safety_and_errors
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Is null handling explicit at boundaries, with Optional used intentionally rather than as a blanket replacement?
+  citation: Optional usage guidance
+  source: { reference: https://docs.oracle.com/en/java/, section: Optional best practices }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: java.null_safety_and_errors.02
+  section: null_safety_and_errors
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Is exception taxonomy intentional (checked vs unchecked) with errors translated at service boundaries?
+  citation: Exception handling design
+  source: { reference: https://docs.oracle.com/javase/tutorial/essential/exceptions/, section: exception architecture }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: java.concurrency_and_transactions.01
+  section: concurrency_and_transactions
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are shared mutable states minimized and protected with clear thread-safety contracts?
+  citation: Java concurrency principles
+  source: { reference: https://docs.oracle.com/javase/tutorial/essential/concurrency/, section: synchronization and state safety }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: java.concurrency_and_transactions.02
+  section: concurrency_and_transactions
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Are transaction boundaries defined at use-case level to ensure consistency and rollback correctness?
+  citation: Transaction boundary discipline
+  source: { reference: https://jakarta.ee/specifications/transactions/, section: transaction demarcation }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: java.testing_and_observability.01
+  section: testing_and_observability
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are unit and integration tests separated, deterministic, and representative of boundary contracts?
+  citation: JUnit testing structure
+  source: { reference: https://junit.org/junit5/docs/current/user-guide/, section: test organization }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: java.testing_and_observability.02
+  section: testing_and_observability
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are logs structured with correlation IDs and are key operational metrics exported for production diagnosis?
+  citation: Production observability
+  source: { reference: https://opentelemetry.io/docs/languages/java/, section: tracing and metrics }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

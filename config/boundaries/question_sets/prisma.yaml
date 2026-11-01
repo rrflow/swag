@@ -1,0 +1,111 @@
+schema_version: 1
+question_set:
+  key: prisma
+  kind: stack
+  stack: prisma
+  stack_field_in_source: prisma
+source:
+  doc_id: null
+  title: "Stack — Prisma ORM (TypeScript): Curriculum and Boundary Questions (Draft v0.1)"
+  version: v0.1
+  status: Draft
+  owner: hades
+  export_date: "2026-10-19"
+  authored_against: Prisma ORM and Prisma Migrate official docs.
+sections:
+- key: schema_and_migrations
+  source_heading: Schema and Migrations
+  title: Schema and Migrations
+- key: client_usage_and_safety
+  source_heading: Client Usage and Safety
+  title: Client Usage and Safety
+- key: performance_and_query_shape
+  source_heading: Performance and Query Shape
+  title: Performance and Query Shape
+- key: transactions_and_consistency
+  source_heading: Transactions and Consistency
+  title: Transactions and Consistency
+- key: operations_and_testing
+  source_heading: Operations and Testing
+  title: Operations and Testing
+questions:
+- id: prisma.schema_and_migrations.01
+  section: schema_and_migrations
+  section_ordinal: 1
+  doc_ordinal: 1
+  text: Is schema.prisma treated as the canonical data model, with migrations generated and reviewed before apply?
+  citation: Prisma schema and migrate flow
+  source: { reference: https://www.prisma.io/docs/orm/prisma-schema, section: data model source of truth }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: prisma.schema_and_migrations.02
+  section: schema_and_migrations
+  section_ordinal: 2
+  doc_ordinal: 2
+  text: Are migration commands separated by environment (dev vs deploy) to prevent accidental destructive drift in production?
+  citation: Prisma migrate deploy discipline
+  source: { reference: https://www.prisma.io/docs/orm/prisma-migrate, section: migrate dev vs migrate deploy }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: prisma.client_usage_and_safety.01
+  section: client_usage_and_safety
+  section_ordinal: 1
+  doc_ordinal: 3
+  text: Are Prisma Client calls constrained to repository/data-access boundaries rather than scattered through UI/service layers?
+  citation: Data access boundary cohesion
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client, section: client usage patterns }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: prisma.client_usage_and_safety.02
+  section: client_usage_and_safety
+  section_ordinal: 2
+  doc_ordinal: 4
+  text: Are raw SQL APIs used only when required, with parameter binding and explicit review for injection risk?
+  citation: Raw query safety
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client/using-raw-sql, section: safe raw queries }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: prisma.performance_and_query_shape.01
+  section: performance_and_query_shape
+  section_ordinal: 1
+  doc_ordinal: 5
+  text: Are relation loading strategies (select/include) chosen intentionally to avoid N+1 query patterns?
+  citation: Query optimization
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client/queries/relation-queries, section: include/select patterns }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: prisma.performance_and_query_shape.02
+  section: performance_and_query_shape
+  section_ordinal: 2
+  doc_ordinal: 6
+  text: Are pagination and filtering indexed and bounded for all externally reachable list/query endpoints?
+  citation: Pagination and indexing discipline
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client/queries/pagination, section: cursor/offset pagination }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: prisma.transactions_and_consistency.01
+  section: transactions_and_consistency
+  section_ordinal: 1
+  doc_ordinal: 7
+  text: Are multi-step write workflows using Prisma transactions with explicit failure and retry behavior?
+  citation: Prisma transaction API
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client/queries/transactions, section: transaction patterns }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: prisma.transactions_and_consistency.02
+  section: transactions_and_consistency
+  section_ordinal: 2
+  doc_ordinal: 8
+  text: Is isolation-level behavior understood for correctness-sensitive workflows (financial, inventory, authorization)?
+  citation: Isolation and consistency guarantees
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client/queries/transactions#transaction-isolation-level, section: isolation level }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: false }
+- id: prisma.operations_and_testing.01
+  section: operations_and_testing
+  section_ordinal: 1
+  doc_ordinal: 9
+  text: Are integration tests run against a real database instance with migrations applied from scratch?
+  citation: Migration-backed integration testing
+  source: { reference: https://www.prisma.io/docs/orm/prisma-client/testing, section: database testing }
+  maturity: { greenfield: true, growing: true, mandatory_at_mature: false }
+- id: prisma.operations_and_testing.02
+  section: operations_and_testing
+  section_ordinal: 2
+  doc_ordinal: 10
+  text: Are Prisma engine/client versions pinned and upgrade-tested to catch query-planner and migration behavior shifts?
+  citation: Version governance
+  source: { reference: https://www.prisma.io/docs/orm/reference/prisma-cli-reference, section: versioning and upgrade }
+  maturity: { greenfield: false, growing: true, mandatory_at_mature: true }

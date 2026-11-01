@@ -1,0 +1,63 @@
+# SUPERSEDED: historical experiment, not an active deployment recommendation.
+# See swag_28b_tuning_plan.template.yaml and docs/current-context.md.
+schema_version: 1
+status: superseded_unqualified
+description: >
+  Experimental fast-path profile for a 28B-class System-One controller tuned for
+  controller routing and decision-quality work under aggressive memory constraints.
+  This is not a blanket replacement for 14B; it is a high-upside optimization route
+  to benchmark when memory and latency targets are strict.
+
+profile_key: fast_28b_controller
+model_tier: "27-28b"
+controller_role: >
+  Deep reasoning and high-risk route for architecture, security, incident, and
+  long-context project work when the controller must be more careful than the
+  14B baseline.
+
+runtime:
+  target_memory_gb: [6, 9]
+  target_memory_mode: low_vram_quantized
+  quantization: awq
+  precision: float16
+  device: cuda
+  tensor_parallel_size: 1
+  use_lora: true
+  max_context_tokens: 4096
+  enable_kv_cache_optimization: true
+  enable_flash_attention: true
+  offload_layers: 0
+  use_4bit_weights: false
+  note: >
+    Historical 6-9GB target was not demonstrated. Do not use this profile for
+    current training or serving; the selected experiment starts in BF16.
+
+training:
+  objective: >
+    Optimize the 28B controller for routing precision and decision-quality under
+    strict low-latency and memory constraints.
+  preferred_training_strategy: lora_then_merge
+  expected_outcome: >
+    In the best case, a tuned 28B controller can outperform the default 14B route
+    on the hardest architecture/security/incident tasks while still staying on a
+    fast, low-memory runtime profile.
+  quality_gate:
+    win_condition: >
+      28B must outperform 14B on a scenario-weighted set of high-risk tasks while
+      remaining within the runtime budget and not increasing failure rate.
+    min_delta_over_14b: 0.02
+    max_runtime_budget_seconds: 180
+
+routing_policy:
+  default_override: false
+  use_only_when:
+    - requires_deep_reasoning
+    - high_risk_decision
+    - architecture
+    - security
+    - incident
+    - migration
+    - compliance
+  fallback_if_memory_unavailable: "14b"
+  preferred_default_controller: "14b"
+  current_status: experimental
