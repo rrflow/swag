@@ -23,7 +23,37 @@ roadmap owns engine dependency order and gate completion.
 - One bounded package per PR, required checks and protected landing. Preserve
   failures. Local scripts, configurations and dev binaries do not prove distribution.
 
-## Current execution, 31 October
+## Developer-build execution, 1 November
+
+Deliver one matched developer bundle before public distribution. RRFlow remains
+the execution authority; this plan coordinates integration and cannot close its
+roadmap gates. The longer-term real-task, reviewed-learning, model-comparison,
+native/container and measured-memory goals remain in scope.
+
+| Order | Work | Required exit evidence |
+|---|---|---|
+| 1 | Reconcile sender PR235 with accepted RRFlow main, regenerate the canonical public projections, validate and land through protected CI. | No unresolved conflicts, retained behavior from both parents, exact candidate and merge receipts. The old 23-pass run qualifies only `ebeecabb`. |
+| 2 | Integrate worker PR229, recovery PR230, discovery PR231 and Connectome PR30 in dependency order. Resolve the worker publication hold before its rejected actions. | Required checks on each final head, accepted source, regenerated SDK parity and no client-owned execution state. |
+| 3 | Assemble one versioned native developer bundle from accepted engine/UI source using the landed packaging tooling. Configure the BF16 endpoint and credentials explicitly. | Build/manifest/checksum verification, clean-start instructions, authenticated readiness, actual routing/handoff and restart readback. Model weights and serving memory are reported separately. |
+| 4 | Implement the missing governed project-effect path under D-06/I-03/I-07, then exercise the owner's real task through the same public engine/UI operations. | Exact approved change matches independent artifact inspection; ordinary edits require scoped replanning; recovery avoids duplicate effects; RROFLOW retains correlated outcomes. Draft text alone cannot pass. |
+| 5 | Admit independently reviewed real outcomes; compare original Qwen, custom BF16 and its quantized derivative under one frozen protocol. | Explicit data permission, held-out evidence, artifact lineage, measured serving footprint and no automatic promotion from model-generated labels. |
+| 6 | Qualify container delivery and public release. | Reproducible image/binary provenance, clean installation, upgrades/rollback, credential isolation and the complete user workflow. |
+
+Current action: PR235 publishes ordinary merge `b856a8fb`, incorporating accepted
+main `daec1f1a` and resolving the 19 OpenAPI/projection conflicts. Local validation
+passes; [candidate 41342695388](https://github.com/rrflow/rrflow-development/actions/runs/41342695388)
+is queued and normal automatic merge is enabled. Candidate and protected
+acceptance remain pending. The linked journal
+records 165 contract/adapter passes, 499 reported owning-suite passes, four
+ignored cases and one SDK entry lacking its live-daemon manifest, plus build,
+lint, TypeScript and repository checks. PR190/232 and packaging PR212 have landed.
+SWAG itself has local
+commit `3a5b337` and no configured remote; its delivery repository is requested,
+not inferred. The owner is also asked for a real task and acceptance criteria;
+that answer grants no training permission. The latest local checkout check
+passed 97 Python tests and six TypeScript viewer tests.
+
+## Earlier execution, 31 October
 
 Latest receiver package: RROFLOW PR43 merged as `d552e8ab`, from `b4c04cee`, with typed
 engine-observation references in its existing immutable capture API. Local
@@ -40,7 +70,7 @@ implementation and CI/test corrections at `ebeecabb9815a891611f312c99bfa0afe5afe
 It is ready for review, with the full
 [candidate pipeline](https://github.com/rrflow/rrflow-development/actions/runs/41263686147)
 complete with all 23 jobs successful. PR235 is queued for protected acceptance
-(position 3 observed on 1 November, 02:52 UTC), not yet merged. The previous run
+(position 3 observed on 1 November, 02:52 UTC), not yet merged.
 The queue now reports generated catalogue/SDK conflicts with its preceding
 entries. Their protected runs are live; reconcile actual landed source and
 regenerate projections before qualifying a successor. Preserve the successful

@@ -1,6 +1,6 @@
 # Deployment readiness
 
-Assessment checked 31 October 2026. SWAG is an engineering preview. The current
+Assessment checked 1 November 2026. SWAG is an engineering preview. The current
 evidence supports continued development and controlled testing, not a public
 release or a qualified routing model.
 
@@ -40,9 +40,9 @@ release or a qualified routing model.
 4. Validate native and container installation on clean environments, upgrades,
    rollback, configured credentials, resource limits and failure recovery.
    Produce versioned distribution artifacts with checksums and release evidence.
-5. Put the local SWAG changes into the intended version-controlled delivery
-   repository. This checkout has no Git metadata; local corrections are not
-   published, merged or reproducible release artifacts yet.
+5. Connect the local SWAG repository to the owner's intended delivery repository.
+   This checkout now has Git history starting at `3a5b337`, but no configured
+   remote. Local commits are not published or reproducible release artifacts.
 
 The RROFLOW engine-correlation receiver merged through
 [PR43](https://github.com/rrflow/rroflow-development/pull/43) as
@@ -89,17 +89,23 @@ and acceptance requirements, not merely a missing demonstration.
 ## Current engineering gap
 
 The engine sender implementation is published in
-[PR235](https://github.com/rrflow/rrflow-development/pull/235) at
-`ebeecabb9815a891611f312c99bfa0afe5afee9e`. The PR is ready and the full
+[PR235](https://github.com/rrflow/rrflow-development/pull/235), now at
+`b856a8fb08200c9117d759c43f9eaad0ec55ef77`. Its earlier `ebeecabb` head's full
 [candidate pipeline](https://github.com/rrflow/rrflow-development/actions/runs/41263686147)
 completed all 23 jobs successfully. PR235 entered the protected merge queue at
 position 3 on 1 November, 02:52 UTC; protected acceptance and merge remain pending.
-The queue reports `UNMERGEABLE` against the entries ahead, although the PR remains
-mergeable against current main. Previewing that queued prefix finds 19 conflicts
-in the OpenAPI digest and generated SDK/reference outputs. Wait for the actual
-predecessor landing, reconcile accepted source and regenerate projections, then
-qualify the resulting candidate. Re-enqueuing unchanged source cannot resolve
-those conflicts. The passing run remains evidence for `ebeecabb` only.
+The queue reported `UNMERGEABLE` against the entries ahead. PR190, PR232 and
+packaging PR212 have since landed. The published ordinary integration of accepted
+main `daec1f1a` resolves the 19 OpenAPI digest and generated SDK/reference
+conflicts, regenerates the canonical projections and preserves both parents'
+behavior. Local contract/adapter, owning-suite, binary build, lint, TypeScript
+and repository checks pass. GitHub reports the PR mergeable; new candidate and
+protected acceptance remain pending. New
+[candidate 41342695388](https://github.com/rrflow/rrflow-development/actions/runs/41342695388)
+is queued, with normal automatic merge enabled for the exact head. The old
+passing run remains evidence for `ebeecabb` only. Follow the
+[developer-build execution plan](implementation-plan.md#developer-build-execution-1-november)
+for the remaining dependency order and evidence requirements.
 The original candidate
 exposed missing adapter CI coverage, stale generated storage-test digests and two
 recovery-test timestamp assumptions. The correction retains every failing log,
