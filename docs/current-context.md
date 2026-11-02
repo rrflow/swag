@@ -13,6 +13,12 @@ total-memory measurement or completed UI task is claimed. Observation PR235 has
 merged with protected CI success; discovery PR248 and worker PR229 remain drafts
 at this inspection. See the plan and owning PRs before using older status below.
 
+The owner's next compression targets are 15 GB total serving memory, then 9 GB
+if controller quality and useful performance can be preserved. The first target
+remains 29 GB. These supersede the older 19 GB aspiration below; none is measured
+or guaranteed. The research plan distinguishes same-checkpoint quantization from
+smaller-model distillation and requires RRFlow-owned artifact/promotion workflows.
+
 ## SWAG developer interface, 2 November
 
 Fresh cluster access is restored. A full declared-file hash check passed for

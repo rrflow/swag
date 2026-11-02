@@ -88,6 +88,46 @@ the target before freezing. On unified-memory hardware, document non-overlapping
 accounting; do not add overlapping host RSS and GPU allocations. Weight file size,
 training allocator peaks and idle residency cannot prove total serving footprint.
 
+## Compression targets: 29 GB, 15 GB, then 9 GB
+
+Owner update, 2 November: retain 29 GB as the first total-serving milestone, add
+15 GB as the next research target and 9 GB as a stretch target. Preserve controller
+quality and useful latency/throughput under the same declared workload. These are
+experiments, not promises of equal general-purpose model capability or identical
+outputs. Freeze acceptable task-success, handoff, risk/coverage and performance
+margins before evaluation; never relax them merely to meet a smaller footprint.
+
+The retained base manifest identifies
+[`Qwen3-Coder-30B-A3B-Instruct`](https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct).
+For an illustrative 30 billion stored parameters, ideal packed weights alone are
+60 GB at 16 bits, 30 GB at 8 bits, 15 GB at 4 bits, 11.25 GB at 3 bits and 7.5 GB at
+2 bits. Actual parameter count, quantization scales/metadata, unquantized tensors,
+runtime allocations, activations and KV cache increase these figures. Short
+decision outputs can reduce generation/cache work; they do not remove model weights.
+Thus 4-bit weights alone do not establish a 15 GB total-serving build, and 3-bit
+weights alone already exceed a 9 GB total budget for this approximate model size.
+
+Investigate calibrated mixed-precision/post-training quantization first, then
+quantization-aware adaptation if justified by development results. For 9 GB,
+compare aggressive compression with distillation into a smaller specialist;
+distillation is a separate artifact family, not the same-checkpoint quantized arm.
+[QuIP](https://arxiv.org/abs/2307.13304) provides research evidence that 2-bit
+post-training quantization can produce viable models on its tested settings; it
+does not prove Qwen compatibility, GB10 kernel support or unchanged SWAG quality.
+[BitNet b1.58](https://arxiv.org/abs/2402.17764) concerns a low-bit model/training
+recipe, not a guaranteed lossless conversion of the current BF16 checkpoint.
+
+RRFlow should own compression/training job admission, immutable parent/recipe/data
+identities, resource limits, verification, promotion and rollback. The serving
+runtime must supply the actual quantized kernels and cache behavior. Disk formats
+and sharding do not alone reduce total resident memory; account for every worker
+and offloaded allocation rather than quoting only the smallest device footprint.
+
+Tune compression on development data. Predeclare final candidate arms and targets
+before opening acceptance results; do not repeatedly tune against the same exposed
+holdout. The existing evaluator accepts an explicit frozen byte target, so none of
+these sizes requires a hardcoded provider rule or a new default acceptance limit.
+
 ## Implementation sequence and remaining integration
 
 1. **This package:** strict outcome/review JSONL, independently reviewed admission,
