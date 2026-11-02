@@ -2,6 +2,7 @@ export type Measurement = { operation: string; samples: number; errors: number; 
 export type TrainingProgress = { state: 'not_recorded' | 'saved_state' | 'observed_progress' | 'invalid_state'; globalStep: number | null; maxSteps: number | null; points: { step: number; loss?: number; eval_loss?: number }[]; pointsOmitted?: number; lastObservedAt?: string | null; lastObservation?: string | null; lastErrorType?: string | null; incompleteTail?: boolean };
 export type TrainingArtifact = { state: 'not_recorded' | 'invalid_manifest' | 'manifest_recorded'; verification: 'not_recorded' | 'past_receipt_matches_manifest' | 'invalid_or_stale_receipt'; declaredWeightBytes?: number; manifestSha256?: string; verifiedAt?: string; model?: string | null };
 export type DevStatus = { schema: 'swag.dev-status/v1'; observedAt: string;
+  modelEndpoint?: { state: string; modelListed: boolean; modelId?: string; manifestSha256?: string; loadedWeightsVerified: false; inferencePerformed: false; qualified: false };
   engine: { state: string; authenticated: boolean; instanceId?: string };
   observability: { files: number; invalidFiles: number; incompleteSpans: number; measurements: Measurement[]; recentFailures: { traceId: string; operation: string; timestamp: string; errorType: string }[] };
   training: { dataset: { state: string; counts: Record<string, number> | null; manifestSha256: string | null }; launchAvailable: false; registryState: string; runs: { id: string; state: string; metrics: Record<string, number>; model?: string | null; modelRevision?: string | null; precision?: string | null; artifactKind?: string | null; baseQuantized?: boolean | null; datasetBasis?: string; progress?: TrainingProgress; artifact?: TrainingArtifact }[] };
@@ -19,6 +20,14 @@ export function parseDevStatus(value: unknown): DevStatus {
       data.integration?.connectomeIntegrated !== false || data.integration.subscriptionUsageObserved !== false ||
       data.integration.rroflowTraceExportAvailable !== false) throw new Error('Unsupported developer status');
   const nonnegative = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0;
+  const endpoint = data.modelEndpoint;
+  if (endpoint) {
+    if (!['not_configured', 'invalid_configuration', 'model_listed', 'model_not_listed', 'authentication_failed', 'discovery_rejected', 'unavailable', 'invalid_response'].includes(endpoint.state) ||
+        endpoint.modelListed !== (endpoint.state === 'model_listed') || endpoint.loadedWeightsVerified !== false || endpoint.inferencePerformed !== false || endpoint.qualified !== false ||
+        (endpoint.modelListed && (!endpoint.modelId || !endpoint.manifestSha256)) ||
+        (endpoint.modelId !== undefined && typeof endpoint.modelId !== 'string') ||
+        (endpoint.manifestSha256 !== undefined && !/^[0-9a-f]{64}$/.test(endpoint.manifestSha256))) throw new Error('Invalid model endpoint observation');
+  }
   const dataset = data.training.dataset;
   if (['verified_export', 'empty_export'].includes(dataset.state)) {
     if (!dataset.counts || Object.keys(dataset.counts).sort().join() !== 'acceptance,development,train' ||

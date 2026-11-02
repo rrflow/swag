@@ -60,6 +60,42 @@ alone yields `configured_outcome_unknown`. Metadata supplies model revision,
 precision, dataset basis, recorded metrics and a content digest. No process
 progress, deployment permission or model quality is inferred.
 
+## Observe the model endpoint
+
+Set `SWAG_MODEL_CONNECTION_FILE` in the UI or MCP process environment to an
+explicit private binding. Use the actual endpoint, model alias, retained artifact
+manifest and existing credential file; no model or server is selected by default:
+
+```json
+{
+  "schemaVersion": 1,
+  "baseUrl": "http://127.0.0.1:8084/v1",
+  "modelId": "your-deployed-model",
+  "credentialFile": "server.env",
+  "credentialVariable": "VLLM_API_KEY",
+  "artifactManifest": "training-run/artifact-manifest.json"
+}
+```
+
+Relative file paths resolve beside the binding. The manifest's `model` must
+match `modelId`. The credential file supplies one literal `NAME=value` entry;
+shell interpolation is not supported. Discovery uses authenticated `GET /v1/models`,
+bypasses environment proxies, refuses redirects, requires HTTPS outside loopback,
+and bounds each response to 1 MB with a five-second socket timeout.
+
+The shared `modelEndpoint` status distinguishes configuration, authentication,
+availability, response and model-identity failures. Configuration and manifest
+digests correlate local spans; credentials, URLs and response bodies are excluded.
+Each refresh rereads inputs. An ordinary project edit does not invalidate the
+binding; changing its selected manifest identity requires updating the binding.
+
+`model_listed` proves only that discovery returned the configured alias. It does
+not attest the process's loaded weights, perform inference, measure serving
+memory, authorize training or qualify routing. Those flags remain false. A past
+artifact-verification receipt is displayed independently beside its training run.
+
+![Actual configured endpoint, trace timings and retained BF16 verification receipt](images/model-endpoint.png)
+
 ## Use with subscription clients
 
 Codex and Claude clients retain their existing login/subscription authentication.

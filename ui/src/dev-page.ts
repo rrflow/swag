@@ -9,6 +9,9 @@ async function refresh() {
     const data = parseDevStatus(await response.json());
     el('observed').textContent = `Observed ${new Date(data.observedAt).toLocaleString()}`;
     el('engine').textContent = data.engine.authenticated ? `Authenticated · ${data.engine.instanceId}` : data.engine.state;
+    const endpoint = data.modelEndpoint;
+    el('model-endpoint').textContent = endpoint?.modelListed ? `Expected model listed: ${endpoint.modelId}` :
+      `Model endpoint: ${(endpoint?.state ?? 'not_configured').replaceAll('_', ' ')}`;
     const dataset = data.training.dataset;
     el('dataset').textContent = dataset.counts ? `${dataset.state.replaceAll('_', ' ')} · ${JSON.stringify(dataset.counts)}` :
       dataset.state === 'not_configured' ? 'No reviewed dataset selected' : 'Dataset verification failed';

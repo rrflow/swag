@@ -19,8 +19,10 @@ The Unsloth CLI already verifies a reviewed export before GPU imports and saves
 optimizer-capable checkpoints, but has no structured progress/interruption
 projection or explicit artifact verification interface for the UI. Its BF16
 exporter also embeds one historical model name. The retained run used provisional
-labels; it cannot authorize new training. Spark inspection currently needs a
-renewed Tailscale SSH identity check.
+labels; it cannot authorize new training. Subsequent Spark access, artifact
+rehash and Unsloth CUDA preflight passed; see the dated
+[runtime verification](runtime-verification.md). New callback GPU acceptance
+and engine activity execution remain open.
 
 ## Research and decision
 
