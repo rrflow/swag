@@ -3,6 +3,25 @@
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
+## SWAG developer interface, 2 November
+
+The owner's latest priority is subscription-client/RRFlow integration with
+debugging, optimization and a UI path for fine-tuning that Connectome can adopt.
+The [developer workspace](developer-workspace.md) now shares a versioned read
+model between TypeScript and MCP. Local validation passed 110 Python tests,
+eight UI tests and four browser tests. The installed bridge authenticated against
+the local RRFlow core prototype and read public storage diagnostics. Codex and
+Claude registrations were added locally; Claude reported connected and the exact
+Codex registered transport passed a direct stdio lifecycle/probe. This does not
+prove an agent used the tool during a task or measure subscription consumption.
+
+The UI reads the retained custom BF16 run's actual metrics and marks its dataset
+basis as provisional task-corpus training. There is no configured independently
+reviewed routing export. Engine-owned UI training admission, live job control,
+Connectome embedding, automatic RROFLOW trace export and promotion remain open.
+The workspace document records their implementation order. Local test results
+are not PR merge evidence or model qualification.
+
 ## Owner direction: RRG suite and public repository (2026-11-01)
 
 SWAG belongs to the [Reason Ready Governance (RRG) suite](rrg-suite.md). The

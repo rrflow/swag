@@ -20,6 +20,7 @@ if str(TOOLS_DIR) not in sys.path:
 
 from boundary_controller import compose_battery
 from swag_runtime_bootstrap import resolve_effective_runtime
+from swag_observability import Span, summarize, trace_directory
 
 
 def _run_compose_battery(params: dict[str, Any]) -> dict[str, Any]:
@@ -45,6 +46,9 @@ def _run_resolve_runtime(params: dict[str, Any]) -> dict[str, Any]:
 
 def _run_decision_route(params: dict[str, Any]) -> dict[str, Any]:
     from swag_decision_service import DecisionService, ServiceConfig
+
+    if params.get('execute_frontier') or params.get('execute_local'):
+        raise ValueError('MCP routing is preview-only; model execution requires RRFlow admission.')
 
     repo = Path(str(params.get("repo", ROOT))).resolve()
     provider_cfg = Path(str(params.get("provider_config", ROOT / "config" / "frontier" / "providers.template.yaml"))).resolve()
@@ -147,11 +151,24 @@ def _tool_list() -> list[dict[str, Any]]:
                     "attunement_profile": {"type": "string"},
                     "route_profile": {"type": "string"},
                     "model_tier": {"type": "string"},
-                    "execute_frontier": {"type": "boolean"},
-                    "execute_local": {"type": "boolean"},
                 },
                 "required": ["repo", "intent_text"],
             },
+        },
+        {
+            "name": "developer_status",
+            "description": "Read the versioned UI model: engine connection, traces, reviewed-dataset readiness and registered training artifacts. Does not launch training or promote models.",
+            "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
+        },
+        {
+            "name": "rrflow_status",
+            "description": "Read the explicitly configured RRFlow engine through authenticated public operations. Does not dispatch a model or execute project work.",
+            "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
+        },
+        {
+            "name": "observability_summary",
+            "description": "Read measured SWAG client timings, failures and incomplete traces. No model quality or subscription usage is inferred.",
+            "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
         },
         {
             "name": "health",
@@ -161,7 +178,7 @@ def _tool_list() -> list[dict[str, Any]]:
     ]
 
 
-def _handle_message(message: dict[str, Any]) -> dict[str, Any] | None:
+def _dispatch_message(message: dict[str, Any]) -> dict[str, Any] | None:
     if not isinstance(message, dict) or message.get("jsonrpc") != "2.0" or not isinstance(message.get("method"), str):
         return {"jsonrpc": "2.0", "id": None, "error": {"code": -32600, "message": "Invalid request"}}
     if "id" not in message:
@@ -200,16 +217,71 @@ def _handle_message(message: dict[str, Any]) -> dict[str, Any] | None:
             result = _run_decision_route(tool_args)
         elif tool_name == "health":
             result = {"status": "ok", "runtime": "swag-mcp-server", "repo": str(ROOT)}
+        elif tool_name == 'rrflow_status':
+            from swag_rrflow import status
+            result = status()
+        elif tool_name == 'observability_summary':
+            result = summarize(trace_directory())
+        elif tool_name == 'developer_status':
+            from swag_dev_status import status
+            result = status()
         else:
             raise ValueError(f"Unknown tool: {tool_name}")
         return {"jsonrpc": "2.0", "id": message.get("id"), "result": {"content": [{"type": "text", "text": json.dumps(result, ensure_ascii=True, indent=2)}]}}
     if method == "ping":
         return {"jsonrpc": "2.0", "id": message.get("id"), "result": {"ok": True}}
-    return {"jsonrpc": "2.0", "id": message.get("id"), "error": {"code": -32601, "message": f"Method not found: {method}"}}
+    return {"jsonrpc": "2.0", "id": message.get("id"), "error": {"code": -32601, "message": "Method not found"}}
+
+
+def _handle_message(message: dict[str, Any]) -> dict[str, Any] | None:
+    if not isinstance(message, dict) or 'id' not in message:
+        return _dispatch_message(message)
+    params = message.get('params')
+    metadata = params.get('_meta', {}) if isinstance(params, dict) else {}
+    parent = metadata.get('traceparent') if isinstance(metadata, dict) else None
+    try:
+        span = Span('mcp.request', traceparent=parent)
+    except ValueError:
+        return {'jsonrpc': '2.0', 'id': message['id'],
+                'error': {'code': -32602, 'message': 'Invalid traceparent'}}
+    try:
+        with span:
+            name = params.get('name') if isinstance(params, dict) else None
+            known = {tool['name'] for tool in _tool_list()}
+            if message.get('method') == 'tools/call' and isinstance(name, str) and name in known:
+                with Span('mcp.tool.' + name):
+                    response = _dispatch_message(message)
+            else:
+                response = _dispatch_message(message)
+            if response is not None and 'error' in response:
+                span.fail('ProtocolError')
+    except (Exception, SystemExit):
+        # Trace exit records the actual error class and safe code locations.
+        # Do not return exception text: it may contain credentials or prompts.
+        response = {'jsonrpc': '2.0', 'id': message['id'], 'result': {
+            'isError': True, 'content': [{'type': 'text', 'text':
+                'SWAG operation failed; inspect the correlated local trace.'}]}}
+        if message.get('method') != 'tools/call':
+            response = {'jsonrpc': '2.0', 'id': message['id'],
+                        'error': {'code': -32603, 'message': 'SWAG request failed'}}
+    if response is not None:
+        metadata = {'swag/traceId': span.trace_id, 'swag/spanId': span.span_id}
+        if isinstance(response.get('result'), dict):
+            response['result']['_meta'] = metadata
+        elif isinstance(response.get('error'), dict):
+            response['error']['data'] = metadata
+    return response
 
 
 def main() -> int:
-    for raw_line in sys.stdin:
+    while True:
+        raw_line = sys.stdin.readline(1_048_577)
+        if not raw_line:
+            break
+        if len(raw_line) > 1_048_576:
+            print(json.dumps({'jsonrpc': '2.0', 'id': None, 'error': {
+                'code': -32600, 'message': 'Request exceeds its bound'}}), flush=True)
+            return 1
         line = raw_line.strip()
         if not line:
             continue
@@ -223,8 +295,8 @@ def main() -> int:
         except (Exception, SystemExit) as exc:  # pragma: no cover - runtime path
             response = {
                 "jsonrpc": "2.0",
-                "id": message.get("id"),
-                "error": {"code": -32603, "message": str(exc)},
+                "id": message.get("id") if isinstance(message, dict) else None,
+                "error": {"code": -32603, "message": "SWAG request failed; inspect local traces for the error class and code location."},
             }
         if response is not None:
             print(json.dumps(response, ensure_ascii=True), flush=True)

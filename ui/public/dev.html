@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWAG developer workspace</title><link rel="stylesheet" href="dev.css"></head>
+<body><main><header><div><p class="eyebrow">SWAG / DEVELOPER WORKSPACE</p><h1>Observe. Review. Improve.</h1></div><button id="refresh">Refresh observations</button></header>
+<p class="lead">Live client diagnostics and recorded training evidence. RRFlow owns execution.</p>
+<nav><a href="index.html">Model comparisons</a><a href="review.html">Review dataset labels</a><a href="/api/dev/status">Versioned JSON interface</a></nav>
+<p id="error" role="alert" hidden></p><p id="observed">Loading current state…</p>
+<div class="grid"><section><h2>RRFlow connection</h2><p id="engine">Not checked</p><p class="note">Authenticated readback is distinct from a completed reasoning or project task.</p></section>
+<section><h2>Fine-tuning readiness</h2><p id="dataset">Not checked</p><p id="training"></p><button disabled>Launch training</button><p class="note">The UI launch path still needs engine-owned job admission. Reviewed data and explicit authorization remain required.</p></section></div>
+<section><h2>Debugging and optimization</h2><p id="trace-status"></p><div class="scroll"><table><thead><tr><th>Operation</th><th>Samples</th><th>Errors</th><th>Median ms</th><th>p95 ms</th><th>Configuration</th></tr></thead><tbody id="timings"></tbody></table></div><p class="note">Observed elapsed time, including failures. Nested spans overlap. Subscription tokens, cost and model quality are not inferred from these timings.</p></section>
+<section><h2>Recent failures</h2><div id="failures"></div><p class="note">Use the trace ID to locate local JSONL records and code locations. Prompt text and exception messages are excluded.</p></section>
+<section><h2>Registered training runs</h2><div id="runs"></div><p class="note">A completion file is recorded evidence, not a live process heartbeat or an approved checkpoint.</p></section>
+<section><h2>Qualification and handoff</h2><p>Compare the original baseline, custom BF16 checkpoint, and that same checkpoint after quantization. Keep failed trials and measure real serving memory.</p><p>This workspace exposes <code>swag.dev-status/v1</code> for the future Connectome adapter. Connectome embedding, trace export to RROFLOW, UI training launch and automatic promotion are not implemented here.</p></section>
+</main><script type="module" src="dev-page.js"></script></body></html>

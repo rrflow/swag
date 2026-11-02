@@ -15,6 +15,7 @@ from typing import Any
 from uuid import uuid4
 
 from swag_rroflow import preview_record, publish_record
+from swag_observability import CURRENT, observed
 
 ROOT = Path(__file__).resolve().parent.parent
 PROFILE = Path(".swag/project.json")
@@ -119,6 +120,7 @@ def doctor(repo: Path) -> dict[str, Any]:
     }
 
 
+@observed('swag.preview')
 def preview(repo: Path, intent: str | None = None) -> dict[str, Any]:
     profile = load_project(repo)
     if intent is not None and not intent.strip():
@@ -145,9 +147,13 @@ def preview(repo: Path, intent: str | None = None) -> dict[str, Any]:
     event_path = repo / ".swag" / "events" / f"{record['event_id']}.json"
     _write_new(decision_path, decision)
     _write_new(event_path, record)
+    span = CURRENT.get()
+    if span:
+        span.set(eventId=record['event_id'], modelExecuted=False, engineIntegrated=False)
     matrix = decision["system_one_decision_matrix"]
     return {
         "status": "preview_complete", "run_id": run_id, "project": profile["project"],
+        "trace_id": span.trace_id if span else None,
         "mode": "rules_only", "model_executed": False,
         "planned_model_tier": decision["decision_context"]["model_tier"],
         "tier_reason": decision["decision_context"]["model_tier_reason"],

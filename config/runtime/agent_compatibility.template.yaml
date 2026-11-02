@@ -1,10 +1,9 @@
 schema_version: 1
 compatibility:
   statement: >
-    SWAG is designed to be vendor-agnostic and easy to deploy for production,
-    local experimentation, and model-provider orchestration. The runtime is meant
-    to work cleanly with Codex, Claude, Grok, and other provider-based coding
-    agents without bespoke custom logic per assistant.
+    SWAG exposes a stdio MCP bridge for local policy previews and diagnostics.
+    Client registration does not prove model dispatch, subscription quota access,
+    production qualification, or completion of the RRFlow integration.
   supported_agents:
     - codex
     - claude
@@ -13,17 +12,13 @@ compatibility:
     - local_ollama
   default_usage:
     codex:
-      environment:
-        - OPENAI_BASE_URL
-        - OPENAI_API_KEY
-      recommended_mode: openai_compatible
-      notes: Use the local OpenAI-compatible adapter or frontier provider route.
+      environment: []
+      recommended_mode: stdio_mcp
+      notes: Register swag_mcp_server.py in the authenticated Codex client; API credentials are separate.
     claude:
-      environment:
-        - ANTHROPIC_BASE_URL
-        - ANTHROPIC_API_KEY
-      recommended_mode: anthropic_compatible
-      notes: Works with the frontier provider route and the SWAG controller policy.
+      environment: []
+      recommended_mode: stdio_mcp
+      notes: Register swag_mcp_server.py in the authenticated Claude client; API credentials are separate.
     grok:
       environment:
         - XAI_BASE_URL

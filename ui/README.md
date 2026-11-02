@@ -13,8 +13,11 @@ npm run build
 npm run dev
 ```
 
-Open `http://127.0.0.1:8891`. Node serves only built assets on loopback. The viewer
-has no server-side mutation endpoints. Import another `evidence.json` locally;
+Open `http://127.0.0.1:8891` for saved evidence or `/dev.html` for the
+[developer workspace](../docs/developer-workspace.md). The loopback Node server
+also exposes `GET /api/dev/status`, invoking the configured Python interpreter
+to read local traces/artifacts and optionally authenticate with RRFlow for
+diagnostics. There are no training or project mutation endpoints. Import another `evidence.json` locally;
 the browser validates its shape and count consistency without uploading it.
 The dashboard exports exclude prompts, raw responses, credentials and original
 case titles. The separate review packet includes public task titles and retained
