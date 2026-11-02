@@ -77,6 +77,39 @@ settings. Restart/reconnect the client and call `health`, `developer_status` or
 tool. `decision_route` is a legacy policy preview: direct model-execution flags
 are rejected on MCP. RRFlow must own execution admission and provider dispatch.
 
+## Connect a local LFG developer build
+
+The MCP tool `lfg_assess` can call LFG's versioned observation API when
+explicitly configured. Set `SWAG_LFG_CONNECTION_FILE` in the environment of the
+process launching SWAG to a private JSON file, for example:
+
+```json
+{
+  "schemaVersion": 1,
+  "baseUrl": "http://127.0.0.1:4317",
+  "timeoutMs": 5000,
+  "maxRequestBytes": 1048576,
+  "maxResponseBytes": 1048576
+}
+```
+
+Use the actual running LFG endpoint and operator-chosen limits. The bridge
+requires an HTTP origin with a literal loopback IP and explicit port, bypasses
+proxies, refuses redirects, and bounds response reads. It checks the advertised
+schema and configuration digests, binds the exact input hash and request ID,
+and validates the returned advisory observation. Unknown future request fields
+are accepted without becoming authority. The MCP result contains the observation,
+not the original request; SWAG's traces do not retain prompt contents. LFG's
+own developer diagnostics still record bounded metadata.
+
+This is a direct local client call. It does not cause SWAG's routing policy to
+consume the observation, integrate with RRFlow, verify the identity of an
+unauthenticated local LFG process, or dispatch a provider. Timeout is a client
+deadline and does not guarantee that work already started in LFG is preempted.
+Local browser or process access to the unauthenticated LFG service is outside
+this bridge's authority. The LFG observation API is available from the LFG
+candidate PR; use a binary containing that API.
+
 ## Trace and optimization semantics
 
 `SWAG_TRACE_DIR` defaults to `.swag/traces` in the checkout. Each request writes
