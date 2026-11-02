@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "kind": "swag.runtime_correlation_evidence_summary",
+  "runStartedAt": "2026-11-02T20:46:27Z",
+  "scope": "One real work-item proposal, engine-owned terminal-attempt metadata delivery, abrupt restart and same-event replay",
+  "taskSource": {
+    "url": "https://github.com/rrflow/rrflow-development/pull/248",
+    "head": "59e48ebfc24025a063619ce14714e545b8f4775b",
+    "snapshotSha256": "dfd6be59005c9a26c78f94bece6c9de0da828d8a50e243db77a763ce07f11248",
+    "projection": "Exact PR title and first problem paragraph; no generated task or label"
+  },
+  "engine": {
+    "candidatePr": 235,
+    "candidateCommit": "74ace47c877f56e4c385f74902f1799aeabaaf1a",
+    "testedSourceTree": "fae574cedcc3668e40801e865244ea45815cafcc",
+    "binarySha256": "e8a26f99e0f8faed332014a15cae47d011afb5743fb3cea2e80a5d1febd0212e",
+    "build": "unqualified debug binary built before final evidence commit"
+  },
+  "receiver": {
+    "sourcePr": 43,
+    "binarySha256": "786b6c48e64fc7c5962b1b4dc427af1b06867f8c05a54669e096ebf27a9b82bb",
+    "deployment": "isolated local native receiver"
+  },
+  "model": {
+    "serviceId": "swag-qwen3-coder-intent-20261028",
+    "manifestSha256": "ba7bede9963d469f312e06b337cb9241de524bdf77c7fe2ee30e09dd9b126252",
+    "configuredCandidateCount": 1,
+    "loadedWeightsAttested": false,
+    "qualified": false,
+    "acceptedChoice": {
+      "kind": "select",
+      "binding_id": "swag-custom-bf16",
+      "effort": null
+    },
+    "httpStatus": 200,
+    "providerReportedUsage": {
+      "prompt_tokens": 1008,
+      "completion_tokens": 20,
+      "total_tokens": 1028
+    },
+    "proposalElapsedMs": 1860,
+    "budgetChargedElapsedMs": 1900,
+    "providerResponseSha256": "60512752839645d7d85200131cb5e69194e4de4c856dd455462d71cbfd668294"
+  },
+  "correlation": {
+    "instanceId": "instance-52b294015f12cbe0ffc0417a",
+    "taskId": "task-fc74096958fb1bb9b3a62a042f8b94da53d6a33577c401a3924c0203c8b4f229",
+    "attemptId": "bf16-correlation-e99ff4a231164755abe2aa13260debbb",
+    "eventId": "48a62acf-c407-817e-a07c-3a820186df36",
+    "deliveryId": "installed-observation-5d226ec98163436fa9d55c3a5215d844",
+    "configurationSha256": "42747217edb8fd38b9d232c03d873e3006d18ce4a6bf22ba59c1a95214fd7223",
+    "sourceResponseSha256": "9b9ec34ba34b446b75a808022862f3b57d8fc77b7910e347fdaa6b741ab0bacc",
+    "payloadSha256": "3ee195909dc74b70365617197f7fcfca342e1d9bc83eb033e0ab36d160b43820",
+    "acknowledgementSha256": "17605cdaf9b2e270ef6c4785eb96bc0f03431d54dc1005e0568eaf5fc2fcc145"
+  },
+  "observations": {
+    "proposalAccepted": true,
+    "correlationPassed": true,
+    "receiverEventsAfterReplay": 1,
+    "deliveryAttemptsAfterReplay": 1,
+    "modelReservedStepsAfterReplay": 1,
+    "attemptAndDeliveryReadbackUnchangedAfterRestart": true,
+    "taskContentExportedToReceiver": false
+  },
+  "capture": {
+    "observationId": "passive-e3b9afc2a381",
+    "observationSha256": "c07b2cd1aaec895c3076476138c331e7f615f7d5e814aa325d6b045eb38c5368",
+    "labelStatus": "unreviewed",
+    "trainingConsent": false,
+    "independentReview": null,
+    "routeQuality": "unknown",
+    "projectOutcome": "unknown"
+  },
+  "retainedEarlierFailure": {
+    "stage": "task-budget-configure",
+    "code": "resource_exhausted",
+    "reason": "Requested step duration exceeded the estate cap; no inference dispatched",
+    "correction": "Read capabilities and use published estate reasoning limits, with one reserved step",
+    "failureReceiptSha256": "4256f2ee45246d0f500cd0c8e5cd765901ef3f302e18f51f2c497498f3d085de"
+  },
+  "remainingAcceptance": [
+    "candidate and protected engine CI",
+    "Connectome real-task journey",
+    "selected worker and project effects",
+    "independent review and consent",
+    "baseline/custom BF16/quantized qualification",
+    "29 GB footprint",
+    "release delivery"
+  ],
+  "rawEvidence": "Retained privately; session logs, credentials, private infrastructure and training inputs are not published"
+}
