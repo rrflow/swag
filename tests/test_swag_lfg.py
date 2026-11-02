@@ -96,6 +96,17 @@ class LfgBridgeTests(unittest.TestCase):
                     self.send_response(302)
                     self.send_header('Location', '/target')
                     self.end_headers()
+                elif self.path == '/slow':
+                    self.send_response(200)
+                    self.send_header('Content-Length', '10')
+                    self.end_headers()
+                    try:
+                        for _ in range(10):
+                            self.wfile.write(b' ')
+                            self.wfile.flush()
+                            time.sleep(0.05)
+                    except OSError:
+                        pass
                 else:
                     data = b'{' + b' ' * 100 + b'}'
                     self.send_response(200)
@@ -119,6 +130,10 @@ class LfgBridgeTests(unittest.TestCase):
         self.assertEqual(calls, ['/redirect'])
         with self.assertRaisesRegex(swag_lfg.LfgBridgeError, 'size or deadline'):
             swag_lfg._exchange(self.settings, '/large', time.monotonic() + 3)
+        start = time.monotonic()
+        with self.assertRaises(swag_lfg.LfgBridgeError):
+            swag_lfg._exchange(self.settings, '/slow', start + 0.12)
+        self.assertLess(time.monotonic() - start, 2)
 
 
 if __name__ == '__main__':

@@ -69,10 +69,17 @@ def _exchange(config: dict, path: str, deadline: float, payload: dict | None = N
                 span.set(inputBytes=len(body))
             with opener.open(req, timeout=remaining) as response:
                 span.set(httpStatus=response.status)
-                raw = response.read(config['maxResponseBytes'] + 1)
-            span.set(outputBytes=len(raw))
-        if len(raw) > config['maxResponseBytes'] or time.monotonic() >= deadline:
-            raise LfgBridgeError('LFG response exceeded the configured size or deadline.')
+                raw = bytearray()
+                while len(raw) <= config['maxResponseBytes']:
+                    if time.monotonic() >= deadline:
+                        raise LfgBridgeError('LFG response exceeded the configured size or deadline.')
+                    chunk = response.read1(config['maxResponseBytes'] + 1 - len(raw))
+                    if not chunk:
+                        break
+                    raw.extend(chunk)
+                span.set(outputBytes=len(raw))
+                if len(raw) > config['maxResponseBytes'] or time.monotonic() >= deadline:
+                    raise LfgBridgeError('LFG response exceeded the configured size or deadline.')
         value = json.loads(raw)
         if not isinstance(value, dict):
             raise ValueError('response is not an object')
