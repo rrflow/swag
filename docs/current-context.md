@@ -10,7 +10,7 @@ identifies the missing generic engine activity runner on accepted RRFlow main
 `e6f3632b`. The [training evidence adapter](training-evidence.md) now exposes
 actual saved steps/loss, bounded callback observations, interruption records,
 explicit artifact verification and configured export identity. Local checks pass
-125 Python tests, nine UI tests and four browser tests. Callback stop behavior is
+126 Python tests, nine UI tests and four browser tests. Callback stop behavior is
 tested at the software boundary; no new GPU training or resume qualification is
 claimed. The retained manifest declares 61,066,575,648 weight-file bytes, distinct
 from serving memory. Fresh Spark verification requires renewed Tailscale SSH

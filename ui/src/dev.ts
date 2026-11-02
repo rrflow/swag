@@ -1,5 +1,5 @@
 export type Measurement = { operation: string; samples: number; errors: number; p50Ms: number; p95Ms: number; maxMs: number; configurationSha256: string | null };
-export type TrainingProgress = { state: 'not_recorded' | 'saved_state' | 'observed_progress' | 'invalid_state'; globalStep: number | null; maxSteps: number | null; points: { step: number; loss?: number; eval_loss?: number }[]; pointsOmitted?: number; lastObservedAt?: string | null; lastObservation?: string | null; incompleteTail?: boolean };
+export type TrainingProgress = { state: 'not_recorded' | 'saved_state' | 'observed_progress' | 'invalid_state'; globalStep: number | null; maxSteps: number | null; points: { step: number; loss?: number; eval_loss?: number }[]; pointsOmitted?: number; lastObservedAt?: string | null; lastObservation?: string | null; lastErrorType?: string | null; incompleteTail?: boolean };
 export type TrainingArtifact = { state: 'not_recorded' | 'invalid_manifest' | 'manifest_recorded'; verification: 'not_recorded' | 'past_receipt_matches_manifest' | 'invalid_or_stale_receipt'; declaredWeightBytes?: number; manifestSha256?: string; verifiedAt?: string; model?: string | null };
 export type DevStatus = { schema: 'swag.dev-status/v1'; observedAt: string;
   engine: { state: string; authenticated: boolean; instanceId?: string };
@@ -48,6 +48,8 @@ export function parseDevStatus(value: unknown): DevStatus {
     if (progress) {
       if (!['not_recorded', 'saved_state', 'observed_progress', 'invalid_state'].includes(progress.state) ||
           !Array.isArray(progress.points) || progress.points.length > 200) throw new Error('Invalid training progress');
+      if (progress.lastObservation != null && !['started', 'progress', 'checkpoint_saved', 'stop_observed', 'loop_returned', 'artifacts_saved', 'failed'].includes(progress.lastObservation)) throw new Error('Invalid trainer phase');
+      if (progress.lastErrorType != null && !/^[A-Za-z_][A-Za-z_0-9]{0,95}$/.test(progress.lastErrorType)) throw new Error('Invalid trainer error class');
       if (progress.globalStep !== null || progress.maxSteps !== null) {
         if (!nonnegative(progress.globalStep) || !Number.isInteger(progress.globalStep) || !nonnegative(progress.maxSteps) ||
             !Number.isInteger(progress.maxSteps) || progress.maxSteps < 1 || progress.globalStep > progress.maxSteps) throw new Error('Invalid step observation');

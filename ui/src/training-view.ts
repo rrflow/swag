@@ -6,6 +6,7 @@ export function renderTrainingEvidence(parent: HTMLElement, progress?: TrainingP
     status.textContent = progress.globalStep === null ? `Progress: ${progress.state.replaceAll('_', ' ')}` :
       `Recorded step ${progress.globalStep} of ${progress.maxSteps}. Current process liveness is unknown.`;
     if (progress.incompleteTail) status.textContent += ' The latest observation is incomplete.';
+    if (progress.lastObservation) status.textContent += ` Last trainer observation: ${progress.lastObservation.replaceAll('_', ' ')}${progress.lastErrorType ? ` (${progress.lastErrorType})` : ''}.`;
     parent.append(status);
     const points = progress.points.filter(row => row.loss !== undefined);
     if (points.length) {

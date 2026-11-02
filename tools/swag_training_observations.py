@@ -83,11 +83,13 @@ def observed_progress(paths: list[Path]) -> dict:
                     points.append({'step': row['globalStep'], **metrics})
             rows.append(row)
         latest = next((row for row in reversed(rows) if 'globalStep' in row), {})
+        error_type = rows[-1].get('errorType') if rows else None
         return {'state': 'observed_progress', 'globalStep': latest.get('globalStep'),
                 'maxSteps': latest.get('maxSteps'), 'points': points[-200:],
                 'pointsOmitted': max(0, len(points) - 200), 'attemptId': attempt,
                 'lastObservedAt': rows[-1]['observedAt'] if rows else None,
                 'lastObservation': rows[-1]['kind'] if rows else None,
+                'lastErrorType': error_type if isinstance(error_type, str) and ERROR_NAME.fullmatch(error_type) else None,
                 'incompleteTail': partial, 'processLiveness': 'unknown', 'completionVerified': False}
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
         return {'state': 'invalid_state', 'globalStep': None, 'maxSteps': None, 'points': []}

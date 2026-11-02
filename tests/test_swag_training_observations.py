@@ -81,6 +81,16 @@ class ObservationTests(unittest.TestCase):
         observer.path.write_text(json.dumps(row) + '\n')
         self.assertEqual(progress(self.directory)['state'], 'invalid_state')
 
+    def test_failure_before_first_step_remains_visible_without_invented_progress(self):
+        observer = TrainingObserver(self.directory)
+        observer.emit('failed', SimpleNamespace(global_step=0, max_steps=0), error_type='RuntimeError')
+        observer.close()
+        value = progress(self.directory)
+        self.assertEqual(value['lastObservation'], 'failed')
+        self.assertEqual(value['lastErrorType'], 'RuntimeError')
+        self.assertIsNone(value['globalStep'])
+        self.assertFalse(value['completionVerified'])
+
     def test_budget_is_bounded(self):
         observer = TrainingObserver(self.directory, limit_bytes=1024)
         try:
