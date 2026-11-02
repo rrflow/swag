@@ -21,6 +21,7 @@ from typing import Any
 from urllib import error, request
 
 from boundary_controller import compose_battery
+from swag_observability import observed
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -549,6 +550,7 @@ class DecisionService:
                                     pass
         return []
 
+    @observed('swag.decision')
     def decide(self, payload: dict[str, Any]) -> dict[str, Any]:
         repo = Path(str(payload.get("repo", ROOT))).resolve()
         maturity = str(payload.get("maturity", "growing"))

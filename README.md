@@ -76,6 +76,12 @@ complete Connectome workflow remain open. See [current context](docs/current-con
 
 ## Legacy policy preview
 
+The [developer workspace](docs/developer-workspace.md) adds a live local UI at
+`/dev.html`, a versioned status API, content-free traces and an authenticated
+RRFlow diagnostics probe. It reads registered training artifacts and dataset
+readiness. UI training launch, subscription usage measurement, Connectome
+integration and automatic promotion remain unavailable.
+
 Current status: **local preview alpha**. This path runs the existing question
 composition and routing policies without calling a model. A preview is not a
 verdict that the application is correct or that the planned model is available.

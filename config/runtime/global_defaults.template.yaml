@@ -21,9 +21,9 @@ runtime:
     enabled: true
     transport: stdio
     servers:
-      - name: rrflow
+      - name: swag
         command: python
-        args: ["-m", "rrflow_mcp"]
+        args: ["tools/swag_mcp_server.py"]
         enabled: true
         project_scope: global
       - name: filesystem

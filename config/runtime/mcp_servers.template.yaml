@@ -3,10 +3,10 @@ mcp:
   enabled: true
   transport: stdio
   servers:
-    - name: rrflow
-      description: RRFlow project coordination and shared state sync
+    - name: swag
+      description: SWAG previews and diagnostics; configure absolute installed paths before client registration
       command: python
-      args: ["-m", "rrflow_mcp"]
+      args: ["tools/swag_mcp_server.py"]
       env: {}
       enabled: true
       scope: global

@@ -1,6 +1,8 @@
 schema_version: 1
 description: >
-  Template for integrating frontier AI subscriptions and per-key API usage policy.
+  Template for paid API credentials and per-key usage policy. These are not
+  consumer subscription credentials; Codex and Claude subscription clients
+  connect to SWAG through the MCP bridge using their own authenticated sessions.
   Copy to a private runtime file (for example providers.local.yaml) and replace
   placeholder env vars with your real key variable names.
 
