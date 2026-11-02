@@ -1,4 +1,5 @@
 import { parseDevStatus } from './dev.js';
+import { renderTrainingEvidence } from './training-view.js';
 const el = (id: string): HTMLElement => { const node = document.getElementById(id); if (!node) throw new Error('Missing UI element'); return node; };
 async function refresh() {
   const button = el('refresh') as HTMLButtonElement; button.disabled = true; el('error').hidden = true;
@@ -47,7 +48,9 @@ async function refresh() {
         measured.textContent = key.endsWith('_bytes') ? `${(value / 2 ** 30).toFixed(2)} GiB` : key === 'train_runtime' ? `${value.toFixed(2)} seconds` : value.toPrecision(5);
         metrics.append(term, measured);
       }
-      article.append(metrics); el('runs').append(article);
+      article.append(metrics);
+      renderTrainingEvidence(article, run.progress, run.artifact);
+      el('runs').append(article);
     }
   } catch (error) {
     el('error').textContent = error instanceof Error ? error.message : 'Unable to read status'; el('error').hidden = false;

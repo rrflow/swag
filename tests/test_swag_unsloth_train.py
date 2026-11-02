@@ -1,5 +1,6 @@
 """CPU checks of input handling; these do not qualify GPU training."""
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -51,6 +52,28 @@ class TrainingInputTests(unittest.TestCase):
                                 capture_output=True, text=True)
         self.assertEqual(result.returncode, 2)
         self.assertIn("requires --eval-dataset-jsonl", result.stderr)
+
+    def test_snapshot_binds_bytes_and_does_not_depend_on_unrelated_edits(self):
+        # Byte-binding probe only: repository text is never passed to a trainer.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = (ROOT / 'AGENTS.md').read_bytes()
+            training = root / 'train.chat.jsonl'
+            training.write_bytes(source)
+            manifest = root / 'manifest.json'
+            manifest.write_text(json.dumps({'files': {'train.chat.jsonl': hashlib.sha256(source).hexdigest()}}))
+            digest = hashlib.sha256(manifest.read_bytes()).hexdigest()
+            frozen, _ = runner._admitted_snapshot(root, training, None, digest)
+            (root / 'README.md').write_text('An ordinary unrelated edit')
+            self.assertEqual(runner._admitted_snapshot(root, training, None, digest)[0], frozen)
+            training.write_bytes(source + b'changed')
+            with self.assertRaisesRegex(ValueError, 'Admitted data changed'):
+                runner._admitted_snapshot(root, training, None, digest)
+            self.assertEqual(frozen, source)
+            training.write_bytes(source)
+            manifest.write_text('{}')
+            with self.assertRaisesRegex(ValueError, 'Admission manifest changed'):
+                runner._admitted_snapshot(root, training, None, digest)
 
 
 if __name__ == "__main__":

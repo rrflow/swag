@@ -21,6 +21,10 @@ measurements remain absent. Training memory is PyTorch allocated/reserved peak
 memory from the recorded run, **not serving footprint**. A completion record
 does not attest a live GPU, checkpoint contents, independent review or qualification.
 Provisional task-corpus training stays visibly separate from reviewed routing data.
+The [training evidence interface](training-evidence.md) adds recorded step/loss
+history, interruption visibility and explicit manifest/verification receipts.
+The [researched execution plan](training-control-plan.md) maps the remaining
+engine, UI, qualification and delivery packages to their acceptance evidence.
 
 ## Configure the engine and artifacts
 

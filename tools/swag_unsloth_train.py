@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import suppress
 import faulthandler
 import hashlib
 import importlib.util
@@ -10,6 +11,7 @@ from importlib.metadata import version
 import json
 import os
 from pathlib import Path
+import re
 from typing import Any
 
 def _training_rows(dataset_path: Path, contents: str | None = None) -> list[dict[str, Any]]:
@@ -86,6 +88,21 @@ def _validate_admitted_inputs(directory: Path, training_path: Path,
     return hashlib.sha256((directory / 'manifest.json').read_bytes()).hexdigest()
 
 
+def _admitted_snapshot(directory: Path, training_path: Path, evaluation_path: Path | None,
+                       admission_digest: str) -> tuple[bytes, bytes | None]:
+    """Consume already validated split identities into immutable process inputs."""
+    manifest_bytes = (directory / 'manifest.json').read_bytes()
+    if hashlib.sha256(manifest_bytes).hexdigest() != admission_digest:
+        raise ValueError('Admission manifest changed; prepare a fresh training input')
+    manifest = json.loads(manifest_bytes)
+    training = training_path.read_bytes()
+    evaluation = evaluation_path.read_bytes() if evaluation_path else None
+    for name, contents in (('train.chat.jsonl', training), ('development.chat.jsonl', evaluation)):
+        if contents is not None and hashlib.sha256(contents).hexdigest() != manifest['files'][name]:
+            raise ValueError('Admitted data changed; prepare a fresh training input')
+    return training, evaluation
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train SWAG LoRA adapter with Unsloth + TRL.")
     parser.add_argument("--preflight", action="store_true", help="Check imports and actual CUDA execution; no training or downloads.")
@@ -112,6 +129,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--save-steps", type=int, default=50)
     parser.add_argument("--eval-steps", type=int, default=0)
     parser.add_argument("--logging-steps", type=int, default=1)
+    parser.add_argument("--observation-max-bytes", type=int, default=4_000_000,
+                        help="Bound content-free trainer observations for UI/adapter inspection.")
     parser.add_argument("--max-steps", type=int, default=0)
     parser.add_argument("--torch-empty-cache-steps", type=int, default=1)
     parser.add_argument("--ddp-backend", default="nccl")
@@ -144,6 +163,12 @@ def parse_args() -> argparse.Namespace:
             parser.error("training requires --admitted-dataset-dir with reviewed real observations")
         if args.seed is None or not 0 <= args.seed <= 2**32 - 1:
             parser.error("training requires an explicit --seed in the unsigned 32-bit range")
+        if not args.model_revision or not re.fullmatch(r'[0-9a-f]{40}', args.model_revision):
+            parser.error('training requires an exact 40-character --model-revision')
+        if not 1024 <= args.observation_max_bytes <= 4_000_000:
+            parser.error('observation-max-bytes must be between 1024 and 4000000')
+        if os.environ.get('WORLD_SIZE', '1') != '1':
+            parser.error('The observed trainer currently supports one process; distributed training is unqualified')
     return args
 
 
@@ -158,6 +183,10 @@ def main() -> int:
     if not args.preflight and args.admitted_dataset_dir is not None:
         admission_digest = _validate_admitted_inputs(args.admitted_dataset_dir,
                                                     args.dataset_jsonl, args.eval_dataset_jsonl)
+        # Consume the exact admitted bytes. An ordinary edit cannot silently
+        # replace training data between validation and a slow GPU/model import.
+        dataset_bytes, eval_bytes = _admitted_snapshot(args.admitted_dataset_dir,
+            args.dataset_jsonl, args.eval_dataset_jsonl, admission_digest)
     readiness = _preflight()
     print(json.dumps({"phase": "preflight", **readiness}), flush=True)
     if args.preflight:
@@ -170,7 +199,6 @@ def main() -> int:
     from trl import SFTConfig, SFTTrainer
 
     dataset_path = args.dataset_jsonl.resolve()
-    dataset_bytes = dataset_path.read_bytes()
     dataset = Dataset.from_list(_training_rows(dataset_path, dataset_bytes.decode("utf-8-sig")))
     eval_dataset = None
     eval_digest = None
@@ -178,7 +206,6 @@ def main() -> int:
         if args.eval_dataset_jsonl.resolve() == dataset_path:
             raise SystemExit("Training and evaluation must use separate datasets")
         eval_path = args.eval_dataset_jsonl.resolve()
-        eval_bytes = eval_path.read_bytes()
         eval_digest = hashlib.sha256(eval_bytes).hexdigest()
         if eval_digest == hashlib.sha256(dataset_bytes).hexdigest():
             raise SystemExit("Training and evaluation datasets have identical bytes")
@@ -186,6 +213,11 @@ def main() -> int:
     # Never overwrite a prior adapter or its evidence.
     args.output_dir.mkdir(parents=True, exist_ok=False)
     (args.output_dir / 'trainer.py').write_bytes(trainer_source)
+    observation_sources = {}
+    for name in ('swag_training_observations.py', 'swag_training_artifacts.py'):
+        source = Path(__file__).with_name(name).read_bytes()
+        (args.output_dir / name).write_bytes(source)
+        observation_sources[name] = hashlib.sha256(source).hexdigest()
     run_config = {
         "arguments": vars(args),
         "dataset_sha256": hashlib.sha256(dataset_bytes).hexdigest(),
@@ -194,6 +226,7 @@ def main() -> int:
         "provisional_task_corpus_sha256": task_corpus_digest,
         "packages": {name: version(name) for name in ("unsloth", "torch", "trl", "transformers", "datasets", "peft")},
         "trainer_source_sha256": hashlib.sha256(trainer_source).hexdigest(),
+        "observation_source_sha256": observation_sources,
         "preflight": readiness,
     }
     (args.output_dir / "run_config.json").write_text(
@@ -309,10 +342,31 @@ def main() -> int:
     print(json.dumps({"phase": "training", "rows": len(dataset), "max_steps": args.max_steps,
                       "output_dir": str(args.output_dir.resolve())}), flush=True)
     torch.cuda.reset_peak_memory_stats()
-    result = trainer.train()
-    trainer.save_model(str(args.output_dir.resolve()))
-    trainer.save_state()
-    trainer.save_metrics("train", result.metrics)
+    from swag_training_observations import TrainingObserver
+    observer = TrainingObserver(args.output_dir, limit_bytes=args.observation_max_bytes)
+    trainer.add_callback(observer.callback())
+    try:
+        observer.install_signals()
+        result = trainer.train()
+        trainer.save_state()
+        if observer.stop_requested or trainer.state.global_step < trainer.state.max_steps:
+            # A cooperative stop may save a real checkpoint, but cannot create
+            # the completion metadata consumed by the BF16 exporter.
+            interrupted = {'schema': 'swag.training-interruption/v1',
+                           'attemptId': observer.attempt_id, 'globalStep': trainer.state.global_step,
+                           'maxSteps': trainer.state.max_steps, 'stopRequested': observer.stop_requested,
+                           'completed': False, 'qualified': False}
+            (args.output_dir / 'training_interrupted.json').write_text(json.dumps(interrupted), encoding='utf-8')
+            return 130 if observer.stop_requested else 2
+        trainer.save_model(str(args.output_dir.resolve()))
+        trainer.save_metrics("train", result.metrics)
+        observer.emit('artifacts_saved', trainer.state, result.metrics)
+    except BaseException as exc:
+        with suppress(Exception):
+            observer.emit('failed', trainer.state, error_type=type(exc).__name__)
+        raise
+    finally:
+        observer.close()
     metadata = {
         "trainer_backend": "unsloth",
         "model": args.model,
@@ -324,6 +378,8 @@ def main() -> int:
         "base_quantized": args.load_in_4bit,
         "artifact_kind": "lora_adapter_requires_pinned_base",
         "trainer_source_sha256": hashlib.sha256(trainer_source).hexdigest(),
+        "observation_source_sha256": observation_sources,
+        "training_attempt_id": observer.attempt_id,
         "global_step": trainer.state.global_step,
         "metrics": result.metrics,
         "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated(),

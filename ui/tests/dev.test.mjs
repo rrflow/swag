@@ -8,10 +8,11 @@ import { fileURLToPath } from 'node:url';
 import { parseDevStatus } from '../dist/dev.js';
 
 // Observe the actual unconfigured read model, never invent training measurements.
-function currentStatus() {
+function currentStatus(recordedTraining = false) {
   const directory = mkdtempSync(join(tmpdir(), 'swag-status-'));
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('SWAG_')));
   env.SWAG_TRACE_DIR = directory;
+  if (recordedTraining) env.SWAG_TRAINING_RUNS_FILE = fileURLToPath(new URL('../browser-tests/training-runs.json', import.meta.url));
   try {
     return JSON.parse(execFileSync(process.env.SWAG_PYTHON ?? 'python',
       [fileURLToPath(new URL('../../tools/swag_dev_status.py', import.meta.url))], { env, encoding: 'utf8' }));
@@ -26,6 +27,21 @@ test('actual unconfigured status cannot claim training, integration or usage', (
   assert.deepEqual(data.training.runs, []);
   assert.deepEqual(data.observability.measurements, []);
   assert.equal(data.observability.incompleteSpans, 0);
+});
+
+test('recorded real training history stays historical and rejects impossible progress', () => {
+  const data = parseDevStatus(currentStatus(true));
+  const progress = data.training.runs[0].progress;
+  assert.equal(progress.globalStep, 33);
+  assert.equal(progress.maxSteps, 33);
+  assert.equal(progress.points.length, 37);
+  assert.equal(data.training.launchAvailable, false);
+  const changed = structuredClone(data);
+  changed.training.runs[0].progress.globalStep = 34;
+  assert.throws(() => parseDevStatus(changed));
+  const badLoss = structuredClone(data);
+  badLoss.training.runs[0].progress.points[0].loss = -1;
+  assert.throws(() => parseDevStatus(badLoss));
 });
 
 test('UI rejects false readiness and invalid observation counts', () => {

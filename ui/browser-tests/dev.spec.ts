@@ -8,6 +8,10 @@ test('developer UI renders actual read model and keeps launch unavailable', asyn
   await expect(page.locator('#observed')).toContainText('Observed');
   await expect(page.getByRole('button', { name: 'Launch training' })).toBeDisabled();
   await expect(page.locator('#error')).toBeHidden();
+  await expect(page.getByRole('img', { name: 'Recorded training loss over optimizer steps' })).toBeVisible();
+  await expect(page.locator('#runs')).toContainText('Recorded step 33 of 33');
+  await page.getByText('Inspect recorded loss values', { exact: true }).click();
+  await expect(page.locator('.loss-chart table')).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.getByRole('button', { name: 'Refresh observations' }).click();
