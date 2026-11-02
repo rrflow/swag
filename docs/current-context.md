@@ -5,6 +5,18 @@ This records owner direction and evidence; it is not an engine execution plan.
 
 ## SWAG developer interface, 2 November
 
+The follow-on [training-control research and plan](training-control-plan.md)
+identifies the missing generic engine activity runner on accepted RRFlow main
+`e6f3632b`. The [training evidence adapter](training-evidence.md) now exposes
+actual saved steps/loss, bounded callback observations, interruption records,
+explicit artifact verification and configured export identity. Local checks pass
+125 Python tests, nine UI tests and four browser tests. Callback stop behavior is
+tested at the software boundary; no new GPU training or resume qualification is
+claimed. The retained manifest declares 61,066,575,648 weight-file bytes, distinct
+from serving memory. Fresh Spark verification requires renewed Tailscale SSH
+authentication; the previously configured custom-endpoint forward was unreachable
+during this check. Historical evidence remains unchanged and unqualified.
+
 The owner's latest priority is subscription-client/RRFlow integration with
 debugging, optimization and a UI path for fine-tuning that Connectome can adopt.
 The [developer workspace](developer-workspace.md) now shares a versioned read

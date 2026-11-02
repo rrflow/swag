@@ -81,6 +81,10 @@ The [developer workspace](docs/developer-workspace.md) adds a live local UI at
 RRFlow diagnostics probe. It reads registered training artifacts and dataset
 readiness. UI training launch, subscription usage measurement, Connectome
 integration and automatic promotion remain unavailable.
+The [training-control research and execution plan](docs/training-control-plan.md)
+maps the remaining work. [Training evidence tools](docs/training-evidence.md)
+provide recorded progress/loss, interruption observations and explicit artifact
+verification without introducing a UI-owned training scheduler.
 
 Current status: **local preview alpha**. This path runs the existing question
 composition and routing policies without calling a model. A preview is not a

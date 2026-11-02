@@ -19,7 +19,8 @@ class ExportGuards(unittest.TestCase):
             manifest.write_text(json.dumps({'revision': 'a' * 40}))
             result = subprocess.run([sys.executable, str(ROOT / 'tools/swag_export_bf16.py'),
                 '--base-dir', str(root / 'missing-base'), '--base-manifest', str(manifest),
-                '--adapter-dir', str(adapter), '--output-dir', str(root / 'output')], capture_output=True, text=True)
+                '--adapter-dir', str(adapter), '--output-dir', str(root / 'output'),
+                '--model-id', 'test-export', '--max-base-bytes', '1024'], capture_output=True, text=True)
             self.assertFalse((root / 'output').exists())
             self.assertNotEqual(result.returncode, 0)
             self.assertNotIn('ModuleNotFoundError', result.stderr)  # Reject before optional GPU dependencies.

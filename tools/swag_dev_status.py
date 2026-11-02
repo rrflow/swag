@@ -9,15 +9,12 @@ import os
 from pathlib import Path
 
 from swag_observability import HASH, observed, summarize, trace_directory
+from swag_training_artifacts import describe, read_object
+from swag_training_observations import progress
 
 
 def read_json(path: Path) -> dict:
-    if path.stat().st_size > 2_000_000:
-        raise ValueError('Artifact exceeds read-model limit')
-    data = json.loads(path.read_text(encoding='utf-8'))
-    if not isinstance(data, dict):
-        raise ValueError('Expected an artifact object')
-    return data
+    return read_object(path)[0]
 
 
 def dataset_status() -> dict:
@@ -44,17 +41,29 @@ def training_runs() -> list[dict]:
         raise ValueError('Invalid training-run registry')
     result = []
     for entry in runs:
-        if not isinstance(entry, dict) or set(entry) != {'id', 'directory'} or not isinstance(entry['id'], str) or len(entry['id']) > 96:
+        if (not isinstance(entry, dict) or not {'id', 'directory'} <= set(entry)
+                or set(entry) - {'id', 'directory', 'artifactManifest', 'artifactVerification'}
+                or not isinstance(entry['id'], str) or not entry['id'] or len(entry['id']) > 96):
             raise ValueError('Invalid training-run entry')
         directory = Path(entry['directory'])
+        if not directory.is_absolute():
+            directory = Path(configured).resolve().parent / directory
+        def selected_path(key: str, default: Path | None):
+            if key not in entry:
+                return default
+            value = Path(entry[key])
+            return value if value.is_absolute() else Path(configured).resolve().parent / value
         row = {'id': entry['id'], 'state': 'unavailable', 'metrics': {}, 'metadataSha256': None,
-               'trainingAuthorized': False, 'promotionAuthorized': False}
+               'trainingAuthorized': False, 'promotionAuthorized': False,
+               'progress': progress(directory),
+               'artifact': describe(selected_path('artifactManifest', directory / 'artifact-manifest.json'),
+                                    selected_path('artifactVerification', None))}
         try:
             metadata_file = directory / 'training_metadata.json'
             if metadata_file.is_file():
-                data = read_json(metadata_file)
+                data, metadata_bytes = read_object(metadata_file)
                 row['state'] = 'completion_record_present'
-                row['metadataSha256'] = hashlib.sha256(metadata_file.read_bytes()).hexdigest()
+                row['metadataSha256'] = hashlib.sha256(metadata_bytes).hexdigest()
                 for key in ('gpu_peak_allocated_bytes', 'gpu_peak_reserved_bytes', 'train_runtime', 'train_loss'):
                     value = data.get(key, data.get('metrics', {}).get(key))
                     if type(value) in {int, float} and math.isfinite(value) and value >= 0:
@@ -70,6 +79,8 @@ def training_runs() -> list[dict]:
                     value = data.get(source)
                     row[target] = value if isinstance(value, str) and len(value) <= 256 else None
                 row['baseQuantized'] = data.get('base_quantized') if type(data.get('base_quantized')) is bool else None
+            elif (directory / 'training_interrupted.json').is_file():
+                row['state'] = 'interruption_record_present'
             elif (directory / 'run_config.json').is_file():
                 row['state'] = 'configured_outcome_unknown'
         except (OSError, ValueError, TypeError, AttributeError):

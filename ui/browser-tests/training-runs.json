@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "runs": [
+    {"id": "recorded-progress-regression", "directory": "../../tests/fixtures/training-recorded"}
+  ]
+}

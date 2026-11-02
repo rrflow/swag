@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SWAG trainer observation, not an engine job receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "attemptId", "sequence", "observedAt", "elapsedSeconds", "kind", "metrics", "stopRequested"],
+  "properties": {
+    "schema": {"const": "swag.training-observation/v1"},
+    "attemptId": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+    "sequence": {"type": "integer", "minimum": 0},
+    "observedAt": {"type": "string", "format": "date-time"},
+    "elapsedSeconds": {"type": "number", "minimum": 0},
+    "kind": {"enum": ["started", "progress", "checkpoint_saved", "stop_observed", "loop_returned", "artifacts_saved", "failed"]},
+    "metrics": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "loss": {"type": "number", "minimum": 0},
+        "eval_loss": {"type": "number", "minimum": 0},
+        "learning_rate": {"type": "number", "minimum": 0},
+        "grad_norm": {"type": "number", "minimum": 0},
+        "train_runtime": {"type": "number", "minimum": 0},
+        "train_loss": {"type": "number", "minimum": 0}
+      }
+    },
+    "stopRequested": {"type": "boolean"},
+    "globalStep": {"type": "integer", "minimum": 0},
+    "maxSteps": {"type": "integer", "minimum": 1},
+    "errorType": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z_0-9]{0,95}$"}
+  },
+  "dependentRequired": {"globalStep": ["maxSteps"], "maxSteps": ["globalStep"]}
+}
