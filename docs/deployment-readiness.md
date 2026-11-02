@@ -4,6 +4,16 @@ Assessment checked 1 November 2026. SWAG is an engineering preview. The current
 evidence supports continued development and controlled testing, not a public
 release or a qualified routing model.
 
+Update, 2 November: [one real BF16 proposal and RROFLOW correlation trial](model-outcome-correlation.md)
+passes on the delivery candidate, with an unreviewed, consent-disabled capture.
+Independent discovery [PR248](https://github.com/rrflow/rrflow-development/pull/248)
+at `59e48ebf` also passes an actual primary-process stale-preview rejection,
+fresh replan acceptance and restart/replay trial. Required candidate/protected
+acceptance and the complete Connectome journey remain open. Connectome main now
+contains a guided workspace; the older PR30 panel must preserve that workspace
+and its guides when reconciled. The earlier desktop evidence below keeps its
+original scope and source identities.
+
 ## What is verified
 
 - RRFlow PR222 merged as `6c069e1462d2b9cbb0237e9c117c379d1482bbaa`;
@@ -89,9 +99,16 @@ and acceptance requirements, not merely a missing demonstration.
 
 ## Current engineering gap
 
-The engine sender implementation is published in
-[PR235](https://github.com/rrflow/rrflow-development/pull/235), now at
-`b856a8fb08200c9117d759c43f9eaad0ec55ef77`. Its earlier `ebeecabb` head's full
+The latest engine sender candidate is
+[PR235](https://github.com/rrflow/rrflow-development/pull/235) at
+`74ace47c877f56e4c385f74902f1799aeabaaf1a`, reconciled with accepted main
+`e6f3632b`. Its first [candidate attempt](https://github.com/rrflow/rrflow-development/actions/runs/41514366554)
+passed 21 jobs; the macOS 100-cycle job never acquired a hosted runner and was
+cancelled, so the final gate failed. A failed-job rerun was requested on the same
+candidate. No failed check is waived and protected acceptance remains required.
+
+Earlier sender candidate history follows, including head
+`b856a8fb08200c9117d759c43f9eaad0ec55ef77`. The earlier `ebeecabb` head's full
 [candidate pipeline](https://github.com/rrflow/rrflow-development/actions/runs/41263686147)
 completed all 23 jobs successfully. PR235 entered the protected merge queue at
 position 3 on 1 November, 02:52 UTC; protected acceptance and merge remain pending.

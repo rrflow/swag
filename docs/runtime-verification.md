@@ -33,7 +33,16 @@ At `2026-11-02T18:31:34.162580+00:00`, `/v1/models` returned HTTP 401 without
 credentials and HTTP 200 with credentials, listing
 `swag-qwen3-coder-intent-20261028`. The local forward was restored. Discovery
 does not prove which bytes the running process loaded. No inference or serving
-restart was performed in this verification.
+restart was performed in these artifact and discovery checks.
+
+## Subsequent proposal and correlation trial
+
+A separate [real work-item trial](model-outcome-correlation.md) subsequently
+performed one accepted BF16 proposal and delivered its terminal-attempt metadata
+to the actual native RROFLOW receiver. Exact task/attempt/configuration/response
+correlation and readback survived process restart; delivery replay retained one
+event. The capture remains unreviewed with training consent disabled. This is
+bounded candidate evidence, not model qualification or a completed UI workflow.
 
 ## Remaining acceptance
 
@@ -41,6 +50,6 @@ The historical checkpoint includes optimizer, scheduler and RNG files, but
 full resume and new cooperative-stop behavior still require authorized GPU
 execution and engine recovery evidence. Independently reviewed routing labels
 remain required for new admitted training. Baseline/custom-BF16/quantized
-qualification, measured serving footprint, Connectome embedding and durable
-RROFLOW trace delivery remain open. Follow the
+qualification, measured serving footprint, Connectome embedding and deployment
+acceptance for complete RROFLOW trace delivery remain open. Follow the
 [training-control plan](training-control-plan.md).
