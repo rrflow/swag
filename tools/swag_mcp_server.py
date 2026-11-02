@@ -21,6 +21,7 @@ if str(TOOLS_DIR) not in sys.path:
 from boundary_controller import compose_battery
 from swag_runtime_bootstrap import resolve_effective_runtime
 from swag_observability import Span, summarize, trace_directory
+from swag_lfg import LfgBridgeError
 
 
 def _run_compose_battery(params: dict[str, Any]) -> dict[str, Any]:
@@ -161,6 +162,16 @@ def _tool_list() -> list[dict[str, Any]]:
             "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
         },
         {
+            "name": "lfg_assess",
+            "description": "Assess a request through an explicitly configured local LFG instance. Returns an advisory observation; it does not authorize, route, or dispatch work. LFG and SWAG record local diagnostics.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {"text": {"type": "string", "description": "The request to assess; sent only to the configured local LFG instance."}},
+                "required": ["text"],
+            },
+            "annotations": {"readOnlyHint": False, "destructiveHint": False, "idempotentHint": False, "openWorldHint": False},
+        },
+        {
             "name": "rrflow_status",
             "description": "Read the explicitly configured RRFlow engine through authenticated public operations. Does not dispatch a model or execute project work.",
             "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
@@ -220,6 +231,9 @@ def _dispatch_message(message: dict[str, Any]) -> dict[str, Any] | None:
         elif tool_name == 'rrflow_status':
             from swag_rrflow import status
             result = status()
+        elif tool_name == 'lfg_assess':
+            from swag_lfg import assess
+            result = assess(tool_args.get('text'))
         elif tool_name == 'observability_summary':
             result = summarize(trace_directory())
         elif tool_name == 'developer_status':
@@ -255,6 +269,10 @@ def _handle_message(message: dict[str, Any]) -> dict[str, Any] | None:
                 response = _dispatch_message(message)
             if response is not None and 'error' in response:
                 span.fail('ProtocolError')
+    except LfgBridgeError as exc:
+        # Bridge errors are fixed strings, never prompts or connection details.
+        response = {'jsonrpc': '2.0', 'id': message['id'], 'result': {
+            'isError': True, 'content': [{'type': 'text', 'text': str(exc)}]}}
     except (Exception, SystemExit):
         # Trace exit records the actual error class and safe code locations.
         # Do not return exception text: it may contain credentials or prompts.
