@@ -25,7 +25,11 @@ test('actual unconfigured status cannot claim training, integration or usage', (
   assert.equal(data.training.launchAvailable, false);
   assert.equal(data.training.dataset.state, 'not_configured');
   assert.deepEqual(data.training.runs, []);
-  assert.deepEqual(data.observability.measurements, []);
+  assert.equal(data.modelEndpoint.state, 'not_configured');
+  assert.equal(data.modelEndpoint.modelListed, false);
+  assert.equal(data.observability.measurements.length, 1);
+  assert.equal(data.observability.measurements[0].operation, 'swag.model_endpoint');
+  assert.equal(data.observability.measurements[0].errors, 0);
   assert.equal(data.observability.incompleteSpans, 0);
 });
 
@@ -50,6 +54,11 @@ test('UI rejects false readiness and invalid observation counts', () => {
     data => { data.training.launchAvailable = true; },
     data => { data.integration.connectomeIntegrated = true; },
     data => { data.engine.authenticated = true; },
+    data => { data.modelEndpoint.qualified = true; },
+    data => { data.modelEndpoint.loadedWeightsVerified = true; },
+    data => { data.modelEndpoint.inferencePerformed = true; },
+    data => { data.modelEndpoint.modelListed = true; },
+    data => { data.modelEndpoint.state = 'model_listed'; data.modelEndpoint.modelListed = true; },
     data => { data.training.dataset.state = 'verified_export'; },
     data => { data.observability.files = -1; },
     data => { data.observability.measurements = [null]; },

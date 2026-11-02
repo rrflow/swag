@@ -11,6 +11,7 @@ from pathlib import Path
 from swag_observability import HASH, observed, summarize, trace_directory
 from swag_training_artifacts import describe, read_object
 from swag_training_observations import progress
+from swag_model_endpoint import status as model_status
 
 
 def read_json(path: Path) -> dict:
@@ -104,7 +105,7 @@ def status() -> dict:
     except (OSError, ValueError, TypeError, KeyError):
         runs, registry_state = [], 'invalid_registry'
     return {'schema': 'swag.dev-status/v1', 'observedAt': datetime.now(timezone.utc).isoformat(),
-            'engine': engine, 'observability': summarize(trace_directory()),
+            'engine': engine, 'modelEndpoint': model_status(), 'observability': summarize(trace_directory()),
             'training': {'dataset': dataset_status(), 'runs': runs, 'registryState': registry_state,
                          'launchAvailable': False, 'launchBlocker': 'engine_training_job_admission_not_integrated',
                          'trainer': 'swag_unsloth_train', 'gpuExecutionVerified': False},

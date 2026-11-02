@@ -78,8 +78,10 @@ offline CLI, not a UI execution endpoint.
 
 ## Remaining proof
 
-Fresh Spark access, actual checkpoint rehash, callback stop/checkpoint behavior
-on the pinned GPU stack, engine activity admission/recovery, UI launch/cancel,
+Fresh Spark access, a full declared-file rehash and an Unsloth CUDA preflight
+passed on 2 November; see [runtime verification](runtime-verification.md).
+Callback stop/checkpoint behavior on the pinned GPU stack,
+engine activity admission/recovery, UI launch/cancel,
 Connectome integration and RROFLOW delivery remain separate acceptance work.
 New training requires independently reviewed labels; the earlier provisional
 experiment cannot satisfy that requirement.

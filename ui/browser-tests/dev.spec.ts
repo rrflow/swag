@@ -3,11 +3,18 @@ import { test, expect } from '@playwright/test';
 test('developer UI renders actual read model and keeps launch unavailable', async ({ page, request }) => {
   const status = await request.get('/api/dev/status');
   expect(status.status()).toBe(200);
-  expect((await status.json()).schema).toBe('swag.dev-status/v1');
+  const observed = await status.json();
+  expect(observed.schema).toBe('swag.dev-status/v1');
+  expect(observed.modelEndpoint.loadedWeightsVerified).toBe(false);
+  expect(observed.modelEndpoint.inferencePerformed).toBe(false);
+  expect(observed.modelEndpoint.qualified).toBe(false);
   await page.goto('/dev.html');
   await expect(page.locator('#observed')).toContainText('Observed');
   await expect(page.getByRole('button', { name: 'Launch training' })).toBeDisabled();
   await expect(page.locator('#error')).toBeHidden();
+  await expect(page.locator('#model-endpoint')).toContainText(observed.modelEndpoint.modelListed
+    ? `Expected model listed: ${observed.modelEndpoint.modelId}`
+    : `Model endpoint: ${observed.modelEndpoint.state.replaceAll('_', ' ')}`);
   await expect(page.getByRole('img', { name: 'Recorded training loss over optimizer steps' })).toBeVisible();
   await expect(page.locator('#runs')).toContainText('Recorded step 33 of 33');
   await page.getByText('Inspect recorded loss values', { exact: true }).click();

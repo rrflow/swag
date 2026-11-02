@@ -5,6 +5,16 @@ This records owner direction and evidence; it is not an engine execution plan.
 
 ## SWAG developer interface, 2 November
 
+Fresh cluster access is restored. A full declared-file hash check passed for
+26 files (61,084,160,920 bytes), including 61,066,575,648 weight bytes. The pinned
+Unsloth container imported successfully and passed an actual CUDA operation on
+the GB10. The restored custom endpoint rejects unauthenticated discovery and
+lists the configured model with authentication. These observations supersede the
+earlier access failure below. See [runtime verification](runtime-verification.md)
+for identities and limits. No new training, inference or model qualification was
+performed in this check. The developer interface now exposes explicit configured
+model discovery through its shared UI/MCP read model.
+
 The follow-on [training-control research and plan](training-control-plan.md)
 identifies the missing generic engine activity runner on accepted RRFlow main
 `e6f3632b`. The [training evidence adapter](training-evidence.md) now exposes
