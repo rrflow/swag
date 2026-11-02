@@ -6,6 +6,11 @@
 This document records engineering analysis, not independent senior-engineer approval
 or completion of the engine roadmap.
 
+The [outcome research plan](outcome-research-plan.md) now makes the owner's five
+milestones explicit and adds observed task/handoff supervision separately from
+this document's supplied-score policy experiments. Its offline implementation
+does not establish a completed UI workflow or a qualified custom router.
+
 ## Context
 
 SWAG should interpret intent and propose bounded routes quickly. RRFlow owns

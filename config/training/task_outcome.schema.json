@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Comparable observed task attempts, revision 1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "taskId", "repositoryId", "projectGroup", "leakageGroup", "capturedAt", "sourceKind", "sourceSha256", "configurationSha256", "request", "attempts"],
+  "$defs": {
+    "text": {"type": "string", "pattern": "\\S", "maxLength": 32000},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+      "properties": {"path": {"$ref": "#/$defs/text"}, "sha256": {"$ref": "#/$defs/digest"}}
+    },
+    "candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["optionId", "bindingId", "modelRevision", "effort", "description", "eligible", "handoff"],
+      "properties": {
+        "optionId": {"$ref": "#/$defs/text"}, "bindingId": {"$ref": "#/$defs/text"},
+        "modelRevision": {"$ref": "#/$defs/text"},
+        "effort": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/text"}]},
+        "description": {"$ref": "#/$defs/text"}, "eligible": {"type": "boolean"},
+        "handoff": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/text"}]}
+      }
+    },
+    "attempt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["optionId", "attemptId", "completedAt", "sourceSha256", "configurationSha256", "terminalStatus", "elapsedMs", "cost", "evidence"],
+      "properties": {
+        "optionId": {"$ref": "#/$defs/text"}, "attemptId": {"$ref": "#/$defs/text"},
+        "completedAt": {"type": "string", "format": "date-time"},
+        "sourceSha256": {"$ref": "#/$defs/digest"}, "configurationSha256": {"$ref": "#/$defs/digest"},
+        "terminalStatus": {"enum": ["completed", "failed", "timeout", "cancelled"]},
+        "elapsedMs": {"type": "number", "minimum": 0},
+        "cost": {
+          "anyOf": [{"type": "null"}, {
+            "type": "object", "additionalProperties": false, "required": ["amount", "unit"],
+            "properties": {"amount": {"type": "number", "minimum": 0}, "unit": {"$ref": "#/$defs/text"}}
+          }]
+        },
+        "evidence": {
+          "type": "object", "additionalProperties": false, "required": ["receipt", "output", "verification"],
+          "properties": {
+            "receipt": {"$ref": "#/$defs/artifact"},
+            "output": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]},
+            "verification": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]}
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {"const": 1}, "sourceKind": {"const": "real_observation"},
+    "caseId": {"$ref": "#/$defs/text"}, "taskId": {"$ref": "#/$defs/text"},
+    "repositoryId": {"$ref": "#/$defs/text"}, "projectGroup": {"$ref": "#/$defs/text"},
+    "leakageGroup": {"$ref": "#/$defs/text"},
+    "capturedAt": {"type": "string", "format": "date-time"},
+    "sourceSha256": {"$ref": "#/$defs/digest"}, "configurationSha256": {"$ref": "#/$defs/digest"},
+    "request": {
+      "type": "object", "additionalProperties": false,
+      "required": ["projectIntent", "taskText", "acceptanceCriteria", "candidates"],
+      "properties": {
+        "projectIntent": {"$ref": "#/$defs/text"}, "taskText": {"$ref": "#/$defs/text"},
+        "acceptanceCriteria": {"$ref": "#/$defs/text"},
+        "candidates": {"type": "array", "minItems": 2, "maxItems": 16, "items": {"$ref": "#/$defs/candidate"}}
+      }
+    },
+    "attempts": {"type": "array", "minItems": 2, "maxItems": 16, "items": {"$ref": "#/$defs/attempt"}}
+  }
+}

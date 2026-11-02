@@ -73,9 +73,9 @@ def _preflight() -> dict[str, Any]:
 def _validate_admitted_inputs(directory: Path, training_path: Path,
                               evaluation_path: Path | None) -> str:
     """Check exported bytes and split selection before GPU imports or model loading."""
-    from swag_routing_eval import verify_dataset
+    from swag_task_outcomes import verify_training_dataset
 
-    manifest = verify_dataset(directory)
+    manifest = verify_training_dataset(directory)
     if manifest['counts']['train'] < 1:
         raise ValueError('Admitted dataset has no training rows')
     if training_path.resolve() != (directory / 'train.chat.jsonl').resolve():

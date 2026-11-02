@@ -1,5 +1,9 @@
 # Reviewed routing data and evaluation
 
+For observed task success and handoff validity, use the separate
+[outcome workflow](task-outcome-workflow.md). The bounded selector below remains
+a supplied-score policy test; it is not the learned-suitability objective.
+
 Owner update, 2026-10-29: new data admission and dataset use require reviewed real
 observations in every split. The current Unsloth launcher requires that admission
 and an explicit `--seed`; provisional task-corpus training is retired. Historical

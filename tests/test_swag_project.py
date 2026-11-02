@@ -164,6 +164,9 @@ class RroflowTests(unittest.TestCase):
                 pass
 
             def do_POST(self):
+                # Drain the body before closing a redirect response. Otherwise a
+                # Windows socket can reset before urllib observes the HTTP status.
+                raw = self.rfile.read(int(self.headers["Content-Length"]))
                 if self.redirect:
                     self.send_response(307)
                     self.send_header("Location", "/redirect-target")
@@ -172,7 +175,7 @@ class RroflowTests(unittest.TestCase):
                 if self.path != "/v1/turns" or self.headers.get("Authorization") != "Bearer test-key":
                     self.send_error(401)
                     return
-                body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+                body = json.loads(raw)
                 record = body["turns"][0]
                 new = int(record["event_id"] not in stored)
                 stored[record["event_id"]] = record

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent review of observed task and handoff outcomes",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "observationSha256", "labelAuthorId", "reviewerId", "reviewedAt", "previouslyUsed", "redactionReviewed", "consent", "evidence", "verdicts"],
+  "$defs": {
+    "text": {"type": "string", "pattern": "\\S"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+      "properties": {"path": {"$ref": "#/$defs/text"}, "sha256": {"$ref": "#/$defs/digest"}}
+    }
+  },
+  "properties": {
+    "schemaVersion": {"const": 1}, "caseId": {"$ref": "#/$defs/text"},
+    "observationSha256": {"$ref": "#/$defs/digest"},
+    "labelAuthorId": {"$ref": "#/$defs/text"}, "reviewerId": {"$ref": "#/$defs/text"},
+    "reviewedAt": {"type": "string", "format": "date-time"},
+    "previouslyUsed": {"type": "boolean"}, "redactionReviewed": {"const": true},
+    "consent": {
+      "type": "object", "additionalProperties": false, "required": ["training", "evaluation", "grantedBy"],
+      "properties": {"training": {"type": "boolean"}, "evaluation": {"type": "boolean"}, "grantedBy": {"$ref": "#/$defs/text"}}
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false, "required": ["consent", "redaction", "review"],
+      "properties": {
+        "consent": {"$ref": "#/$defs/artifact"}, "redaction": {"$ref": "#/$defs/artifact"}, "review": {"$ref": "#/$defs/artifact"}
+      }
+    },
+    "verdicts": {
+      "type": "array", "minItems": 2, "maxItems": 16,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["attemptId", "taskSuccess", "handoffValid", "rationale"],
+        "properties": {
+          "attemptId": {"$ref": "#/$defs/text"}, "rationale": {"$ref": "#/$defs/text"},
+          "taskSuccess": {"enum": ["pass", "fail", "unknown"]},
+          "handoffValid": {"enum": ["pass", "fail", "unknown"]}
+        }
+      }
+    }
+  }
+}

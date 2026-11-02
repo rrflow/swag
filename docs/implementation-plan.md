@@ -5,6 +5,20 @@ real development work through RRFlow, learns from reviewed outcomes, and can
 ship locally and as a scale-out image. This is SWAG's work plan; RRFlow's existing
 roadmap owns engine dependency order and gate completion.
 
+## Outcome research correction, 2 November
+
+Follow the [five-milestone research plan](outcome-research-plan.md) and
+[runnable outcome workflow](task-outcome-workflow.md). Task success and handoff
+validity now have a separate reviewed-outcome admission and evaluation path;
+supplied-score policy compliance remains its own baseline. This adds no fabricated
+training records or research results. UI project execution, independently reviewed
+real comparisons, new training and measured 29 GB serving acceptance remain open.
+
+At inspection, RRFlow observation PR235 merged on 2 November at 22:46 UTC and
+protected run 41533075841 succeeded. Discovery PR248 and worker PR229 remain drafts.
+These facts supersede older sender-status paragraphs below; they do not qualify
+the rest of the integration stack.
+
 ## Required constraints
 
 - Use real tasks, source revisions, provider attempts and observed outcomes.
