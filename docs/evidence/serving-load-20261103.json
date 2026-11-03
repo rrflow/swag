@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "scope": "observed_serving_load_only",
+  "profiles": {
+    "results": {
+      "phases": [
+        {
+          "attempted": 63,
+          "clientConcurrency": 1,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.3742787804430527,
+          "elapsedSeconds": 45.84222713508643,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 0.7201720320153981,
+          "p95Seconds": 0.7680272138677537,
+          "p99Seconds": 0.8220018679276109,
+          "qualityEvaluated": false
+        },
+        {
+          "attempted": 63,
+          "clientConcurrency": 2,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.4020369740629053,
+          "elapsedSeconds": 44.93462095898576,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 1.423185600200668,
+          "p95Seconds": 1.4795217639766634,
+          "p99Seconds": 1.4872755389660597,
+          "qualityEvaluated": false
+        },
+        {
+          "attempted": 63,
+          "clientConcurrency": 4,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.4001447033384955,
+          "elapsedSeconds": 44.995349301956594,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 2.8528830190189183,
+          "p95Seconds": 2.9115554781164974,
+          "p99Seconds": 2.925354307051748,
+          "qualityEvaluated": false
+        }
+      ],
+      "samples": 63,
+      "protocolSha256": "e3d012d0070e93f3ae64e37157cf5160158485daa2729589ca70309a5f01cc97",
+      "summarySha256": "9d0548fda6a76390ee65a41b9f1f0daf6baa42c686a3a68aa40862f6d4e7a983",
+      "workloadSha256": "ad5f64369365bf8e8ad9c3d2b847962f030c5552a42699fa7ed87e143b0b03dc",
+      "implementationSha256": "0015810f3527fe3861a1e80cffe2a27f7a266f89ef3efa8da7ff04724b1a9fa0",
+      "artifactManifestSha256": "ba7bede9963d469f312e06b337cb9241de524bdf77c7fe2ee30e09dd9b126252",
+      "stoppedEarly": false,
+      "runtimeConfiguration": {
+        "dtype": "bfloat16",
+        "enforce-eager": true,
+        "gpu-memory-utilization": "0.70",
+        "kv-cache-memory-bytes": "1073741824",
+        "max-model-len": "4096",
+        "max-num-seqs": "1"
+      },
+      "maximumGpuUtilizationPercent": 96.0,
+      "maximumTemperatureC": 67.0,
+      "minimumHostAvailableBytes": 42701737984,
+      "largestOwnedProcessGpuReportedBytes": 62995300352,
+      "maximumCgroupMemoryBytes": 3293560832,
+      "outputContractValid": 189,
+      "requests": 189,
+      "qualityEvaluated": false,
+      "totalServingBytes": null,
+      "totalServingMemoryVerified": false
+    }
+  },
+  "comparison": null,
+  "deploymentQualified": false,
+  "trainingPerformed": false
+}
