@@ -1,0 +1,161 @@
+{
+  "comparison": {
+    "jsonComparableAttempts": 189,
+    "matchedAttempts": 189,
+    "outputAgreement": 1.0,
+    "qualityEquivalenceEstablished": false,
+    "sameParsedOutput": 189
+  },
+  "deploymentQualified": false,
+  "profiles": {
+    "baseline": {
+      "artifactManifestSha256": "ba7bede9963d469f312e06b337cb9241de524bdf77c7fe2ee30e09dd9b126252",
+      "generation": {
+        "maxTokens": 48,
+        "model": "swag-qwen3-coder-intent-20261028",
+        "temperature": 0
+      },
+      "implementationSha256": "0015810f3527fe3861a1e80cffe2a27f7a266f89ef3efa8da7ff04724b1a9fa0",
+      "largestOwnedProcessGpuReportedBytes": 62995300352,
+      "maximumCgroupMemoryBytes": 3293560832,
+      "maximumGpuUtilizationPercent": 96.0,
+      "maximumTemperatureC": 67.0,
+      "minimumHostAvailableBytes": 42701737984,
+      "phases": [
+        {
+          "attempted": 63,
+          "clientConcurrency": 1,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.3742787804430527,
+          "elapsedSeconds": 45.84222713508643,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 0.7201720320153981,
+          "p95Seconds": 0.7680272138677537,
+          "p99Seconds": 0.8220018679276109,
+          "qualityEvaluated": false
+        },
+        {
+          "attempted": 63,
+          "clientConcurrency": 2,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.4020369740629053,
+          "elapsedSeconds": 44.93462095898576,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 1.423185600200668,
+          "p95Seconds": 1.4795217639766634,
+          "p99Seconds": 1.4872755389660597,
+          "qualityEvaluated": false
+        },
+        {
+          "attempted": 63,
+          "clientConcurrency": 4,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.4001447033384955,
+          "elapsedSeconds": 44.995349301956594,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 2.8528830190189183,
+          "p95Seconds": 2.9115554781164974,
+          "p99Seconds": 2.925354307051748,
+          "qualityEvaluated": false
+        }
+      ],
+      "protocolSha256": "e3d012d0070e93f3ae64e37157cf5160158485daa2729589ca70309a5f01cc97",
+      "qualityEvaluated": false,
+      "requests": 189,
+      "runtimeConfiguration": {
+        "dtype": "bfloat16",
+        "enforce-eager": true,
+        "gpu-memory-utilization": "0.70",
+        "kv-cache-memory-bytes": "1073741824",
+        "max-model-len": "4096",
+        "max-num-seqs": "1"
+      },
+      "runtimeImageId": "sha256:654e563e727be1968487d453de0733fb074cb59adf424c779d0f9e7cfcb2b6b6",
+      "samples": 63,
+      "stoppedEarly": false,
+      "summarySha256": "9d0548fda6a76390ee65a41b9f1f0daf6baa42c686a3a68aa40862f6d4e7a983",
+      "totalServingBytes": null,
+      "totalServingMemoryVerified": false,
+      "workloadSha256": "ad5f64369365bf8e8ad9c3d2b847962f030c5552a42699fa7ed87e143b0b03dc"
+    },
+    "candidate": {
+      "artifactManifestSha256": "ba7bede9963d469f312e06b337cb9241de524bdf77c7fe2ee30e09dd9b126252",
+      "generation": {
+        "maxTokens": 48,
+        "model": "swag-qwen3-coder-intent-20261028",
+        "temperature": 0
+      },
+      "implementationSha256": "0015810f3527fe3861a1e80cffe2a27f7a266f89ef3efa8da7ff04724b1a9fa0",
+      "largestOwnedProcessGpuReportedBytes": 62993203200,
+      "maximumCgroupMemoryBytes": 4309921792,
+      "maximumGpuUtilizationPercent": 96.0,
+      "maximumTemperatureC": 67.0,
+      "minimumHostAvailableBytes": 45221396480,
+      "phases": [
+        {
+          "attempted": 63,
+          "clientConcurrency": 1,
+          "completed": 63,
+          "completedRequestsPerSecond": 1.2567005841941719,
+          "elapsedSeconds": 50.13127294788137,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 0.7530480641871691,
+          "p95Seconds": 0.812817218946293,
+          "p99Seconds": 3.058167453156784,
+          "qualityEvaluated": false
+        },
+        {
+          "attempted": 63,
+          "clientConcurrency": 2,
+          "completed": 63,
+          "completedRequestsPerSecond": 2.168337139308942,
+          "elapsedSeconds": 29.054522407008335,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 0.9264227158855647,
+          "p95Seconds": 0.9751658118329942,
+          "p99Seconds": 1.0647227100562304,
+          "qualityEvaluated": false
+        },
+        {
+          "attempted": 63,
+          "clientConcurrency": 4,
+          "completed": 63,
+          "completedRequestsPerSecond": 3.816108332053813,
+          "elapsedSeconds": 16.50896529085003,
+          "errors": 0,
+          "notDispatched": 0,
+          "p50Seconds": 1.0525569601450115,
+          "p95Seconds": 1.1126368739642203,
+          "p99Seconds": 1.198128464864567,
+          "qualityEvaluated": false
+        }
+      ],
+      "protocolSha256": "06001fe6bb765c783cefa0549c96a5b309073950c7948aaedd78d47cf4fa7e7e",
+      "qualityEvaluated": false,
+      "requests": 189,
+      "runtimeConfiguration": {
+        "dtype": "bfloat16",
+        "enforce-eager": true,
+        "gpu-memory-utilization": "0.70",
+        "kv-cache-memory-bytes": "1073741824",
+        "max-model-len": "4096",
+        "max-num-seqs": "4"
+      },
+      "runtimeImageId": "sha256:654e563e727be1968487d453de0733fb074cb59adf424c779d0f9e7cfcb2b6b6",
+      "samples": 45,
+      "stoppedEarly": false,
+      "summarySha256": "a4ec79841c6897e0bd4b10e6ea350835105c7d8fdf798213915cde02d86b1004",
+      "totalServingBytes": null,
+      "totalServingMemoryVerified": false,
+      "workloadSha256": "ad5f64369365bf8e8ad9c3d2b847962f030c5552a42699fa7ed87e143b0b03dc"
+    }
+  },
+  "schemaVersion": 1,
+  "scope": "observed_serving_load_only",
+  "trainingPerformed": false
+}
