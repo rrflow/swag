@@ -8,10 +8,17 @@ This records owner direction and evidence; it is not an engine execution plan.
 The [five-milestone plan](outcome-research-plan.md) separates task success and
 handoff supervision from supplied-score policy compliance. Its offline outcome
 admission, training-input verification and frozen four-arm evaluation are now
-implemented locally. No new real reviewed dataset, GPU training, quantization,
+merged through [SWAG PR6](https://github.com/rrflow/swag/pull/6). No new real reviewed dataset, GPU training, quantization,
 total-memory measurement or completed UI task is claimed. Observation PR235 has
-merged with protected CI success; discovery PR248 and worker PR229 remain drafts
-at this inspection. See the plan and owning PRs before using older status below.
+merged with protected CI success. Discovery PR248 is ready with candidate CI
+running; its tree already includes the landed observation dependency. Worker
+PR229 remains draft under its existing publication hold. See the plan and owning
+PRs before using older status below.
+
+The [Spark serving experiment](serving-load-measurements.md) measures real BF16
+requests and overlapping memory counters. Its four-sequence runtime improves
+observed throughput at concurrent load, with matching outputs on the repeated
+inputs; it does not qualify routing quality, total memory or the joined UI task.
 
 The owner's next compression targets are 15 GB total serving memory, then 9 GB
 if controller quality and useful performance can be preserved. The first target

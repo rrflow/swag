@@ -45,6 +45,20 @@ activity, process counters and host availability. `summary.json` is written only
 after the run and sampler finish; it binds both streams and reports phase latency
 and throughput. Partial directories remain incomplete evidence.
 
+Recompute a content-free report, optionally pairing the same workload against a
+different runtime profile:
+
+```bash
+python3 tools/swag_serving_report.py --baseline baseline-results --candidate candidate-results --output comparison.json
+```
+
+The report checks retained hashes, planned request identities, process continuity,
+phase counts and latency statistics. Paired profiles must share the workload,
+artifact, runtime image, load-runner implementation and generation settings.
+Output agreement is reported independently from correctness; it cannot qualify a
+model or establish general performance equivalence. The phase wall-clock duration
+remains a retained runner observation rather than an independently timed trace.
+
 Client concurrency is not server batch capacity. Record `max-num-seqs`, context,
 cache allocation and eager/graph mode. A one-sequence server can show longer queues
 without increasing throughput as clients increase. Short, repeated title inputs
@@ -60,7 +74,7 @@ cover different scopes. This tool never adds them into a supposed total.
 `totalServingBytes` remains null and `totalServingMemoryVerified` remains false.
 These measurements cannot alone pass the 29/15/9 GB qualification gate.
 
-## Current experiment
+## Spark BF16 experiment, 3 November 2026 UTC
 
 The first run used 21 real, previously exposed Connectome PR titles without their
 provisional labels, repeated three times at each client concurrency. The custom
@@ -75,5 +89,30 @@ process GPU-memory counter reached 62,995,300,352 bytes, while the cgroup counte
 peaked near 3.29 GB. The difference illustrates why cgroup usage alone cannot be
 advertised as this model's footprint. Total serving memory remains unverified.
 
-A four-sequence profile comparison is in progress. No improvement, rollback success
-or complete comparison is claimed until its retained measurements are checked.
+The paired four-sequence run also completed 189/189 requests without errors.
+The declared checkpoint, runtime image, workload and generation settings matched;
+the recorded runtime configurations differed only in `max-num-seqs` (1 versus 4).
+Recomputed observations are in [the content-free report](evidence/serving-load-20261103.json).
+
+| Client concurrency | One sequence: requests/s | Four sequences: requests/s | One sequence: p95 s | Four sequences: p95 s |
+| --- | --- | --- | --- | --- |
+| 1 | 1.37 | 1.26 | 0.77 | 0.81 |
+| 2 | 1.40 | 2.17 | 1.48 | 0.98 |
+| 4 | 1.40 | 3.82 | 2.91 | 1.11 |
+
+All 189 paired parsed JSON outputs agreed. These are repeated, previously exposed
+inputs, not independent correctness labels or frozen unseen acceptance tasks.
+This single ordered sweep supports further batching evaluation; it does not
+establish general quality equivalence or a statistically reliable speedup.
+Single-client throughput declined and its p99 rose from 0.82 to 3.06 seconds;
+no observations were discarded as warmup. Four-sequence sampling reached 96%
+GPU utilization, 67 C and a 62,993,203,200-byte owned-process GPU counter.
+
+The first four-sequence startup failed its 300-second readiness deadline. Its
+failure and successful restoration were retained. The retry used a 1,200-second
+startup allowance; the loader reported 374.6 seconds for checkpoint loading.
+The request timeout and load bounds were unchanged. The experiment supervisor
+finished successfully and restored the original container/image and one-sequence
+configuration. Independent readback at 03:23:25 UTC verified the candidate stopped
+and one authenticated inference request succeeded against the restored endpoint.
+The candidate is not promoted; raw restoration and failure evidence stays private.
