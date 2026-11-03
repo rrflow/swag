@@ -3,6 +3,19 @@
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
+## Compact controller research, 3 November
+
+The owner clarified that the three forms are **choice, score and binary decision
+modes**, backed by a built-in development best-practices knowledge mesh and
+templates fulfilled against deployed projects. They are not three fixed gates.
+The [decision/template direction](decision-modes-and-knowledge-mesh.md) records
+the intended contract, existing question-set foundations and remaining lifecycle.
+The 9–12 GB candidate target remains. The [primary-source research update](controller-compression-research.md)
+adds calibrated expert/channel pruning plus quantization, a small decision-model
+comparison and selective residency experiments. This corrects the earlier plan's
+limited treatment of structural compression. Mode and knowledge/template contracts
+still require implementation; no equivalent-quality or memory-qualified candidate exists yet.
+
 ## Outcome research correction, 2 November
 
 The [five-milestone plan](outcome-research-plan.md) separates task success and

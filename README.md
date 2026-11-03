@@ -11,6 +11,11 @@ coding workflow, selects relevant checks, and routes work according to project
 context. The product goal is a personal, configurable controller that becomes
 more useful through measured outcomes.
 
+The intended decision modes are **choice, score and binary**, backed by a built-in
+development best-practices knowledge mesh and project templates whose fulfillment
+is verified through RRFlow. See [the decision and template design](docs/decision-modes-and-knowledge-mesh.md)
+for existing foundations and the remaining implementation.
+
 **RRFlow** owns accepted plans, authorization, execution and durable receipts;
 SWAG proposes bounded decisions through its public contracts.
 **RROFLOW (rroflow.ai)** is the intended AI observability and learning sink.
