@@ -1,7 +1,9 @@
 # SWAG decision modes and development knowledge mesh
 
 **Owner clarification:** 3 November 2026. **Status:** product contract direction;
-the complete decision API, knowledge mesh and template lifecycle are not implemented.
+the [local read-only adapter](knowledge-template-adapter.md) implements typed
+answer validation and source-bound template previews. The complete engine decision
+API, knowledge mesh and fulfillment lifecycle are not implemented.
 
 SWAG is a System One controller with three decision modes: **choice, score and
 binary**. These are reusable output forms, not three fixed application gates,

@@ -3,6 +3,24 @@
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
+## Knowledge-template adapter, 3 November
+
+The [read-only adapter](knowledge-template-adapter.md) now binds a shipped Python
+delivery template to actual source-linked practices and selected project files.
+The developer UI and MCP expose choice, score and binary requirements; answer
+validation rejects stale context, invalid options/scales and unbound references.
+An ordinary bound-file edit changes only dependent requirement revisions, and
+refresh immediately supplies current inputs. Fulfillment stays unassessed.
+
+Local validation passed 171 Python tests, 11 UI tests and five browser tests.
+The named browser driver `ui/browser-tests/knowledge.spec.ts` uses disposable
+copies of real repository files and verifies UI/API readback across an edit.
+This is preview/source-invalidation evidence, not engine replanning, model
+inference, an executed project change or a completed template. Research PR8 and
+RRFlow discovery PR248 have merged. Worker PR229 remains draft under the existing
+publication hold; the public engine proposal/verification adapter and complete
+Connectome fulfillment driver are the next integration boundaries.
+
 ## Compact controller research, 3 November
 
 The owner clarified that the three forms are **choice, score and binary decision
@@ -13,8 +31,9 @@ the intended contract, existing question-set foundations and remaining lifecycle
 The 9–12 GB candidate target remains. The [primary-source research update](controller-compression-research.md)
 adds calibrated expert/channel pruning plus quantization, a small decision-model
 comparison and selective residency experiments. This corrects the earlier plan's
-limited treatment of structural compression. Mode and knowledge/template contracts
-still require implementation; no equivalent-quality or memory-qualified candidate exists yet.
+limited treatment of structural compression. The local mode/template adapter is
+implemented above; native integration remains open. No equivalent-quality or
+memory-qualified candidate exists yet.
 
 ## Outcome research correction, 2 November
 
@@ -23,8 +42,8 @@ handoff supervision from supplied-score policy compliance. Its offline outcome
 admission, training-input verification and frozen four-arm evaluation are now
 merged through [SWAG PR6](https://github.com/rrflow/swag/pull/6). No new real reviewed dataset, GPU training, quantization,
 total-memory measurement or completed UI task is claimed. Observation PR235 has
-merged with protected CI success. Discovery PR248 is ready with candidate CI
-running; its tree already includes the landed observation dependency. Worker
+merged with protected CI success. Discovery PR248 has merged as `4252c692`.
+Its tree includes the landed observation dependency. Worker
 PR229 remains draft under its existing publication hold. See the plan and owning
 PRs before using older status below.
 

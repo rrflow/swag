@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SWAG advisory decision answer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "inputSha256", "mode", "status", "value", "references"],
+  "properties": {
+    "schema": {"const": "swag.decision-answer/v1"},
+    "inputSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "mode": {"enum": ["choice", "score", "binary"]},
+    "status": {"enum": ["answered", "abstained"]},
+    "value": {},
+    "references": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+  },
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "abstained"}}}, "then": {"properties": {"value": {"type": "null"}}}, "else": {"properties": {"references": {"minItems": 1}}}},
+    {"if": {"properties": {"status": {"const": "answered"}, "mode": {"const": "binary"}}}, "then": {"properties": {"value": {"type": "boolean"}}}},
+    {"if": {"properties": {"status": {"const": "answered"}, "mode": {"const": "score"}}}, "then": {"properties": {"value": {"type": "number"}}}},
+    {"if": {"properties": {"status": {"const": "answered"}, "mode": {"const": "choice"}}}, "then": {"properties": {"value": {"type": "string"}}}}
+  ]
+}

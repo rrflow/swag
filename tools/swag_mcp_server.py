@@ -93,6 +93,18 @@ def _run_decision_route(params: dict[str, Any]) -> dict[str, Any]:
 def _tool_list() -> list[dict[str, Any]]:
     return [
         {
+            'name': 'knowledge_preview',
+            'description': 'Read the configured project template, source-linked practices and input digests. No model execution or fulfillment assessment.',
+            'inputSchema': {'type': 'object', 'properties': {}, 'additionalProperties': False},
+        },
+        {
+            'name': 'validate_template_decision',
+            'description': 'Validate a supplied choice, score or binary answer against freshly read template inputs. Does not verify truth, grant permission or mark fulfillment.',
+            'inputSchema': {'type': 'object', 'properties': {
+                'requirementId': {'type': 'string'}, 'answer': {'type': 'object'}},
+                'required': ['requirementId', 'answer'], 'additionalProperties': False},
+        },
+        {
             "name": "project_preview",
             "description": "Preview a project's saved SWAG profile without model calls. Writes local decision and content-free RROFLOW event files; does not upload.",
             "inputSchema": {
@@ -239,6 +251,15 @@ def _dispatch_message(message: dict[str, Any]) -> dict[str, Any] | None:
         elif tool_name == 'developer_status':
             from swag_dev_status import status
             result = status()
+        elif tool_name == 'knowledge_preview':
+            from swag_knowledge import preview
+            if tool_args:
+                raise ValueError('knowledge_preview takes no arguments')
+            result = preview()
+        elif tool_name == 'validate_template_decision':
+            from swag_knowledge import validate_decision, fields
+            fields(tool_args, {'requirementId', 'answer'})
+            result = validate_decision(tool_args['requirementId'], tool_args['answer'])
         else:
             raise ValueError(f"Unknown tool: {tool_name}")
         return {"jsonrpc": "2.0", "id": message.get("id"), "result": {"content": [{"type": "text", "text": json.dumps(result, ensure_ascii=True, indent=2)}]}}

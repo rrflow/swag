@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "python_delivery_review",
+  "title": "Python delivery review",
+  "requirements": [
+    {
+      "id": "dependency_separation",
+      "title": "Separate runtime and development dependencies",
+      "practice": {"questionSet": "python", "questionId": "python.packaging_and_environment.02"},
+      "inputSlots": ["packaging"],
+      "decision": {"mode": "binary", "proposition": "Do the supplied dependency declarations separate runtime dependencies from development tooling?"}
+    },
+    {
+      "id": "test_organization",
+      "title": "Choose a test organization for this project",
+      "practice": {"questionSet": "python", "questionId": "python.testing_and_quality.01"},
+      "inputSlots": ["tests"],
+      "decision": {
+        "mode": "choice",
+        "question": "Which organization is appropriate for the supplied tests and project constraints? Abstain if the evidence does not support a choice.",
+        "options": [
+          {"id": "separate_directories", "description": "Separate unit, integration and boundary tests into explicit directories."},
+          {"id": "explicit_groups", "description": "Keep tests together with explicit groups and independently selectable commands."}
+        ]
+      }
+    },
+    {
+      "id": "ci_check_coverage",
+      "title": "Assess declared CI checks",
+      "practice": {"questionSet": "python", "questionId": "python.testing_and_quality.02"},
+      "inputSlots": ["ci"],
+      "decision": {"mode": "score", "minimum": 0, "maximum": 4, "direction": "higher_is_better", "rubric": "Count categories explicitly invoked by the supplied CI configuration: linting, formatting, type checking and tests. Award one point per category with an identifiable command, zero for an absent category. This is configuration coverage only; it does not verify execution, required branch checks or project readiness. Abstain if invoked commands cannot be resolved from the supplied evidence."}
+    }
+  ]
+}
