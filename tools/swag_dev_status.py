@@ -22,13 +22,16 @@ def dataset_status() -> dict:
     configured = os.environ.get('SWAG_ADMITTED_DATASET_DIR')
     if not configured:
         return {'state': 'not_configured', 'counts': None, 'manifestSha256': None}
+    from jsonschema import ValidationError
     try:
-        from swag_routing_eval import verify_dataset
+        from swag_task_outcomes import verify_training_dataset
         directory = Path(configured)
-        manifest = verify_dataset(directory)
+        manifest = verify_training_dataset(directory)
         return {'state': 'verified_export' if all(manifest['counts'].values()) else 'empty_export', 'counts': manifest['counts'],
+                'scope': manifest['scope'], 'objective': manifest.get('objective'),
+                'withheldCount': len(manifest.get('withheld', [])),
                 'manifestSha256': hashlib.sha256((directory / 'manifest.json').read_bytes()).hexdigest()}
-    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, ValidationError):
         return {'state': 'invalid_export', 'counts': None, 'manifestSha256': None}
 
 
