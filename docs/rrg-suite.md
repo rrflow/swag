@@ -49,7 +49,12 @@ held-out evaluation.
 |---|---|---|
 | Qwen3-Coder-30B-A3B in BF16 | 61.07 GB on disk; vLLM reported 56.93 GiB of model memory | Measured; isolated peak not measured |
 | Custom checkpoint after quantization | 29 GB | Target; not measured |
-| Quantized checkpoint on a custom RRFlow shard and KV-cache system | 19 GB | Goal; not built or measured |
+| Further optimized custom controller | 15 GB | Research target; not measured |
+| Specialized controller using pruning/quantization, a smaller model or selective residency | 9–12 GB | Candidate research target; equivalent routing quality and total memory unverified |
+
+The [3 November research update](controller-compression-research.md) supersedes
+the earlier 19 GB aspiration. It defines how custom shards could reduce residency
+and how to evaluate gate-specific quality before release.
 
 ## Licensing
 
