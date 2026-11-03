@@ -3,12 +3,15 @@
 **Reviewed:** 3 November 2026. **Status:** research-backed candidate direction;
 no compressed SWAG checkpoint or equivalent-quality result is claimed.
 
-The owner's target is a specialized System One router answering three gates,
+The owner's target is a specialized System One router supporting choice, score
+and binary decision modes with a built-in development knowledge mesh and templates,
 with RRFlow owning plans and execution. A 9–12 GB serving candidate is plausible
 enough to test directly. Preserve the BF16 reference and the existing 29/15 GB
 milestones, but do not require every intermediate footprint before investigating
-the smaller candidate. Equal quality means comparable real gate outcomes within
-predeclared margins, not equal general-purpose language capability.
+the smaller candidate. Equal quality means comparable real decision and template outcomes within
+predeclared margins, not equal general-purpose language capability. The
+[decision modes and knowledge-mesh direction](decision-modes-and-knowledge-mesh.md)
+corrects the earlier interpretation of three fixed application gates.
 
 ## What the primary sources establish
 
@@ -32,9 +35,9 @@ File sharding is packaging. Expert-aware residency is a runtime policy. Physical
 pruning changes the network. Quantization changes representation. Distillation
 trains a smaller network. Measure each mechanism separately before composing them.
 
-Do not assign a third of the existing experts to each application gate: native
+Do not assign a third of the existing experts to each decision mode: native
 MoE routing is learned per token/layer and does not establish that partition.
-Profile actual gate inputs, including rare errors and ordinary source edits.
+Profile actual decision and template inputs, including rare errors and ordinary source edits.
 Compare one shared backbone with small decision heads against learned specialist
 subsets; three copies of the backbone would defeat the memory objective.
 
@@ -52,14 +55,14 @@ Short answers reduce decode work; long input processing can still dominate.
 
 ## Candidate experiments and developer-build acceptance
 
-1. **Bind the gates.** Obtain the owner's exact three gate definitions and map
-   inputs, outputs, abstention and failure costs to versioned public contracts.
-   Keep deterministic permission enforcement in RRFlow. Gate names and candidate
-   choices are configuration, not invented model labels or hardcoded rankings.
+1. **Bind the decision modes.** Map choice, score and binary inputs, outputs,
+   abstention and failure costs to versioned public contracts, together with
+   knowledge/template identity. Keep deterministic permission enforcement in
+   RRFlow. Options, rubrics and propositions are explicit configuration.
 2. **Measure the unchanged teacher.** Use admitted real task inputs to capture
-   per-layer expert contribution, gate coverage and input lengths. Keep profiling
+   per-layer expert contribution, decision-mode coverage and input lengths. Keep profiling
    separate from correctness labels. The repeated title load test is a runtime
-   check and cannot serve as unseen gate acceptance.
+   check and cannot serve as unseen decision/template acceptance.
 3. **Compare compression mechanisms on development data.** Establish four-bit
    quantization alone, then calibrated expert/channel pruning plus quantization.
    Test recovery training only with admitted data. Compare a small decision model
@@ -71,20 +74,22 @@ Short answers reduce decode work; long input processing can still dominate.
    RRFlow owns job admission and lifecycle; the inference backend executes kernels,
    scheduling and prefetch. Test cold misses, restart, eviction and integrity
    failures. Loading from CPU RAM on Spark still consumes its unified memory.
-5. **Freeze and qualify.** Measure each gate and the combined task on unseen
+5. **Freeze and qualify.** Measure each decision mode and template fulfillment on unseen
    project/time splits, with independently reviewed outcomes. Compare error costs,
    abstention/coverage, calibration, paired uncertainty, p95/p99 and throughput.
    Select one explicit decimal-byte limit (9 or 12 billion) before acceptance.
    Report total serving residency, disk storage, transfer volume and fallback
    resources separately; include runtime, allocator reserve, buffers and cache
-   without double-counting unified pages. A remote teacher fallback does not
+   without double-counting unified pages. Include resident knowledge retrieval,
+   indexes and template services within the declared controller scope. A remote teacher fallback does not
    establish a self-contained 9–12 GB build.
 6. **Ship one reversible candidate.** The UI must expose artifact/recipe identity,
-   gate decisions, abstentions, memory/latency and correlated RRFlow/RROFLOW receipts.
+   typed decisions, knowledge/template revisions, fulfillment evidence, abstentions,
+   memory/latency and correlated RRFlow/RROFLOW receipts.
    Prove an ordinary edit triggers scoped replanning and verified project effects.
    Promotion needs quality and developer-build evidence, not a smaller file alone.
 
 Near-term priority: calibrated pruning plus four-bit quantization and a small
 decision-model comparison. Custom paging follows measured need; it is not a
-prerequisite for trying a compact controller. No training dataset, gate semantics,
+prerequisite for trying a compact controller. No training dataset, task semantics,
 quality margin or working kernel is fabricated by this research note.

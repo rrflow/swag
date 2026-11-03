@@ -90,13 +90,15 @@ training allocator peaks and idle residency cannot prove total serving footprint
 
 ## Compression targets: 29 GB, 15 GB and a 9–12 GB controller candidate
 
-Owner update, 3 November: investigate a 9–12 GB specialized three-gate controller
+Owner update, 3 November: investigate a 9–12 GB specialized controller with choice,
+score and binary modes plus a built-in development knowledge/template system
 as a concrete candidate direction, including learned expert pruning, quantization,
 small decision models and selective shard residency. The
 [primary-source review and experiment sequence](controller-compression-research.md)
 supports feasibility research and distinguishes checkpoint size from serving
 memory. These experiments need not wait for every intermediate footprint.
-Exact gate contracts and equivalent-quality margins remain to be bound; existing
+The [mode and template direction](decision-modes-and-knowledge-mesh.md) replaces
+the earlier three-fixed-gates interpretation. Public contracts and equivalent-quality margins remain to be bound; existing
 permission checks and the required four-arm checkpoint comparison stay separate.
 
 Owner update, 2 November: retain 29 GB as the first total-serving milestone, add

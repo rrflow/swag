@@ -5,12 +5,16 @@ This records owner direction and evidence; it is not an engine execution plan.
 
 ## Compact controller research, 3 November
 
-The owner clarified the intended SWAG role as a three-gate System One decision
-router and a 9–12 GB candidate target. The [primary-source research update](controller-compression-research.md)
+The owner clarified that the three forms are **choice, score and binary decision
+modes**, backed by a built-in development best-practices knowledge mesh and
+templates fulfilled against deployed projects. They are not three fixed gates.
+The [decision/template direction](decision-modes-and-knowledge-mesh.md) records
+the intended contract, existing question-set foundations and remaining lifecycle.
+The 9–12 GB candidate target remains. The [primary-source research update](controller-compression-research.md)
 adds calibrated expert/channel pruning plus quantization, a small decision-model
 comparison and selective residency experiments. This corrects the earlier plan's
-limited treatment of structural compression. Exact gate contracts require owner
-binding; no equivalent-quality or memory-qualified candidate exists yet.
+limited treatment of structural compression. Mode and knowledge/template contracts
+still require implementation; no equivalent-quality or memory-qualified candidate exists yet.
 
 ## Outcome research correction, 2 November
 

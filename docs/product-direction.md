@@ -15,6 +15,13 @@ parameter counts.
 The initial delivery target is local operation with an optional hosted path.
 Model training is an advanced capability, not a prerequisite for onboarding.
 
+The owner's three decision modes are **choice, score and binary**. SWAG also
+includes a development best-practices knowledge mesh and templates that bind to
+real projects after deployment. RRFlow executes admitted work and records verified
+fulfillment; Connectome exposes requirements and evidence. See the
+[decision modes and knowledge-mesh direction](decision-modes-and-knowledge-mesh.md)
+for the intended behavior and the implementation boundary.
+
 ## Product responsibilities
 
 | Component | Responsibility |
@@ -76,8 +83,9 @@ zero scored scenarios, `avg_f1: null`, and `insufficient_evidence: true`. It
 withholds a recommended default tier. Current 14B/7B/27–28B settings are routing
 policy, not proof of an optimal deployment. Older 6–9 GB profiles are superseded. The active sequence is Qwen3-Coder-30B
 BF16 base, custom BF16, then evaluated compression toward 29 GB serving memory.
-A custom RRFlow shard and KV-cache system aiming for 19 GB is a later goal; it is
-not built or measured.
+The latest targets include 15 GB and a 9–12 GB specialized controller candidate,
+with knowledge/template runtime costs included in the declared scope. See the
+[compression research](controller-compression-research.md); none is qualified.
 A from-scratch 14B specialist remains a later research goal, not the default.
 Claude Fable/Sonnet/Opus and Codex handoffs must account for exact model, effort,
 authorized access and measured task strengths.
