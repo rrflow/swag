@@ -11,4 +11,5 @@
 <section><h2>Recent failures</h2><div id="failures"></div><p class="note">Use the trace ID to locate local JSONL records and code locations. Prompt text and exception messages are excluded.</p></section>
 <section><h2>Registered training runs</h2><div id="runs"></div><p class="note">A completion file is recorded evidence, not a live process heartbeat or an approved checkpoint.</p></section>
 <section><h2>Qualification and handoff</h2><p>Compare the original baseline, custom BF16 checkpoint, and that same checkpoint after quantization. Keep failed trials and measure real serving memory.</p><p>This workspace exposes <code>swag.dev-status/v1</code> for the future Connectome adapter. Connectome embedding, trace export to RROFLOW, UI training launch and automatic promotion are not implemented here.</p></section>
-</main><script type="module" src="dev-page.js"></script></body></html>
+<section><h2>Project knowledge and templates</h2><button id="refresh-knowledge">Refresh template inputs</button><div id="knowledge" aria-live="polite">Loading template preview...</div><p class="note">Choice, score and binary decisions use source-linked practices. This preview does not run a model, execute work or verify fulfillment.</p></section>
+</main><script type="module" src="dev-page.js"></script><script type="module" src="knowledge-page.js"></script></body></html>

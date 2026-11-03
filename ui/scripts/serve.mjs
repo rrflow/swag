@@ -9,7 +9,9 @@ const port = Number(process.env.SWAG_UI_PORT ?? 8891);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid SWAG_UI_PORT');
 const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`]);
 const statusScript = fileURLToPath(new URL('../../tools/swag_dev_status.py', import.meta.url));
+const knowledgeScript = fileURLToPath(new URL('../../tools/swag_knowledge.py', import.meta.url));
 let pendingStatus;
+let pendingKnowledge;
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json' };
 createServer(async (request, response) => {
@@ -20,6 +22,21 @@ createServer(async (request, response) => {
   if (request.method !== 'GET') { response.writeHead(405); response.end('Read-only interface'); return; }
   try {
     const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+    if (pathname === '/api/dev/knowledge') {
+      try {
+        pendingKnowledge ??= execute(process.env.SWAG_PYTHON ?? 'python', [knowledgeScript],
+          { timeout: 30000, maxBuffer: 2_000_000, windowsHide: true }).finally(() => { pendingKnowledge = undefined; });
+        const { stdout } = await pendingKnowledge;
+        const data = JSON.parse(stdout);
+        if (data.schema !== 'swag.knowledge-preview/v1') throw new Error('Invalid knowledge projection');
+        response.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+        response.end(JSON.stringify(data));
+      } catch {
+        response.writeHead(503, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+        response.end(JSON.stringify({ error: 'Knowledge preview unavailable; inspect local traces.' }));
+      }
+      return;
+    }
     if (pathname === '/api/dev/status') {
       try {
         pendingStatus ??= execute(process.env.SWAG_PYTHON ?? 'python', [statusScript],

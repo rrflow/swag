@@ -5,6 +5,12 @@ The TypeScript workspace reads `swag.dev-status/v1` from
 Both call `tools/swag_dev_status.py`; Connectome can consume this versioned
 contract through an adapter. No Connectome integration is claimed yet.
 
+The [knowledge-template adapter](knowledge-template-adapter.md) adds
+`GET /api/dev/knowledge`, MCP `knowledge_preview` and `validate_template_decision`.
+Bind a real project to inspect source-linked practices, choice/score/binary
+requirements and changed input revisions in the same developer workspace.
+Template fulfillment remains unassessed until engine verification is integrated.
+
 ## Run locally
 
 Install `requirements.txt` in a virtual environment, then set `SWAG_PYTHON` to
