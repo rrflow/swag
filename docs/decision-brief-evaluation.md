@@ -46,30 +46,63 @@ domain and per check. Domain routing improved and that gain held on test. Asking
 outcomes raised stakes F1 from 0.875 to 0.97 on development, but test stayed at 0.78, so **it should not
 be treated as an improvement**.
 
-## Speed and size
+## All three models on the same questions
+
+A later run gave [KnowLine-4B-Gen5.5](https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5) and Clef-flash the
+compact questions on the same GB10 Spark, one model at a time. Each model's thresholds came from one rule
+applied to development. For domains: fewest silent misses, then fewest harmless requests flagged, then best
+domain F1. For stakes: best F1. The test split had already been seen, and this was the custom model's third
+look at it, so read this as a same-schema comparison and not as a fresh held-out result.
+
+| 63 test requests | Custom model | KnowLine-4B | Clef-flash |
+| --- | --- | --- | --- |
+| Stakes F1 | 0.79 | 0.87 | **0.91** |
+| Elevated requests caught | 15 of 16 | **16 of 16** | 15 of 16 |
+| Normal requests marked elevated | 7 of 46 | 5 of 46 | **2 of 46** |
+| Domain F1 (micro) | **0.83** | 0.74 | 0.82 |
+| Real risks it stayed silent on | **0 of 38** | **0 of 38** | 1 of 38 |
+| Harmless requests given checks | **1 of 25** | 5 of 25 | 2 of 25 |
+| A required check in the top seven | 84% | **87%** | **87%** |
+| Time per brief, median | 0.96 s | 0.63 s | **0.48 s** |
+| Time per brief, p95 | 1.01 s | 1.12 s | **0.91 s** |
+| Size on disk | 61.07 GB | **9.34 GB** | 19.08 GB |
+| GPU memory, peak | about 63 GB | **9.95 GB** | 19.37 GB |
+
+- **No pair differs reliably on stakes.** Exact McNemar: custom and Clef-flash 0 to 5 (p = 0.06), custom and
+  KnowLine 0 to 3 (p = 0.25), KnowLine and Clef-flash 1 to 3 (p = 0.63).
+- **Thresholds move these numbers as much as the choice of model.** KnowLine's stakes F1 was 0.91 at the
+  policy's thresholds and 0.87 at its own tuned ones, so tuning on 27 requests did not help it. The shipped
+  thresholds were chosen for the custom model, and another model needs its own.
+- **Serving differs.** The custom model runs behind its existing endpoint in eager mode with one sequence.
+  The other two run in-process through Transformers, and KnowLine's documented SGLang path was not used.
+  Memory figures come from different counters and are not a total serving footprint.
+
+On the 21 retained real tasks with assistant labels, always answering `implementation` matches 14. The custom
+model matches 17, KnowLine 13 and Clef-flash 11. The custom model was trained on labels written the same way,
+which favours it here, and its two extra tasks over its own earlier JSON output could be chance (p = 0.5).
+
+Clef-flash's holdout outputs did not change between a laptop GPU and the Spark: no stakes decision flipped
+across the 90 requests at its threshold.
+
+## Speed before the schema change
 
 | | Time per brief | Size on disk |
 | --- | --- | --- |
 | Rules, warm | 12 ms | not applicable |
 | Custom model, one question per item | 5.45 s (median) | 61.07 GB |
-| Custom model, compact | 1.11 s median, 1.62 s p95 | 61.07 GB |
-| Clef-flash | not measured on the same hardware | 19.08 GB |
+| Custom model, compact through `decision_brief` and a tunnel | 1.11 s median, 1.62 s p95 | 61.07 GB |
 
-The endpoint runs one sequence in eager mode and is unchanged, so these are not its best possible times.
-Clef-flash took 0.39 s per question on a laptop GPU, on a slower attention path than it was built for, and
-[Cloudflare publishes](https://blog.cloudflare.com/clef-decision-models/) 38.8 ms on its own hardware.
-
-Reading one token instead of generating JSON also changed the 21 retained real tasks, with the same
-assistant labels: 15 to 17 matched, and 0.75 s to 0.24 s. Always answering `implementation` matches 14, and
-two more tasks could be chance (p = 0.5).
+[Cloudflare publishes](https://blog.cloudflare.com/clef-decision-models/) a 38.8 ms median for Clef-flash on its
+own hardware, per request. Reading one token instead of generating JSON also took the custom model from 0.75 s
+to 0.24 s on the 21 real tasks.
 
 ## What this does not establish
 
-- **Stakes false alarms remain.** The custom model's probabilities sit near 0 or 1, and on development no
-  threshold from 0.3 to 0.95 reduced them. That points at calibration in training rather than settings.
-- **Requests touching two domains can lose one.** Domains compete in one question.
-- **The comparison is incomplete.** Higher-scoring small models on the public
-  [Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index), such as KnowLine-4B at
-  9.34 GB, have not been run here.
-- **Nothing here measures real outcomes.** These are selected questions against assistant labels, not
-  checks that prevented a defect in a real project.
+- **A best model.** With 63 requests and small gaps, this supports "similar quality at very different sizes",
+  not a ranking. Other models on the public
+  [Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index) have not been run here.
+- **Fixed stakes false alarms.** The custom model's probabilities sit near 0 or 1, so on development thresholds
+  from 0.3 to 0.95 left its false alarms unchanged. That points at calibration in training rather than settings.
+- **Requests touching two domains.** Domains compete in one question, so one of them can be lost.
+- **Real outcomes.** These are selected questions against assistant labels, not checks that prevented a defect
+  in a real project. Comparing further changes needs new held-out requests, ideally human-reviewed.
