@@ -79,6 +79,43 @@ unqualified. [Merged PR212](https://github.com/rrflow/rrflow-development/pull/21
 provides the packaging tooling; signed releases, container deployment and the
 complete Connectome workflow remain open. See [current context](docs/current-context.md).
 
+## Get a decision brief
+
+Describe a request and SWAG returns the few checks that matter, a stakes call and
+a direction, or abstains when nothing stands out. It runs without a project profile,
+and it writes nothing to your project.
+
+```powershell
+python tools/swag.py brief --repo C:/work/my-app --intent "Add Stripe billing and make sure webhooks can't double charge"
+```
+
+Agents get the same result from the `decision_brief` MCP tool. A brief holds up to
+seven checks with their text, in under 4 KB in the requests tried so far.
+`decision_route` still lists every composed question ID without text. When
+`SWAG_LFG_CONNECTION_FILE` is set, the request is also sent to that local LFG
+instance, and a low-effort signal on elevated stakes is reported as a conflict.
+
+Without a decision model, the brief is a rules-only baseline whose stakes call comes
+from [policy terms](config/boundaries/decision_brief_policy.yaml). Treat it as a weak
+signal: on a held-out development set it found none of the elevated requests described
+without the usual words, and it raised checks on about half of the harmless ones.
+
+To use a decision model, set `SWAG_DECISION_MODEL_CONNECTION_FILE` to a JSON file naming
+a loopback service that answers `POST /v1/systemone`:
+
+```json
+{"schemaVersion": 1, "baseUrl": "http://127.0.0.1:8791", "model": "your-model", "revision": "pinned-revision",
+ "timeoutMs": 10000, "maxRequestBytes": 262144, "maxResponseBytes": 262144}
+```
+
+The model then decides stakes and domains and ranks the checks, and the brief reports
+`basis: decision_model` with its likelihoods. If the service fails, the brief falls back
+to the rules and reports `basis: rules_only` with `decisionModel.state: unavailable`.
+
+Either way, the brief selects existing questions and does not judge whether your project
+is correct. Model thresholds were chosen on assistant-labelled development data, so no
+route is qualified.
+
 ## Legacy policy preview
 
 The [developer workspace](docs/developer-workspace.md) adds a live local UI at
