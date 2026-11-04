@@ -228,6 +228,16 @@ class StackDetectionTests(unittest.TestCase):
         stacks, _ = bc.detect_stacks_from_intent(self.registry, "What should I do next on the dashboard?", [])
         self.assertNotIn("nextjs", stacks)
 
+    def test_the_word_go_does_not_name_the_go_stack(self):
+        for request in ("when we let someone go their account keeps working", "Go ahead and fix the header", "go through the logs"):
+            with self.subTest(request):
+                self.assertNotIn("go", bc.detect_stacks_from_intent(self.registry, request, [])[0])
+
+    def test_go_can_still_be_named(self):
+        for request in ("Write this service in Go", "Port it to golang", "rewrite the worker in Go, keep the API"):
+            with self.subTest(request):
+                self.assertIn("go", bc.detect_stacks_from_intent(self.registry, request, [])[0])
+
     def test_next_js_still_names_nextjs(self):
         for request in ("Add billing to my Next.js app", "Build it with nextjs"):
             with self.subTest(request):

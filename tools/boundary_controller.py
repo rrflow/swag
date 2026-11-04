@@ -34,7 +34,10 @@ KNOWN_FRAMEWORK_DEPS = {
 }
 
 # Registry aliases that are ordinary English words and cannot name a stack by themselves.
-AMBIGUOUS_INTENT_ALIASES = {"next"}
+AMBIGUOUS_INTENT_ALIASES = {"next", "go"}
+
+# How an ambiguous stack can still be named: "golang", or a capital "Go" that does not start a sentence.
+UNAMBIGUOUS_INTENT_PATTERNS = {"go": re.compile(r"\bgolang\b|(?<=[a-z,] )Go\b")}
 
 # Parsing the question sets dominates a composed battery, so keep each file until it changes.
 _YAML_CACHE: dict[Path, tuple[tuple[int, int], dict[str, Any]]] = {}
@@ -362,6 +365,12 @@ def detect_stacks_from_intent(
                     candidates.add(val.lower())
             elif isinstance(alias, str):
                 candidates.add(alias.lower())
+
+        pattern = UNAMBIGUOUS_INTENT_PATTERNS.get(key)
+        if pattern and pattern.search(intent_text):
+            detected.append(key)
+            reasons.append(f"Detected {key}: unambiguous intent name")
+            continue
 
         matched = False
         for candidate in candidates:

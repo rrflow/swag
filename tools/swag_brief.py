@@ -22,7 +22,7 @@ from boundary_controller import (
     detect_domains,
     detect_stacks_from_intent,
 )
-from swag_decision_model import DecisionModelError, configured as decision_model_configured, probabilities
+from swag_decision_model import DecisionModelError, choices, configured as decision_model_configured
 from swag_lfg import LfgBridgeError, assess
 from swag_observability import CURRENT, observed
 
@@ -129,15 +129,20 @@ def _lfg_signal(text: str) -> dict[str, Any]:
 def _model_reading(intent_text: str, domains_config: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
     """Ask the decision model for stakes and domains. Thresholds come from the policy."""
     settings = policy["decision_model"]
-    questions = {"stakes": {"type": "noul", "instructions": settings["stakes_question"]}}
-    for domain in domains_config["domains"]:
-        questions[f"domain:{domain['key']}"] = {"type": "noul", "instructions": settings["domain_question"].format(
-            label=domain["canonical_label"], notes=" ".join(str(domain.get("disambiguation") or "").split()))}
-    reading = probabilities({"request": intent_text}, questions, int(settings["max_questions_per_request"]))
-    likelihoods = {key.removeprefix("domain:"): value for key, value in reading["answers"].items() if key != "stakes"}
+    criteria = {
+        domain["key"]: f"{domain['canonical_label']}. {' '.join(str(domain.get('disambiguation') or '').split())}"
+        for domain in domains_config["domains"]
+    }
+    criteria["none"] = settings["no_domain_option"]
+    reading = choices({"request": intent_text}, {
+        "stakes": {"type": "choice", "instructions": settings["stakes_question"], "criteria": settings["stakes_options"]},
+        "domain": {"type": "choice", "instructions": settings["domain_question"], "criteria": criteria},
+    }, int(settings["max_questions_per_request"]))
+    stakes = reading["answers"]["stakes"]["elevated"]
+    likelihoods = {key: value for key, value in reading["answers"]["domain"].items() if key != "none"}
     return {
-        "stakes": reading["answers"]["stakes"],
-        "elevated": reading["answers"]["stakes"] >= float(settings["stakes_threshold"]),
+        "stakes": stakes,
+        "elevated": stakes >= float(settings["stakes_threshold"]),
         "domains": sorted(key for key, value in likelihoods.items() if value >= float(settings["domain_threshold"])),
         "likelihoods": likelihoods,
         "inputTokens": reading["inputTokens"],
@@ -149,15 +154,32 @@ def _model_reading(intent_text: str, domains_config: dict[str, Any], policy: dic
 def _model_rank(
     intent_text: str,
     candidates: list[dict[str, Any]],
+    shares: dict[str, float],
     policy: dict[str, Any],
 ) -> tuple[list[tuple[dict[str, Any], float]], int]:
-    """Rank candidate checks by how strongly the model says this request needs each one."""
+    """Ask which check matters most within each group, weighted by how strongly that group applies."""
     settings = policy["decision_model"]
-    questions = {question["id"]: {"type": "noul", "instructions": settings["check_question"].format(check=question["text"])}
-                 for question in candidates}
-    reading = probabilities({"request": intent_text}, questions, int(settings["max_questions_per_request"]))
-    scored = sorted(enumerate(candidates), key=lambda row: (-reading["answers"][row[1]["id"]], row[0]))
-    return [(question, reading["answers"][question["id"]]) for _, question in scored], reading["inputTokens"]
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for question in candidates:
+        groups.setdefault(question["domain"] if question["kind"] == "domain" else question["question_set"], []).append(question)
+    kept = sorted(groups, key=lambda key: -shares[key])[: int(settings["max_check_groups"])]
+    limit = int(settings["max_options_per_question"])
+    questions = {}
+    for key in kept:
+        criteria = {question["id"]: question["text"] for question in groups[key][:limit - 1]}
+        # Domains were already chosen for this request. Naming a stack does not mean one of its checks applies.
+        if groups[key][0]["kind"] != "domain":
+            criteria["none"] = settings["no_check_option"]
+        questions[key] = {"type": "choice", "instructions": settings["check_question"], "criteria": criteria}
+    reading = choices({"request": intent_text}, questions, int(settings["max_questions_per_request"]))
+    scored = []
+    for key in kept:
+        distribution = reading["answers"][key]
+        if distribution.get("none", 0.0) == max(distribution.values()):
+            continue
+        scored += [(question, shares[key] * distribution[question["id"]]) for question in groups[key] if question["id"] in distribution]
+    order = sorted(enumerate(scored), key=lambda row: (-row[1][1], row[0]))
+    return [row for _, row in order], reading["inputTokens"]
 
 
 @observed("swag.decision_brief")
@@ -227,7 +249,9 @@ def decision_brief(
         selected = []
         if candidates:
             try:
-                rank, check_tokens = _model_rank(intent_text, candidates, policy)
+                shares = reading["likelihoods"] | {key: 1.0 for key in domains or []}
+                shares |= {str(key): float(policy["decision_model"]["named_stack_share"]) for key in named_stacks}
+                rank, check_tokens = _model_rank(intent_text, candidates, shares, policy)
                 selected = rank[: int(policy["max_checks"])]
             except DecisionModelError:
                 selected = [(question, []) for question in candidates[: int(policy["max_checks"])]]
