@@ -98,9 +98,12 @@ to 0.24 s on the 21 real tasks.
 
 ## What this does not establish
 
-- **A best model.** With 63 requests and small gaps, this supports "similar quality at very different sizes",
-  not a ranking. Other models on the public
-  [Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index) have not been run here.
+- **That a smaller model can replace the larger one.** These are 63 short routing requests, which is where small
+  models do best. On the public
+  [Decision Index 0.4.1](https://huggingface.co/spaces/multimodalart/jev-decision-index), median full scores are
+  40.9 at 4-5B, 46.2 at 9-12B and 66.1 at 26-32B. Among each class's leaders, the widest gap is code reasoning
+  (CRUXEval), 0.83 against 0.43 at 4-5B. This test is too small and too easy to show a gap like that, so finding
+  no reliable difference here says little.
 - **Fixed stakes false alarms.** The custom model's probabilities sit near 0 or 1, so on development thresholds
   from 0.3 to 0.95 left its false alarms unchanged. That points at calibration in training rather than settings.
 - **Requests touching two domains.** Domains compete in one question, so one of them can be lost.
