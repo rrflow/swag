@@ -76,8 +76,11 @@ class ProjectTests(unittest.TestCase):
     def test_route_is_resolved_once(self):
         service = swag._service()
         with patch.object(service, "_resolve_route", wraps=service._resolve_route) as route:
-            service.decide({"repo": str(self.repo), "intent_text": "Build an app"})
+            result = service.decide({"repo": str(self.repo), "intent_text": "Build an app"})
         self.assertEqual(route.call_count, 1)
+        self.assertIn("semantic_router", result)
+        self.assertIn("proposal", result["semantic_router"])
+        self.assertIn("rrflow_validation", result["semantic_router"])
 
     def test_mcp_project_preview(self):
         result = swag_mcp_server._handle_message({

@@ -5,8 +5,8 @@ the [local read-only adapter](knowledge-template-adapter.md) implements typed
 answer validation and source-bound template previews. The complete engine decision
 API, knowledge mesh and fulfillment lifecycle are not implemented.
 
-SWAG is a System One controller with three decision modes: **choice, score and
-binary**. These are reusable output forms, not three fixed application gates,
+SWAG is a System One controller with three decision modes: **binary, score and
+choice**. These are reusable output forms, not three fixed application gates,
 three candidate models or three predetermined groups of MoE experts. SWAG also
 needs built-in development best-practices knowledge and deployable templates
 that are fulfilled against the user's actual project.
@@ -74,6 +74,51 @@ authorized correlated observations for debugging and reviewed learning. A model'
 binary yes or high score alone cannot mark a project requirement complete.
 
 ## Evaluation and delivery sequence
+
+### Triggered LFG/SWAG assessment cycles
+
+**Owner clarification, 4 November 2026:** evolve the three modes through bounded
+LFG/SWAG assessment bursts. This is the next experiment design, not an implemented
+trigger service or evidence that either component assesses a task correctly.
+
+A cycle evaluates an explicit proposition, rubric or option set against relevant
+project inputs and referenced practices. Experiment configuration selects the
+participants, their order, context, budgets and stop conditions; it does not
+hardcode a preferred model or assume every trigger needs both components.
+The existing LFG bridge returns advisory intent, configured-rule complexity
+points and role/effort suggestions. Those points are not automatically a SWAG
+rubric score, confidence estimate or reviewed task outcome.
+
+Proposed trigger candidates are a new intent, a relevant input/knowledge/template
+change, a user route override and an actual verification failure. RRFlow must
+admit each cycle through its canonical execution authority. Bind the trigger ID,
+affected requirement/input digest, policy revision and participant identities;
+coalesce repeated events and deduplicate replay. An assessment's own completion
+must not recursively trigger another burst. Time, calls, tokens, concurrency,
+cooldown and retry limits are explicit configuration, with cancellation and
+unknown remote outcomes accounted for by the engine.
+
+Ordinary edits refresh affected inputs immediately. Retain an in-flight result
+against the old identity as historical evidence, prevent its application to the
+new revision, and admit a bounded reassessment when eligible. Unrelated edits
+must not block the project. A cycle may answer, abstain, request missing context
+or propose escalation; it cannot authorize an effect or mark fulfillment itself.
+
+Compare LFG alone, SWAG alone and explicitly configured combinations on the same
+real, frozen tasks. Include a matched-budget non-triggered baseline to measure
+whether the burst adds value. Collect independent reviews of binary errors,
+rubric agreement and choice suitability, alongside latency, calls, token usage,
+memory and unnecessary/missed triggers. Disagreement and user overrides are
+observations awaiting review, not automatic labels or training permission.
+
+The UI should expose the triggering event, input revision, assessments, evidence,
+budget consumed, stop reason and reviewed outcome. Correlate authorized RROFLOW
+events with the same cycle/task/attempt identities. Durable cycle admission,
+trigger deduplication, UI controls and reviewed experiment execution remain
+native integration work; no separate SWAG scheduler or completion ledger is
+introduced by this document.
+
+### Acceptance sequence
 
 First bind these modes to the public engine proposal contract and project-source
 identity. Then add the versioned knowledge/template adapter and Connectome view.
