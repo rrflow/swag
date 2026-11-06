@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "baseUrl": "https://localhost:8788",
+  "instanceId": "local-swag-dev",
+  "credentialFile": "/etc/swag/rrflow-credential.json"
+}
