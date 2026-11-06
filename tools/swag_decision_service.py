@@ -20,10 +20,7 @@ from pathlib import Path
 from typing import Any
 from urllib import error, request
 
-from baseline_route_selector import select_route
 from boundary_controller import compose_battery
-from rrflow_route_gate import RRFlowRouteGate
-from semantic_router_adapter import SemanticRouterAdapter
 from swag_observability import observed
 
 
@@ -594,48 +591,6 @@ class DecisionService:
             else []
         )
 
-        route_request = {
-            "projectIntent": intent_text,
-            "taskText": intent_text,
-            "minimumQuality": 0.75,
-            "maxCost": 20.0,
-            "requestedEffort": "medium",
-            "localOnly": bool(payload.get("local_only", False)),
-            "candidates": [
-                {
-                    "bindingId": f"{key_info.get('provider', 'provider')}:{key_info.get('key_id', 'key')}",
-                    "provider": str(key_info.get('provider', 'unknown')),
-                    "modelId": str((route_info["route"].get("model_preferences", [{}])[0].get("model") if isinstance(route_info["route"].get("model_preferences", []), list) and route_info["route"].get("model_preferences") else key_info.get('key_id', 'route'))),
-                    "accessMode": "subscription" if key_info.get('provider') else "local",
-                    "authorized": bool(key_info.get('env_present', False)),
-                    "healthy": True,
-                    "quotaAvailable": bool(key_info.get('env_present', False)),
-                    "location": "local" if str(key_info.get('provider', '')).lower() in {'local', 'self_hosted'} else "cloud",
-                    "quality": 0.82,
-                    "cost": 12.0 if str(key_info.get('provider', '')).lower() not in {'local', 'self_hosted'} else 6.0,
-                    "efforts": ['low', 'medium', 'high'],
-                }
-                for key_info in route_info.get('key_pool', [])
-            ] or [
-                {
-                    "bindingId": "local-default",
-                    "provider": "local",
-                    "modelId": "local-default",
-                    "accessMode": "local",
-                    "authorized": True,
-                    "healthy": True,
-                    "quotaAvailable": True,
-                    "location": "local",
-                    "quality": 0.8,
-                    "cost": 6.0,
-                    "efforts": ['low', 'medium', 'high'],
-                }
-            ],
-        }
-        semantic_router = SemanticRouterAdapter(proposer=select_route, gate=RRFlowRouteGate())
-        route_proposal = semantic_router.propose(route_request)
-        rrflow_validation = RRFlowRouteGate().evaluate(route_request, route_proposal)
-
         response: dict[str, Any] = {
             "aiddevspec": {
                 "name": self.aiddevspec.get("profile", {}).get("name", "swag-system-one-default"),
@@ -663,14 +618,13 @@ class DecisionService:
                 "fallback_order_for_tier": fallback_order if isinstance(fallback_order, list) else [],
             },
             "semantic_router": {
-                "route_request": route_request,
-                "proposal": route_proposal,
-                "rrflow_validation": rrflow_validation,
+                "state": "engine_proposal_not_integrated",
+                "proposal": None,
+                "engineValidated": False,
+                "executionAuthorized": False,
             },
             "decision": {
                 "selected_question_ids": selected_ids,
-                "route_proposal": route_proposal,
-                "rrflow_route_validation": rrflow_validation,
                 "notes": "dry-run; no model execution requested",
             },
         }
