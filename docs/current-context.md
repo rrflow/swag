@@ -3,6 +3,29 @@
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
+## Routing evidence boundary repair, 6 November
+
+The newer developer-preview router constructed unobserved candidate health,
+quota, quality and cost values and labeled a Python eligibility check as RRFlow
+validation. The correction removes that fabricated request and approval from
+the production `decision_route`/decision-service response. Until the native
+proposal consumer is integrated, `semantic_router` explicitly reports
+`engine_proposal_not_integrated`, with no proposal or execution authorization.
+
+Offline proposal helpers now use `LocalRouteValidator`, preserve unknown
+confidence, bind supplied input identities and reject stale or ineligible
+proposals without claiming engine admission. These checks do not authenticate
+caller-supplied candidate facts or supply reviewed training labels. The actual
+stdio MCP preview was exercised on this repository's controller-delivery task;
+its unavailable state and correlated trace were retained privately.
+
+RRFlow PR229 is currently draft and conflicted at `5ddd7c2c`; its existing
+current-main reconciliation is distinct from this SWAG repair. Older publication
+hold statements below are historical. The next production boundary remains the
+public UI's engine-owned prompt flight consuming an admitted provider result,
+followed by relevant-input refresh and verified project effects. A preview or
+local consistency check cannot substitute for that acceptance.
+
 ## Knowledge-template adapter, 3 November
 
 The [read-only adapter](knowledge-template-adapter.md) now binds a shipped Python

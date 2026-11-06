@@ -1,16 +1,13 @@
 """Deterministic, policy-aware baseline for route selection."""
 from __future__ import annotations
 
-from swag_routing_contract import eligible_candidates
+from swag_routing_contract import digest, expected_route, validate_request
 
 
 def decision_for(request: dict) -> dict:
     """Return the exact bounded decision the contract would expect."""
-    eligible = eligible_candidates(request)
-    if not eligible:
-        return {'bindingId': None, 'effort': None}
-    choice = min(eligible, key=lambda item: (item['cost'], item['bindingId']))
-    return {'bindingId': choice['bindingId'], 'effort': request['requestedEffort']}
+    validate_request(request)
+    return expected_route(request)
 
 
 def select_route(request: dict) -> dict:
@@ -18,13 +15,13 @@ def select_route(request: dict) -> dict:
     if not isinstance(request, dict):
         raise TypeError('Route requests must be dictionaries.')
     decision = decision_for(request)
-    eligible = eligible_candidates(request)
-    if not eligible:
+    if decision['bindingId'] is None:
         return {
             'bindingId': None,
             'effort': None,
             'abstain': True,
-            'confidence': 0.0,
+            'confidence': None,
+            'inputSha256': digest(request),
             'reason': 'No eligible candidate satisfies the current policy and budget.',
             'source': 'deterministic_baseline',
             'decision': decision,
@@ -33,7 +30,8 @@ def select_route(request: dict) -> dict:
         'bindingId': decision['bindingId'],
         'effort': decision['effort'],
         'abstain': False,
-        'confidence': 0.5,
+        'confidence': None,
+        'inputSha256': digest(request),
         'reason': 'Lowest-cost eligible candidate after policy checks.',
         'source': 'deterministic_baseline',
         'decision': decision,
