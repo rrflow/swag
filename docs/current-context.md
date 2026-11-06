@@ -3,6 +3,24 @@
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
+## Deployment scaffold correction, 6 November
+
+The newly added deployment scaffolding did not launch RRFlow or Connectome:
+the engine script invoked a read-only module and suppressed errors, and the UI
+script only printed a message. Its handwritten engine/panel contracts also named
+unimplemented endpoints. Those invented contracts and unused environment examples
+are removed. Unsupported launchers now fail explicitly; SWAG bootstrap only
+prepares its local preview configuration, preserves existing settings and starts
+no services. The preview defaults to loopback. This correction is not a joined
+deployment, engine admission, Connectome integration or a binary release.
+
+The existing private developer stack's engine and workspace remained reachable.
+After an actual successful Spark SSH probe, its owned model tunnel and local
+observation receiver restarted and passed readiness checks. Real browser readback
+then reported an authenticated engine, the expected model listed and no page
+errors. Discovery does not attest loaded weights or prove inference; earlier
+model receipts retain their original binary/source identities.
+
 ## Routing evidence boundary repair, 6 November
 
 The newer developer-preview router constructed unobserved candidate health,

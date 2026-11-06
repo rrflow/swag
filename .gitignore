@@ -14,6 +14,11 @@ Microsoft/
 .env.*
 !.env.example
 .swag/
+deploy/env/*.env
+deploy/rrflow/connection.json
+deploy/swag/rrflow-connection.json
+deploy/connectome/manifest.json
+deploy/evidence/
 
 # Session logs and generated artifacts stay local.
 chat-archive/

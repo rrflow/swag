@@ -7,4 +7,4 @@ if [ -f "${ROOT_DIR}/env/swag.env" ]; then
   . "${ROOT_DIR}/env/swag.env"
   set +a
 fi
-python "${ROOT_DIR}/../tools/swag_decision_service.py" --host "${SWAG_HOST:-127.0.0.1}" --port "${SWAG_PORT:-8787}"
+exec "${SWAG_PYTHON:-python}" "${ROOT_DIR}/../tools/swag_decision_service.py" --host "${SWAG_HOST:-127.0.0.1}" --port "${SWAG_PORT:-8787}"
