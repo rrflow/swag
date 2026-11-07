@@ -46,6 +46,9 @@ a target, not a measured result for SWAG.
   attunement profiles, model adapters, and training/evaluation tooling.
 - A single project entry point: `tools/swag.py init`, `doctor`, and `preview`.
   The saved project profile drives the actual controller preview.
+- A decision brief, through `tools/swag.py brief` and MCP `decision_brief`, that uses a local `/v1/systemone` decision model when one is configured and otherwise reports a rules-only result.
+  It returns up to seven checks, a stakes call and any LFG conflict, or abstains. It
+  is the rules-only baseline for route comparison, not measured routing quality.
 - CLI and MCP `project_preview` produce the same local decision artifacts and
   content-free preview events, including failed controller runs.
 - An explicit publisher targeting RROFLOW's existing `rroflow.turn/v1` and

@@ -166,13 +166,27 @@ def preview(repo: Path, intent: str | None = None) -> dict[str, Any]:
     }
 
 
+def brief(repo: Path, intent: str | None = None) -> dict[str, Any]:
+    from swag_brief import decision_brief
+
+    try:
+        profile = load_project(repo)
+    except FileNotFoundError:
+        profile = {}
+    request = intent if intent is not None else profile.get("intent")
+    if not request:
+        raise ValueError("Describe the request with --intent.")
+    return decision_brief(repo, request, maturity=profile.get("maturity", "growing"),
+                          has_test_harness=profile.get("has_test_harness", True))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("init", "doctor", "preview"):
+    for name in ("init", "doctor", "preview", "brief"):
         command = commands.add_parser(name)
         command.add_argument("--repo", type=Path, default=Path.cwd())
-        if name in {"init", "preview"}:
+        if name in {"init", "preview", "brief"}:
             command.add_argument("--intent", required=name == "init")
         if name == "init":
             command.add_argument("--project")
@@ -186,6 +200,8 @@ def main(argv: list[str] | None = None) -> int:
             result = doctor(args.repo.resolve())
         elif args.command == "preview":
             result = preview(args.repo.resolve(), args.intent)
+        elif args.command == "brief":
+            result = brief(args.repo.resolve(), args.intent)
         else:
             with args.event.open(encoding="utf-8") as stream:
                 record = json.load(stream)

@@ -7,6 +7,7 @@ This controller executes the routing contract:
 from __future__ import annotations
 
 import argparse
+import copy
 import fnmatch
 import json
 import re
@@ -32,6 +33,15 @@ KNOWN_FRAMEWORK_DEPS = {
     "@angular/core",
 }
 
+# Registry aliases that are ordinary English words and cannot name a stack by themselves.
+AMBIGUOUS_INTENT_ALIASES = {"next", "go"}
+
+# How an ambiguous stack can still be named: "golang", or a capital "Go" that does not start a sentence.
+UNAMBIGUOUS_INTENT_PATTERNS = {"go": re.compile(r"\bgolang\b|(?<=[a-z,] )Go\b")}
+
+# Parsing the question sets dominates a composed battery, so keep each file until it changes.
+_YAML_CACHE: dict[Path, tuple[tuple[int, int], dict[str, Any]]] = {}
+
 
 def _load_yaml(path: Path) -> dict[str, Any]:
     try:
@@ -42,11 +52,17 @@ def _load_yaml(path: Path) -> dict[str, Any]:
             "(pip install pyyaml)."
         ) from exc
 
+    status = path.stat()
+    stamp = (status.st_mtime_ns, status.st_size)
+    cached = _YAML_CACHE.get(path)
+    if cached and cached[0] == stamp:
+        return copy.deepcopy(cached[1])
     with path.open("r", encoding="utf-8") as fh:
         data = yaml.safe_load(fh)
     if not isinstance(data, dict):
         raise SystemExit(f"Expected YAML mapping in {path}")
-    return data
+    _YAML_CACHE[path] = (stamp, data)
+    return copy.deepcopy(data)
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -233,12 +249,12 @@ def detect_stacks(repo: Path, registry: dict[str, Any]) -> tuple[list[str], list
 
     cargo_toml = _read_text(repo / "Cargo.toml")
 
-    if (repo / "next.config.js").exists() or (repo / "next.config.mjs").exists():
+    if any((repo / name).exists() for name in ("next.config.js", "next.config.mjs", "next.config.cjs", "next.config.ts")):
         detected.add("nextjs")
         reasons.append("Detected nextjs: next.config.*")
-    if (repo / "app").is_dir() and "next" in dependencies:
+    if "next" in dependencies:
         detected.add("nextjs")
-        reasons.append("Detected nextjs: app/ + next dependency")
+        reasons.append("Detected nextjs: next dependency")
 
     if (repo / "go.mod").exists():
         detected.add("go")
@@ -350,9 +366,15 @@ def detect_stacks_from_intent(
             elif isinstance(alias, str):
                 candidates.add(alias.lower())
 
+        pattern = UNAMBIGUOUS_INTENT_PATTERNS.get(key)
+        if pattern and pattern.search(intent_text):
+            detected.append(key)
+            reasons.append(f"Detected {key}: unambiguous intent name")
+            continue
+
         matched = False
         for candidate in candidates:
-            if not candidate.strip():
+            if not candidate.strip() or candidate in AMBIGUOUS_INTENT_ALIASES:
                 continue
             if re.search(r"\b" + re.escape(candidate) + r"\b", intent):
                 detected.append(key)
