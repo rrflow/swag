@@ -116,6 +116,20 @@ class AdmissionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'No reviewed'):
             self.export()
 
+    def test_native_attempt_and_prior_review_do_not_create_admission_authority(self):
+        from test_swag_passive_capture import native_fixture
+        manifest = native_fixture(self.root)
+        observation = capture.import_native_attempt(manifest, self.root)
+        self.observations = [observation]
+        self.reviews = []
+        with self.assertRaisesRegex(ValueError, 'No reviewed'):
+            self.export()
+        self.assertFalse(self.output.exists())
+        self.assertFalse(observation['training_consent'])
+        self.assertEqual(observation['label_status'], 'unreviewed')
+        self.assertEqual(observation['native_attempt']['prior_review']['relationship'],
+                         'prior_observation_only_not_capture_review')
+
     def test_changed_or_escaping_evidence_rejected(self):
         ref = self.reviews[0]['evidence']['label']
         (self.root / ref['path']).write_bytes(b'changed')

@@ -1,8 +1,8 @@
 # SWAG routing observations
 
-Status: local explicit emitter with JSON Schema validation. No background watcher,
-issue-service polling, subscription dispatch, engine integration, or training
-promotion is implemented here.
+Status: local explicit emitter and offline retained-native-attempt importer with
+JSON Schema validation. This command does not poll issue services, dispatch
+subscriptions, call the engine, or promote training data.
 
 ## Current capture boundary
 
@@ -39,7 +39,62 @@ now implements this offline export boundary. Raw capture records stay unchanged;
 reviews are separate hash-bound supplements. Reviewer identity and consent remain
 local attestations, not authenticated engine receipts.
 
-## Next engine integration
+## Import a retained native attempt
+
+The opt-in importer handles one accepted native v1 source-only worker and its
+preceding accepted selector. These are two stages of one attempt, not two
+comparable model outcomes. Supply a private JSON manifest with `schema_version: 1`
+and an `artifacts` object. Each artifact has exactly `path` (relative to the
+evidence root, using `/`) and `sha256` (the file's actual SHA-256).
+
+Required roles are `task`, `worker`, `selector`, `budget` (successful native
+protocol readback envelopes), and `source` (the exact selected source bytes).
+Optional `prior_review` accepts the retained `clyffy.private-draft-review.v1`
+observation. Optional `prepared_delivery` and `receiver_readback` must occur
+together. No evidence paths, prompts, source text, output text, or review prose
+are copied into the capture. Keep both inputs and output private.
+
+```powershell
+python tools/swag_passive_capture.py --native-manifest .swag/evidence/import.json --evidence-root .swag/evidence --output .swag/capture/native-attempts.jsonl
+```
+
+The manifest is limited to 16 KiB, each artifact to 4 MiB, and the destination
+JSONL to 64 MiB. Native import requires an explicit dedicated output; it rejects
+destinations containing legacy capture rows or aliasing the manifest or selected
+evidence, including hard links and lock-file aliases. Duplicate JSON keys,
+non-finite numbers, links/reparse points in inputs or destinations,
+path escapes, unsupported shapes, and mismatched byte hashes fail before append.
+This is a local consistency check, not authenticated origin or loaded-weight
+attestation. Preserve the private evidence root against concurrent modification.
+
+The optional `native_attempt` section retains exact engine instance, scope, task
+and attempt identities separately from the capture's short local IDs. It verifies
+artifact, source and worker-content bytes, joins selection/task/configuration
+identities, and marks native typed digests as **engine-reported**. It does not
+pretend Python JSON serialization reproduces Rust's typed hashing. Service IDs
+remain observed aliases; provider/model/revision/loaded-weight identity remain
+unknown. Reported effort, usage and elapsed time retain nulls when absent.
+
+Delivery correlation joins the event to the prepared native source-response
+digest, which describes a typed attempt view, not the worker's provider response
+or full HTTP envelope. The receiver's absent source digest stays null. A matching
+retained receiver event does not prove a cloud deployment or authenticate the
+offline files. A prior review stays a prior observation; it is not a review of
+the newly captured record.
+
+Exact immutable replay under the writer lock adds no row. Different evidence for
+the same native identity fails while preserving the original bytes. Later review
+or event supplements must be retained separately; this importer does not merge
+them into an existing row. All records remain unreviewed without training consent,
+selected questions, inferred success, or inferred best-model labels.
+
+The current offline viewer and paired-outcome review UI do not support this native
+metadata record. It deliberately omits raw task text and repository location and
+cannot directly satisfy the existing routing dataset admission contract. A future
+reviewed adapter must supply genuine task/candidate evidence and explicit consent;
+it must preserve independent review, comparable-attempt and frozen-split gates.
+
+## Next live engine integration
 
 An admitted observation adapter should correlate plan revision, source/read
 identity, task and effect receipt with the eligible candidate set, original route,
