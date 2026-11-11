@@ -1,5 +1,15 @@
 # SWAG implementation plan
 
+## Active delivery sequence, 7 November 2026
+
+Use the [decision-router alpha delivery plan](decision-router-alpha-plan.md) for
+the next executable packages: the installed RRFlow journey, reviewed outcome
+adapter, compute preparation, bounded training pilot, evaluation, traceability
+and reversible promotion. It separates authorized offline training from the
+engine-owned training lifecycle so preparation and reviewed experiments can
+advance alongside integration. The meaning of the owner's "03" remains to be
+confirmed. This sequencing update changes no historical evidence or RRFlow gate.
+
 Owner direction: 2026-10-29. Goal: a usable System One controller that completes
 real development work through RRFlow, learns from reviewed outcomes, and can
 ship locally and as a scale-out image. This is SWAG's work plan; RRFlow's existing

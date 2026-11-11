@@ -23,6 +23,10 @@ The complete connected project workflow and automatic learning remain unqualifie
 Start with [current context and verified status](docs/current-context.md), then
 [product direction and release gates](docs/product-direction.md).
 
+The [decision-router alpha delivery plan](docs/decision-router-alpha-plan.md)
+defines the active goal, RRFlow integration packages, reviewed-data training path,
+compute preparation, tracing, optimization and acceptance milestones.
+
 The model qualification milestone compares the original Qwen baseline, one
 versioned custom BF16 checkpoint, and that same checkpoint after quantization.
 See the [engine-owned plan and source-identity design](docs/engine-plan-source-identity.md)
