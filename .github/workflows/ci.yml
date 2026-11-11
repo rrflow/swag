@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  merge_group:
 
 permissions:
   contents: read
@@ -55,3 +56,10 @@ jobs:
       - run: >-
           docker run --rm --network none -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.18.4
           detect --source /repo --redact --verbose --no-banner
+
+  ci-gate:
+    if: always()
+    needs: [python, evidence-viewer, secret-scan]
+    runs-on: ubuntu-latest
+    steps:
+      - run: test "${{ needs.python.result }}${{ needs.evidence-viewer.result }}${{ needs.secret-scan.result }}" = successsuccesssuccess

@@ -39,6 +39,8 @@ Tests use `unittest`, and CI runs them with the evidence viewer tests and a secr
 
 Use concise imperative commit subjects, such as `Fix boundary routing fallback`. PRs should explain behavior changes, link relevant issues, list validation results, and include screenshots for UI changes.
 
+`main` only accepts pull requests whose required checks pass. After opening a PR, run `gh pr merge --auto --merge` so it merges once green; its branch is deleted on merge. The `Repo status` workflow comments on failing PRs, opens a `main is red` issue, and keeps one issue listing conflicted or stuck PRs and leftover branches. Treat any of those as work to finish.
+
 ## Security & Configuration
 
 Use `.env.example` as the configuration reference; keep credentials out of committed files. Preserve dataset redaction and provenance checks when changing training workflows.
