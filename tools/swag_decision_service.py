@@ -617,6 +617,12 @@ class DecisionService:
                 "key_pool": route_info.get("key_pool", []),
                 "fallback_order_for_tier": fallback_order if isinstance(fallback_order, list) else [],
             },
+            "semantic_router": {
+                "state": "engine_proposal_not_integrated",
+                "proposal": None,
+                "engineValidated": False,
+                "executionAuthorized": False,
+            },
             "decision": {
                 "selected_question_ids": selected_ids,
                 "notes": "dry-run; no model execution requested",

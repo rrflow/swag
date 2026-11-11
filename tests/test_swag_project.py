@@ -76,8 +76,29 @@ class ProjectTests(unittest.TestCase):
     def test_route_is_resolved_once(self):
         service = swag._service()
         with patch.object(service, "_resolve_route", wraps=service._resolve_route) as route:
-            service.decide({"repo": str(self.repo), "intent_text": "Build an app"})
+            result = service.decide({"repo": str(self.repo), "intent_text": "Build an app"})
         self.assertEqual(route.call_count, 1)
+        self.assertIn("semantic_router", result)
+        self.assertIn("proposal", result["semantic_router"])
+        self.assertEqual(result["semantic_router"]["state"], "engine_proposal_not_integrated")
+        self.assertIsNone(result["semantic_router"]["proposal"])
+        self.assertFalse(result["semantic_router"]["executionAuthorized"])
+        self.assertFalse(result["semantic_router"]["engineValidated"])
+        self.assertNotIn("rrflow_route_validation", result["decision"])
+
+    def test_mcp_route_preview_cannot_invent_local_candidate_or_engine_admission(self):
+        result = swag_mcp_server._handle_message({
+            "jsonrpc": "2.0", "id": 9, "method": "tools/call",
+            "params": {"name": "decision_route", "arguments": {
+                "repo": str(self.repo), "intent_text": "Review dependencies"}},
+        })
+        self.assertNotIn("error", result)
+        self.assertFalse(result["result"].get("isError", False))
+        payload = json.loads(result["result"]["content"][0]["text"])
+        self.assertIsNone(payload["semantic_router"]["proposal"])
+        self.assertNotIn("route_request", payload["semantic_router"])
+        self.assertNotIn("rrflow_validation", payload["semantic_router"])
+        self.assertFalse(payload["semantic_router"]["executionAuthorized"])
 
     def test_mcp_project_preview(self):
         result = swag_mcp_server._handle_message({
