@@ -23,6 +23,7 @@ Run from the repository root with Python 3.10+. There is no separate application
 - `python tools/check_naming.py --no-user tests/fixtures/sample_seam_keys.txt`: exercise seam-name validation.
 - `python tools/swag_runtime_bootstrap.py --pretty`: inspect merged runtime configuration.
 - `python tools/boundary_controller.py --pretty --intent-text "secure AI app architecture"`: exercise controller routing.
+- `python tools/swag.py brief --repo . --intent "Add password reset"`: get the compact decision brief for one request.
 - `python tools/swag_ops_ui.py --host 127.0.0.1 --port 8790`: start the local operations UI.
 
 ## Coding Style & Naming Conventions

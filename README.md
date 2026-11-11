@@ -79,6 +79,47 @@ unqualified. [Merged PR212](https://github.com/rrflow/rrflow-development/pull/21
 provides the packaging tooling; signed releases, container deployment and the
 complete Connectome workflow remain open. See [current context](docs/current-context.md).
 
+## Get a decision brief
+
+Describe a request and SWAG returns the few checks that matter, a stakes call and
+a direction, or abstains when nothing stands out. It runs without a project profile,
+and it writes nothing to your project.
+
+```powershell
+python tools/swag.py brief --repo C:/work/my-app --intent "Add Stripe billing and make sure webhooks can't double charge"
+```
+
+Agents get the same result from the `decision_brief` MCP tool. A brief holds up to
+seven checks with their text, in under 4 KB in the requests tried so far.
+`decision_route` still lists every composed question ID without text. When
+`SWAG_LFG_CONNECTION_FILE` is set, the request is also sent to that local LFG
+instance, and a low-effort signal on elevated stakes is reported as a conflict.
+
+Without a decision model, the brief is a rules-only baseline whose stakes call comes
+from [policy terms](config/boundaries/decision_brief_policy.yaml). Treat it as a weak
+signal: on a held-out development set it found none of the elevated requests described
+without the usual words, and it raised checks on about half of the harmless ones.
+
+To use a decision model, set `SWAG_DECISION_MODEL_CONNECTION_FILE` to a JSON file naming
+a loopback endpoint. With `protocol` `systemone` (the default), the service answers
+`POST /v1/systemone`. With `chat_first_token`, SWAG scores any OpenAI-compatible chat
+model by the logprobs of its first answer token, so the model writes no text:
+
+```json
+{"schemaVersion": 1, "protocol": "chat_first_token", "baseUrl": "http://127.0.0.1:8084",
+ "model": "your-model", "revision": "pinned-revision",
+ "credentialFile": "server.env", "credentialVariable": "API_KEY",
+ "timeoutMs": 60000, "maxRequestBytes": 262144, "maxResponseBytes": 262144}
+```
+
+The model then decides stakes and domains and ranks the checks, and the brief reports
+`basis: decision_model` with its likelihoods. If the service fails, the brief falls back
+to the rules and reports `basis: rules_only` with `decisionModel.state: unavailable`.
+
+Either way, the brief selects existing questions and does not judge whether your project
+is correct. No route is qualified. See the
+[decision brief evaluation](docs/decision-brief-evaluation.md) for what has been measured.
+
 ## Legacy policy preview
 
 The [developer workspace](docs/developer-workspace.md) adds a live local UI at

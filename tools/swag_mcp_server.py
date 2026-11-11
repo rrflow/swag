@@ -45,6 +45,19 @@ def _run_resolve_runtime(params: dict[str, Any]) -> dict[str, Any]:
     return resolve_effective_runtime(repo=repo, global_config=global_config, project_config=project_config)
 
 
+def _run_decision_brief(params: dict[str, Any]) -> dict[str, Any]:
+    from swag_brief import decision_brief
+
+    return decision_brief(
+        repo=Path(str(params.get("repo", ROOT))).resolve(),
+        intent_text=params.get("intent_text"),
+        maturity=str(params.get("maturity", "growing")),
+        has_test_harness=bool(params.get("has_test_harness", True)),
+        domains=list(params.get("domains", []) or []),
+        primary_stack=params.get("primary_stack"),
+    )
+
+
 def _run_decision_route(params: dict[str, Any]) -> dict[str, Any]:
     from swag_decision_service import DecisionService, ServiceConfig
 
@@ -169,6 +182,23 @@ def _tool_list() -> list[dict[str, Any]]:
             },
         },
         {
+            "name": "decision_brief",
+            "description": "Return the few checks that matter for one request, a stakes call and any LFG signal, or abstain. Rules-only: no model call, dispatch or project write. If an LFG connection is configured, the request is sent to that local instance.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "repo": {"type": "string"},
+                    "intent_text": {"type": "string"},
+                    "maturity": {"type": "string"},
+                    "has_test_harness": {"type": "boolean"},
+                    "domains": {"type": "array", "items": {"type": "string"}},
+                    "primary_stack": {"type": "string"},
+                },
+                "required": ["repo", "intent_text"],
+            },
+            "annotations": {"readOnlyHint": False, "destructiveHint": False, "idempotentHint": False, "openWorldHint": False},
+        },
+        {
             "name": "developer_status",
             "description": "Read the versioned UI model: engine connection, traces, reviewed-dataset readiness and registered training artifacts. Does not launch training or promote models.",
             "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
@@ -238,6 +268,8 @@ def _dispatch_message(message: dict[str, Any]) -> dict[str, Any] | None:
             result = _run_resolve_runtime(tool_args)
         elif tool_name == "decision_route":
             result = _run_decision_route(tool_args)
+        elif tool_name == "decision_brief":
+            result = _run_decision_brief(tool_args)
         elif tool_name == "health":
             result = {"status": "ok", "runtime": "swag-mcp-server", "repo": str(ROOT)}
         elif tool_name == 'rrflow_status':

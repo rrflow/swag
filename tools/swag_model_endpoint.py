@@ -15,6 +15,24 @@ from swag_rrflow import NoRedirect
 from swag_training_artifacts import read_object
 
 
+def read_credential(path: Path, variable: str) -> str:
+    with path.open('rb') as stream:
+        credential_bytes = stream.read(16385)
+    if len(credential_bytes) > 16384:
+        raise ValueError('Credential file exceeds bound')
+    matches = []
+    for line in credential_bytes.decode('utf-8').splitlines():
+        name, separator, value = line.partition('=')
+        if separator and name.strip() == variable:
+            value = value.strip()
+            if len(value) > 1 and value[0] == value[-1] and value[0] in ('"', "'"):
+                value = value[1:-1]
+            matches.append(value)
+    if len(matches) != 1 or not matches[0] or any(ord(char) < 32 for char in matches[0]):
+        raise ValueError('Credential reference is missing or ambiguous')
+    return matches[0]
+
+
 def binding(path: Path) -> tuple[dict, str, str]:
     config, raw = read_object(path, 16384)
     required = {'schemaVersion', 'baseUrl', 'modelId', 'credentialFile', 'credentialVariable', 'artifactManifest'}
@@ -37,23 +55,10 @@ def binding(path: Path) -> tuple[dict, str, str]:
     manifest, manifest_bytes = read_object(local_file('artifactManifest'))
     if manifest.get('model') != config['modelId']:
         raise ValueError('Configured model does not match the selected manifest identity')
-    with local_file('credentialFile').open('rb') as stream:
-        credential_bytes = stream.read(16385)
-    if len(credential_bytes) > 16384:
-        raise ValueError('Credential file exceeds bound')
-    matches = []
-    for line in credential_bytes.decode('utf-8').splitlines():
-        name, separator, value = line.partition('=')
-        if separator and name.strip() == config['credentialVariable']:
-            value = value.strip()
-            if len(value) > 1 and value[0] == value[-1] and value[0] in ('"', "'"):
-                value = value[1:-1]
-            matches.append(value)
-    if len(matches) != 1 or not matches[0] or any(ord(char) < 32 for char in matches[0]):
-        raise ValueError('Credential reference is missing or ambiguous')
+    credential = read_credential(local_file('credentialFile'), config['credentialVariable'])
     config['manifestSha256'] = hashlib.sha256(manifest_bytes).hexdigest()
     config['configurationSha256'] = hashlib.sha256(raw).hexdigest()
-    return config, matches[0], config['baseUrl'].rstrip('/') + ('/models' if url.path.rstrip('/') == '/v1' else '/v1/models')
+    return config, credential, config['baseUrl'].rstrip('/') + ('/models' if url.path.rstrip('/') == '/v1' else '/v1/models')
 
 
 @observed('swag.model_endpoint')
