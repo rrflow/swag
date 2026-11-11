@@ -3,6 +3,23 @@
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
+## Decision-router alpha planning, 7 November
+
+The owner requested an extensible, trainable, observable personal decision
+router integrated with RRFlow. The [active delivery plan](decision-router-alpha-plan.md)
+defines the installed journey, cross-repository ownership, reviewed-data adapter,
+compute readiness, bounded offline pilot, qualification and governed promotion.
+It preserves choice/score/binary as distinct from endpoint selection and RRFlow's
+recipe/branch/context proposals. "03" remains an unresolved compute/model reference.
+
+The targeted review inspected SWAG `8de17df` and local RRFlow `bf6dec69`;
+remote-main and installed-build equivalence were not established. This session's
+200 Python and 11 UI tests passed. Connected developer status reported the engine
+and configured model endpoint unavailable from that connection, no configured
+admitted dataset and no integrated training launch. Those observations do not
+prove remote hosts are down. No new training, installed journey, deployment or
+qualification occurred. Existing historical evidence below retains its scope.
+
 ## Deployment scaffold correction, 6 November
 
 The newly added deployment scaffolding did not launch RRFlow or Connectome:

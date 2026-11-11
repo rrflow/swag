@@ -40,7 +40,7 @@ Tests use `unittest`, and CI runs them with the evidence viewer tests and a secr
 
 Use concise imperative commit subjects, such as `Fix boundary routing fallback`. PRs should explain behavior changes, link relevant issues, list validation results, and include screenshots for UI changes.
 
-`main` only accepts pull requests through the merge queue, which tests each one against the latest `main` and merges it only if `ci-gate` passes. After opening a PR, run `gh pr merge --auto`; its branch is deleted on merge. The `Repo status` workflow comments on failing PRs, opens a `main is red` issue, and keeps one issue listing conflicted or stuck PRs and leftover branches. Treat any of those as work to finish.
+Work on one short branch at a time. `main` only accepts a pull request once `ci-gate` passes. After opening the PR, run `gh pr merge --auto`; it merges when green and its branch is deleted. The `Repo status` workflow comments on failing PRs, opens a `main is red` issue, and keeps one issue listing conflicted or stuck PRs and leftover branches. Treat any of those as work to finish.
 
 ## Security & Configuration
 
