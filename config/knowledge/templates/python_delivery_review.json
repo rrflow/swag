@@ -1,27 +1,42 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "python_delivery_review",
   "title": "Python delivery review",
+  "preferences": {
+    "abstainBelow": {"noul": 0.2, "choice": 0.2, "score": 0.2}
+  },
   "requirements": [
     {
       "id": "dependency_separation",
       "title": "Separate runtime and development dependencies",
       "practice": {"questionSet": "python", "questionId": "python.packaging_and_environment.02"},
       "inputSlots": ["packaging"],
-      "decision": {"mode": "binary", "proposition": "Do the supplied dependency declarations separate runtime dependencies from development tooling?"}
+      "question": {
+        "type": "noul",
+        "instructions": "Do the supplied dependency declarations separate runtime dependencies from development tooling?"
+      },
+      "suggest": {
+        "false": "Move test, lint and build tools into a development dependency group so production installs stay minimal.",
+        "abstain": "Point SWAG at the dependency files (pyproject.toml or requirements files) so it can check them."
+      }
     },
     {
       "id": "test_organization",
       "title": "Choose a test organization for this project",
       "practice": {"questionSet": "python", "questionId": "python.testing_and_quality.01"},
       "inputSlots": ["tests"],
-      "decision": {
-        "mode": "choice",
-        "question": "Which organization is appropriate for the supplied tests and project constraints? Abstain if the evidence does not support a choice.",
-        "options": [
-          {"id": "separate_directories", "description": "Separate unit, integration and boundary tests into explicit directories."},
-          {"id": "explicit_groups", "description": "Keep tests together with explicit groups and independently selectable commands."}
-        ]
+      "question": {
+        "type": "choice",
+        "instructions": "Which organization is appropriate for the supplied tests and project constraints?",
+        "criteria": {
+          "separate_directories": "Separate unit, integration and boundary tests into explicit directories.",
+          "explicit_groups": "Keep tests together with explicit groups and independently selectable commands."
+        }
+      },
+      "suggest": {
+        "separate_directories": "Split tests into unit, integration and boundary directories and give each its own command.",
+        "explicit_groups": "Keep one test tree and mark groups so each can run on its own.",
+        "abstain": "Share the test layout and how tests are run so SWAG can recommend an organization."
       }
     },
     {
@@ -29,7 +44,24 @@
       "title": "Assess declared CI checks",
       "practice": {"questionSet": "python", "questionId": "python.testing_and_quality.02"},
       "inputSlots": ["ci"],
-      "decision": {"mode": "score", "minimum": 0, "maximum": 4, "direction": "higher_is_better", "rubric": "Count categories explicitly invoked by the supplied CI configuration: linting, formatting, type checking and tests. Award one point per category with an identifiable command, zero for an absent category. This is configuration coverage only; it does not verify execution, required branch checks or project readiness. Abstain if invoked commands cannot be resolved from the supplied evidence."}
+      "question": {
+        "type": "score",
+        "instructions": "How many of these check categories does the supplied CI configuration explicitly invoke: linting, formatting, type checking and tests? Count a category only when an identifiable command runs it. This is configuration coverage only; it does not verify execution or required branch checks.",
+        "criteria": [
+          "None of the four categories is invoked.",
+          "One category is invoked.",
+          "Two categories are invoked.",
+          "Three categories are invoked.",
+          "All four categories are invoked."
+        ]
+      },
+      "suggest": {
+        "0": "Add a CI job that runs the tests, then add linting, formatting and type checking.",
+        "1": "Add the missing check categories to CI; tests and a linter come first.",
+        "2": "Add the remaining check categories so CI covers linting, formatting, type checking and tests.",
+        "3": "Add the one missing check category to CI.",
+        "abstain": "Share the CI configuration files so SWAG can count the checks they run."
+      }
     }
   ]
 }

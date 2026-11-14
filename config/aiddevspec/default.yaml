@@ -19,14 +19,37 @@ profile:
   default_maturity: growing
   default_model_tier: 14b
 
+# The operator layer of every SWAG decision (tools/swag_decide.py). It sits above the shipped
+# template and the project's .swag/layer.json, and below the request itself. Point SWAG_AIDEVSPEC
+# at your own copy to change it. See docs/decision-contract.md.
+#
+# operator_preferences are soft: later layers can change them, and no preference can go below a
+# hard rule's floor or pick an option a rule forbids.
+#   abstainBelow     abstain when confidence is under this value, by question type or question id
+#   threshold        probability of true needed to answer yes, by binary question id (default 0.5)
+#   prefer           option keys to favour in a near tie, by question id
+#   tieMargin        how close two options must be for a preference to break the tie
+#   suggestionLimit  most suggestions returned per request
 operator_preferences:
-  coding_style: production_ready
-  reasoning_preference: evidence_first
-  architecture_bias: explicit_contracts
-  testing_policy: mandatory_for_behavior_changes
-  security_posture: secure_by_default
-  documentation_standard: cite_sources_and_tradeoffs
-  rollout_style: staged_and_replayable
+  abstainBelow:
+    noul: 0.2
+    choice: 0.25
+    score: 0.25
+  tieMargin: 0.05
+  suggestionLimit: 5
+
+# operator_rules are hard: each names a question id, says why, and forbids options, requires an
+# answer, raises the abstention floor or sets the answer used on abstention. Later layers cannot
+# remove or replace them. Example:
+#   - id: stakes_default_elevated
+#     question: stakes
+#     onAbstain: "true"
+#     why: When SWAG is unsure whether a change is risky, treat it as risky.
+operator_rules: []
+
+# operator_facts are statements every decision may use, with a source and an optional freshness
+# window (observedAt plus freshForDays). Stale facts are listed and never used.
+operator_facts: []
 
 quality_gates:
   require_main_question_threshold: true

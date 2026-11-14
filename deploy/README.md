@@ -4,7 +4,7 @@ These files do not deploy a joined SWAG, RRFlow and Connectome stack. The
 RRFlow and Connectome launch commands explicitly fail because their installers
 and engine/provider integration are not supplied here.
 
-## SWAG preview service
+## SWAG decision server
 
 Install the repository's Python dependencies, then run from the repository root:
 
@@ -15,16 +15,19 @@ bash deploy/scripts/start-swag.sh
 
 Bootstrap copies only the SWAG environment example and preserves an existing
 file. It starts no service and provisions no credentials. The launcher starts
-`tools/swag_decision_service.py` on loopback by default. `SWAG_PYTHON` may select
+`tools/swag_server.py` on `127.0.0.1:8792` by default. `SWAG_PYTHON` may select
 an installed Python interpreter. A successful `/health` response proves only
 that this service is reachable.
 
-Implemented paths are `GET /health`, `GET /v1/providers/status`,
-`GET /v1/local/providers/status`, and `POST /v1/decision`. There is no
-`/v1/preview` endpoint. Decisions default to a local preview; legacy explicit
-model-call options do not implement RRFlow admission. Do not expose this
-unauthenticated experimental service publicly or treat its results as engine
-authorization.
+The server answers `POST /v1/systemone`, `GET /v1/decisions`, `GET /v1/models`
+and `GET /health`; see the [decision contract](../docs/decision-contract.md).
+Bound to anything but loopback, it refuses to start without `SWAG_SERVER_TOKEN`
+and then requires that bearer token on every request except `/health`. Its
+decisions are proposals; they do not authorize anything in RRFlow.
+
+The older preview service (`tools/swag_decision_service.py`, `POST /v1/decision`)
+still runs by hand for the legacy `preview` command. It refuses model execution
+over HTTP and returns plain errors.
 
 ## Engine and UI integration
 
@@ -40,4 +43,4 @@ does not start or authorize an engine.
 The current developer evidence UI is built with `cd ui && npm ci && npm test`
 and served with `npm run dev`. Connectome embedding, engine-owned template
 execution and triggered LFG/SWAG assessment cycles remain unimplemented here.
-See [current context](../docs/current-context.md) for evidence and limitations.
+See [current context](../docs/history/current-context.md) for evidence and limitations.

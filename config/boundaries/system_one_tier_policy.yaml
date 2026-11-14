@@ -1,6 +1,6 @@
 # Legacy preview policy: tier labels do not establish loaded models or qualification.
 # The enabled experimental profile below is a historical policy setting, not
-# evidence that 6-9GB is attainable. Current BF16 work follows docs/current-context.md.
+# evidence that 6-9GB is attainable. Current BF16 work follows docs/history/current-context.md.
 schema_version: 1
 policy:
   controller_tier_strategy:

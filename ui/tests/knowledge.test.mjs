@@ -23,7 +23,7 @@ function current() {
 test('actual repository template contains sourced requirements in all three modes', () => {
   const data = current();
   assert.equal(data.state, 'preview');
-  assert.deepEqual(new Set(data.requirements.map(row => row.decision.mode)), new Set(['binary', 'choice', 'score']));
+  assert.deepEqual(new Set(data.requirements.map(row => row.mode)), new Set(['binary', 'choice', 'score']));
   assert.equal(data.fulfillmentAvailable, false);
   assert.deepEqual(changedRequirements(data, current()), []);
 });
@@ -33,8 +33,8 @@ test('UI rejects fabricated fulfillment and malformed input/rubric projections',
   for (const change of [
     x => x.requirements[0].fulfillment = 'fulfilled',
     x => x.requirements[0].inputs.packaging[0].sha256 = null,
-    x => x.requirements[2].decision.maximum = Number.NaN,
-    x => x.requirements[1].decision.options[1].id = x.requirements[1].decision.options[0].id,
+    x => x.requirements[2].question.criteria = ['only one level'],
+    x => x.requirements[1].mode = 'binary',
   ]) {
     const changed = structuredClone(data); change(changed);
     assert.throws(() => parseKnowledge(changed));

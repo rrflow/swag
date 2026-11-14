@@ -2,9 +2,11 @@
 
 ## Project Structure & Module Organization
 
-SWAG provides RRFLOW naming validation, boundary decision routing, and model-training workflows. It is part of the Reason Ready Governance (RRG) suite; see `docs/rrg-suite.md`.
+SWAG is a System One controller: it answers binary (`noul`), choice and score questions in the SystemOne wire format, abstains when unsure, and applies facts, hard rules and preferences from four layers. It is part of the Reason Ready Governance (RRG) suite; see `docs/rrg-suite.md`. The only active plan is `docs/system-one-plan.md`; the contract is `docs/decision-contract.md`; terms are defined in `docs/glossary.md`. Documents under `docs/history/` and `docs/evidence/` are records, not instructions.
 
-- `tools/`: Python CLI tools, controller services, and the local operations UI.
+- `tools/`: Python tools. The decision path is `swag_systemone.py` (wire format), `swag_decide.py` (layers and decisions), `swag_decision_model.py` (engines), `swag_server.py` (HTTP) and `swag_decision_log.py` (the log the devtools read).
+- `bench/`: the competitor comparison (Jev, Clef, KnowLine, SWAG over the same `/v1/systemone` requests). `bench/data/` and `bench/results/` stay local.
+- `ui/`: the developer workspace (`dev.html`), including the Decisions panel.
 - `config/`: shipped YAML policies, runtime/provider templates, question sets, and training configuration. Source datasets live in `config/training/real_sources/`.
 - `tests/fixtures/`: naming-check input lists, including intentional violations.
 - `boundaries/`: naming reviews and reference documentation.
@@ -23,8 +25,12 @@ Run from the repository root with Python 3.10+. There is no separate application
 - `python tools/check_naming.py --no-user tests/fixtures/sample_seam_keys.txt`: exercise seam-name validation.
 - `python tools/swag_runtime_bootstrap.py --pretty`: inspect merged runtime configuration.
 - `python tools/boundary_controller.py --pretty --intent-text "secure AI app architecture"`: exercise controller routing.
-- `python tools/swag.py brief --repo . --intent "Add password reset"`: get the compact decision brief for one request.
-- `python tools/swag_ops_ui.py --host 127.0.0.1 --port 8790`: start the local operations UI.
+- `python tools/swag.py decide --template python_delivery_review --state "..."`: ask a template's binary, choice and score questions.
+- `python tools/swag_server.py`: serve `POST /v1/systemone` on 127.0.0.1:8792.
+- `cd ui; npm run dev`: the developer workspace at http://127.0.0.1:8891/dev.html.
+- `python tools/check_doc_links.py`: fail on dead relative links in Markdown.
+- `python tools/swag.py brief --repo . --intent "Add password reset"`: get the older compact decision brief for one request.
+- `python tools/swag_ops_ui.py --host 127.0.0.1 --port 8790`: the training operations UI (training jobs only; not the developer workspace).
 
 ## Coding Style & Naming Conventions
 

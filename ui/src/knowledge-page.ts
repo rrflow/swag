@@ -20,11 +20,12 @@ async function refresh() {
     paragraph(container, previous ? `${changed.size} ${changed.size === 1 ? 'requirement has' : 'requirements have'} changed inputs since the previous preview.` : 'Current project inputs loaded. No decisions have been assessed.');
     for (const row of data.requirements) {
       const article = document.createElement('article'); article.className = 'run'; article.dataset.requirement = row.id;
-      const h = document.createElement('h3'); h.textContent = `${row.title} · ${row.decision.mode}`; article.append(h);
+      const h = document.createElement('h3'); h.textContent = `${row.title} · ${row.mode}`; article.append(h);
       paragraph(article, `${row.state === 'missing_inputs' ? 'Missing project inputs' : 'Inputs available'} · Fulfillment unassessed${changed.has(row.id) ? ' · Inputs changed' : ''}`);
-      paragraph(article, row.decision.proposition ?? row.decision.question ?? row.decision.rubric!);
-      for (const option of row.decision.options ?? []) paragraph(article, option.description);
-      if (row.decision.mode === 'score') paragraph(article, `Scale ${row.decision.minimum}–${row.decision.maximum} · ${row.decision.direction?.replaceAll('_', ' ')}`);
+      paragraph(article, row.question.instructions);
+      const criteria = row.question.criteria;
+      if (Array.isArray(criteria)) criteria.forEach((level, index) => paragraph(article, `${index}: ${level}`));
+      else for (const [key, description] of Object.entries(criteria ?? {})) paragraph(article, `${key}: ${description}`);
       const details = document.createElement('details'); const summary = document.createElement('summary'); summary.textContent = 'Inspect practice and bound inputs'; details.append(summary);
       paragraph(details, row.practice.question.text);
       paragraph(details, `Source reference: ${JSON.stringify(row.practice.question.source)}. Freshness has not been reverified.`);

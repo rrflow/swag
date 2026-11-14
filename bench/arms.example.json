@@ -1,0 +1,31 @@
+[
+  {
+    "name": "swag",
+    "url": "http://127.0.0.1:8792/v1/systemone",
+    "model": "swag",
+    "workers": 4,
+    "note": "python tools/swag_server.py with SWAG_DECISION_MODEL_CONNECTION_FILE pointing at the model under test"
+  },
+  {
+    "name": "jev",
+    "url": "https://api.typesafe.ai/v1/systemone",
+    "model": "jev-latest",
+    "credentialEnv": "TYPESAFE_API_KEY",
+    "workers": 8,
+    "note": "TypeSafe's hosted API; billed per input token"
+  },
+  {
+    "name": "knowline-4b",
+    "url": "http://127.0.0.1:8080/v1/systemone",
+    "model": "m",
+    "workers": 8,
+    "note": "KnowLine's released knowline_server.py in front of SGLang; see bench/README.md"
+  },
+  {
+    "name": "clef-flash",
+    "url": "http://127.0.0.1:8081/v1/systemone",
+    "model": "clef-flash",
+    "workers": 1,
+    "note": "A small server around Clef's released systemone() function; see bench/README.md"
+  }
+]

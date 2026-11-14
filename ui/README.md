@@ -14,7 +14,7 @@ npm run dev
 ```
 
 Open `http://127.0.0.1:8891` for saved evidence or `/dev.html` for the
-[developer workspace](../docs/developer-workspace.md). The loopback Node server
+[developer workspace](../docs/reference/developer-workspace.md). The loopback Node server
 also exposes `GET /api/dev/status`, invoking the configured Python interpreter
 to read local traces/artifacts and optionally authenticate with RRFlow for
 diagnostics. There are no training or project mutation endpoints. Import another `evidence.json` locally;
@@ -63,7 +63,7 @@ layout. Its screenshots go to the root `.swag/evidence/20261028/` directory.
 
 This is a rendering reference for a future Connectome public-SDK view. No engine
 state, training routine or provider credentials belong in this UI. See the
-[architecture and research decision](../docs/decision-router-research.md).
+[architecture and research decision](../docs/history/decision-router-research.md).
 
 ## Review the real task labels
 
