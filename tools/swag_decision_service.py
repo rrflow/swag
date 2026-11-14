@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import traceback
 from dataclasses import dataclass
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -709,8 +708,8 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(HTTPStatus.OK, self.service.local_provider_status())
                 return
             self._send(HTTPStatus.NOT_FOUND, {"error": "not_found"})
-        except Exception as exc:  # pragma: no cover
-            self._send(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": str(exc)})
+        except Exception:  # pragma: no cover
+            self._send(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": "Status unavailable; check local traces."})
 
     def do_POST(self) -> None:  # noqa: N802
         if self.path != "/v1/decision":
@@ -722,17 +721,16 @@ class Handler(BaseHTTPRequestHandler):
             payload = json.loads(body or "{}")
             if not isinstance(payload, dict):
                 raise RuntimeError("JSON body must be an object.")
+            if payload.get("execute_frontier") or payload.get("execute_local"):
+                # Model execution over this unauthenticated endpoint could spend provider credit; MCP refuses it too.
+                self._send(HTTPStatus.FORBIDDEN, {"error": "Model execution is not available over this endpoint."})
+                return
             assert self.service is not None
             result = self.service.decide(payload)
             self._send(HTTPStatus.OK, result)
-        except Exception as exc:
-            self._send(
-                HTTPStatus.BAD_REQUEST,
-                {
-                    "error": str(exc),
-                    "trace": traceback.format_exc(limit=3),
-                },
-            )
+        except Exception:
+            # Internals stay local; clients get a plain message.
+            self._send(HTTPStatus.BAD_REQUEST, {"error": "The preview request failed; check the request and local traces."})
 
 
 def parse_args() -> argparse.Namespace:

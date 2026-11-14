@@ -56,8 +56,7 @@ class DeploymentLauncherTests(unittest.TestCase):
                             ignore=shutil.ignore_patterns("*.env", "evidence"))
             # The actual launcher resolves its service relative to its deployment.
             (Path(directory) / "tools").mkdir()
-            shutil.copy2(ROOT / "tools/swag_decision_service.py",
-                         Path(directory) / "tools/swag_decision_service.py")
+            shutil.copy2(ROOT / "tools/swag_server.py", Path(directory) / "tools/swag_server.py")
             env = {**os.environ, "SWAG_PYTHON": sys.executable,
                    "PYTHONPATH": str(ROOT / "tools"), "SWAG_PORT": "invalid"}
             result = self.run_script(deployment / "scripts/start-swag.sh", env=env)
