@@ -1,5 +1,7 @@
 # SWAG implementation plan
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 ## Active delivery sequence, 7 November 2026
 
 Use the [decision-router alpha delivery plan](decision-router-alpha-plan.md) for
@@ -18,7 +20,7 @@ roadmap owns engine dependency order and gate completion.
 ## Outcome research correction, 2 November
 
 Follow the [five-milestone research plan](outcome-research-plan.md) and
-[runnable outcome workflow](task-outcome-workflow.md). Task success and handoff
+[runnable outcome workflow](../reference/task-outcome-workflow.md). Task success and handoff
 validity now have a separate reviewed-outcome admission and evaluation path;
 supplied-score policy compliance remains its own baseline. This adds no fabricated
 training records or research results. UI project execution, independently reviewed
@@ -113,7 +115,7 @@ The installed sender/receiver trial proves metadata transport and restart/replay
 persistence on exact recorded debug binaries. It does not prove a completed
 project task, training approval or public release. The
 [current context](current-context.md) and
-[deployment readiness](deployment-readiness.md) retain exact proof and limits.
+[deployment readiness](../reference/deployment-readiness.md) retain exact proof and limits.
 
 Next land the sender only after its required candidate and protected checks.
 The worker/resume/discovery and UI dependencies still need accepted source before
@@ -124,7 +126,7 @@ existing D-06/I-03/I-07 owners before treating real-task completion as a test-on
 gap. Bind exact effect previews and source/configuration/authorization, preserve
 uncertainty across crashes, and expose the behavior through engine-owned public
 operations. No external patch runner or UI executor may supply missing authority.
-The [execution gate](deployment-readiness.md#project-execution-is-an-implementation-gate)
+The [execution gate](../reference/deployment-readiness.md#project-execution-is-an-implementation-gate)
 records the inspected contract and acceptance boundary.
 Keep that milestone focused on one real task,
 its observable project effects, ordinary-edit recovery and the matching RROFLOW
@@ -138,7 +140,7 @@ Connectome PR30 now contains the bounded plan panel at `1f2e2a5c`, with a clean
 matching desktop build. Complete its interrupted source-edit desktop trial;
 component checks already pass but do not replace UI acceptance. Then prove an
 authorized real project task and correlated outcome before adding more release
-claims. [Deployment readiness](deployment-readiness.md) lists the outstanding
+claims. [Deployment readiness](../reference/deployment-readiness.md) lists the outstanding
 model, integration and native/container distribution gates. The older pending
 PR222 and not-yet-implemented UI statements below are historical.
 
@@ -183,7 +185,7 @@ clean-install and upgrade/rollback evidence for native and container artifacts.
 Model acceptance requires reviewed held-out comparisons of original Qwen,
 custom BF16 and the same custom checkpoint after quantization, with measured
 serving memory. No 29 GB, automatic-learning or public-readiness claim is made.
-The [current custom artifact audit](checkpoint-binding-20261031.md) verified
+The [current custom artifact audit](../evidence/checkpoint-binding-20261031.md) verified
 61.07 GB of BF16 weight files and 30.53 billion stored elements. Plain 9-bit
 payload would be 34.35 GB before runtime/cache; it cannot by itself meet the
 29 GB total-serving target. Choose compression only after reviewed quality
@@ -743,7 +745,7 @@ Next steps remain ordered:
 1. PR206's tested main reconciliation is published at `f278fa6f`. Resolve the shared native failure
    at C-07 / POAM-035, and complete exact-candidate/protected checks before landing.
 2. PR212 is refreshed at `19ef6a04`; complete dependency/CI gates before landing its
-   [actual Windows engineering bundle](testing-binary.md). Packaging,
+   [actual Windows engineering bundle](../evidence/testing-binary.md). Packaging,
    relocation, real proposal/reopen and primary readiness passed; preserve the
    release configuration-case model failure (unsupported effort) as an open
    qualification issue. Model serving stays separate. Signed/image delivery remains.

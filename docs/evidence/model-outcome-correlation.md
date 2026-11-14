@@ -1,11 +1,13 @@
 # BF16 proposal and RROFLOW correlation, 2 November 2026
 
+> **Evidence record.** A measurement or verification from the date it describes. Current status is in the [System One plan](../system-one-plan.md).
+
 An isolated run passed one real work-item proposal through the configured BF16
 endpoint, RRFlow's durable task-attempt boundary, and the native RROFLOW receiver.
 This is candidate integration evidence. It does not establish a complete
 Connectome workflow, successful project changes, routing quality or release readiness.
 
-The [measured summary](evidence/model-outcome-correlation-20261102.json) binds the
+The [measured summary](model-outcome-correlation-20261102.json) binds the
 binary, source, task, attempt, configuration, event and response identities. Raw
 session logs and the unreviewed capture remain private.
 

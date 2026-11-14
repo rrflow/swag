@@ -31,7 +31,7 @@ Some naming fixtures contain intentional violations and exit with code 1. See
 Explain the behavior change, link related issues, list the commands you ran with
 their results, and include screenshots for UI changes. Claims about model quality,
 latency or memory need retained evidence; see
-[routing data and evaluation](docs/routing-data-and-evaluation.md).
+[routing data and evaluation](docs/reference/routing-data-and-evaluation.md).
 
 ## Data and privacy
 

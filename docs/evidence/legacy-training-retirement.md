@@ -1,5 +1,7 @@
 # Retirement of unreviewed training paths
 
+> **Evidence record.** A measurement or verification from the date it describes. Current status is in the [System One plan](../system-one-plan.md).
+
 Verified 31 October 2026 in the local SWAG workspace. This directory has no Git
 metadata; these changes are local, not a merged or deployed package.
 

@@ -1,5 +1,7 @@
 # Contributing real tasks and reviews
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 The first input is a real task you want completed. You do not need to write a
 dataset or choose a training framework.
 

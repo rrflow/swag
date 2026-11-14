@@ -1,7 +1,7 @@
 # Training observations and artifact verification
 
 This implements the first SWAG adapter package in the
-[researched training-control plan](training-control-plan.md). It adds evidence
+[researched training-control plan](../history/training-control-plan.md). It adds evidence
 and input checks; RRFlow's engine-owned job admission remains unimplemented.
 
 ## Inspect actual runs
@@ -50,7 +50,7 @@ immutable process snapshot. A relevant input change rejects that attempt and
 requires fresh admission; an unrelated source/document edit does not trap a project.
 
 Actual Trainer callbacks emit the content-free
-[`swag.training-observation/v1` schema](../config/training/training_observation.schema.json).
+[`swag.training-observation/v1` schema](../../config/training/training_observation.schema.json).
 Only whitelisted numeric metrics, step counts, attempt identity and phase/error
 class are recorded. Source digests for the observation helpers accompany the
 trainer digest. `--observation-max-bytes` controls a 1 KiB–4 MB bound.
@@ -79,11 +79,11 @@ offline CLI, not a UI execution endpoint.
 ## Remaining proof
 
 Fresh Spark access, a full declared-file rehash and an Unsloth CUDA preflight
-passed on 2 November; see [runtime verification](runtime-verification.md).
+passed on 2 November; see [runtime verification](../evidence/runtime-verification.md).
 Callback stop/checkpoint behavior on the pinned GPU stack,
 engine activity admission/recovery, UI launch/cancel,
 Connectome integration and RROFLOW delivery remain separate acceptance work.
 New training requires independently reviewed labels; the earlier provisional
 experiment cannot satisfy that requirement.
 
-![Actual recorded BF16 training history and manifest limits](images/training-evidence.png)
+![Actual recorded BF16 training history and manifest limits](../images/training-evidence.png)

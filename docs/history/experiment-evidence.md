@@ -1,5 +1,7 @@
 # SWAG experiment evidence and execution
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 Recorded 2026-10-28. These are offline/operator experiments, not completed engine
 integration or an independently approved release.
 
@@ -328,7 +330,7 @@ outcome or training consent was inferred. Evidence is retained under
 temporary fixtures, not training data.
 
 Raw diffs are not retained. Existing pattern redaction, byte/time limits and
-append locking apply; see [the operating instructions](passive-capture-watch.md)
+append locking apply; see [the operating instructions](../reference/passive-capture-watch.md)
 for exclusions and limits. This local collection adapter is not an engine
 routine, automatic learning scheduler, accepted source read stamp or Connectome
 integration. SWAG has no Git repository here, so these local changes have not
@@ -869,7 +871,7 @@ stopped/attempt-failed and conservative uncertainty. Recovery did not separately
 read the successor attempt. Six release-trial calls created no training data or
 consent. This real failure remains a model qualification gap.
 
-[Testing instructions and artifact](testing-binary.md). PR212 contains fourteen
+[Testing instructions and artifact](../evidence/testing-binary.md). PR212 contains fourteen
 exact public receipts and hashes; the legacy checkpoint remains provisional.
 PR206's first full candidate run passed, but protected enqueue reported its
 required aggregate check expected. The actual aggregate rerun also passed without

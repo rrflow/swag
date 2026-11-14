@@ -1,5 +1,7 @@
 # ADR: Qualify SWAG through observed development outcomes
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 **Status:** Offline outcome admission, training-input integration, protocol runner
 and comparison implemented; live research and product acceptance pending.
 **Date:** 2026-11-02.
@@ -97,7 +99,7 @@ small decision models and selective shard residency. The
 [primary-source review and experiment sequence](controller-compression-research.md)
 supports feasibility research and distinguishes checkpoint size from serving
 memory. These experiments need not wait for every intermediate footprint.
-The [mode and template direction](decision-modes-and-knowledge-mesh.md) replaces
+The [mode and template direction](../reference/decision-modes-and-knowledge-mesh.md) replaces
 the earlier three-fixed-gates interpretation. Public contracts and equivalent-quality margins remain to be bound; existing
 permission checks and the required four-arm checkpoint comparison stay separate.
 
@@ -162,6 +164,6 @@ these sizes requires a hardcoded provider rule or a new default acceptance limit
    correctness labels. Training and promotion need admitted data and engine
    authorization. Qualify rollback, native bundle and image separately.
 
-Follow [the runnable outcome workflow](task-outcome-workflow.md). Existing
+Follow [the runnable outcome workflow](../reference/task-outcome-workflow.md). Existing
 integration evidence and historical failures remain unchanged. No milestone closes
 until its owning PRs and the relevant real-workload evidence exist.

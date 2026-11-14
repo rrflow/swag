@@ -5,5 +5,5 @@ LEGACY_TRAINING_RETIRED = (
     "verify independently reviewed real observations. Preserve historical artifacts; "
     "admit new data with tools/swag_routing_dataset.py, then explicitly invoke "
     "tools/swag_unsloth_train.py with --admitted-dataset-dir and --seed. "
-    "See docs/routing-data-and-evaluation.md. No data was generated or job launched."
+    "See docs/reference/routing-data-and-evaluation.md. No data was generated or job launched."
 )

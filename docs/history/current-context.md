@@ -1,5 +1,7 @@
 # SWAG current context
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 Reconciled 2026-10-31 (US Eastern) after worker admission publication and deployment review. Read this before older runbooks and generated reports; full controller delivery remains incomplete.
 This records owner direction and evidence; it is not an engine execution plan.
 
@@ -63,7 +65,7 @@ local consistency check cannot substitute for that acceptance.
 
 ## Knowledge-template adapter, 3 November
 
-The [read-only adapter](knowledge-template-adapter.md) now binds a shipped Python
+The [read-only adapter](../reference/knowledge-template-adapter.md) now binds a shipped Python
 delivery template to actual source-linked practices and selected project files.
 The developer UI and MCP expose choice, score and binary requirements; answer
 validation rejects stale context, invalid options/scales and unbound references.
@@ -84,7 +86,7 @@ Connectome fulfillment driver are the next integration boundaries.
 The owner clarified that the three forms are **choice, score and binary decision
 modes**, backed by a built-in development best-practices knowledge mesh and
 templates fulfilled against deployed projects. They are not three fixed gates.
-The [decision/template direction](decision-modes-and-knowledge-mesh.md) records
+The [decision/template direction](../reference/decision-modes-and-knowledge-mesh.md) records
 the intended contract, existing question-set foundations and remaining lifecycle.
 The 9–12 GB candidate target remains. The [primary-source research update](controller-compression-research.md)
 adds calibrated expert/channel pruning plus quantization, a small decision-model
@@ -105,7 +107,7 @@ Its tree includes the landed observation dependency. Worker
 PR229 remains draft under its existing publication hold. See the plan and owning
 PRs before using older status below.
 
-The [Spark serving experiment](serving-load-measurements.md) measures real BF16
+The [Spark serving experiment](../reference/serving-load-measurements.md) measures real BF16
 requests and overlapping memory counters. Its four-sequence runtime improves
 observed throughput at concurrent load, with matching outputs on the repeated
 inputs; it does not qualify routing quality, total memory or the joined UI task.
@@ -123,14 +125,14 @@ Fresh cluster access is restored. A full declared-file hash check passed for
 Unsloth container imported successfully and passed an actual CUDA operation on
 the GB10. The restored custom endpoint rejects unauthenticated discovery and
 lists the configured model with authentication. These observations supersede the
-earlier access failure below. See [runtime verification](runtime-verification.md)
+earlier access failure below. See [runtime verification](../evidence/runtime-verification.md)
 for identities and limits. No new training, inference or model qualification was
 performed in this check. The developer interface now exposes explicit configured
 model discovery through its shared UI/MCP read model.
 
 The follow-on [training-control research and plan](training-control-plan.md)
 identifies the missing generic engine activity runner on accepted RRFlow main
-`e6f3632b`. The [training evidence adapter](training-evidence.md) now exposes
+`e6f3632b`. The [training evidence adapter](../reference/training-evidence.md) now exposes
 actual saved steps/loss, bounded callback observations, interruption records,
 explicit artifact verification and configured export identity. Local checks pass
 126 Python tests, nine UI tests and four browser tests. Callback stop behavior is
@@ -142,7 +144,7 @@ during this check. Historical evidence remains unchanged and unqualified.
 
 The owner's latest priority is subscription-client/RRFlow integration with
 debugging, optimization and a UI path for fine-tuning that Connectome can adopt.
-The [developer workspace](developer-workspace.md) now shares a versioned read
+The [developer workspace](../reference/developer-workspace.md) now shares a versioned read
 model between TypeScript and MCP. Local validation passed 110 Python tests,
 eight UI tests and four browser tests. The installed bridge authenticated against
 the local RRFlow core prototype and read public storage diagnostics. Codex and
@@ -159,7 +161,7 @@ are not PR merge evidence or model qualification.
 
 ## Owner direction: RRG suite and public repository (2026-11-01)
 
-SWAG belongs to the [Reason Ready Governance (RRG) suite](rrg-suite.md). The
+SWAG belongs to the [Reason Ready Governance (RRG) suite](../rrg-suite.md). The
 serving goal beyond 29 GB is 19 GB through a custom RRFlow shard and KV-cache
 system; neither footprint has been measured. The tree is prepared for
 source-available publication under BSL 1.1. Session logs, generated artifacts
@@ -364,7 +366,7 @@ RROFLOW upload or deployment follows from these checks.
 
 ### Local training-path correction
 
-[Legacy training retirement](legacy-training-retirement.md) closes a discovered
+[Legacy training retirement](../evidence/legacy-training-retirement.md) closes a discovered
 local bypass: the older pipeline could generate synthetic SFT rows and execute
 raw runbook training despite the reviewed-data requirement. Generator and raw
 trainer entry points now refuse; runbooks remain inspectable but cannot execute;
@@ -390,7 +392,7 @@ candidate acceptance. The final reviewable description is retained locally at
 `.swag/evidence/20261031/worker-native-landed/pr-ready.md`. No bypass or retry of
 the rejected transition was attempted. Other dependency work remains active.
 
-[Deployment readiness](deployment-readiness.md) supersedes the pending PR222
+[Deployment readiness](../reference/deployment-readiness.md) supersedes the pending PR222
 and missing plan-panel statements below. PR222 merged at `6c069e14` with
 successful protected run `41248811413`. Connectome draft PR30 now publishes
 engine-owned plan controls at `1f2e2a5c`; its exact matching desktop bundle is
@@ -469,7 +471,7 @@ arbitrary triple-dot base. All runtime/SDK/test/harness/receipt bytes are
 unchanged; repository checks pass. It remains draft pending actual worker
 landing and its own full pipeline. Local receipts: `resume-worker-candidate/`.
 
-A fresh [checkpoint binding audit](checkpoint-binding-20261031.md) matched all
+A fresh [checkpoint binding audit](../evidence/checkpoint-binding-20261031.md) matched all
 26 custom artifact files to the retained manifest, including 16 BF16 shards,
 18,867 tensors and 30,532,122,624 stored elements. Weight files total
 61,066,575,648 bytes; ideal packed 9-bit payload alone is 34,348,637,952 bytes.
@@ -1409,7 +1411,7 @@ its owner, then obtain exact-candidate and protected merge evidence. New main's
 additional diagnostics do not themselves prove the failure repaired.
 
 [Draft PR212](https://github.com/rrflow/rrflow-development/pull/212) now supplies
-the [native Windows engineering bundle and testing guide](testing-binary.md).
+the [native Windows engineering bundle and testing guide](../evidence/testing-binary.md).
 Its refreshed head is `19ef6a04c9f3e409439ca567eb6f5f0285b58938`, ordinarily
 merging PR206 `f278fa6f` without conflicts. All 18 archive checks passed again
 against the original ZIP; all 14 captured receipt hashes remain exact. Generated
@@ -1536,7 +1538,7 @@ on a declared routing workload is a hypothesis to test, not universal superiorit
   Git diffs and a caller-supplied issue/title/override file. It retains diff hashes,
   suppresses unchanged polls across restarts and preserves prior observations.
   Remote issue polling, provider dispatch and automatic training admission remain
-  unimplemented. See [capture usage and scope](passive-capture-watch.md).
+  unimplemented. See [capture usage and scope](../reference/passive-capture-watch.md).
 - Preserve persistent project intent when applying task intent; verify this before
   claiming complete project-context handling. Provider/output admission also
   requires implementation review and evidence before autonomous effects.
@@ -1551,7 +1553,7 @@ on a declared routing workload is a hypothesis to test, not universal superiorit
 ## Resumed implementation: routing data and evaluation
 
 Offline review admission, project/time-separated exports, strict route schemas and
-a digest-pinned evaluator are implemented. See [data and evaluation](routing-data-and-evaluation.md)
+a digest-pinned evaluator are implemented. See [data and evaluation](../reference/routing-data-and-evaluation.md)
 for their limits and commands. Training can verify the admitted train/development
 files before GPU work; no real reviewed dataset has yet been admitted.
 
@@ -1578,7 +1580,7 @@ has not been installed. The Qwen BF16-first sequence is retained.
 
 `tools/swag_evidence_projection.py` verifies retained evaluation artifacts and
 exports content-free UI data plus a local RROFLOW-shaped report event. The
-[TypeScript evidence viewer](../ui/README.md) displays the actual 7/13 snapshot,
+[TypeScript evidence viewer](../../ui/README.md) displays the actual 7/13 snapshot,
 failure signals and proposed learning stages. It cannot train, promote or execute
 work. Signals suggest review; they are not automatic supervised/unsupervised jobs.
 Live engine/Connectome integration remains pending its owning PRs. A real local
@@ -1630,7 +1632,7 @@ rejection. [PR180](https://github.com/rrflow/rrflow-development/pull/180) adds t
 RRFlow-repository validator, depending on PR179. A synthetic assistant browser
 export passed the real validator twice with the same result; this proves the
 file-exchange workflow, not independent human review or training admission.
-No actual human decisions have been recorded. See [UI usage](../ui/README.md).
+No actual human decisions have been recorded. See [UI usage](../../ui/README.md).
 
 ## Native endpoint configuration evidence
 

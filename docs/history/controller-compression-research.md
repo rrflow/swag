@@ -1,5 +1,7 @@
 # Research: a 9–12 GB SWAG decision controller
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 **Reviewed:** 3 November 2026. **Status:** research-backed candidate direction;
 no compressed SWAG checkpoint or equivalent-quality result is claimed.
 
@@ -10,7 +12,7 @@ enough to test directly. Preserve the BF16 reference and the existing 29/15 GB
 milestones, but do not require every intermediate footprint before investigating
 the smaller candidate. Equal quality means comparable real decision and template outcomes within
 predeclared margins, not equal general-purpose language capability. The
-[decision modes and knowledge-mesh direction](decision-modes-and-knowledge-mesh.md)
+[decision modes and knowledge-mesh direction](../reference/decision-modes-and-knowledge-mesh.md)
 corrects the earlier interpretation of three fixed application gates.
 
 ## What the primary sources establish

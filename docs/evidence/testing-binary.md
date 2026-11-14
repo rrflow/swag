@@ -1,5 +1,7 @@
 # Testing the native controller binary
 
+> **Evidence record.** A measurement or verification from the date it describes. Current status is in the [System One plan](../system-one-plan.md).
+
 ## Latest project-plan preview
 
 The latest frozen candidate is
@@ -16,7 +18,7 @@ This adds the Project plan panel. Three actual installed-process scenarios pass;
 desktop discovery and first source replan preview were observed. The remaining
 desktop trial is incomplete after the target window became unavailable. This is
 an unsigned, unoptimized preview, excludes weights, and retains preview UI data.
-It is not a turnkey public package. See [release gates](deployment-readiness.md).
+It is not a turnkey public package. See [release gates](../reference/deployment-readiness.md).
 Older artifacts and their historical evidence below remain separate.
 
 ## Installed-job discovery engine candidate
@@ -91,7 +93,7 @@ Retained checks cover archive integrity and same-host installation, serving,
 restart and quick verification with only System32 on the child PATH. Those checks
 did not invoke a model or worker. The newer `9e167aad` engine/SDK test executable
 is a separate unoptimized artifact; it is not contained in this ZIP. See
-[current context](current-context.md) for subsequent source changes.
+[current context](../history/current-context.md) for subsequent source changes.
 
 ## Verify and start
 
@@ -116,7 +118,7 @@ This unsigned, unoptimized standalone artifact passed an actual configured
 selection/worker draft, missing-credential denial, restart/readback and replay
 trial. It is not the ZIP below, a qualified release or a complete UI/project
 workflow. The first rejected selector trial is retained separately; see
-[current context](current-context.md) for exact results and limits.
+[current context](../history/current-context.md) for exact results and limits.
 
 A subsequent trial exercised that engine through the Rust SDK built at
 `43d18059`. Its engineering example is
@@ -184,7 +186,7 @@ protected landing. PR206 is now ready at `9371f856`, with candidate run
 trial stays bound to the source above. Container delivery, complete connected
 workflow, worker execution, model qualification and automatic learning remain
 open. Source-edit recovery has newer engine evidence in
-[current context](current-context.md); that evidence belongs to its named builds.
+[current context](../history/current-context.md); that evidence belongs to its named builds.
 
 ## Native desktop preview
 

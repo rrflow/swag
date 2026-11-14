@@ -1,5 +1,7 @@
 # ADR: Evidence-bound training controls
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 **Status:** Integration proposed; offline adapter package implemented with local
 software validation. Engine activity and GPU acceptance remain open.
 **Date:** 2026-11-02
@@ -21,7 +23,7 @@ projection or explicit artifact verification interface for the UI. Its BF16
 exporter also embeds one historical model name. The retained run used provisional
 labels; it cannot authorize new training. Subsequent Spark access, artifact
 rehash and Unsloth CUDA preflight passed; see the dated
-[runtime verification](runtime-verification.md). New callback GPU acceptance
+[runtime verification](../evidence/runtime-verification.md). New callback GPU acceptance
 and engine activity execution remain open.
 
 ## Research and decision

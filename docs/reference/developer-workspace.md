@@ -29,7 +29,7 @@ does not attest a live GPU, checkpoint contents, independent review or qualifica
 Provisional task-corpus training stays visibly separate from reviewed routing data.
 The [training evidence interface](training-evidence.md) adds recorded step/loss
 history, interruption visibility and explicit manifest/verification receipts.
-The [researched execution plan](training-control-plan.md) maps the remaining
+The [researched execution plan](../history/training-control-plan.md) maps the remaining
 engine, UI, qualification and delivery packages to their acceptance evidence.
 
 ## Configure the engine and artifacts
@@ -100,7 +100,7 @@ not attest the process's loaded weights, perform inference, measure serving
 memory, authorize training or qualify routing. Those flags remain false. A past
 artifact-verification receipt is displayed independently beside its training run.
 
-![Actual configured endpoint, trace timings and retained BF16 verification receipt](images/model-endpoint.png)
+![Actual configured endpoint, trace timings and retained BF16 verification receipt](../images/model-endpoint.png)
 
 ## Use with subscription clients
 
@@ -190,4 +190,4 @@ disabled launch control is a visible dependency, not a completed fine-tuning UI.
 The screenshot below captures the actual local developer workspace, including
 historical BF16 training measurements and unavailable capabilities:
 
-![Developer workspace with engine diagnostics and recorded training metrics](images/developer-workspace.png)
+![Developer workspace with engine diagnostics and recorded training metrics](../images/developer-workspace.png)

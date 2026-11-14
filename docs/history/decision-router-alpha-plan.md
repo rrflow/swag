@@ -1,5 +1,7 @@
 # SWAG decision-router alpha delivery plan
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 **Date:** 7 November 2026. **Status:** proposed implementation sequence, grounded
 in inspected source. **Goal ID:** `decision_router_alpha`.
 **Driver:** the SWAG delivery owner; each implementation PR names its responsible
@@ -50,8 +52,8 @@ This was a targeted boundary review, not a whole-codebase review.
   not run for this plan.
 - `DecisionService.decide` returns `engine_proposal_not_integrated`.
   `SemanticRouterAdapter` supplies offline proposals/local checks with no
-  execution authority. See [the service](../tools/swag_decision_service.py) and
-  [adapter](../tools/semantic_router_adapter.py).
+  execution authority. See [the service](../../tools/swag_decision_service.py) and
+  [adapter](../../tools/semantic_router_adapter.py).
 - The connected developer-status probe reported engine and model endpoint
   unavailable from that connection, no configured admitted dataset, and no
   engine training launch. This is a point-in-time connection observation,
@@ -59,14 +61,14 @@ This was a targeted boundary review, not a whole-codebase review.
 - The registered historical intent run has 33 saved steps and provisional
   labels. Its [routing result](experiment-evidence.md#custom-endpoint-comparison)
   is 7/13 with five policy violations. It is retained as historical evidence.
-- [Native capture](passive-capture.md#import-a-retained-native-attempt) preserves
+- [Native capture](../reference/passive-capture.md#import-a-retained-native-attempt) preserves
   metadata but omits task text and verified model identity. The existing review
   UI and outcome admission cannot consume it directly. A selector and worker
   from one attempt are not two competing outcomes.
-- [Training](training-evidence.md) supports admitted data, pinned revision/seed,
+- [Training](../reference/training-evidence.md) supports admitted data, pinned revision/seed,
   bounded observations and cooperative stop handling. Full resume and the new
   stop path on GPU are unqualified; multi-process training is explicitly refused.
-- [Knowledge previews](knowledge-template-adapter.md) validate source-bound
+- [Knowledge previews](../reference/knowledge-template-adapter.md) validate source-bound
   answers and refresh affected inputs. They do not execute or verify fulfillment.
 - In the inspected RRFlow source, `engine/flight.rs::launch_prompt_flight`
   documents the observe-only path; `engine/endpoint_worker.rs` produces a draft,
@@ -384,11 +386,11 @@ implementation instead of copying their old checkboxes into SWAG status:
   [Gate I](https://github.com/rrflow/rrflow-development/blob/bf6dec69f1ca8c37d97dbd447af128ce33c390be/docs/roadmap/rrflow-1.0/gate-i.md).
 - [Controller training contract](https://github.com/rrflow/rrflow-development/blob/bf6dec69f1ca8c37d97dbd447af128ce33c390be/docs/reference/inference/learning/controller-training.md)
   and [change-authoring procedure](https://github.com/rrflow/rrflow-development/blob/bf6dec69f1ca8c37d97dbd447af128ce33c390be/docs/roadmap/rrflow-1.0-execution/change-authoring.md).
-- SWAG [task-outcome workflow](task-outcome-workflow.md),
+- SWAG [task-outcome workflow](../reference/task-outcome-workflow.md),
   [training controls](training-control-plan.md),
-  [decision modes](decision-modes-and-knowledge-mesh.md),
-  [developer workspace](developer-workspace.md), and
-  [serving measurements](serving-load-measurements.md).
+  [decision modes](../reference/decision-modes-and-knowledge-mesh.md),
+  [developer workspace](../reference/developer-workspace.md), and
+  [serving measurements](../reference/serving-load-measurements.md).
 
 Implementation validation begins with a reproduced failure, then affected tests,
 the owning suite and actual installed/GPU evidence appropriate to that package.

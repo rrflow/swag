@@ -58,7 +58,7 @@ file bytes. File contents and absolute project paths are excluded from the previ
 This is a local observation, not an authenticated or atomic engine snapshot.
 
 `validate_template_decision` takes `requirementId` and an `answer` matching
-[`swag.decision-answer/v1`](../config/knowledge/decision_answer.schema.json).
+[`swag.decision-answer/v1`](../../config/knowledge/decision_answer.schema.json).
 The answer supplies the current `inputSha256`, mode, status (`answered` or
 `abstained`), value and evidence-reference digests. References must resolve to the
 selected practice or observed input files. Abstention uses a null value. Answered
@@ -83,7 +83,7 @@ refreshes, checks only one requirement changed, and confirms fulfillment stays
 unassessed. It also checks read-only/origin controls and narrow-screen rendering.
 This proves preview invalidation, not engine replanning or executed project effects.
 
-![Actual browser preview after editing a disposable copy of the repository dependency file](images/knowledge-template.png)
+![Actual browser preview after editing a disposable copy of the repository dependency file](../images/knowledge-template.png)
 
 Next integration: map the typed proposal and knowledge/template identities onto
 RRFlow's public operation owner, retain source-bound execution/verification receipts,

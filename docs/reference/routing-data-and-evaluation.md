@@ -8,19 +8,19 @@ Owner update, 2026-10-29: new data admission and dataset use require reviewed re
 observations in every split. The current Unsloth launcher requires that admission
 and an explicit `--seed`; provisional task-corpus training is retired. Historical
 synthetic commands and results below are retained for audit, not approved for new
-training or qualification. Follow [the current plan](implementation-plan.md) and
-[real-task contribution guide](real-task-review.md). Local review declarations
+training or qualification. Follow [the current plan](../history/implementation-plan.md) and
+[real-task contribution guide](../history/real-task-review.md). Local review declarations
 still need actual human evidence; declaring a row real does not prove it is real.
 
 Status: offline admission, export and protocol runner implemented. The first live
 run used synthetic development cases. No real provider-routing dataset has been
 admitted and no acceptance protocol is approved. A separate provisional intent
-corpus has now produced a custom BF16 checkpoint; see [its measured evidence](experiment-evidence.md).
+corpus has now produced a custom BF16 checkpoint; see [its measured evidence](../history/experiment-evidence.md).
 It is not a substitute for this routing-review admission process.
 
 ## Contract and scope
 
-[`routing_request.schema.json`](../config/training/routing_request.schema.json)
+[`routing_request.schema.json`](../../config/training/routing_request.schema.json)
 keeps persistent `projectIntent` separate from `taskText`. A candidate identifies
 provider, exact model, effort support, access mode and binding, with explicit
 authorization, health, quota, locality, quality and cost observations. Unknown
@@ -38,7 +38,7 @@ additional contracts and evaluation; passing this selector does not qualify them
 1. Preserve the original capture JSONL. Its `training_consent: false` and
    `label_status: unreviewed` remain unchanged.
 2. Create a separate review JSONL matching
-   [`routing_review.schema.json`](../config/training/routing_review.schema.json).
+   [`routing_review.schema.json`](../../config/training/routing_review.schema.json).
    Bind each review to the canonical SHA-256 of its observation, a stable project
    group and a leakage group covering related tasks and variants. Use
    `swag_routing_contract.digest(record)` for the canonical digest.

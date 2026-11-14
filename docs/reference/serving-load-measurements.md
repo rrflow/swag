@@ -92,7 +92,7 @@ advertised as this model's footprint. Total serving memory remains unverified.
 The paired four-sequence run also completed 189/189 requests without errors.
 The declared checkpoint, runtime image, workload and generation settings matched;
 the recorded runtime configurations differed only in `max-num-seqs` (1 versus 4).
-Recomputed observations are in [the content-free report](evidence/serving-load-20261103.json).
+Recomputed observations are in [the content-free report](../evidence/serving-load-20261103.json).
 
 | Client concurrency | One sequence: requests/s | Four sequences: requests/s | One sequence: p95 s | Four sequences: p95 s |
 | --- | --- | --- | --- | --- |

@@ -1,5 +1,7 @@
 # Engine-owned planning and custom checkpoint qualification
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 ## Status and authority
 
 Supporting design proposal, updated 2026-10-28. See [current context](current-context.md)

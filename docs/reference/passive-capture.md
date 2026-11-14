@@ -14,7 +14,7 @@ not a clean working tree. Issue titles and outcomes come from the caller, not an
 automatic service connection.
 
 The enforced line format is
-[`passive_capture.schema.json`](../config/training/passive_capture.schema.json).
+[`passive_capture.schema.json`](../../config/training/passive_capture.schema.json).
 The older YAML file is explanatory only. Default output is the ignored
 `.swag/capture/observations.jsonl`. Appends serialize local writers; a partial
 tail or existing writer lock is an explicit error. After a crash, reconcile the

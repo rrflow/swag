@@ -1,5 +1,7 @@
 # ADR: Evidence-driven System One optimization
 
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
 **Status:** Proposed architecture; offline evidence projection implemented.
 **Date:** 2026-10-28.
 **Deciders:** Product owner and the owning RRFlow/Connectome/RROFLOW maintainers.

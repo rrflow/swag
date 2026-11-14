@@ -1,5 +1,7 @@
 # Custom BF16 checkpoint binding observation
 
+> **Evidence record.** A measurement or verification from the date it describes. Current status is in the [System One plan](../system-one-plan.md).
+
 Observed 31 October 2026, 21:59–22:00 UTC. This is a read-only operator audit
 of the existing experiment; it is not model qualification or a new deployment.
 

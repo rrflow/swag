@@ -4,7 +4,7 @@ Assessment checked 1 November 2026. SWAG is an engineering preview. The current
 evidence supports continued development and controlled testing, not a public
 release or a qualified routing model.
 
-Update, 2 November: [one real BF16 proposal and RROFLOW correlation trial](model-outcome-correlation.md)
+Update, 2 November: [one real BF16 proposal and RROFLOW correlation trial](../evidence/model-outcome-correlation.md)
 passes on the delivery candidate, with an unreviewed, consent-disabled capture.
 Independent discovery [PR248](https://github.com/rrflow/rrflow-development/pull/248)
 at `59e48ebf` also passes an actual primary-process stale-preview rejection,
@@ -52,8 +52,8 @@ original scope and source identities.
    Produce versioned distribution artifacts with checksums and release evidence.
 5. Qualify distribution from the owner's selected delivery repository,
    [`rrflow/swag`](https://github.com/rrflow/swag), configured as `origin`.
-   Publishing source does not establish reproducible release artifacts or
-   change the repository's private visibility.
+   The repository is public under BSL 1.1. Publishing source does not
+   establish reproducible release artifacts.
 
 The RROFLOW engine-correlation receiver merged through
 [PR43](https://github.com/rrflow/rroflow-development/pull/43) as
@@ -122,7 +122,7 @@ and repository checks pass. New
 passes all 23 jobs, including live SDK conformance. PR235 remains open and
 protected acceptance remains pending. The old
 passing run remains evidence for `ebeecabb` only. Follow the
-[developer-build execution plan](implementation-plan.md#developer-build-execution-1-november)
+[developer-build execution plan](../history/implementation-plan.md#developer-build-execution-1-november)
 for the remaining dependency order and evidence requirements.
 The original candidate
 exposed missing adapter CI coverage, stale generated storage-test digests and two

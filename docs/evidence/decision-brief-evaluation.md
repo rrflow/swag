@@ -1,7 +1,9 @@
 # Decision brief evaluation, 4 November 2026
 
+> **Evidence record.** A measurement or verification from the date it describes. Current status is in the [System One plan](../system-one-plan.md).
+
 This is a development comparison, not a qualification. Assistants wrote the labels, so under
-[deployment readiness](deployment-readiness.md) these results neither qualify a route nor admit
+[deployment readiness](../reference/deployment-readiness.md) these results neither qualify a route nor admit
 training data. Independent human review remains open.
 
 ## Method

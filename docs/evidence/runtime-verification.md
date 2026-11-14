@@ -1,5 +1,7 @@
 # Runtime verification, 2 November 2026
 
+> **Evidence record.** A measurement or verification from the date it describes. Current status is in the [System One plan](../system-one-plan.md).
+
 These observations concern the retained provisional custom BF16 experiment on
 `spark-02`. They are not a new training run or a qualified router release.
 Private raw receipts and access configuration remain outside the tracked tree.
@@ -52,4 +54,4 @@ execution and engine recovery evidence. Independently reviewed routing labels
 remain required for new admitted training. Baseline/custom-BF16/quantized
 qualification, measured serving footprint, Connectome embedding and deployment
 acceptance for complete RROFLOW trace delivery remain open. Follow the
-[training-control plan](training-control-plan.md).
+[training-control plan](../history/training-control-plan.md).

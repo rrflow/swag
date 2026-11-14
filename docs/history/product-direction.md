@@ -1,6 +1,8 @@
 # SWAG product direction
 
-SWAG is the decision router in the [Reason Ready Governance (RRG) suite](rrg-suite.md).
+> **Historical record.** Kept as evidence of what was planned, decided or measured at the time. It is not current instructions; see the [System One plan](../system-one-plan.md) and the [docs index](../index.md).
+
+SWAG is the decision router in the [Reason Ready Governance (RRG) suite](../rrg-suite.md).
 Read [current context](current-context.md) for the dated evidence and next work.
 
 ## Intended outcome
@@ -19,7 +21,7 @@ The owner's three decision modes are **choice, score and binary**. SWAG also
 includes a development best-practices knowledge mesh and templates that bind to
 real projects after deployment. RRFlow executes admitted work and records verified
 fulfillment; Connectome exposes requirements and evidence. See the
-[decision modes and knowledge-mesh direction](decision-modes-and-knowledge-mesh.md)
+[decision modes and knowledge-mesh direction](../reference/decision-modes-and-knowledge-mesh.md)
 for the intended behavior and the implementation boundary.
 
 ## Product responsibilities

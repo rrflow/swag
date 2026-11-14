@@ -7,7 +7,7 @@ Use the repository virtual environment after installing `requirements.txt`.
 ## Capture and review
 
 Write genuine comparable observations to JSONL matching
-[`task_outcome.schema.json`](../config/training/task_outcome.schema.json).
+[`task_outcome.schema.json`](../../config/training/task_outcome.schema.json).
 Each line contains a real task, stable repository/project/leakage identities,
 source/configuration digests, task criteria, candidate model revisions/efforts,
 and one retained attempt per eligible option (at least two). Reruns need distinct
@@ -23,7 +23,7 @@ SHA-256 hashes under the evidence root. Completed attempts need output; any know
 reviewed outcome needs verification. Native adapter/UI collection remains pending.
 
 A separate JSONL review matches
-[`task_outcome_review.schema.json`](../config/training/task_outcome_review.schema.json).
+[`task_outcome_review.schema.json`](../../config/training/task_outcome_review.schema.json).
 It binds the complete canonical observation digest, independent reviewer identity,
 explicit training/evaluation consent, redaction evidence, and every attempt's
 `taskSuccess` and `handoffValid` verdict (`pass`, `fail`, or `unknown`). These are
