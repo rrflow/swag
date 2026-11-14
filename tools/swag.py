@@ -180,6 +180,20 @@ def brief(repo: Path, intent: str | None = None) -> dict[str, Any]:
                           has_test_harness=profile.get("has_test_harness", True))
 
 
+def decide(repo: Path, request_file: Path | None, template: str | None, state: str | None) -> dict[str, Any]:
+    """One decision request: a SystemOne body from a file, or a template's questions over a state."""
+    from swag_server import run
+
+    if request_file is not None:
+        with request_file.open(encoding="utf-8") as stream:
+            body = json.load(stream)
+    else:
+        if not template or state is None:
+            raise ValueError("Give --request FILE, or --template NAME with --state TEXT.")
+        body = {"state": state, "swag": {"template": template}}
+    return run(body, repo, source="cli")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -190,6 +204,11 @@ def main(argv: list[str] | None = None) -> int:
             command.add_argument("--intent", required=name == "init")
         if name == "init":
             command.add_argument("--project")
+    decide_command = commands.add_parser("decide", help="Answer binary, choice and score questions with SWAG's decision layer")
+    decide_command.add_argument("--repo", type=Path, default=Path.cwd())
+    decide_command.add_argument("--request", type=Path, help="A SystemOne request body (state, questions, optional swag block)")
+    decide_command.add_argument("--template", help="A knowledge template whose questions to ask")
+    decide_command.add_argument("--state", help="The state the template's questions are asked about")
     publish = commands.add_parser("publish", help="Upload one saved content-free preview event to RROFLOW")
     publish.add_argument("--event", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -202,6 +221,8 @@ def main(argv: list[str] | None = None) -> int:
             result = preview(args.repo.resolve(), args.intent)
         elif args.command == "brief":
             result = brief(args.repo.resolve(), args.intent)
+        elif args.command == "decide":
+            result = decide(args.repo.resolve(), args.request, args.template, args.state)
         else:
             with args.event.open(encoding="utf-8") as stream:
                 record = json.load(stream)

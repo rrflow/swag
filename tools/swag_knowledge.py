@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 
 from swag_observability import observed
+import swag_systemone as contract
 
 ROOT = Path(__file__).resolve().parents[1]
 NAME = re.compile(r'[a-z][a-z0-9_]{0,95}')
@@ -56,49 +57,28 @@ def under(root: Path, relative: str) -> Path:
     return resolved
 
 
-def mode_contract(value: dict) -> None:
-    if not isinstance(value, dict):
-        raise ValueError('Decision contract required')
-    mode = value.get('mode')
-    if mode == 'binary':
-        fields(value, {'mode', 'proposition'})
-        if not text(value['proposition']):
-            raise ValueError('Explicit proposition required')
-    elif mode == 'choice':
-        fields(value, {'mode', 'question', 'options'})
-        options = value['options']
-        if not text(value['question']) or not isinstance(options, list) or not 2 <= len(options) <= 100:
-            raise ValueError('Explicit question and options required')
-        ids = []
-        for option in options:
-            fields(option, {'id', 'description'})
-            if not isinstance(option['id'], str) or not NAME.fullmatch(option['id']) or not text(option['description']):
-                raise ValueError('Invalid option')
-            ids.append(option['id'])
-        if len(set(ids)) != len(ids):
-            raise ValueError('Duplicate option')
-    elif mode == 'score':
-        fields(value, {'mode', 'rubric', 'minimum', 'maximum', 'direction'})
-        if (not text(value['rubric']) or value['direction'] not in ('higher_is_better', 'lower_is_better')
-                or any(type(value[key]) not in (int, float) or not math.isfinite(value[key]) for key in ('minimum', 'maximum'))
-                or value['minimum'] >= value['maximum']):
-            raise ValueError('Explicit finite score scale and rubric required')
-    else:
-        raise ValueError('Unsupported decision mode')
+def suggestion_contract(question: dict, suggest: object) -> None:
+    if not isinstance(suggest, dict) or not suggest:
+        raise ValueError('Suggestions map answers to text')
+    allowed = set(contract.options(question)) | {'abstain'}
+    if set(suggest) - allowed or not all(text(value) for value in suggest.values()):
+        raise ValueError('Suggestions must name an option of their question, or abstain')
 
 
 def template(name: str, root: Path = ROOT) -> dict:
     if not isinstance(name, str) or not NAME.fullmatch(name):
         raise ValueError('Invalid template identity')
     data = json.loads(read_bytes(under(root, f'config/knowledge/templates/{name}.json')))
-    fields(data, {'schemaVersion', 'id', 'title', 'requirements'})
-    if type(data['schemaVersion']) is not int or data['schemaVersion'] != 1 or data['id'] != name or not text(data['title']):
+    if not isinstance(data, dict) or not {'schemaVersion', 'id', 'title', 'requirements'} <= set(data)             or not set(data) <= {'schemaVersion', 'id', 'title', 'requirements', 'facts', 'rules', 'preferences'}:
+        raise ValueError('Unexpected contract fields')
+    if type(data['schemaVersion']) is not int or data['schemaVersion'] != 2 or data['id'] != name or not text(data['title']):
         raise ValueError('Invalid template version or identity')
-    if not isinstance(data['requirements'], list) or not 1 <= len(data['requirements']) <= 100:
+    if not isinstance(data['requirements'], list) or not 1 <= len(data['requirements']) <= contract.MAX_QUESTIONS:
         raise ValueError('Nonempty bounded requirements required')
     ids = set()
     for row in data['requirements']:
-        fields(row, {'id', 'title', 'practice', 'inputSlots', 'decision'})
+        if not isinstance(row, dict) or not {'id', 'title', 'practice', 'inputSlots', 'question'} <= set(row)                 or not set(row) <= {'id', 'title', 'practice', 'inputSlots', 'question', 'suggest'}:
+            raise ValueError('Unexpected contract fields')
         if not isinstance(row['id'], str) or not NAME.fullmatch(row['id']) or row['id'] in ids or not text(row['title']):
             raise ValueError('Invalid requirement identity')
         ids.add(row['id'])
@@ -107,7 +87,22 @@ def template(name: str, root: Path = ROOT) -> dict:
         if (not isinstance(slots, list) or not slots or len(slots) != len(set(slots))
                 or any(not isinstance(slot, str) or not NAME.fullmatch(slot) for slot in slots)):
             raise ValueError('Explicit input slots required')
-        mode_contract(row['decision'])
+        try:
+            row['question'] = contract.validate_question(row['id'], row['question'])
+        except contract.ContractError as exc:
+            raise ValueError(str(exc)) from None
+        if not text(row['question'].get('instructions')):
+            raise ValueError('Explicit question instructions required')
+        if 'suggest' in row:
+            suggestion_contract(row['question'], row['suggest'])
+    from swag_decide import LayerError, template_layer
+    try:
+        template_layer(data)
+    except LayerError as exc:
+        raise ValueError(str(exc)) from None
+    unknown = {rule['question'] for rule in data.get('rules', [])} - ids
+    if unknown:
+        raise ValueError('Template rules must name one of its requirements')
     return data
 
 
@@ -173,7 +168,7 @@ def preview(binding_path: Path | None = None, root: Path = ROOT) -> dict:
         context = {'projectId': binding['projectId'], 'templateId': definition['id'],
                    'schemaVersion': definition['schemaVersion'], 'requirement': row,
                    'practiceSha256': knowledge['sha256'], 'inputs': selected}
-        requirements.append({**row, 'practice': knowledge, 'inputs': selected,
+        requirements.append({**row, 'mode': contract.MODE_NAMES[row['question']['type']], 'practice': knowledge, 'inputs': selected,
             'inputSha256': digest(context), 'state': 'unassessed' if ready else 'missing_inputs',
             'fulfillment': 'unassessed'})
     result = {**base, 'state': 'preview', 'projectId': binding['projectId'], 'templateId': definition['id'],
@@ -192,7 +187,7 @@ def validate_decision(requirement_id: str, answer: dict, binding_path: Path | No
     row = matches[0]
     fields(answer, {'schema', 'inputSha256', 'mode', 'status', 'value', 'references'})
     if (answer['schema'] != 'swag.decision-answer/v1' or answer['inputSha256'] != row['inputSha256']
-            or answer['mode'] != row['decision']['mode']):
+            or answer['mode'] != row['mode']):
         raise ValueError('Stale or mismatched decision context; refresh preview')
     references = answer['references']
     allowed = {row['practice']['sha256']} | {item['sha256'] for files in row['inputs'].values() for item in files if item['sha256']}
@@ -205,14 +200,14 @@ def validate_decision(requirement_id: str, answer: dict, binding_path: Path | No
     elif answer['status'] == 'answered':
         if row['state'] != 'unassessed' or not references:
             raise ValueError('Answer requires bound inputs and references')
-        value, contract = answer['value'], row['decision']
-        if contract['mode'] == 'binary' and type(value) is not bool:
+        value, question = answer['value'], row['question']
+        if question['type'] == 'noul' and type(value) is not bool:
             raise ValueError('Binary answer must be a boolean')
-        if contract['mode'] == 'choice' and value not in [option['id'] for option in contract['options']]:
+        if question['type'] == 'choice' and value not in question['criteria']:
             raise ValueError('Choice is outside supplied options')
-        if contract['mode'] == 'score' and (type(value) not in (int, float) or not math.isfinite(value)
-                or not contract['minimum'] <= value <= contract['maximum']):
-            raise ValueError('Score is outside the declared rubric')
+        if question['type'] == 'score' and (type(value) not in (int, float) or not math.isfinite(value)
+                or not 0 <= value <= len(question['criteria']) - 1):
+            raise ValueError('Score is outside the declared levels')
     else:
         raise ValueError('Unknown answer status')
     return {'schema': 'swag.decision-validation/v1', 'requirementId': row['id'],

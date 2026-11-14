@@ -40,12 +40,12 @@ class KnowledgeTests(unittest.TestCase):
 
     def answer(self, row, value, status='answered'):
         return {'schema': 'swag.decision-answer/v1', 'inputSha256': row['inputSha256'],
-                'mode': row['decision']['mode'], 'status': status, 'value': value,
+                'mode': row['mode'], 'status': status, 'value': value,
                 'references': [row['practice']['sha256']]}
 
     def test_real_questions_all_modes_and_no_completion_claim(self):
         result = self.preview()
-        self.assertEqual({r['decision']['mode'] for r in result['requirements']}, {'choice', 'score', 'binary'})
+        self.assertEqual({r['mode'] for r in result['requirements']}, {'choice', 'score', 'binary'})
         for row in result['requirements']:
             self.assertTrue(row['practice']['question']['id'].startswith('python.'))
             self.assertEqual(row['practice']['freshness'], 'not_reverified')
@@ -94,7 +94,7 @@ class KnowledgeTests(unittest.TestCase):
         rows = self.preview()['requirements']
         for row, values in zip(rows, ([1, 'yes', None], ['invented_option', True], [True, -1, 5, float('nan'), float('inf')])):
             for value in values:
-                with self.subTest(mode=row['decision']['mode'], value=value), self.assertRaises(ValueError):
+                with self.subTest(mode=row['mode'], value=value), self.assertRaises(ValueError):
                     knowledge.validate_decision(row['id'], self.answer(row, value), self.config)
 
     def test_unbound_references_and_fulfillment_claim_are_rejected(self):
@@ -124,10 +124,12 @@ class KnowledgeTests(unittest.TestCase):
             self.preview()
         with self.assertRaisesRegex(ValueError, 'missing'):
             knowledge.practice({'questionSet': 'python', 'questionId': 'does_not_exist'})
-        contract = copy.deepcopy(knowledge.template('python_delivery_review')['requirements'][1]['decision'])
-        contract['options'][1]['id'] = contract['options'][0]['id']
-        with self.assertRaisesRegex(ValueError, 'Duplicate'):
-            knowledge.mode_contract(contract)
+        question = copy.deepcopy(knowledge.template('python_delivery_review')['requirements'][1]['question'])
+        with self.assertRaisesRegex(ValueError, 'option of their question'):
+            knowledge.suggestion_contract(question, {'invented_option': 'text'})
+        question['criteria'] = {'only_one': 'x'}
+        with self.assertRaisesRegex(ValueError, '2-255'):
+            knowledge.contract.validate_question('q', question)
 
     def test_mcp_reads_same_projection_and_rejects_stale_answer_with_trace(self):
         def call(name, arguments):
