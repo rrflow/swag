@@ -20,7 +20,9 @@ for existing foundations and the remaining implementation.
 SWAG proposes bounded decisions through its public contracts.
 **RROFLOW (rroflow.ai)** is the intended AI observability and learning sink.
 The complete connected project workflow and automatic learning remain unqualified.
-Start with [current context and verified status](docs/current-context.md), then
+Start with the [System One product plan](docs/system-one-plan.md): what SWAG is, what
+exists today, what is missing, and the workstreams and milestones that close the gap.
+For history, see [current context](docs/current-context.md) and
 [product direction and release gates](docs/product-direction.md).
 
 The [decision-router alpha delivery plan](docs/decision-router-alpha-plan.md)
