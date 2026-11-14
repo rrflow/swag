@@ -31,3 +31,6 @@ files/controller_experiments/*
 
 # Draft for another suite product, held back from the public tree.
 boundaries/reference/lfg_engine_plan_draft_*.md
+bench/data/
+bench/results/
+bench/arms.json
