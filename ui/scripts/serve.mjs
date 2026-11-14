@@ -10,8 +10,10 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invali
 const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`]);
 const statusScript = fileURLToPath(new URL('../../tools/swag_dev_status.py', import.meta.url));
 const knowledgeScript = fileURLToPath(new URL('../../tools/swag_knowledge.py', import.meta.url));
+const decisionLogScript = fileURLToPath(new URL('../../tools/swag_decision_log.py', import.meta.url));
 let pendingStatus;
 let pendingKnowledge;
+let pendingDecisions;
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json' };
 createServer(async (request, response) => {
@@ -34,6 +36,21 @@ createServer(async (request, response) => {
       } catch {
         response.writeHead(503, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
         response.end(JSON.stringify({ error: 'Knowledge preview unavailable; inspect local traces.' }));
+      }
+      return;
+    }
+    if (pathname === '/api/dev/decisions') {
+      try {
+        pendingDecisions ??= execute(process.env.SWAG_PYTHON ?? 'python', [decisionLogScript, '--limit', '50'],
+          { timeout: 30000, maxBuffer: 20_000_000, windowsHide: true }).finally(() => { pendingDecisions = undefined; });
+        const { stdout } = await pendingDecisions;
+        const data = JSON.parse(stdout);
+        if (data.schema !== 'swag.decision-log/v1') throw new Error('Invalid decision log');
+        response.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+        response.end(JSON.stringify(data));
+      } catch {
+        response.writeHead(503, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+        response.end(JSON.stringify({ error: 'Decision log unavailable; inspect local traces.' }));
       }
       return;
     }

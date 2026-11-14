@@ -1,7 +1,8 @@
 export type Requirement = {
   id: string; title: string; inputSha256: string; state: 'unassessed' | 'missing_inputs'; fulfillment: 'unassessed';
-  decision: { mode: 'choice' | 'score' | 'binary'; question?: string; proposition?: string; rubric?: string;
-    options?: { id: string; description: string }[]; minimum?: number; maximum?: number; direction?: string };
+  mode: 'choice' | 'score' | 'binary';
+  question: { type: 'noul' | 'choice' | 'score'; instructions: string; criteria?: Record<string, string> | string[] };
+  suggest?: Record<string, string>;
   practice: { sha256: string; freshness: 'not_reverified'; question: { id: string; text: string; source: Record<string, unknown> } };
   inputs: Record<string, { path: string; sha256: string | null; bytes: number | null; state: 'read' | 'missing' }[]>;
 };
@@ -39,13 +40,13 @@ export function parseKnowledge(value: unknown): KnowledgePreview {
     }
     const complete = Object.values(row.inputs).length > 0 && Object.values(row.inputs).every(files => files.length && files.every(f => f.state === 'read'));
     if (complete !== (row.state === 'unassessed')) throw new Error('Input readiness mismatch');
-    const c = row.decision;
-    if (!c || !['choice', 'score', 'binary'].includes(c.mode)) throw new Error('Invalid decision mode');
-    if (c.mode === 'binary' && !text(c.proposition)) throw new Error('Missing proposition');
-    if (c.mode === 'choice' && (!text(c.question) || !Array.isArray(c.options) || c.options.length < 2 ||
-        c.options.some(o => !text(o.id) || !text(o.description)) || new Set(c.options.map(o => o.id)).size !== c.options.length)) throw new Error('Invalid choices');
-    if (c.mode === 'score' && (!text(c.rubric) || !Number.isFinite(c.minimum) || !Number.isFinite(c.maximum) || c.minimum! >= c.maximum! ||
-        !['higher_is_better', 'lower_is_better'].includes(c.direction!))) throw new Error('Invalid rubric');
+    const q = row.question;
+    const modes: Record<string, string> = { noul: 'binary', choice: 'choice', score: 'score' };
+    if (!q || modes[q.type] !== row.mode || !text(q.instructions)) throw new Error('Invalid decision question');
+    if (q.type === 'choice' && (!q.criteria || Array.isArray(q.criteria) || Object.keys(q.criteria).length < 2 ||
+        Object.values(q.criteria).some(v => !text(v)))) throw new Error('Invalid choices');
+    if (q.type === 'score' && (!Array.isArray(q.criteria) || q.criteria.length < 2 || q.criteria.some(v => !text(v)))) throw new Error('Invalid score levels');
+    if (row.suggest !== undefined && (typeof row.suggest !== 'object' || Object.values(row.suggest).some(v => !text(v)))) throw new Error('Invalid suggestions');
   }
   return data;
 }
